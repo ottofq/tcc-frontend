@@ -1,11 +1,16 @@
 import React from 'react';
+import { AppBar, Toolbar, Button } from '@material-ui/core';
 import { Container, Logo } from './styled';
-import LogoImage from '../../assets/logo.png';
 
 export default function Header() {
   return (
     <Container>
-      <Logo src={LogoImage} />
+      <AppBar position="static">
+        <Toolbar>
+          <h1>News</h1>
+          <Button color="inherit">Logout</Button>
+        </Toolbar>
+      </AppBar>
     </Container>
   );
 }

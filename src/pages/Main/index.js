@@ -5,22 +5,24 @@ import Sidebar from '../../components/Sidebar';
 import Cadastro from '../../components/Cardapio/Cadastro';
 import Home from '../../components/Cardapio/Home';
 
-import { Container } from './styled';
+import { Container, Wrapper } from './styled';
 
 export default function Main() {
   return (
     <BrowserRouter>
       <Container>
         <Sidebar />
-        <Switch>
-          <Route key="cardapio" exact path="/dashboard" component={Home} />
-          <Route
-            key="cardapio"
-            exact
-            path="/dashboard/cardapio/cadastrar"
-            component={Cadastro}
-          />
-        </Switch>
+        <Wrapper>
+          <Switch>
+            <Route key="cardapio" exact path="/dashboard" component={Home} />
+            <Route
+              key="cardapio"
+              exact
+              path="/dashboard/cardapio/cadastrar"
+              component={Cadastro}
+            />
+          </Switch>
+        </Wrapper>
       </Container>
     </BrowserRouter>
   );
