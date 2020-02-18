@@ -53,15 +53,6 @@ export default function Sidebar() {
               Editar Cardápio
             </SidebarLink>
           </ListItem>
-          <ListItem
-            component="li"
-            selected={selectedIndex === 4}
-            onClick={event => handleListItemClick(event, 4)}
-          >
-            <SidebarLink to="/dashboard/cardapio/excluir">
-              Excluir Cardápio
-            </SidebarLink>
-          </ListItem>
         </List>
         <Divider />
       </nav>

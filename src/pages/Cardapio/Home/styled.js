@@ -5,15 +5,19 @@ import { Rating as rating } from '@material-ui/lab';
 export const Container = styled.div`
   display: flex;
   flex: 1;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
 
   [class='wrapper'] {
     display: flex;
+    border: 1px solid #ccc;
+    padding: 20px 10px;
+    border-radius: 4px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-right: 20px;
 
     & > p {
       font-size: 12px;
@@ -22,12 +26,6 @@ export const Container = styled.div`
     h3 {
       margin: 20px 0;
       font-size: 24px;
-    }
-
-    h4 {
-      align-self: flex-start;
-      font-size: 20px;
-      margin-bottom: 5px;
     }
   }
 
@@ -76,12 +74,18 @@ export const ContainerComentario = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: #fff;
-  border: 1px solid #eee;
   border-radius: 4px;
   width: 500px;
 
+  h4 {
+    align-self: flex-start;
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+
   ul {
+    background-color: #fff;
+    border: 1px solid #eee;
     width: 100%;
     height: 300px;
     overflow: hidden;
