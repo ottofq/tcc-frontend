@@ -7,11 +7,11 @@ import Login from './pages/Login';
 export default function Routes() {
   return (
     <Switch>
+      <Route path="/" exact component={Login} />
       <Route path="/dashboard" exact component={Main} />
       <Route path="/dashboard/cardapio" exact component={Main} />
       <Route path="/dashboard/cardapio/cadastrar" exact component={Main} />
       <Route path="/dashboard/cardapio/editar" exact component={Main} />
-      <Route path="/" exact component={Login} />
     </Switch>
   );
 }

@@ -9,25 +9,48 @@ export const Container = styled.aside`
   background-color: #174578;
   flex-direction: column;
 
-  h2 {
-    align-self: center;
-    font-size: 32px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    color: #fff;
-    font-weight: bold;
+  img {
+    margin: 10px;
+    width: 200px;
+    height: 100px;
+  }
+
+  nav {
+    ul {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    li {
+      align-self: stretch;
+
+      a {
+        div {
+          height: 40px;
+          display: flex;
+          align-items: center;
+          margin-top: 5px;
+
+          svg {
+            padding-left: 20px;
+          }
+          span {
+            margin-left: 15px;
+            font-size: 18px;
+            color: #fff;
+          }
+        }
+      }
+    }
   }
 `;
 
 export const SidebarLink = styled(NavLink)`
   text-decoration: none;
-  align-self: center;
   color: #fff;
   font-size: 20px;
   box-sizing: border-box;
-  width: 100%;
-
-  svg {
-    width: 100%;
-  }
+  display: block;
 `;

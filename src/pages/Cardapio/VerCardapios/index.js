@@ -1,13 +1,14 @@
 import React from 'react';
 import { Table, TableCell, TableRow, Paper } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
-import { TableContainer, TableHead, TableBody, Button } from './styled';
+import { TableContainerUI, TableHeadUI, TableBodyUI, ButtonUI } from './styled';
 
 export default function VerCardapios() {
   return (
-    <TableContainer component={Paper}>
+    <TableContainerUI component={Paper}>
       <Table aria-label="simple table">
-        <TableHead>
+        <TableHeadUI>
           <TableRow>
             <TableCell>Cardápios</TableCell>
             <TableCell align="center">Tipo de Refeição</TableCell>
@@ -15,209 +16,167 @@ export default function VerCardapios() {
             <TableCell align="center">Média</TableCell>
             <TableCell align="center">Ações</TableCell>
           </TableRow>
-        </TableHead>
-        <TableBody>
+        </TableHeadUI>
+        <TableBodyUI>
           <TableRow>
             <TableCell component="th" scope="row">
-              Cardápio dia 15/02/2020
+              15/02/2020
             </TableCell>
             <TableCell align="center">Almoço</TableCell>
             <TableCell align="center">15/02/2020</TableCell>
             <TableCell align="center">3,5</TableCell>
+
             <TableCell align="center">
               <div>
-                <Button variant="contained">Detalhes</Button>
-                <Button variant="contained" color="primary">
-                  Editar
-                </Button>
-                <Button variant="contained" color="secondary">
+                <Link to="/dashboard">
+                  <ButtonUI variant="contained">Detalhes</ButtonUI>
+                </Link>
+
+                <Link to="/dashboard/cardapio/editar">
+                  <ButtonUI variant="contained" color="primary">
+                    Editar
+                  </ButtonUI>
+                </Link>
+
+                <ButtonUI variant="contained" color="secondary">
                   Excluir
-                </Button>
+                </ButtonUI>
               </div>
             </TableCell>
           </TableRow>
 
           <TableRow>
             <TableCell component="th" scope="row">
-              Cardápio dia 15/02/2020
+              15/02/2020
             </TableCell>
             <TableCell align="center">Almoço</TableCell>
             <TableCell align="center">15/02/2020</TableCell>
             <TableCell align="center">3,5</TableCell>
+
             <TableCell align="center">
               <div>
-                <Button variant="contained">Detalhes</Button>
-                <Button variant="contained" color="primary">
-                  Editar
-                </Button>
-                <Button variant="contained" color="secondary">
+                <Link to="/dashboard">
+                  <ButtonUI variant="contained">Detalhes</ButtonUI>
+                </Link>
+
+                <Link to="/dashboard/cardapio/editar">
+                  <ButtonUI variant="contained" color="primary">
+                    Editar
+                  </ButtonUI>
+                </Link>
+
+                <ButtonUI variant="contained" color="secondary">
                   Excluir
-                </Button>
+                </ButtonUI>
               </div>
             </TableCell>
           </TableRow>
-
           <TableRow>
             <TableCell component="th" scope="row">
-              Cardápio dia 15/02/2020
+              15/02/2020
             </TableCell>
             <TableCell align="center">Almoço</TableCell>
             <TableCell align="center">15/02/2020</TableCell>
             <TableCell align="center">3,5</TableCell>
+
             <TableCell align="center">
               <div>
-                <Button variant="contained">Detalhes</Button>
-                <Button variant="contained" color="primary">
-                  Editar
-                </Button>
-                <Button variant="contained" color="secondary">
+                <Link to="/dashboard">
+                  <ButtonUI variant="contained">Detalhes</ButtonUI>
+                </Link>
+
+                <Link to="/dashboard/cardapio/editar">
+                  <ButtonUI variant="contained" color="primary">
+                    Editar
+                  </ButtonUI>
+                </Link>
+
+                <ButtonUI variant="contained" color="secondary">
                   Excluir
-                </Button>
+                </ButtonUI>
               </div>
             </TableCell>
           </TableRow>
-
           <TableRow>
             <TableCell component="th" scope="row">
-              Cardápio dia 15/02/2020
+              15/02/2020
             </TableCell>
             <TableCell align="center">Almoço</TableCell>
             <TableCell align="center">15/02/2020</TableCell>
             <TableCell align="center">3,5</TableCell>
+
             <TableCell align="center">
               <div>
-                <Button variant="contained">Detalhes</Button>
-                <Button variant="contained" color="primary">
-                  Editar
-                </Button>
-                <Button variant="contained" color="secondary">
+                <Link to="/dashboard">
+                  <ButtonUI variant="contained">Detalhes</ButtonUI>
+                </Link>
+
+                <Link to="/dashboard/cardapio/editar">
+                  <ButtonUI variant="contained" color="primary">
+                    Editar
+                  </ButtonUI>
+                </Link>
+
+                <ButtonUI variant="contained" color="secondary">
                   Excluir
-                </Button>
+                </ButtonUI>
               </div>
             </TableCell>
           </TableRow>
-
           <TableRow>
             <TableCell component="th" scope="row">
-              Cardápio dia 15/02/2020
+              15/02/2020
             </TableCell>
             <TableCell align="center">Almoço</TableCell>
             <TableCell align="center">15/02/2020</TableCell>
             <TableCell align="center">3,5</TableCell>
+
             <TableCell align="center">
               <div>
-                <Button variant="contained">Detalhes</Button>
-                <Button variant="contained" color="primary">
-                  Editar
-                </Button>
-                <Button variant="contained" color="secondary">
+                <Link to="/dashboard">
+                  <ButtonUI variant="contained">Detalhes</ButtonUI>
+                </Link>
+
+                <Link to="/dashboard/cardapio/editar">
+                  <ButtonUI variant="contained" color="primary">
+                    Editar
+                  </ButtonUI>
+                </Link>
+
+                <ButtonUI variant="contained" color="secondary">
                   Excluir
-                </Button>
+                </ButtonUI>
               </div>
             </TableCell>
           </TableRow>
-
           <TableRow>
             <TableCell component="th" scope="row">
-              Cardápio dia 15/02/2020
+              15/02/2020
             </TableCell>
             <TableCell align="center">Almoço</TableCell>
             <TableCell align="center">15/02/2020</TableCell>
             <TableCell align="center">3,5</TableCell>
-            <TableCell align="center">
-              <div>
-                <Button variant="contained">Detalhes</Button>
-                <Button variant="contained" color="primary">
-                  Editar
-                </Button>
-                <Button variant="contained" color="secondary">
-                  Excluir
-                </Button>
-              </div>
-            </TableCell>
-          </TableRow>
 
-          <TableRow>
-            <TableCell component="th" scope="row">
-              Cardápio dia 15/02/2020
-            </TableCell>
-            <TableCell align="center">Almoço</TableCell>
-            <TableCell align="center">15/02/2020</TableCell>
-            <TableCell align="center">3,5</TableCell>
             <TableCell align="center">
               <div>
-                <Button variant="contained">Detalhes</Button>
-                <Button variant="contained" color="primary">
-                  Editar
-                </Button>
-                <Button variant="contained" color="secondary">
-                  Excluir
-                </Button>
-              </div>
-            </TableCell>
-          </TableRow>
+                <Link to="/dashboard">
+                  <ButtonUI variant="contained">Detalhes</ButtonUI>
+                </Link>
 
-          <TableRow>
-            <TableCell component="th" scope="row">
-              Cardápio dia 15/02/2020
-            </TableCell>
-            <TableCell align="center">Almoço</TableCell>
-            <TableCell align="center">15/02/2020</TableCell>
-            <TableCell align="center">3,5</TableCell>
-            <TableCell align="center">
-              <div>
-                <Button variant="contained">Detalhes</Button>
-                <Button variant="contained" color="primary">
-                  Editar
-                </Button>
-                <Button variant="contained" color="secondary">
-                  Excluir
-                </Button>
-              </div>
-            </TableCell>
-          </TableRow>
+                <Link to="/dashboard/cardapio/editar">
+                  <ButtonUI variant="contained" color="primary">
+                    Editar
+                  </ButtonUI>
+                </Link>
 
-          <TableRow>
-            <TableCell component="th" scope="row">
-              Cardápio dia 15/02/2020
-            </TableCell>
-            <TableCell align="center">Almoço</TableCell>
-            <TableCell align="center">15/02/2020</TableCell>
-            <TableCell align="center">3,5</TableCell>
-            <TableCell align="center">
-              <div>
-                <Button variant="contained">Detalhes</Button>
-                <Button variant="contained" color="primary">
-                  Editar
-                </Button>
-                <Button variant="contained" color="secondary">
+                <ButtonUI variant="contained" color="secondary">
                   Excluir
-                </Button>
+                </ButtonUI>
               </div>
             </TableCell>
           </TableRow>
-
-          <TableRow>
-            <TableCell component="th" scope="row">
-              Cardápio dia 15/02/2020
-            </TableCell>
-            <TableCell align="center">Almoço</TableCell>
-            <TableCell align="center">15/02/2020</TableCell>
-            <TableCell align="center">3,5</TableCell>
-            <TableCell align="center">
-              <div>
-                <Button variant="contained">Detalhes</Button>
-                <Button variant="contained" color="primary">
-                  Editar
-                </Button>
-                <Button variant="contained" color="secondary">
-                  Excluir
-                </Button>
-              </div>
-            </TableCell>
-          </TableRow>
-        </TableBody>
+        </TableBodyUI>
       </Table>
-    </TableContainer>
+    </TableContainerUI>
   );
 }

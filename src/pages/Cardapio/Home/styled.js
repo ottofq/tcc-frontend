@@ -1,67 +1,72 @@
 import styled from 'styled-components';
 import { styled as styledUI } from '@material-ui/core/styles';
-import { Rating as rating } from '@material-ui/lab';
+import { Rating } from '@material-ui/lab';
 
 export const Container = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
-  align-items: center;
   justify-content: center;
+`;
 
-  [class='wrapper'] {
+export const ContainerCardapio = styled.div`
+  display: flex;
+  border: 1px solid #ccc;
+  padding: 20px 10px;
+  border-radius: 4px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin: 20px 20px;
+
+  h3 {
+    margin: 20px 0;
+    font-size: 24px;
+  }
+`;
+
+export const ContainerInfo = styled.div`
+  border: 1px solid #eee;
+  padding: 10px 0 10px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  height: 150px;
+  width: 300px;
+
+  div {
     display: flex;
-    border: 1px solid #ccc;
-    padding: 20px 10px;
-    border-radius: 4px;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin-right: 20px;
 
-    & > p {
-      font-size: 12px;
+    p {
+      font-weight: bold;
     }
 
     h3 {
-      margin: 20px 0;
-      font-size: 24px;
+      font-size: 16px;
+      font-weight: bold;
+      align-self: center;
     }
-  }
 
-  [class='conteudo-cardapio'] {
-    border: 1px solid #eee;
-    padding: 10px 0 10px 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    height: 150px;
-    width: 300px;
-
-    div {
-      display: flex;
-      align-items: center;
-
-      p {
-        font-weight: bold;
-      }
-
-      h3 {
-        font-size: 16px;
-        font-weight: bold;
-        align-self: center;
-      }
-
-      span {
-        font-size: 14px;
-        margin-left: 2px;
-      }
+    span {
+      font-size: 14px;
+      margin-left: 2px;
     }
   }
 `;
 
-export const Rating = styledUI(rating)({
+export const ContainerRating = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  p {
+    font-size: 12px;
+  }
+`;
+
+export const RatingUI = styledUI(Rating)({
   alignSelf: 'center',
   marginBottom: '10px',
   '& svg': {
@@ -73,9 +78,10 @@ export const Rating = styledUI(rating)({
 export const ContainerComentario = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   border-radius: 4px;
-  width: 500px;
+  width: 600px;
+  height: 550px;
+  margin: 20px 0px;
 
   h4 {
     align-self: flex-start;
@@ -87,7 +93,6 @@ export const ContainerComentario = styled.div`
     background-color: #fff;
     border: 1px solid #eee;
     width: 100%;
-    height: 300px;
     overflow: hidden;
     overflow-y: scroll;
   }

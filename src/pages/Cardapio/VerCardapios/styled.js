@@ -1,17 +1,13 @@
 import { styled as styledUI } from '@material-ui/core';
 
 import {
-  TableContainer as container,
-  Table,
-  TableHead as head,
-  TableCell,
-  Button as button,
-  TableRow,
-  Paper,
-  TableBody as body,
+  TableContainer,
+  TableHead,
+  Button,
+  TableBody,
 } from '@material-ui/core';
 
-export const TableContainer = styledUI(container)({
+export const TableContainerUI = styledUI(TableContainer)({
   display: 'flex',
   justifyContent: 'center',
   marginTop: '20px',
@@ -19,7 +15,7 @@ export const TableContainer = styledUI(container)({
   marginLeft: '20px',
   marginRight: '20px',
 });
-export const TableHead = styledUI(head)({
+export const TableHeadUI = styledUI(TableHead)({
   backgroundColor: '#174578',
 
   '& th': {
@@ -29,15 +25,16 @@ export const TableHead = styledUI(head)({
   },
 });
 
-export const TableBody = styledUI(body)({
+export const TableBodyUI = styledUI(TableBody)({
   '& tr th': {
     fontSize: '16px',
   },
 });
 
-export const Button = styledUI(button)({
+export const ButtonUI = styledUI(Button)({
   marginLeft: '5px',
   marginRight: '5px',
   height: '30px',
   fontSize: '12px',
+  fontWeight: 'bold',
 });

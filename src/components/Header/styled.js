@@ -1,16 +1,25 @@
 import styled from 'styled-components';
+import { styled as styledUI } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 export const Container = styled.header`
   height: 70px;
   width: 100%;
   display: flex;
-  flex: 1;
-  background-color: #174578;
+  background-color: #2266b1;
+  justify-content: space-between;
+  align-items: center;
+
+  h6 {
+    margin-left: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+  }
 `;
 
-export const Logo = styled.img`
-  height: 60px;
-  width: 120px;
-  margin-left: 20px;
-  margin-top: 10px;
-`;
+export const ButtonUI = styledUI(Button)({
+  backgroundColor: '#fff',
+  marginRight: '20px;',
+  fontWeight: 'bold',
+});

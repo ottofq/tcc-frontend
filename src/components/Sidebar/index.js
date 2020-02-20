@@ -1,59 +1,67 @@
 import React from 'react';
-import { List, ListItem, Divider } from '@material-ui/core';
-
-import { Home } from '@material-ui/icons';
+import { Divider } from '@material-ui/core';
+import { Home, ViewList, AddBox, Edit } from '@material-ui/icons';
+import logo from '../../assets/logo_sem_texto.png';
 
 import { Container, SidebarLink } from './styled';
 
 export default function Sidebar() {
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
-
-  const handleListItemClick = (event, index) => {
-    setSelectedIndex(index);
-  };
-
   return (
     <Container>
-      <h2>Cardápio RU</h2>
-      <Divider />
+      <img src={logo} alt="Logo UFES" />
+      <Divider light />
       <nav>
-        <List component="ul">
-          <ListItem
-            component="li"
-            selected={selectedIndex === 0}
-            onClick={event => handleListItemClick(event, 0)}
-          >
-            <SidebarLink to="/dashboard">
-              <Home size={32} />
+        <ul>
+          <li>
+            <SidebarLink
+              activeStyle={{ backgroundColor: '#2266b1' }}
+              exact
+              to="/dashboard"
+            >
+              <div>
+                <Home size={32} />
+                <span>Home</span>
+              </div>
             </SidebarLink>
-          </ListItem>
+          </li>
 
-          <ListItem
-            component="li"
-            selected={selectedIndex === 1}
-            onClick={event => handleListItemClick(event, 1)}
-          >
-            <SidebarLink to="/dashboard/cardapio">Ver Cardápios</SidebarLink>
-          </ListItem>
-          <ListItem
-            component="li"
-            selected={selectedIndex === 2}
-            onClick={event => handleListItemClick(event, 2)}
-          >
-            <SidebarLink to="/dashboard/cardapio/cadastrar">
-              Cadastrar Cardápio
+          <li>
+            <SidebarLink
+              activeStyle={{ backgroundColor: '#2266b1' }}
+              exact
+              to="/dashboard/cardapio"
+            >
+              <div>
+                <ViewList size={32} />
+                <span>Ver Cardápios</span>
+              </div>
             </SidebarLink>
-          </ListItem>
-          <ListItem
-            component="li"
-            selected={selectedIndex === 3}
-            onClick={event => handleListItemClick(event, 3)}
-          >
-            <SidebarLink to="/dashboard/cardapio/editar">
-              Editar Cardápio
+          </li>
+          <li>
+            <SidebarLink
+              activeStyle={{ backgroundColor: '#2266b1' }}
+              exact
+              to="/dashboard/cardapio/cadastrar"
+            >
+              <div>
+                <AddBox size={32} />
+                <span>Cadastar Cardápio</span>
+              </div>
             </SidebarLink>
-          </ListItem>
-        </List>
+          </li>
+          <li>
+            <SidebarLink
+              activeStyle={{ backgroundColor: '#2266b1' }}
+              exact
+              to="/dashboard/cardapio/editar"
+            >
+              <div>
+                <Edit size={32} />
+                <span>Editar Cardápio</span>
+              </div>
+            </SidebarLink>
+          </li>
+        </ul>
         <Divider />
       </nav>
     </Container>

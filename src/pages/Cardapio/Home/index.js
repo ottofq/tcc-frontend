@@ -1,22 +1,36 @@
 import React from 'react';
 
-import { Container, Rating, ContainerComentario, Comentario } from './styled';
+import {
+  Container,
+  ContainerCardapio,
+  ContainerInfo,
+  RatingUI,
+  ContainerRating,
+  ContainerComentario,
+  Comentario,
+} from './styled';
 import { List, ListItem, Divider } from '@material-ui/core';
 
 export default function Home() {
   return (
     <Container>
-      <div className="wrapper">
-        <h3>Média Geral Almoço dia 15/02/2020</h3>
-        <p>Avaliações: 1000</p>
-        <Rating
-          size="large"
-          name="media"
-          precision={0.5}
-          value={3.5}
-          disabled
-        />
-        <div className="conteudo-cardapio">
+      <ContainerCardapio>
+        <h3>15/02/2020</h3>
+        <h3>Almoço</h3>
+
+        <ContainerRating>
+          <h3>Média das Avaliações</h3>
+          <p>Avaliações: 1000</p>
+          <RatingUI
+            size="large"
+            name="media"
+            precision={0.5}
+            value={3.5}
+            disabled
+          />
+        </ContainerRating>
+
+        <ContainerInfo>
           <div>
             <p>Cardápio dia: </p>
             <span>15/02/2020</span>
@@ -51,8 +65,8 @@ export default function Home() {
             <p>Sobremesa: </p>
             <span>Melancia</span>
           </div>
-        </div>
-      </div>
+        </ContainerInfo>
+      </ContainerCardapio>
 
       <ContainerComentario>
         <h4>Comentários</h4>
@@ -62,7 +76,11 @@ export default function Home() {
               <h5>Nome do Aluno</h5>
               <p>
                 Comentário Comentário Comentário Comentário Comentário
-                Comentário Comentário ComentárioComentário
+                Comentário Comentário Comentário Comentário Comentário
+                Comentário Comentário Comentário Comentário Comentário
+                Comentário Comentário Comentário Comentário Comentário
+                Comentário Comentário Comentário Comentário Comentário
+                Comentário Comentário Comentário Comentário Comentário
               </p>
             </Comentario>
             <Divider />
