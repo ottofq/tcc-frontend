@@ -12,6 +12,11 @@ export default function Routes() {
       <Route path="/dashboard/cardapio" exact component={Main} />
       <Route path="/dashboard/cardapio/cadastrar" exact component={Main} />
       <Route path="/dashboard/cardapio/editar" exact component={Main} />
+      <Route path="/dashboard/avisos/cadastro" exact component={Main} />
+      <Route path="/dashboard/avisos/listagem" exact component={Main} />
+      <Route path="/dashboard/avisos/edicao" exact component={Main} />
+      <Route path="/dashboard/avisos/cardapio" exact component={Main} />
+      <Route path="/dashboard/aluno/listagem" exact component={Main} />
     </Switch>
   );
 }

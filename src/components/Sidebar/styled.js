@@ -54,3 +54,18 @@ export const SidebarLink = styled(NavLink)`
   box-sizing: border-box;
   display: block;
 `;
+
+export const Title = styled.div`
+  display: flex;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  margin-top: 5px;
+
+  h2 {
+    margin-left: 5px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+`;
