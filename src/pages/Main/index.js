@@ -7,6 +7,7 @@ import Home from '../Cardapio/Home';
 import CardapioCadastro from '../Cardapio/Cadastro';
 import CardapioEdicao from '../Cardapio/Editar';
 import CardapioListagem from '../Cardapio/VerCardapios';
+import CardapioDetalhes from '../Cardapio/Detalhes';
 import InfoCadastro from '../Info/Cadastro';
 import InfoListagem from '../Info/Listagem';
 import InfoEdicao from '../Info/Edicao';
@@ -29,6 +30,14 @@ export default function Main() {
               path="/dashboard"
               component={Home}
             />
+
+            <Route
+              key="cardapio-home"
+              exact
+              path="/dashboard/cardapio/detalhes/:id"
+              component={CardapioDetalhes}
+            />
+
             <Route
               key="cardapio-cadastro"
               exact
@@ -45,7 +54,7 @@ export default function Main() {
             <Route
               key="cardapio-edicao"
               exact
-              path="/dashboard/cardapio/editar"
+              path="/dashboard/cardapio/editar/:id"
               component={CardapioEdicao}
             />
 

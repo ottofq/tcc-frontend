@@ -50,6 +50,6 @@ table {
 	border-spacing: 0;
 }
 html{
-  font-family: "PT Sans",sans-serif
+  font-family: "PT Sans",Dejavu Serif,sans-serif
 }
 `;

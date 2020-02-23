@@ -64,7 +64,7 @@ export default function Sidebar() {
             </SidebarLink>
           </li>
 
-          <li>
+          {/* <li>
             <SidebarLink
               activeStyle={{ backgroundColor: '#2266b1' }}
               exact
@@ -75,9 +75,10 @@ export default function Sidebar() {
                 <span>Editar Cardápio</span>
               </div>
             </SidebarLink>
+
             <Divider />
           </li>
-
+          */}
           <li>
             <Title>
               <Info size={32}></Info>

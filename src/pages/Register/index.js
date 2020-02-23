@@ -1,33 +1,38 @@
+/* eslint-disable no-unused-expressions */
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { TextField as Input, Button, Snackbar } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
+import { TextField as Input, Button } from '@material-ui/core';
+import AlertToast from '../../components/AlertToast';
 
 import { Container, ContainerRegister } from './styled';
 import logo from '../../assets/logo.png';
+import api from '../../services/api';
 
-export default function Login({ history }) {
+export default function Register({ history }) {
   const { register, handleSubmit } = useForm();
-  const [open, setOpen] = useState(false);
+  const [status, setStatus] = useState('');
 
-  const onSubmit = data => {
-    console.log(data);
-  };
-
-  async function handleButton(e) {
-    e.preventDefault();
-    setOpen(true);
-    setTimeout(() => {
-      history.push('/');
-    }, 2000);
-  }
-
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
+  const onSubmit = async data => {
+    try {
+      const { email, password } = data;
+      const result = await api.post('/users', { email, password });
+      if (result.status === 200) {
+        setStatus({
+          type: 'success',
+          msg: 'Cadastro Efetuado com Sucesso!',
+          date: new Date(),
+        });
+        setTimeout(() => {
+          history.push('/');
+        }, 1900);
+      }
+    } catch (error) {
+      setStatus({
+        type: 'error',
+        msg: 'Erro ao realizar o cadastro!',
+        date: new Date(),
+      });
     }
-
-    setOpen(false);
   };
 
   return (
@@ -56,28 +61,22 @@ export default function Login({ history }) {
 
             <Input
               inputRef={register({ required: true })}
+              name="password"
               type="password"
-              name="senha"
               id="outlined-basic"
               label="Senha"
               variant="outlined"
             />
 
-            <Button onClick={e => handleButton(e)} type="submit">
-              Cadastrar
-            </Button>
+            <Button type="submit">Cadastrar</Button>
           </form>
-
-          <Snackbar
-            anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-            open={open}
-            autoHideDuration={2000}
-            onClose={handleClose}
-          >
-            <Alert variant="filled" onClose={handleClose} severity="success">
-              Cadastro efetuado com sucesso!
-            </Alert>
-          </Snackbar>
+          {status ? (
+            <AlertToast
+              key={status.date}
+              typeMessage={status.type}
+              message={status.msg}
+            />
+          ) : null}
         </ContainerRegister>
       </Container>
     </>

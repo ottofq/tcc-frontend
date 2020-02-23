@@ -1,7 +1,8 @@
-import React from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useEffect, useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
 import { Radio, FormControlLabel } from '@material-ui/core';
 import { Save } from '@material-ui/icons';
+import AlertToast from '../../../components/AlertToast';
 
 import {
   Container,
@@ -12,12 +13,87 @@ import {
   FormLabel,
 } from './styled';
 
-export default function Cadastro() {
-  const { register, handleSubmit } = useForm();
+import api from '../../../services/api';
 
-  const onSubmit = data => {
-    console.log(data);
-  };
+export default function Cadastro({ match, history }) {
+  const { register, handleSubmit, setValue, control } = useForm();
+  const [cardapio, setCardapio] = useState('');
+  const [statusAlert, setStatusAlert] = useState('');
+
+  useEffect(() => {
+    async function loadCardapio() {
+      try {
+        const { id } = match.params;
+        const result = await api.get(`/cardapio/${id}`);
+        setCardapio(result.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    loadCardapio();
+  }, [match.params]);
+
+  useEffect(() => {
+    if (cardapio) {
+      setValue('entrada', cardapio.entrada.descricao);
+      setValue('proteina', cardapio.proteina.descricao);
+      setValue('opcao', cardapio.opcao.descricao);
+      setValue('acompanhamento', cardapio.acompanhamento.descricao);
+      setValue('guarnicao', cardapio.guarnicao.descricao);
+      setValue('sobremesa', cardapio.sobremesa.descricao);
+    }
+  }, [cardapio, setValue]);
+
+  async function onSubmit(data) {
+    const {
+      tipo,
+      entrada,
+      proteina,
+      opcao,
+      acompanhamento,
+      guarnicao,
+      sobremesa,
+    } = data;
+    try {
+      const { id } = match.params;
+      const user = JSON.parse(localStorage.getItem('user'));
+
+      const result = await api.put(
+        `/cardapio/${id}`,
+        {
+          tipo,
+          entrada,
+          proteina,
+          opcao,
+          acompanhamento,
+          guarnicao,
+          sobremesa,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${user.data.token}`,
+          },
+        }
+      );
+
+      if (result.status === 200) {
+        setStatusAlert({
+          type: 'success',
+          msg: 'Cardápio editado com sucesso!',
+        });
+      }
+      setTimeout(() => {
+        history.push('/dashboard/cardapio ');
+      }, 1900);
+    } catch (error) {
+      console.log(error);
+      setStatusAlert({
+        type: 'error',
+        msg: 'Erro ao editar um cardápio!',
+      });
+    }
+  }
 
   return (
     <Container>
@@ -25,63 +101,63 @@ export default function Cadastro() {
         <FormLabel component="legend">Tipo de Refeição</FormLabel>
         <RadioGroup aria-label="tipo" name="tipo">
           <FormControlLabel
-            value="almoço"
+            value="Almoço"
             control={<Radio required color="primary" inputRef={register} />}
             label="Almoço"
           />
           <FormControlLabel
-            value="jantar"
+            value="Jantar"
             control={<Radio required color="primary" inputRef={register} />}
             label="Jantar"
           />
         </RadioGroup>
 
-        <Input
+        <Controller
+          as={<Input label="Entrada" variant="outlined" />}
+          control={control}
           name="entrada"
-          inputRef={register({ required: true })}
-          id="outlined-basic"
-          label="Entrada"
-          variant="outlined"
+          defaultValue=""
+          rules={{ required: true }}
         />
 
-        <Input
-          inputRef={register({ required: true })}
+        <Controller
+          as={<Input label="Proteina" variant="outlined" />}
+          control={control}
           name="proteina"
-          id="outlined-basic"
-          label="Proteina"
-          variant="outlined"
+          defaultValue=""
+          rules={{ required: true }}
         />
 
-        <Input
-          inputRef={register({ required: true })}
+        <Controller
+          as={<Input label="Opção" variant="outlined" />}
+          control={control}
           name="opcao"
-          id="outlined-basic"
-          label="Opção"
-          variant="outlined"
+          defaultValue=""
+          rules={{ required: true }}
         />
 
-        <Input
-          inputRef={register({ required: true })}
+        <Controller
+          as={<Input label="Acompanhamento" variant="outlined" />}
+          control={control}
           name="acompanhamento"
-          id="outlined-basic"
-          label="Acompanhamento"
-          variant="outlined"
+          defaultValue=""
+          rules={{ required: true }}
         />
 
-        <Input
-          inputRef={register({ required: true })}
+        <Controller
+          as={<Input label="Guarnicão" variant="outlined" />}
+          control={control}
           name="guarnicao"
-          id="outlined-basic"
-          label="Guarnicão"
-          variant="outlined"
+          defaultValue=""
+          rules={{ required: true }}
         />
 
-        <Input
-          inputRef={register({ required: true })}
+        <Controller
+          as={<Input label="Sobremesa" variant="outlined" />}
+          control={control}
           name="sobremesa"
-          id="outlined-basic"
-          label="Sobremesa"
-          variant="outlined"
+          defaultValue=""
+          rules={{ required: true }}
         />
 
         <StyledButton
@@ -93,6 +169,14 @@ export default function Cadastro() {
           Salvar Edição
         </StyledButton>
       </Form>
+
+      {statusAlert ? (
+        <AlertToast
+          key={Date.now}
+          typeMessage={statusAlert.type}
+          message={statusAlert.msg}
+        />
+      ) : null}
     </Container>
   );
 }

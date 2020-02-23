@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Radio, FormControlLabel } from '@material-ui/core';
 import { Save } from '@material-ui/icons';
@@ -11,12 +11,62 @@ import {
   RadioGroup,
   FormLabel,
 } from './styled';
+import api from '../../../services/api';
+import AlertToast from '../../../components/AlertToast';
 
-export default function Cadastro() {
-  const { register, handleSubmit } = useForm();
+export default function Cadastro({ history }) {
+  const { register, handleSubmit, reset } = useForm();
+  const [statusAlert, setStatusAlert] = useState('');
 
-  const onSubmit = data => {
-    console.log(data);
+  const onSubmit = async data => {
+    const {
+      tipo,
+      entrada,
+      proteina,
+      opcao,
+      acompanhamento,
+      guarnicao,
+      sobremesa,
+    } = data;
+
+    try {
+      const user = JSON.parse(localStorage.getItem('user'));
+      const result = await api.post(
+        '/cardapio',
+        {
+          tipo,
+          entrada,
+          proteina,
+          opcao,
+          acompanhamento,
+          guarnicao,
+          sobremesa,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${user.data.token}`,
+          },
+        }
+      );
+
+      if (result.status === 200) {
+        setStatusAlert({
+          type: 'success',
+          msg: 'Novo Cardápio cadastrado!',
+        });
+        reset();
+      }
+      setTimeout(() => {
+        history.push('/dashboard');
+      }, 1900);
+    } catch (error) {
+      console.log(error);
+
+      setStatusAlert({
+        type: 'error',
+        msg: 'Erro ao cadastrar um novo cardápio!',
+      });
+    }
   };
 
   return (
@@ -25,12 +75,12 @@ export default function Cadastro() {
         <FormLabel component="legend">Tipo de Refeição</FormLabel>
         <RadioGroup aria-label="tipo" name="tipo">
           <FormControlLabel
-            value="almoço"
+            value="Almoço"
             control={<Radio required color="primary" inputRef={register} />}
             label="Almoço"
           />
           <FormControlLabel
-            value="jantar"
+            value="Jantar"
             control={<Radio required color="primary" inputRef={register} />}
             label="Jantar"
           />
@@ -93,6 +143,14 @@ export default function Cadastro() {
           Cadastrar
         </StyledButton>
       </Form>
+
+      {statusAlert ? (
+        <AlertToast
+          key={Date.now}
+          typeMessage={statusAlert.type}
+          message={statusAlert.msg}
+        />
+      ) : null}
     </Container>
   );
 }
