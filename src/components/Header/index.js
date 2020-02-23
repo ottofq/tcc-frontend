@@ -1,18 +1,23 @@
 import React from 'react';
 import { Container, ButtonUI } from './styled';
+import { withRouter } from 'react-router-dom';
 
-export default function Header() {
-  const handleLogout = () => {
+function Header({ history }) {
+  function handleLogout() {
     localStorage.removeItem('user');
-  };
+
+    history.push('/');
+  }
 
   return (
     <Container>
       <h6>Cardápio RU CCA-UFES</h6>
 
-      <ButtonUI onClick={handleLogout} variant="contained">
-        Logout
-      </ButtonUI>
+      <a style={{ textDecoration: 'none' }} href="/" onClick={handleLogout}>
+        <ButtonUI variant="contained">Logout</ButtonUI>
+      </a>
     </Container>
   );
 }
+
+export default withRouter(Header);

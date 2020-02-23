@@ -11,6 +11,7 @@ import AlertToast from '../../components/AlertToast';
 import { Container, ContainerLogin } from './styled';
 import logo from '../../assets/logo.png';
 import api from '../../services/api';
+import { useEffect } from 'react';
 
 export default function Login({ history }) {
   const { register, handleSubmit } = useForm();
@@ -32,9 +33,7 @@ export default function Login({ history }) {
           date: new Date(),
         });
 
-        setTimeout(() => {
-          history.push('/dashboard');
-        }, 1000);
+        history.push('/dashboard');
       }
     } catch (error) {
       console.log(error);
@@ -46,6 +45,17 @@ export default function Login({ history }) {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    function verifyUser() {
+      const user = localStorage.getItem('user');
+
+      if (user) {
+        history.push('/dashboard');
+      }
+    }
+    verifyUser();
+  }, [history]);
 
   return (
     <>

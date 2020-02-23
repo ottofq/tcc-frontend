@@ -14,8 +14,8 @@ export default function Register({ history }) {
 
   const onSubmit = async data => {
     try {
-      const { email, password } = data;
-      const result = await api.post('/users', { email, password });
+      const { email, password, nome } = data;
+      const result = await api.post('/users', { nome, email, password });
       if (result.status === 200) {
         setStatus({
           type: 'success',
@@ -46,7 +46,6 @@ export default function Register({ history }) {
               inputRef={register({ required: true })}
               type="text"
               name="nome"
-              id="outlined-basic"
               label="Nome"
               variant="outlined"
             />
@@ -54,7 +53,6 @@ export default function Register({ history }) {
               inputRef={register({ required: true })}
               type="email"
               name="email"
-              id="outlined-basic"
               label="Email"
               variant="outlined"
             />
@@ -63,7 +61,6 @@ export default function Register({ history }) {
               inputRef={register({ required: true })}
               name="password"
               type="password"
-              id="outlined-basic"
               label="Senha"
               variant="outlined"
             />
