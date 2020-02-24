@@ -14,7 +14,7 @@ import {
 import { List, ListItem, Divider, CircularProgress } from '@material-ui/core';
 import api from '../../../services/api';
 
-export default function Detalhes({ match }) {
+export default function Detalhes({ match, history }) {
   const [cardapio, setCardapio] = useState();
   const [comentarios, setComentarios] = useState([]);
   const [media, setMedia] = useState('');
@@ -24,15 +24,21 @@ export default function Detalhes({ match }) {
 
   useEffect(() => {
     async function loadingMenu() {
-      const { id } = match.params;
-      const result = await api.get(`/cardapio/${id}`);
+      try {
+        const { id } = match.params;
+        const result = await api.get(`/cardapio/${id}`);
 
-      setCardapio(result.data);
-      setLoadingCardapio(false);
+        setCardapio(result.data);
+        setLoadingCardapio(false);
+      } catch (error) {
+        console.log(error);
+        history.push('/404');
+        window.location.reload();
+      }
     }
 
     loadingMenu();
-  }, [match.params]);
+  }, [match.params, history]);
 
   useEffect(() => {
     async function loadingRate() {

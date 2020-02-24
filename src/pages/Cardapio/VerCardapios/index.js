@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Table, TableCell, TableRow, Paper } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { format, parseISO } from 'date-fns';
 
 import AlertToast from '../../../components/AlertToast';
 import DialogExcluir from '../../../components/DialogExcluir';
@@ -71,10 +72,12 @@ export default function VerCardapios() {
             cardapios.map(cardapio => (
               <TableRow key={cardapio._id}>
                 <TableCell component="th" scope="row">
-                  {cardapio.data}
+                  {cardapio.proteina.descricao}
                 </TableCell>
                 <TableCell align="center">{cardapio.tipo}</TableCell>
-                <TableCell align="center">{cardapio.data}</TableCell>
+                <TableCell align="center">
+                  {format(parseISO(cardapio.data), 'dd/MM/yyyy')}
+                </TableCell>
                 <TableCell align="center">{cardapio.media_geral}</TableCell>
 
                 <TableCell align="center">

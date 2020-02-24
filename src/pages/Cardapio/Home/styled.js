@@ -38,7 +38,6 @@ export const ContainerInfo = styled.div`
   flex-direction: column;
   flex-wrap: wrap;
   width: 300px;
-  height: 200px;
 
   div {
     margin-top: 10px;

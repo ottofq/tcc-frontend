@@ -25,7 +25,7 @@ export default function Login({ history }) {
       const result = await api.post('/login', { email, password });
 
       if (result.status === 200) {
-        const local = JSON.stringify(result);
+        const local = JSON.stringify(result.data);
         localStorage.setItem('user', local);
         setStatusAlert({
           type: 'success',

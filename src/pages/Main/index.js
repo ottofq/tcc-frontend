@@ -11,6 +11,7 @@ import CardapioDetalhes from '../Cardapio/Detalhes';
 import InfoCadastro from '../Info/Cadastro';
 import InfoListagem from '../Info/Listagem';
 import InfoEdicao from '../Info/Edicao';
+import InfoDetalhes from '../Info/Detalhes';
 import AlunoListagem from '../Aluno/Listagem';
 
 import { Container, Wrapper } from './styled';
@@ -75,8 +76,14 @@ export default function Main() {
             <Route
               key="aviso-edicao"
               exact
-              path="/dashboard/avisos/edicao"
+              path="/dashboard/avisos/edicao/:id"
               component={InfoEdicao}
+            />
+            <Route
+              key="aviso-detalhes"
+              exact
+              path="/dashboard/avisos/detalhes/:id"
+              component={InfoDetalhes}
             />
 
             <Route

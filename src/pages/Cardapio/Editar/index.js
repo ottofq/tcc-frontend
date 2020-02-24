@@ -84,7 +84,7 @@ export default function Cadastro({ match, history }) {
         });
       }
       setTimeout(() => {
-        history.push('/dashboard/cardapio ');
+        history.push('/dashboard/cardapio');
       }, 1900);
     } catch (error) {
       console.log(error);

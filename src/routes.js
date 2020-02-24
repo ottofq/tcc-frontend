@@ -33,7 +33,16 @@ export default function Routes() {
       />
       <PrivateRoute path="/dashboard/avisos/cadastro" exact component={Main} />
       <PrivateRoute path="/dashboard/avisos/listagem" exact component={Main} />
-      <PrivateRoute path="/dashboard/avisos/edicao" exact component={Main} />
+      <PrivateRoute
+        path="/dashboard/avisos/detalhes/:id"
+        exact
+        component={Main}
+      />
+      <PrivateRoute
+        path="/dashboard/avisos/edicao/:id"
+        exact
+        component={Main}
+      />
       <PrivateRoute path="/dashboard/avisos/cardapio" exact component={Main} />
       <PrivateRoute path="/dashboard/aluno/listagem" exact component={Main} />
       <Route path="*" component={Page404} />

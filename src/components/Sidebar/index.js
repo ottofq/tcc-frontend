@@ -4,7 +4,6 @@ import {
   Home,
   ViewList,
   AddBox,
-  Edit,
   RestaurantMenu,
   Info,
   People,
@@ -105,19 +104,6 @@ export default function Sidebar() {
               <div>
                 <AddBox size={32} />
                 <span>Cadastar Aviso</span>
-              </div>
-            </SidebarLink>
-          </li>
-
-          <li>
-            <SidebarLink
-              activeStyle={{ backgroundColor: '#2266b1' }}
-              exact
-              to="/dashboard/avisos/edicao"
-            >
-              <div>
-                <Edit size={32} />
-                <span>Editar Aviso</span>
               </div>
             </SidebarLink>
           </li>
