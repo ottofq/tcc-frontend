@@ -32,10 +32,10 @@ export default function VerCardapios() {
 
   async function handleClick(id) {
     try {
-      const user = JSON.parse(localStorage.getItem('user'));
+      const user = JSON.parse(localStorage.getItem('@app-ru/user'));
       const result = await api.delete(`/cardapio/${id}`, {
         headers: {
-          authorization: `Bearer ${user.data.token}`,
+          authorization: `Bearer ${user.token}`,
         },
       });
       setCardapios(cardapios.filter(cardapio => cardapio._id !== id));

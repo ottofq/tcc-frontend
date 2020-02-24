@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 function Header({ history }) {
   function handleLogout() {
-    localStorage.removeItem('user');
+    localStorage.removeItem('@app-ru/user');
 
     history.push('/');
   }

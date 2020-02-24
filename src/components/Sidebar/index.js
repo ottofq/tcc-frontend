@@ -63,22 +63,8 @@ export default function Sidebar() {
             </SidebarLink>
           </li>
 
-          {/* <li>
-            <SidebarLink
-              activeStyle={{ backgroundColor: '#2266b1' }}
-              exact
-              to="/dashboard/cardapio/editar"
-            >
-              <div>
-                <Edit size={32} />
-                <span>Editar Cardápio</span>
-              </div>
-            </SidebarLink>
-
-            <Divider />
-          </li>
-          */}
           <li>
+            <Divider />
             <Title>
               <Info size={32}></Info>
               <h2>Avisos</h2>

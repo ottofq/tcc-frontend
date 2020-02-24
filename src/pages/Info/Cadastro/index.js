@@ -13,7 +13,7 @@ export default function InfoCadastro({ history }) {
   async function onSubmit(data) {
     try {
       const { titulo, descricao } = data;
-      const user = JSON.parse(localStorage.getItem('user'));
+      const user = JSON.parse(localStorage.getItem('@app-ru/user'));
       const result = await api.post(
         '/informacoes/',
         { titulo, descricao },

@@ -26,7 +26,7 @@ export default function Login({ history }) {
 
       if (result.status === 200) {
         const local = JSON.stringify(result.data);
-        localStorage.setItem('user', local);
+        localStorage.setItem('@app-ru/user', local);
         setStatusAlert({
           type: 'success',
           msg: 'Login Efetuado com Sucesso!',
@@ -48,7 +48,7 @@ export default function Login({ history }) {
 
   useEffect(() => {
     function verifyUser() {
-      const user = localStorage.getItem('user');
+      const user = localStorage.getItem('@app-ru/user');
 
       if (user) {
         history.push('/dashboard');

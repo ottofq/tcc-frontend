@@ -30,7 +30,7 @@ export default function Cadastro({ history }) {
     } = data;
 
     try {
-      const user = JSON.parse(localStorage.getItem('user'));
+      const user = JSON.parse(localStorage.getItem('@app-ru/user'));
       const result = await api.post(
         '/cardapio',
         {
@@ -44,7 +44,7 @@ export default function Cadastro({ history }) {
         },
         {
           headers: {
-            authorization: `Bearer ${user.data.token}`,
+            authorization: `Bearer ${user.token}`,
           },
         }
       );

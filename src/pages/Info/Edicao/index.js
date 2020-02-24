@@ -34,7 +34,7 @@ export default function InfoEdicao({ match, history }) {
   async function onSubmit(data) {
     try {
       const { titulo, descricao } = data;
-      const user = JSON.parse(localStorage.getItem('user'));
+      const user = JSON.parse(localStorage.getItem('@app-ru/user'));
 
       const result = await api.put(
         `/informacoes/${info._id}`,

@@ -57,7 +57,7 @@ export default function Cadastro({ match, history }) {
     } = data;
     try {
       const { id } = match.params;
-      const user = JSON.parse(localStorage.getItem('user'));
+      const user = JSON.parse(localStorage.getItem('@app-ru/user'));
 
       const result = await api.put(
         `/cardapio/${id}`,
@@ -72,7 +72,7 @@ export default function Cadastro({ match, history }) {
         },
         {
           headers: {
-            authorization: `Bearer ${user.data.token}`,
+            authorization: `Bearer ${user.token}`,
           },
         }
       );

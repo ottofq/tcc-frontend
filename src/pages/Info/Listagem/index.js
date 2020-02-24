@@ -20,7 +20,7 @@ export default function VerCardapios() {
 
   async function handleSubmitModal(id) {
     try {
-      const user = JSON.parse(localStorage.getItem('user'));
+      const user = JSON.parse(localStorage.getItem('@app-ru/user'));
       const result = await api.delete(`/informacoes/${id}`, {
         headers: {
           authorization: `Bearer ${user.token}`,
