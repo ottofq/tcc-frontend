@@ -1,5 +1,84 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Table, TableCell, TableRow, Paper } from '@material-ui/core';
+import { format, parseISO } from 'date-fns';
+
+import {
+  TableContainerUI,
+  TableHeadUI,
+  TableBodyUI,
+  ButtonUI,
+  ContainerAcoes,
+} from './styled';
+
+import api from '../../../services/api';
 
 export default function AlunoListagem() {
-  return <h1>Aluno Listagem</h1>;
+  const [alunos, setAlunos] = useState([]);
+  const [qtdAlunos, setQtdsAlunos] = useState(0);
+
+  useEffect(() => {
+    async function loadAlunos() {
+      try {
+        const user = JSON.parse(localStorage.getItem('@app-ru/user'));
+        const result = await api.get('/alunos', {
+          headers: {
+            authorization: `Bearer ${user.token}`,
+          },
+        });
+        setAlunos(result.data);
+        setQtdsAlunos(result.data.length);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    loadAlunos();
+  }, []);
+  return (
+    <div>
+      <h2>Quantidade de Alunos cadastrados:{qtdAlunos}</h2>
+      <TableContainerUI component={Paper}>
+        <Table aria-label="simple table">
+          <TableHeadUI>
+            <TableRow>
+              <TableCell>Alunos</TableCell>
+              <TableCell align="center">Data Nascimento</TableCell>
+              <TableCell align="center">Ações</TableCell>
+            </TableRow>
+          </TableHeadUI>
+          <TableBodyUI>
+            {alunos.length > 0 ? (
+              alunos.map(aluno => (
+                <TableRow key={aluno._id}>
+                  <TableCell component="th" scope="row">
+                    {aluno.nome}
+                  </TableCell>
+                  <TableCell align="center">
+                    {format(parseISO(aluno.data_nascimento), 'dd/MM/yyyy')}
+                  </TableCell>
+
+                  <TableCell align="center">
+                    <ContainerAcoes>
+                      <Link
+                        style={{ textDecoration: 'none' }}
+                        to={`/dashboard/aluno/detalhes/${aluno._id}`}
+                      >
+                        <ButtonUI variant="contained">Detalhes</ButtonUI>
+                      </Link>
+                    </ContainerAcoes>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell>
+                  <h1>Vazio</h1>
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBodyUI>
+        </Table>
+      </TableContainerUI>
+    </div>
+  );
 }

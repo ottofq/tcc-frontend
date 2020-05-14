@@ -13,6 +13,7 @@ import InfoListagem from '../Info/Listagem';
 import InfoEdicao from '../Info/Edicao';
 import InfoDetalhes from '../Info/Detalhes';
 import AlunoListagem from '../Aluno/Listagem';
+import AlunoDetalhes from '../Aluno/Detalhes';
 
 import { Container, Wrapper } from './styled';
 
@@ -91,6 +92,12 @@ export default function Main() {
               exact
               path="/dashboard/aluno/listagem"
               component={AlunoListagem}
+            />
+            <Route
+              key="aluno-detalhes"
+              exact
+              path="/dashboard/aluno/detalhes/:id"
+              component={AlunoDetalhes}
             />
           </Switch>
         </Wrapper>

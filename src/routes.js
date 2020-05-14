@@ -45,6 +45,11 @@ export default function Routes() {
       />
       <PrivateRoute path="/dashboard/avisos/cardapio" exact component={Main} />
       <PrivateRoute path="/dashboard/aluno/listagem" exact component={Main} />
+      <PrivateRoute
+        path="/dashboard/aluno/detalhes/:id"
+        exact
+        component={Main}
+      />
       <Route path="*" component={Page404} />
     </Switch>
   );
