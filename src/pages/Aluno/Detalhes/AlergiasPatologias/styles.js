@@ -1,26 +1,26 @@
 import styled from 'styled-components';
 import { styled as styledUI, TextField } from '@material-ui/core';
 
-export const Container = styled.div`
-  display: flex;
-  height: 700px;
-  width: 1200px;
-  flex-direction: column;
-  justify-content: space-around;
-  padding: 10px;
-`;
-
 export const ContainerDadosAluno = styled.div`
   display: flex;
+  flex-direction: column;
+  height: 400px;
   flex-wrap: wrap;
-  border: 1px solid black;
+  border: 1px solid #bbb;
   justify-content: space-around;
+  padding: 10px;
+  border-radius: 4px;
 `;
 
-export const Title = styled.h2`
-  font-size: 1.2em;
+export const ContainerCheckbox = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 270px;
+  padding-bottom: 4px;
 `;
 
 export const Input = styledUI(TextField)({
-  width: '250px',
+  height: '70px',
+  width: '300px',
 });

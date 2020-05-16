@@ -4,19 +4,29 @@ import {
   TableHead,
   Button,
   TableBody,
-  Modal,
 } from '@material-ui/core';
 
 import styled from 'styled-components';
 
-export const TableContainerUI = styledUI(TableContainer)({
-  display: 'flex',
-  justifyContent: 'center',
-  marginTop: '20px',
-  marginBottom: '20px',
-  marginLeft: '20px',
-  marginRight: '20px',
-});
+export const Container = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 20px;
+`;
+
+export const Title = styled.h2`
+  font-size: 28px;
+  color: #174578;
+  padding: 10px 0;
+  span {
+    color: #174578;
+    font-size: 28px;
+    font-weight: bold;
+  }
+`;
+
+export const TableContainerUI = styledUI(TableContainer)({});
 export const TableHeadUI = styledUI(TableHead)({
   backgroundColor: '#174578',
 
@@ -45,14 +55,4 @@ export const ContainerAcoes = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-`;
-
-export const ModalUI = styledUI(Modal)({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-});
-
-export const ContainerAlunoInfo = styled.div`
-  background-color: #fff;
 `;

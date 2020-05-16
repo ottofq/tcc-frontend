@@ -4,6 +4,8 @@ import { Table, TableCell, TableRow, Paper } from '@material-ui/core';
 import { format, parseISO } from 'date-fns';
 
 import {
+  Container,
+  Title,
   TableContainerUI,
   TableHeadUI,
   TableBodyUI,
@@ -35,14 +37,18 @@ export default function AlunoListagem() {
     loadAlunos();
   }, []);
   return (
-    <div>
-      <h2>Quantidade de Alunos cadastrados:{qtdAlunos}</h2>
+    <Container>
+      <Title>
+        Nº de Alunos cadastrados: <span>{qtdAlunos}</span>
+      </Title>
       <TableContainerUI component={Paper}>
         <Table aria-label="simple table">
           <TableHeadUI>
             <TableRow>
-              <TableCell>Alunos</TableCell>
+              <TableCell>Nome do Aluno</TableCell>
+              <TableCell align="center">Matrícula</TableCell>
               <TableCell align="center">Data Nascimento</TableCell>
+              <TableCell align="center">Curso</TableCell>
               <TableCell align="center">Ações</TableCell>
             </TableRow>
           </TableHeadUI>
@@ -53,9 +59,11 @@ export default function AlunoListagem() {
                   <TableCell component="th" scope="row">
                     {aluno.nome}
                   </TableCell>
+                  <TableCell align="center">{aluno.matricula}</TableCell>
                   <TableCell align="center">
                     {format(parseISO(aluno.data_nascimento), 'dd/MM/yyyy')}
                   </TableCell>
+                  <TableCell align="center">{aluno.curso}</TableCell>
 
                   <TableCell align="center">
                     <ContainerAcoes>
@@ -79,6 +87,6 @@ export default function AlunoListagem() {
           </TableBodyUI>
         </Table>
       </TableContainerUI>
-    </div>
+    </Container>
   );
 }

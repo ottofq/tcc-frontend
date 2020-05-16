@@ -13,7 +13,7 @@ import InfoListagem from '../Info/Listagem';
 import InfoEdicao from '../Info/Edicao';
 import InfoDetalhes from '../Info/Detalhes';
 import AlunoListagem from '../Aluno/Listagem';
-import AlunoDetalhes from '../Aluno/Detalhes';
+import AlunoDetalhes from '../Aluno/Detalhes/Main';
 
 import { Container, Wrapper } from './styled';
 
