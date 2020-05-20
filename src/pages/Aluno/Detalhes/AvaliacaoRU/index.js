@@ -22,31 +22,31 @@ export default function AvaliacaoRU({ aluno }) {
           <FormControlLabel
             control={<Radio color="primary" />}
             name="aroma_refeicao"
-            value="muito ruim"
+            value="Muito ruim"
             label="Muito Ruim"
           />
           <FormControlLabel
             control={<Radio color="primary" />}
             name="aroma_refeicao"
-            value="ruim"
+            value="Ruim"
             label="Ruim"
           />
           <FormControlLabel
             control={<Radio color="primary" />}
             name="aroma_refeicao"
-            value="regular"
+            value="Regular"
             label="Regular"
           />
           <FormControlLabel
             control={<Radio color="primary" />}
             name="aroma_refeicao"
-            value="bom"
+            value="Bom"
             label="Bom"
           />
           <FormControlLabel
             control={<Radio color="primary" />}
             name="aroma_refeicao"
-            value="muito bom"
+            value="Muito bom"
             label="Muito Bom"
           />
         </RadioGroup>
@@ -60,31 +60,31 @@ export default function AvaliacaoRU({ aluno }) {
           <FormControlLabel
             control={<Radio color="primary" />}
             name="coloracao_cardapio"
-            value="muito ruim"
+            value="Muito ruim"
             label="Muito Ruim"
           />
           <FormControlLabel
             control={<Radio color="primary" />}
             name="coloracao_cardapio"
-            value="ruim"
+            value="Ruim"
             label="Ruim"
           />
           <FormControlLabel
             control={<Radio color="primary" />}
             name="coloracao_cardapio"
-            value="regular"
+            value="Regular"
             label="Regular"
           />
           <FormControlLabel
             control={<Radio color="primary" />}
             name="coloracao_cardapio"
-            value="bom"
+            value="Bom"
             label="Bom"
           />
           <FormControlLabel
             control={<Radio color="primary" />}
             name="coloracao_cardapio"
-            value="muito bom"
+            value="Muito bom"
             label="Muito Bom"
           />
         </RadioGroup>
@@ -98,31 +98,31 @@ export default function AvaliacaoRU({ aluno }) {
           <FormControlLabel
             control={<Radio color="primary" />}
             name="textura_preparacao"
-            value="muito ruim"
+            value="Muito ruim"
             label="Muito Ruim"
           />
           <FormControlLabel
             control={<Radio color="primary" />}
             name="textura_preparacao"
-            value="ruim"
+            value="Ruim"
             label="Ruim"
           />
           <FormControlLabel
             control={<Radio color="primary" />}
             name="textura_preparacao"
-            value="regular"
+            value="Regular"
             label="Regular"
           />
           <FormControlLabel
             control={<Radio color="primary" />}
             name="textura_preparacao"
-            value="bom"
+            value="Bom"
             label="Bom"
           />
           <FormControlLabel
             control={<Radio color="primary" />}
             name="textura_preparacao"
-            value="muito bom"
+            value="Muito bom"
             label="Muito Bom"
           />
         </RadioGroup>
@@ -136,31 +136,31 @@ export default function AvaliacaoRU({ aluno }) {
           <FormControlLabel
             control={<Radio color="primary" />}
             name="sabor_preparacao"
-            value="muito ruim"
+            value="Muito ruim"
             label="Muito Ruim"
           />
           <FormControlLabel
             control={<Radio color="primary" />}
             name="sabor_preparacao"
-            value="ruim"
+            value="Ruim"
             label="Ruim"
           />
           <FormControlLabel
             control={<Radio color="primary" />}
             name="sabor_preparacao"
-            value="regular"
+            value="Regular"
             label="Regular"
           />
           <FormControlLabel
             control={<Radio color="primary" />}
             name="sabor_preparacao"
-            value="bom"
+            value="Bom"
             label="Bom"
           />
           <FormControlLabel
             control={<Radio color="primary" />}
             name="sabor_preparacao"
-            value="muito bom"
+            value="Muito bom"
             label="Muito Bom"
           />
         </RadioGroup>
@@ -176,31 +176,31 @@ export default function AvaliacaoRU({ aluno }) {
           <FormControlLabel
             control={<Radio color="primary" />}
             name="avaliacao_geral"
-            value="muito ruim"
+            value="Muito ruim"
             label="Muito Ruim"
           />
           <FormControlLabel
             control={<Radio color="primary" />}
             name="avaliacao_geral"
-            value="ruim"
+            value="Ruim"
             label="Ruim"
           />
           <FormControlLabel
             control={<Radio color="primary" />}
             name="avaliacao_geral"
-            value="regular"
+            value="Regular"
             label="Regular"
           />
           <FormControlLabel
             control={<Radio color="primary" />}
             name="avaliacao_geral"
-            value="bom"
+            value="Bom"
             label="Bom"
           />
           <FormControlLabel
             control={<Radio color="primary" />}
             name="avaliacao_geral"
-            value="muito bom"
+            value="Muito bom"
             label="Muito Bom"
           />
         </RadioGroup>

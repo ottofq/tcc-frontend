@@ -50,6 +50,7 @@ export default function Routes() {
         exact
         component={Main}
       />
+      <PrivateRoute path="/dashboard/aluno/graficos" exact component={Main} />
       <Route path="*" component={Page404} />
     </Switch>
   );
