@@ -5,19 +5,19 @@ export default function Alergia({ data, quantAluno }) {
   const alergia = [
     {
       alergia: 'Alergia a Glúten',
-      'Alergia a Glúten': Math.round(data.totais.alergia_gluten),
+      'Alergia a Glúten': data.totais.alergia_gluten,
     },
     {
       alergia: 'Intolerância a lactose',
-      'Intolerância a lactose': Math.round(data.totais.intolerancia_lactose),
+      'Intolerância a lactose': data.totais.intolerancia_lactose,
     },
     {
       alergia: 'Proteína Leite da Vaca',
-      'Proteína Leite da Vaca': Math.round(data.totais.proteina_leite_vaca),
+      'Proteína Leite da Vaca': data.totais.proteina_leite_vaca,
     },
     {
       alergia: 'Outras Alergias',
-      'Outras Alergias': Math.round(data.totais.outras_alergias),
+      'Outras Alergias': data.totais.outras_alergias,
     },
   ];
   return (

@@ -5,33 +5,31 @@ export default function Patologia({ data, quantAluno }) {
   const patologia = [
     {
       patologia: 'Doença Cardiovascular',
-      'Doença Cardiovascular': Math.round(data.totais.doenca_cardiovascular),
+      'Doença Cardiovascular': data.totais.doenca_cardiovascular,
     },
     {
       patologia: 'Hipertensão Arterial',
-      'Hipertensão Arterial': Math.round(data.totais.hipertensao_arterial),
+      'Hipertensão Arterial': data.totais.hipertensao_arterial,
     },
     {
       patologia: 'Obesidade',
-      Obesidade: Math.round(data.totais.obesidade),
+      Obesidade: data.totais.obesidade,
     },
     {
       patologia: 'Dislipidemias',
-      Dislipidemias: Math.round(data.totais.dislipidemias),
+      Dislipidemias: data.totais.dislipidemias,
     },
     {
       patologia: 'Doença Arterial Coronariana',
-      'Doença Arterial Coronariana': Math.round(
-        data.totais.doenca_arterial_coronariana
-      ),
+      'Doença Arterial Coronariana': data.totais.doenca_arterial_coronariana,
     },
     {
       patologia: 'Diabetes',
-      Diabetes: Math.round(data.totais.diabetes),
+      Diabetes: data.totais.diabetes,
     },
     {
       patologia: 'Outras Patologias',
-      'Outras Patologias': Math.round(data.totais.outras_patologias),
+      'Outras Patologias': data.totais.outras_patologias,
     },
   ];
 
@@ -50,7 +48,7 @@ export default function Patologia({ data, quantAluno }) {
           'Outras Patologias',
         ]}
         indexBy="patologia"
-        margin={{ top: 20, right: 210, bottom: 100, left: 100 }}
+        margin={{ top: 20, right: 210, bottom: 55, left: 100 }}
         colors={{ scheme: 'nivo' }}
         legendBottom="Patologias"
         legendLeft="Total de Alunos"

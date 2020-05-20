@@ -7,6 +7,7 @@ import Alergia from '../Alergia';
 import Patologia from '../Patologia';
 import Bolsista from '../Bolsista';
 import Frequencia from '../Frequencia';
+import TipoRefeicao from '../TipoRefeicao';
 
 export default function AlunoGraficos() {
   const [dataAlergia, setDataAlergia] = useState([]);
@@ -14,6 +15,7 @@ export default function AlunoGraficos() {
   const [dataPatologia, setDataPatologia] = useState([]);
   const [dataBolsista, setDataBolsista] = useState([]);
   const [dataFrequencia, setDataFrequencia] = useState([]);
+  const [dataTipoRefeicao, setDataTipoRefeicao] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -21,7 +23,13 @@ export default function AlunoGraficos() {
       try {
         const user = JSON.parse(localStorage.getItem('@app-ru/user'));
 
-        const routes = ['alergias', 'patologias', 'bolsistas', 'frequencia'];
+        const routes = [
+          'alergias',
+          'patologias',
+          'bolsistas',
+          'frequencia',
+          'tiporefeicao',
+        ];
 
         const promises = routes.map(
           async route =>
@@ -32,15 +40,20 @@ export default function AlunoGraficos() {
             })
         );
 
-        const [alergia, patologia, bolsista, frequencia] = await Promise.all(
-          promises
-        );
+        const [
+          alergia,
+          patologia,
+          bolsista,
+          frequencia,
+          tipo_refeicao,
+        ] = await Promise.all(promises);
 
         setQuantAluno(alergia.data.total_alunos);
         setDataAlergia(alergia.data);
         setDataPatologia(patologia.data);
         setDataBolsista(bolsista.data);
         setDataFrequencia(frequencia.data);
+        setDataTipoRefeicao(tipo_refeicao.data);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -67,6 +80,9 @@ export default function AlunoGraficos() {
 
           <ContainerGrafico>
             <Frequencia data={dataFrequencia} />
+          </ContainerGrafico>
+          <ContainerGrafico>
+            <TipoRefeicao data={dataTipoRefeicao} />
           </ContainerGrafico>
         </Container>
       ) : (

@@ -7,22 +7,22 @@ export default function Frequencia({ data }) {
     {
       id: 'Todos os dias',
       label: 'Todos os dias',
-      value: Math.round(data.porcentagem.todo_dia),
+      value: data.porcentagem.todo_dia,
     },
     {
       id: 'Pelo menos 3 vezes na semana',
       label: 'Pelo menos 3 vezes na semana',
-      value: Math.round(data.porcentagem.semana_3vezes),
+      value: data.porcentagem.semana_3vezes,
     },
     {
       id: 'Pelo menos 1 vez na semana',
       label: 'Pelo menos 1 vez na semana',
-      value: Math.round(data.porcentagem.semana_1vez),
+      value: data.porcentagem.semana_1vez,
     },
     {
       id: 'Raramente',
       label: 'Raramente',
-      value: Math.round(data.porcentagem.raramente),
+      value: data.porcentagem.raramente,
     },
   ];
 
@@ -31,7 +31,7 @@ export default function Frequencia({ data }) {
       <h2>Frequência de refeição no RU</h2>
       <Pie
         data={frequencia}
-        margin={{ top: 20, right: 70, bottom: 20, left: 150 }}
+        margin={{ top: 20, right: 120, bottom: 20, left: 170 }}
         colors={{ scheme: 'nivo' }}
       />
     </>

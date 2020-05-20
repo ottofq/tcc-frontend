@@ -7,17 +7,17 @@ export default function Bolsista({ data }) {
     {
       id: 'Bolsa Integral',
       label: 'Bolsa Integral',
-      value: Math.round(data.porcentagem.bolsa_integral),
+      value: data.porcentagem.bolsa_integral,
     },
     {
       id: 'Bolsa Parcial',
       label: 'Bolsa Parcial',
-      value: Math.round(data.porcentagem.bolsa_parcial),
+      value: data.porcentagem.bolsa_parcial,
     },
     {
       id: 'Não Bolsista',
       label: 'Não Bolsista',
-      value: Math.round(data.porcentagem.nao_bolsista),
+      value: data.porcentagem.nao_bolsista,
     },
   ];
 
@@ -26,7 +26,7 @@ export default function Bolsista({ data }) {
       <h2>Bolsistas</h2>
       <Pie
         data={bolsista}
-        margin={{ top: 20, right: 70, bottom: 20, left: 150 }}
+        margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
         colors={{ scheme: 'set1' }}
       />
     </>

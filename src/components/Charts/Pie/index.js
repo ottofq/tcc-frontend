@@ -2,12 +2,25 @@ import React from 'react';
 import { ResponsivePie } from '@nivo/pie';
 
 export default function Pie({ data, margin, colors }) {
+  const format = item =>
+    `${new Intl.NumberFormat('pt-BR', {
+      style: 'decimal',
+      maximumSignificantDigits: 4,
+    }).format(item.value)}%`;
+
+  const formatTooltip = item =>
+    `${new Intl.NumberFormat('pt-BR', {
+      style: 'decimal',
+      maximumSignificantDigits: 4,
+    }).format(item)}%`;
+
   return (
     <ResponsivePie
       data={data}
       pixelRatio={1}
       margin={margin}
-      sliceLabel={item => `${item.value}%`}
+      sliceLabel={format}
+      tooltipFormat={formatTooltip}
       innerRadius={0}
       startAngle={-180}
       endAngle={360}
