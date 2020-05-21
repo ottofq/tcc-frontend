@@ -9,6 +9,7 @@ import Bolsista from '../Bolsista';
 import Frequencia from '../Frequencia';
 import TipoRefeicao from '../TipoRefeicao';
 import NivelFisico from '../NivelFisico';
+import Vegetariano from '../Vegetariano';
 
 export default function AlunoGraficos() {
   const [dataAlergia, setDataAlergia] = useState([]);
@@ -18,6 +19,7 @@ export default function AlunoGraficos() {
   const [dataFrequencia, setDataFrequencia] = useState([]);
   const [dataTipoRefeicao, setDataTipoRefeicao] = useState([]);
   const [dataNivelFisico, setDataNivelFisico] = useState([]);
+  const [dataVegetariano, setDataVegetariano] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -32,6 +34,7 @@ export default function AlunoGraficos() {
           'frequencia',
           'tiporefeicao',
           'nivelatividadefisica',
+          'vegetariano',
         ];
 
         const promises = routes.map(
@@ -50,6 +53,7 @@ export default function AlunoGraficos() {
           frequencia,
           tipo_refeicao,
           nivelatividadefisica,
+          vegetariano,
         ] = await Promise.all(promises);
 
         setQuantAluno(alergia.data.total_alunos);
@@ -59,6 +63,7 @@ export default function AlunoGraficos() {
         setDataFrequencia(frequencia.data);
         setDataTipoRefeicao(tipo_refeicao.data);
         setDataNivelFisico(nivelatividadefisica.data);
+        setDataVegetariano(vegetariano.data);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -91,6 +96,9 @@ export default function AlunoGraficos() {
           </ContainerGrafico>
           <ContainerGrafico>
             <NivelFisico data={dataNivelFisico} />
+          </ContainerGrafico>
+          <ContainerGrafico>
+            <Vegetariano data={dataVegetariano} />
           </ContainerGrafico>
         </Container>
       ) : (
