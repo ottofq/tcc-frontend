@@ -3,7 +3,7 @@ import React from 'react';
 import Pie from '../../../../components/Charts/Pie';
 
 export default function TipoRefeicao({ data }) {
-  const frequencia = [
+  const tipo_refeicao = [
     {
       id: 'Almoço',
       label: 'Almoço',
@@ -23,9 +23,9 @@ export default function TipoRefeicao({ data }) {
 
   return (
     <>
-      <h2>Frequência de refeição no RU</h2>
+      <h2>Tipo de Refeição consumida no RU</h2>
       <Pie
-        data={frequencia}
+        data={tipo_refeicao}
         margin={{ top: 20, right: 120, bottom: 20, left: 170 }}
         colors={{ scheme: 'accent' }}
       />

@@ -8,6 +8,7 @@ import Patologia from '../Patologia';
 import Bolsista from '../Bolsista';
 import Frequencia from '../Frequencia';
 import TipoRefeicao from '../TipoRefeicao';
+import NivelFisico from '../NivelFisico';
 
 export default function AlunoGraficos() {
   const [dataAlergia, setDataAlergia] = useState([]);
@@ -16,6 +17,7 @@ export default function AlunoGraficos() {
   const [dataBolsista, setDataBolsista] = useState([]);
   const [dataFrequencia, setDataFrequencia] = useState([]);
   const [dataTipoRefeicao, setDataTipoRefeicao] = useState([]);
+  const [dataNivelFisico, setDataNivelFisico] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -29,6 +31,7 @@ export default function AlunoGraficos() {
           'bolsistas',
           'frequencia',
           'tiporefeicao',
+          'nivelatividadefisica',
         ];
 
         const promises = routes.map(
@@ -46,6 +49,7 @@ export default function AlunoGraficos() {
           bolsista,
           frequencia,
           tipo_refeicao,
+          nivelatividadefisica,
         ] = await Promise.all(promises);
 
         setQuantAluno(alergia.data.total_alunos);
@@ -54,6 +58,7 @@ export default function AlunoGraficos() {
         setDataBolsista(bolsista.data);
         setDataFrequencia(frequencia.data);
         setDataTipoRefeicao(tipo_refeicao.data);
+        setDataNivelFisico(nivelatividadefisica.data);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -83,6 +88,9 @@ export default function AlunoGraficos() {
           </ContainerGrafico>
           <ContainerGrafico>
             <TipoRefeicao data={dataTipoRefeicao} />
+          </ContainerGrafico>
+          <ContainerGrafico>
+            <NivelFisico data={dataNivelFisico} />
           </ContainerGrafico>
         </Container>
       ) : (
