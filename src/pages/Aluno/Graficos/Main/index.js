@@ -11,6 +11,7 @@ import TipoRefeicao from '../TipoRefeicao';
 import NivelFisico from '../NivelFisico';
 import Vegetariano from '../Vegetariano';
 import ConsumoBebidaAlcoolica from '../ConsumoBebidaAlcoolica';
+import Tabagista from '../Tabagista';
 
 export default function AlunoGraficos() {
   const [dataAlergia, setDataAlergia] = useState([]);
@@ -21,6 +22,7 @@ export default function AlunoGraficos() {
   const [dataTipoRefeicao, setDataTipoRefeicao] = useState([]);
   const [dataNivelFisico, setDataNivelFisico] = useState([]);
   const [dataVegetariano, setDataVegetariano] = useState([]);
+  const [dataTabagista, setDataTabagista] = useState([]);
   const [dataConsumoBebidaAlcoolica, setDataConsumoBebidaAlcoolica] = useState(
     []
   );
@@ -40,6 +42,7 @@ export default function AlunoGraficos() {
           'nivelatividadefisica',
           'vegetariano',
           'consumobebidaalcoolica',
+          'tabagista',
         ];
 
         const promises = routes.map(
@@ -60,6 +63,7 @@ export default function AlunoGraficos() {
           nivelatividadefisica,
           vegetariano,
           consumobebidaalcoolica,
+          tabagista,
         ] = await Promise.all(promises);
 
         setQuantAluno(alergia.data.total_alunos);
@@ -71,6 +75,7 @@ export default function AlunoGraficos() {
         setDataNivelFisico(nivelatividadefisica.data);
         setDataVegetariano(vegetariano.data);
         setDataConsumoBebidaAlcoolica(consumobebidaalcoolica.data);
+        setDataTabagista(tabagista.data);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -109,6 +114,9 @@ export default function AlunoGraficos() {
           </ContainerGrafico>
           <ContainerGrafico>
             <ConsumoBebidaAlcoolica data={dataConsumoBebidaAlcoolica} />
+          </ContainerGrafico>
+          <ContainerGrafico>
+            <Tabagista data={dataTabagista} />
           </ContainerGrafico>
         </Container>
       ) : (
