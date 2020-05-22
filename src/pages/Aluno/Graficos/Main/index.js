@@ -14,6 +14,7 @@ import ConsumoBebidaAlcoolica from '../ConsumoBebidaAlcoolica';
 import Tabagista from '../Tabagista';
 import Avaliacao from '../Avaliacao';
 import AvaliacaoGeral from '../AvaliacaoGeral';
+import MelhoriaRU from '../MelhoriaRU';
 
 export default function AlunoGraficos() {
   const [dataAlergia, setDataAlergia] = useState([]);
@@ -30,6 +31,7 @@ export default function AlunoGraficos() {
   );
   const [dataAvaliacao, setDataAvaliacao] = useState([]);
   const [dataAvaliacaoGeral, setDataAvaliacaoGeral] = useState([]);
+  const [dataMelhoriaRU, setDataMelhoriaRU] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -49,6 +51,7 @@ export default function AlunoGraficos() {
           'tabagista',
           'avaliacao',
           'avaliacaogeral',
+          'melhoriasru',
         ];
 
         const promises = routes.map(
@@ -72,6 +75,7 @@ export default function AlunoGraficos() {
           tabagista,
           avaliacao,
           avaliacaogeral,
+          melhoriaru,
         ] = await Promise.all(promises);
 
         setQuantAluno(alergia.data.total_alunos);
@@ -86,6 +90,7 @@ export default function AlunoGraficos() {
         setDataTabagista(tabagista.data);
         setDataAvaliacao(avaliacao.data);
         setDataAvaliacaoGeral(avaliacaogeral.data);
+        setDataMelhoriaRU(melhoriaru.data);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -102,6 +107,7 @@ export default function AlunoGraficos() {
           <ContainerGrafico>
             <Alergia quantAluno={quantAluno} data={dataAlergia} />
           </ContainerGrafico>
+
           <ContainerGrafico>
             <Patologia quantAluno={quantAluno} data={dataPatologia} />
           </ContainerGrafico>
@@ -113,26 +119,36 @@ export default function AlunoGraficos() {
           <ContainerGrafico>
             <Frequencia data={dataFrequencia} />
           </ContainerGrafico>
+
           <ContainerGrafico>
             <TipoRefeicao data={dataTipoRefeicao} />
           </ContainerGrafico>
           <ContainerGrafico>
             <NivelFisico data={dataNivelFisico} />
           </ContainerGrafico>
+
           <ContainerGrafico>
             <Vegetariano data={dataVegetariano} />
           </ContainerGrafico>
+
           <ContainerGrafico>
             <ConsumoBebidaAlcoolica data={dataConsumoBebidaAlcoolica} />
           </ContainerGrafico>
+
           <ContainerGrafico>
             <Tabagista data={dataTabagista} />
           </ContainerGrafico>
+
           <ContainerGrafico>
             <Avaliacao data={dataAvaliacao} />
           </ContainerGrafico>
+
           <ContainerGrafico>
             <AvaliacaoGeral data={dataAvaliacaoGeral} />
+          </ContainerGrafico>
+
+          <ContainerGrafico>
+            <MelhoriaRU data={dataMelhoriaRU} quantAluno={quantAluno} />
           </ContainerGrafico>
         </Container>
       ) : (
