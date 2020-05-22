@@ -37,7 +37,7 @@ export default function AvaliacaoGeral({ data }) {
       <Pie
         data={avaliacao_geral}
         margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-        colors={{ scheme: 'paired' }}
+        colors={{ scheme: 'set3' }}
       />
     </>
   );

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Container, ContainerGrafico } from './styles';
+import { Title, Container, ContainerGrafico } from './styles';
 import api from '../../../../services/api';
 
 import Alergia from '../Alergia';
@@ -12,7 +12,7 @@ import NivelFisico from '../NivelFisico';
 import Vegetariano from '../Vegetariano';
 import ConsumoBebidaAlcoolica from '../ConsumoBebidaAlcoolica';
 import Tabagista from '../Tabagista';
-import Avaliacao from '../Avaliacao';
+import AvaliacaoRefeicao from '../AvaliacaoRefeicao';
 import AvaliacaoGeral from '../AvaliacaoGeral';
 import MelhoriaRU from '../MelhoriaRU';
 
@@ -29,7 +29,7 @@ export default function AlunoGraficos() {
   const [dataConsumoBebidaAlcoolica, setDataConsumoBebidaAlcoolica] = useState(
     []
   );
-  const [dataAvaliacao, setDataAvaliacao] = useState([]);
+  const [dataAvaliacaoRefeicao, setDataAvaliacaoRefeicao] = useState([]);
   const [dataAvaliacaoGeral, setDataAvaliacaoGeral] = useState([]);
   const [dataMelhoriaRU, setDataMelhoriaRU] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -68,14 +68,14 @@ export default function AlunoGraficos() {
           patologia,
           bolsista,
           frequencia,
-          tipo_refeicao,
-          nivelatividadefisica,
+          tipoRefeicao,
+          nivelAtividadeFisica,
           vegetariano,
-          consumobebidaalcoolica,
+          consumoBebidaAlcoolica,
           tabagista,
-          avaliacao,
-          avaliacaogeral,
-          melhoriaru,
+          avaliacaoRefeicao,
+          avaliacaoGeral,
+          melhoriaRU,
         ] = await Promise.all(promises);
 
         setQuantAluno(alergia.data.total_alunos);
@@ -83,14 +83,14 @@ export default function AlunoGraficos() {
         setDataPatologia(patologia.data);
         setDataBolsista(bolsista.data);
         setDataFrequencia(frequencia.data);
-        setDataTipoRefeicao(tipo_refeicao.data);
-        setDataNivelFisico(nivelatividadefisica.data);
+        setDataTipoRefeicao(tipoRefeicao.data);
+        setDataNivelFisico(nivelAtividadeFisica.data);
         setDataVegetariano(vegetariano.data);
-        setDataConsumoBebidaAlcoolica(consumobebidaalcoolica.data);
+        setDataConsumoBebidaAlcoolica(consumoBebidaAlcoolica.data);
         setDataTabagista(tabagista.data);
-        setDataAvaliacao(avaliacao.data);
-        setDataAvaliacaoGeral(avaliacaogeral.data);
-        setDataMelhoriaRU(melhoriaru.data);
+        setDataAvaliacaoRefeicao(avaliacaoRefeicao.data);
+        setDataAvaliacaoGeral(avaliacaoGeral.data);
+        setDataMelhoriaRU(melhoriaRU.data);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -102,6 +102,10 @@ export default function AlunoGraficos() {
 
   return (
     <>
+      <Title>
+        Abaixo contém gráficos gerados a partir dos dados obtidos pelo
+        questionário preenchido pelos alunos.
+      </Title>
       {loading === false ? (
         <Container>
           <ContainerGrafico>
@@ -140,7 +144,7 @@ export default function AlunoGraficos() {
           </ContainerGrafico>
 
           <ContainerGrafico>
-            <Avaliacao data={dataAvaliacao} />
+            <AvaliacaoRefeicao data={dataAvaliacaoRefeicao} />
           </ContainerGrafico>
 
           <ContainerGrafico>

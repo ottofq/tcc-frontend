@@ -1,7 +1,7 @@
 import React from 'react';
 import Bar from '../../../../components/Charts/Bar';
 
-export default function Avaliacao({ data }) {
+export default function AvaliacaoRefeicao({ data }) {
   const avaliacao = [
     {
       avaliacao: 'Aroma',
@@ -57,13 +57,7 @@ export default function Avaliacao({ data }) {
         legendBottom="Avaliações"
         legendLeft="%"
         maxValue={100}
-        axisBottom={{
-          tickSize: 5,
-          tickPadding: 5,
-          tickRotation: -10,
-          legendPosition: 'middle',
-          legendOffset: 50,
-        }}
+        tickRotation={-8}
       />
     </>
   );

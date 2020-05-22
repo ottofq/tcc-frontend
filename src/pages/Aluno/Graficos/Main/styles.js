@@ -1,5 +1,13 @@
 import styled from 'styled-components';
 
+export const Title = styled.h1`
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 10px;
+  color: #174578;
+`;
+
 export const Container = styled.div`
   display: flex;
   flex: 1;
@@ -7,7 +15,7 @@ export const Container = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-
+  padding: 10px;
   h2 {
     font-weight: bold;
     color: #174578;

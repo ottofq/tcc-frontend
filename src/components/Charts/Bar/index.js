@@ -1,7 +1,13 @@
 import React from 'react';
 import { ResponsiveBar } from '@nivo/bar';
 
-export default function Bar({ legendBottom, legendLeft, ...rest }) {
+export default function Bar({
+  legendBottom,
+  tickRotation = 0,
+  legendOffset = 50,
+  legendLeft,
+  ...rest
+}) {
   return (
     <ResponsiveBar
       {...rest}
@@ -9,10 +15,10 @@ export default function Bar({ legendBottom, legendLeft, ...rest }) {
       axisBottom={{
         tickSize: 5,
         tickPadding: 5,
-        tickRotation: -15,
+        tickRotation: tickRotation,
         legend: legendBottom,
         legendPosition: 'middle',
-        legendOffset: 50,
+        legendOffset: legendOffset,
       }}
       axisLeft={{
         tickSize: 0,

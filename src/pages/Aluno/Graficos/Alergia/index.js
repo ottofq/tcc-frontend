@@ -4,20 +4,20 @@ import Bar from '../../../../components/Charts/Bar';
 export default function Alergia({ data, quantAluno }) {
   const alergia = [
     {
-      alergia: 'Alergia a Glúten',
-      'Alergia a Glúten': data.totais.alergia_gluten,
+      alergia: 'AG',
+      'AG - Alergia a Glúten': data.totais.alergia_gluten,
     },
     {
-      alergia: 'Intolerância a lactose',
-      'Intolerância a lactose': data.totais.intolerancia_lactose,
+      alergia: 'IL',
+      'IL - Intolerância a Lactose': data.totais.intolerancia_lactose,
     },
     {
-      alergia: 'Proteína Leite da Vaca',
-      'Proteína Leite da Vaca': data.totais.proteina_leite_vaca,
+      alergia: 'PLV',
+      'PLV - Proteína Leite da Vaca': data.totais.proteina_leite_vaca,
     },
     {
-      alergia: 'Outras Alergias',
-      'Outras Alergias': data.totais.outras_alergias,
+      alergia: 'OA',
+      'OA - Outras Alergias': data.totais.outras_alergias,
     },
   ];
   return (
@@ -26,14 +26,15 @@ export default function Alergia({ data, quantAluno }) {
       <Bar
         data={alergia}
         keys={[
-          'Alergia a Glúten',
-          'Intolerância a lactose',
-          'Proteína Leite da Vaca',
-          'Outras Alergias',
+          'OA - Outras Alergias',
+          'PLV - Proteína Leite da Vaca',
+          'IL - Intolerância a Lactose',
+          'AG - Alergia a Glúten',
         ]}
         indexBy="alergia"
-        margin={{ top: 20, right: 180, bottom: 60, left: 50 }}
+        margin={{ top: 20, right: 200, bottom: 50, left: 35 }}
         legendBottom="Alergias"
+        legendOffset={30}
         colors={{ scheme: 'nivo' }}
         legendLeft="Total de Alunos"
         maxValue={quantAluno}

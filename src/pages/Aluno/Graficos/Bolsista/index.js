@@ -27,7 +27,7 @@ export default function Bolsista({ data }) {
       <Pie
         data={bolsista}
         margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-        colors={{ scheme: 'set1' }}
+        colors={{ scheme: 'pastel1' }}
       />
     </>
   );

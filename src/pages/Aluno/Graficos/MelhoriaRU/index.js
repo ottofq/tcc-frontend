@@ -4,31 +4,31 @@ import Bar from '../../../../components/Charts/Bar';
 export default function MelhoriaRU({ data, quantAluno }) {
   const melhoria_ru = [
     {
-      melhoria: 'Cardápio',
+      melhoria: 'CP',
       Cardápio: data.totais.cardapio,
     },
     {
-      melhoria: 'Sabor das preparações',
+      melhoria: 'SP',
       'Sabor das preparações': data.totais.sabor_preparacao,
     },
     {
-      melhoria: 'Mais opção vegetariana',
+      melhoria: 'MOV',
       'Mais opção vegetariana': data.totais.opcao_vegetariana,
     },
     {
-      melhoria: 'Estrutura física do RU',
+      melhoria: 'EF',
       'Estrutura física do RU': data.totais.estrutura_fisica,
     },
     {
-      melhoria: 'Tempo de espera na fila',
+      melhoria: 'TF',
       'Tempo de espera na fila': data.totais.tempo_fila,
     },
     {
-      melhoria: 'Preço Ticket',
+      melhoria: 'PT',
       'Preço Ticket': data.totais.preco_ticket,
     },
     {
-      melhoria: 'Outras melhorias',
+      melhoria: 'OM',
       'Outras melhorias': data.totais.melhoria_outros,
     },
   ];
@@ -39,19 +39,20 @@ export default function MelhoriaRU({ data, quantAluno }) {
       <Bar
         data={melhoria_ru}
         keys={[
-          'Cardápio',
-          'Sabor das preparações',
-          'Mais opção vegetariana',
-          'Estrutura física do RU',
-          'Tempo de espera na fila',
-          'Preço Ticket',
           'Outras melhorias',
+          'Preço Ticket',
+          'Tempo de espera na fila',
+          'Estrutura física do RU',
+          'Mais opção vegetariana',
+          'Sabor das preparações',
+          'Cardápio',
         ]}
         indexBy="melhoria"
-        margin={{ top: 20, right: 180, bottom: 55, left: 60 }}
-        colors={{ scheme: 'spectral' }}
+        margin={{ top: 20, right: 180, bottom: 50, left: 35 }}
+        colors={{ scheme: 'category10' }}
         legendBottom="Melhorias"
         legendLeft="Total de Alunos"
+        legendOffset={30}
         maxValue={quantAluno}
       />
     </>
