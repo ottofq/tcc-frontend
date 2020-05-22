@@ -13,6 +13,7 @@ import Vegetariano from '../Vegetariano';
 import ConsumoBebidaAlcoolica from '../ConsumoBebidaAlcoolica';
 import Tabagista from '../Tabagista';
 import Avaliacao from '../Avaliacao';
+import AvaliacaoGeral from '../AvaliacaoGeral';
 
 export default function AlunoGraficos() {
   const [dataAlergia, setDataAlergia] = useState([]);
@@ -28,6 +29,7 @@ export default function AlunoGraficos() {
     []
   );
   const [dataAvaliacao, setDataAvaliacao] = useState([]);
+  const [dataAvaliacaoGeral, setDataAvaliacaoGeral] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -46,6 +48,7 @@ export default function AlunoGraficos() {
           'consumobebidaalcoolica',
           'tabagista',
           'avaliacao',
+          'avaliacaogeral',
         ];
 
         const promises = routes.map(
@@ -68,6 +71,7 @@ export default function AlunoGraficos() {
           consumobebidaalcoolica,
           tabagista,
           avaliacao,
+          avaliacaogeral,
         ] = await Promise.all(promises);
 
         setQuantAluno(alergia.data.total_alunos);
@@ -81,6 +85,7 @@ export default function AlunoGraficos() {
         setDataConsumoBebidaAlcoolica(consumobebidaalcoolica.data);
         setDataTabagista(tabagista.data);
         setDataAvaliacao(avaliacao.data);
+        setDataAvaliacaoGeral(avaliacaogeral.data);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -125,6 +130,9 @@ export default function AlunoGraficos() {
           </ContainerGrafico>
           <ContainerGrafico>
             <Avaliacao data={dataAvaliacao} />
+          </ContainerGrafico>
+          <ContainerGrafico>
+            <AvaliacaoGeral data={dataAvaliacaoGeral} />
           </ContainerGrafico>
         </Container>
       ) : (
