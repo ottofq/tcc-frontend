@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Table, TableCell, TableRow, Paper } from '@material-ui/core';
-import { format, parseISO } from 'date-fns';
+import {
+  Table,
+  TableCell,
+  TableRow,
+  Paper,
+  TablePagination,
+} from '@material-ui/core';
 
 import {
   Container,
@@ -18,24 +23,29 @@ import api from '../../../services/api';
 export default function AlunoListagem() {
   const [alunos, setAlunos] = useState([]);
   const [qtdAlunos, setQtdsAlunos] = useState(0);
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     async function loadAlunos() {
       try {
         const user = JSON.parse(localStorage.getItem('@app-ru/user'));
-        const result = await api.get('/alunos', {
+        const result = await api.get(`/alunos?page=${page + 1}`, {
           headers: {
             authorization: `Bearer ${user.token}`,
           },
         });
-        setAlunos(result.data);
-        setQtdsAlunos(result.data.length);
+        setAlunos(result.data.result);
+        setQtdsAlunos(result.data.total_alunos);
       } catch (error) {
         console.log(error);
       }
     }
     loadAlunos();
-  }, []);
+  }, [page]);
+
+  const handleChangePage = (event, page) => {
+    setPage(page);
+  };
   return (
     <Container>
       <Title>
@@ -47,7 +57,7 @@ export default function AlunoListagem() {
             <TableRow>
               <TableCell>Nome do Aluno</TableCell>
               <TableCell align="center">Matrícula</TableCell>
-              <TableCell align="center">Data Nascimento</TableCell>
+              <TableCell align="center">Ano de Ingresso</TableCell>
               <TableCell align="center">Curso</TableCell>
               <TableCell align="center">Ações</TableCell>
             </TableRow>
@@ -60,9 +70,7 @@ export default function AlunoListagem() {
                     {aluno.nome}
                   </TableCell>
                   <TableCell align="center">{aluno.matricula}</TableCell>
-                  <TableCell align="center">
-                    {format(parseISO(aluno.data_nascimento), 'dd/MM/yyyy')}
-                  </TableCell>
+                  <TableCell align="center">{aluno.ano_ingresso}</TableCell>
                   <TableCell align="center">{aluno.curso}</TableCell>
 
                   <TableCell align="center">
@@ -86,6 +94,14 @@ export default function AlunoListagem() {
             )}
           </TableBodyUI>
         </Table>
+        <TablePagination
+          component="div"
+          rowsPerPageOptions={['']}
+          count={qtdAlunos}
+          rowsPerPage={8}
+          page={page}
+          onChangePage={handleChangePage}
+        />
       </TableContainerUI>
     </Container>
   );
