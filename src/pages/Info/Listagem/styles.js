@@ -1,12 +1,19 @@
+import { styled as styledUI } from '@material-ui/core';
+import styled from 'styled-components';
+
 import {
-  styled as styledUI,
   TableContainer,
   TableHead,
   Button,
   TableBody,
 } from '@material-ui/core';
 
-import styled from 'styled-components';
+export const Container = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 10px;
+`;
 
 export const TableContainerUI = styledUI(TableContainer)({
   display: 'flex',

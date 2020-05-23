@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Table, TableCell, TableRow, Paper } from '@material-ui/core';
+import {
+  Table,
+  TableCell,
+  TableRow,
+  TablePagination,
+  Paper,
+} from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
 
@@ -11,24 +17,34 @@ import {
   TableBodyUI,
   ButtonUI,
   ContainerAcoes,
-} from './styled';
+  Container,
+  Title,
+  Card,
+} from './styles';
 import api from '../../../services/api';
 
 export default function VerCardapios() {
   const [cardapios, setCardapios] = useState([]);
   const [statusAlert, setStatusAlert] = useState('');
+  const [qtdCardapio, setQtdCardapio] = useState(0);
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     async function loadCardapios() {
       try {
-        const result = await api.get('/cardapio?page=1');
-        setCardapios(result.data);
+        const result = await api.get(`/cardapio?page=${page + 1}`);
+        setCardapios(result.data.result);
+        setQtdCardapio(result.data.total_cardapios);
       } catch (error) {
         console.log(error);
       }
     }
     loadCardapios();
-  }, []);
+  }, [page]);
+
+  const handleChangePage = (event, page) => {
+    setPage(page);
+  };
 
   async function handleClick(id) {
     try {
@@ -56,78 +72,93 @@ export default function VerCardapios() {
   }
 
   return (
-    <TableContainerUI component={Paper}>
-      <Table aria-label="simple table">
-        <TableHeadUI>
-          <TableRow>
-            <TableCell>Cardápios</TableCell>
-            <TableCell align="center">Tipo de Refeição</TableCell>
-            <TableCell align="center">Data</TableCell>
-            <TableCell align="center">Média</TableCell>
-            <TableCell align="center">Ações</TableCell>
-          </TableRow>
-        </TableHeadUI>
-        <TableBodyUI>
-          {cardapios.length > 0 ? (
-            cardapios.map(cardapio => (
-              <TableRow key={cardapio._id}>
-                <TableCell component="th" scope="row">
-                  {cardapio.proteina.descricao}
-                </TableCell>
-                <TableCell align="center">{cardapio.tipo}</TableCell>
-                <TableCell align="center">
-                  {format(parseISO(cardapio.data), 'dd/MM/yyyy')}
-                </TableCell>
-                <TableCell align="center">{cardapio.media_geral}</TableCell>
+    <Container>
+      <Card>
+        <Title>
+          Total de cardápios cadastrados: <strong>{qtdCardapio}</strong>
+        </Title>
+      </Card>
+      <TableContainerUI component={Paper}>
+        <Table aria-label="tabela de cardapios">
+          <TableHeadUI>
+            <TableRow hover>
+              <TableCell>Cardápios</TableCell>
+              <TableCell align="center">Tipo de Refeição</TableCell>
+              <TableCell align="center">Data</TableCell>
+              <TableCell align="center">Média</TableCell>
+              <TableCell align="center">Ações</TableCell>
+            </TableRow>
+          </TableHeadUI>
+          <TableBodyUI>
+            {cardapios.length > 0 ? (
+              cardapios.map(cardapio => (
+                <TableRow hover key={cardapio._id}>
+                  <TableCell component="th" scope="row">
+                    {cardapio.proteina.descricao}
+                  </TableCell>
+                  <TableCell align="center">{cardapio.tipo}</TableCell>
+                  <TableCell align="center">
+                    {format(parseISO(cardapio.data), 'dd/MM/yyyy')}
+                  </TableCell>
+                  <TableCell align="center">{cardapio.media_geral}</TableCell>
 
-                <TableCell align="center">
-                  <ContainerAcoes>
-                    <Link
-                      style={{ textDecoration: 'none' }}
-                      to={`/dashboard/cardapio/detalhes/${cardapio._id}`}
-                    >
-                      <ButtonUI variant="contained">Detalhes</ButtonUI>
-                    </Link>
+                  <TableCell align="center">
+                    <ContainerAcoes>
+                      <Link
+                        style={{ textDecoration: 'none' }}
+                        to={`/dashboard/cardapio/detalhes/${cardapio._id}`}
+                      >
+                        <ButtonUI variant="contained">Detalhes</ButtonUI>
+                      </Link>
 
-                    <Link
-                      style={{ textDecoration: 'none' }}
-                      to={`/dashboard/cardapio/editar/${cardapio._id}`}
-                    >
-                      <ButtonUI variant="contained" color="primary">
-                        Editar
-                      </ButtonUI>
-                    </Link>
+                      <Link
+                        style={{ textDecoration: 'none' }}
+                        to={`/dashboard/cardapio/editar/${cardapio._id}`}
+                      >
+                        <ButtonUI variant="contained" color="primary">
+                          Editar
+                        </ButtonUI>
+                      </Link>
 
-                    <DialogExcluir
-                      TextButton="Excluir"
-                      TextDialog={`Deseja excluir o Cardápio selecionado?`}
-                      TitleDialog="Excluir Aviso"
-                      SubmitModal={() => handleClick(`${cardapio._id}`)}
-                    >
-                      <ButtonUI variant="contained" color="secondary">
-                        Excluir
-                      </ButtonUI>
-                    </DialogExcluir>
-                  </ContainerAcoes>
+                      <DialogExcluir
+                        TextButton="Excluir"
+                        TextDialog={`Deseja excluir o Cardápio selecionado?`}
+                        TitleDialog="Excluir Aviso"
+                        SubmitModal={() => handleClick(`${cardapio._id}`)}
+                      >
+                        <ButtonUI variant="contained" color="secondary">
+                          Excluir
+                        </ButtonUI>
+                      </DialogExcluir>
+                    </ContainerAcoes>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell>
+                  <h1>Vazio</h1>
                 </TableCell>
               </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell>
-                <h1>Vazio</h1>
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBodyUI>
-      </Table>
-      {statusAlert ? (
-        <AlertToast
-          key={new Date()}
-          typeMessage={statusAlert.type}
-          message={statusAlert.msg}
+            )}
+          </TableBodyUI>
+        </Table>
+        {statusAlert ? (
+          <AlertToast
+            key={new Date()}
+            typeMessage={statusAlert.type}
+            message={statusAlert.msg}
+          />
+        ) : null}
+        <TablePagination
+          component="div"
+          rowsPerPageOptions={['']}
+          count={qtdCardapio}
+          rowsPerPage={8}
+          page={page}
+          onChangePage={handleChangePage}
         />
-      ) : null}
-    </TableContainerUI>
+      </TableContainerUI>
+    </Container>
   );
 }
