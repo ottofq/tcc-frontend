@@ -8,6 +8,13 @@ import {
   TableBody,
 } from '@material-ui/core';
 
+export const Container = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 10px;
+`;
+
 export const TableContainerUI = styledUI(TableContainer)({
   display: 'flex',
   justifyContent: 'center',
