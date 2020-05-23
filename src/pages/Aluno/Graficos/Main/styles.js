@@ -36,3 +36,10 @@ export const ContainerGrafico = styled.div`
   margin: 10px;
   padding: 10px;
 `;
+
+export const ContainerLoading = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
