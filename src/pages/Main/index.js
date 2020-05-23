@@ -14,6 +14,7 @@ import InfoEdicao from '../Info/Edicao';
 import InfoDetalhes from '../Info/Detalhes';
 import AlunoListagem from '../Aluno/Listagem';
 import AlunoDetalhes from '../Aluno/Detalhes/Main';
+import AlunoGraficos from '../Aluno/Graficos/Main';
 
 import { Container, Wrapper } from './styled';
 
@@ -98,6 +99,12 @@ export default function Main() {
               exact
               path="/dashboard/aluno/detalhes/:id"
               component={AlunoDetalhes}
+            />
+            <Route
+              key="aluno-graficos"
+              exact
+              path="/dashboard/aluno/graficos"
+              component={AlunoGraficos}
             />
           </Switch>
         </Wrapper>

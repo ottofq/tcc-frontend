@@ -7,6 +7,7 @@ import {
   RestaurantMenu,
   Info,
   People,
+  PieChart,
 } from '@material-ui/icons';
 import logo from '../../assets/logo_sem_texto.png';
 
@@ -108,6 +109,16 @@ export default function Sidebar() {
               <div>
                 <ViewList size={32} />
                 <span>Ver dados dos alunos</span>
+              </div>
+            </SidebarLink>
+            <SidebarLink
+              activeStyle={{ backgroundColor: '#2266b1' }}
+              exact
+              to="/dashboard/aluno/graficos"
+            >
+              <div>
+                <PieChart size={32} />
+                <span>Gráficos</span>
               </div>
             </SidebarLink>
           </li>
