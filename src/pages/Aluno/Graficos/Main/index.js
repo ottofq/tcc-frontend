@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { CircularProgress } from '@material-ui/core';
 
-import { Title, Container, ContainerGrafico } from './styles';
+import { Title, Container, ContainerGrafico, ContainerLoading } from './styles';
 import api from '../../../../services/api';
 
 import Alergia from '../Alergia';
@@ -156,7 +157,9 @@ export default function AlunoGraficos() {
           </ContainerGrafico>
         </Container>
       ) : (
-        <h1>Carregando</h1>
+        <ContainerLoading>
+          <CircularProgress color="primary" />
+        </ContainerLoading>
       )}
     </>
   );

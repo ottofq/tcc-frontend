@@ -12,20 +12,33 @@ export const Container = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 20px;
+  padding: 10px;
 `;
 
 export const Title = styled.h1`
-  font-size: 28px;
+  font-size: 24px;
   color: #174578;
-  padding: 10px 0;
-  span {
+  strong {
     color: #174578;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: bold;
   }
 `;
 
+export const Card = styled.div`
+  background-color: #eee;
+  align-self: center;
+  border-radius: 4px;
+  box-shadow: -1px 0px 4px 0px rgba(50, 50, 50, 0.75);
+  padding: 15px;
+  margin-bottom: 10px;
+
+  &:hover {
+    background-color: rgba(50, 50, 50, 0.1);
+    box-shadow: -1px 0px 8px 0px rgba(50, 50, 50, 0.75);
+    transition: box-shadow 0.5s 0s ease;
+  }
+`;
 export const TableContainerUI = styledUI(TableContainer)({});
 export const TableHeadUI = styledUI(TableHead)({
   backgroundColor: '#174578',

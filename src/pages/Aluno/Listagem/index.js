@@ -16,7 +16,8 @@ import {
   TableBodyUI,
   ButtonUI,
   ContainerAcoes,
-} from './styled';
+  Card,
+} from './styles';
 
 import api from '../../../services/api';
 
@@ -48,9 +49,11 @@ export default function AlunoListagem() {
   };
   return (
     <Container>
-      <Title>
-        Nº de Alunos cadastrados: <span>{qtdAlunos}</span>
-      </Title>
+      <Card>
+        <Title>
+          Total de alunos cadastrados: <strong>{qtdAlunos}</strong>
+        </Title>
+      </Card>
       <TableContainerUI component={Paper}>
         <Table aria-label="simple table">
           <TableHeadUI>
@@ -65,7 +68,7 @@ export default function AlunoListagem() {
           <TableBodyUI>
             {alunos.length > 0 ? (
               alunos.map(aluno => (
-                <TableRow key={aluno._id}>
+                <TableRow hover key={aluno._id}>
                   <TableCell component="th" scope="row">
                     {aluno.nome}
                   </TableCell>
