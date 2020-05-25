@@ -1,8 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Save } from '@material-ui/icons';
+import { EditorState, ContentState, convertToRaw } from 'draft-js';
+import htmlToDraft from 'html-to-draftjs';
+import draftToHtml from 'draftjs-to-html';
+import { Editor } from 'react-draft-wysiwyg';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
-import { Container, Form, TextFieldUI, TextArea, ButtonUI } from './styled';
+import {
+  Container,
+  Form,
+  TextFieldUI,
+  ButtonUI,
+  ContainerEditor,
+} from './styles';
 import api from '../../../services/api';
 import AlertToast from '../../../components/AlertToast';
 
@@ -10,6 +21,7 @@ export default function InfoEdicao({ match, history }) {
   const { handleSubmit, setValue, control } = useForm();
   const [statusAlert, setStatusAlert] = useState('');
   const [info, setInfo] = useState('');
+  const [editorState, setEditorState] = useState();
 
   useEffect(() => {
     async function loadInfo() {
@@ -17,6 +29,11 @@ export default function InfoEdicao({ match, history }) {
         const { id } = match.params;
         const result = await api.get(`/informacoes/${id}`);
         setInfo(result.data);
+        const contentBlock = htmlToDraft(result.data.descricao);
+        const contentState = ContentState.createFromBlockArray(
+          contentBlock.contentBlocks
+        );
+        setEditorState(EditorState.createWithContent(contentState));
       } catch (error) {
         console.log(error);
       }
@@ -27,18 +44,20 @@ export default function InfoEdicao({ match, history }) {
   useEffect(() => {
     if (info) {
       setValue('titulo', info.titulo);
-      setValue('descricao', info.descricao);
     }
   }, [info, setValue]);
 
   async function onSubmit(data) {
     try {
-      const { titulo, descricao } = data;
+      const { titulo } = data;
       const user = JSON.parse(localStorage.getItem('@app-ru/user'));
+      const contentInfo = draftToHtml(
+        convertToRaw(editorState.getCurrentContent())
+      );
 
       const result = await api.put(
         `/informacoes/${info._id}`,
-        { titulo, descricao },
+        { titulo, descricao: contentInfo },
         {
           headers: {
             authorization: `Bearer ${user.token}`,
@@ -52,9 +71,7 @@ export default function InfoEdicao({ match, history }) {
           msg: 'Aviso editado com sucesso!',
         });
       }
-      setTimeout(() => {
-        history.push('/dashboard/avisos/listagem');
-      }, 1500);
+      history.push('/dashboard/avisos/listagem');
     } catch (error) {
       console.log(error);
       setStatusAlert({
@@ -74,12 +91,30 @@ export default function InfoEdicao({ match, history }) {
           rules={{ required: true }}
         ></Controller>
 
-        <Controller
-          as={<TextArea spellCheck placeholder="Digite um aviso" />}
-          name="descricao"
-          control={control}
-          rules={{ required: true }}
-        ></Controller>
+        <ContainerEditor>
+          <Editor
+            editorState={editorState}
+            editorClassName="editor"
+            toolbarClassName="toolbar"
+            onEditorStateChange={setEditorState}
+            toolbar={{
+              options: [
+                'inline',
+                'blockType',
+                'list',
+                'textAlign',
+                'colorPicker',
+                'link',
+                'emoji',
+                'remove',
+                'history',
+              ],
+              fontFamily: {
+                options: ['PT Sans'],
+              },
+            }}
+          />
+        </ContainerEditor>
 
         <ButtonUI
           startIcon={<Save fontSize="large" />}

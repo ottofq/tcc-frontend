@@ -4,30 +4,38 @@ import { TextField, Button } from '@material-ui/core';
 
 export const Container = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `;
 
+export const ContainerEditor = styled.div`
+  width: 900px;
+  height: 550px;
+
+  & .editor {
+    height: 460px;
+    border: 1px solid #999;
+    padding: 5px;
+    border-radius: 2px;
+  }
+  & .toolbar {
+    background-color: #eee;
+    border: 1px solid #999;
+  }
+`;
+
 export const Form = styled.form`
   display: flex;
+  flex: 1;
   flex-direction: column;
-  margin-top: 20px;
+  justify-content: space-around;
 `;
 
-export const TextFieldUI = styledUI(TextField)({
-  marginBottom: '20px',
-});
-
-export const TextArea = styled.textarea`
-  width: 500px;
-  height: 300px;
-  border: 2px solid #174578;
-  marker: inherit;
-`;
+export const TextFieldUI = styledUI(TextField)({});
 
 export const ButtonUI = styledUI(Button)({
-  marginTop: '10px',
   backgroundColor: '#174578',
   fontSize: '18px',
 });

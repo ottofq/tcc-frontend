@@ -15,14 +15,7 @@ export const Container = styled.div`
   padding: 10px;
 `;
 
-export const TableContainerUI = styledUI(TableContainer)({
-  display: 'flex',
-  justifyContent: 'center',
-  marginTop: '20px',
-  marginBottom: '20px',
-  marginLeft: '20px',
-  marginRight: '20px',
-});
+export const TableContainerUI = styledUI(TableContainer)({});
 export const TableHeadUI = styledUI(TableHead)({
   backgroundColor: '#174578',
 
