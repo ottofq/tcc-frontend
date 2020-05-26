@@ -11,7 +11,7 @@ import {
 } from '@material-ui/icons';
 import logo from '../../assets/logo_sem_texto.png';
 
-import { Container, SidebarLink, Title } from './styled';
+import { Container, SidebarLink, Title } from './styles';
 
 export default function Sidebar() {
   return (

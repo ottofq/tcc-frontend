@@ -18,8 +18,6 @@ import {
   ButtonUI,
   ContainerAcoes,
   Container,
-  Title,
-  Card,
 } from './styles';
 import api from '../../../services/api';
 
@@ -73,11 +71,6 @@ export default function VerCardapios() {
 
   return (
     <Container>
-      <Card>
-        <Title>
-          Total de cardápios cadastrados: <strong>{qtdCardapio}</strong>
-        </Title>
-      </Card>
       <TableContainerUI component={Paper}>
         <Table aria-label="tabela de cardapios">
           <TableHeadUI>

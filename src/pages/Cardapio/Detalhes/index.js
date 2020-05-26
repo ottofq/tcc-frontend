@@ -1,18 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
+import { List, ListItem, Divider, CircularProgress } from '@material-ui/core';
 
 import {
   Container,
+  ContainerLoading,
   ContainerCardapio,
   ContainerInfo,
   RatingUI,
   ContainerRating,
   ContainerComentario,
+  ContainerTitleComentario,
+  ContainerSemComentario,
   Comentario,
-} from './styled';
-import { List, ListItem, Divider, CircularProgress } from '@material-ui/core';
+} from './styles';
 import api from '../../../services/api';
+
+const labels = {
+  1: 'Muito ruim',
+  2: 'Ruim',
+  3: 'Regular',
+  4: 'Bom',
+  5: 'Muito bom',
+};
 
 export default function Detalhes({ match, history }) {
   const [cardapio, setCardapio] = useState();
@@ -64,51 +75,22 @@ export default function Detalhes({ match, history }) {
 
   return (
     <Container>
+      <h1>Detalhes do cardápio</h1>
       <ContainerCardapio>
         {loadingCardapio ? (
-          <div
-            style={{
-              display: 'flex',
-              width: '300px',
-              flex: '1',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
+          <ContainerLoading>
             <CircularProgress color="primary" />
-          </div>
+          </ContainerLoading>
         ) : (
           <>
-            <h1>Detalhes do Cardápio</h1>
-            <h3>{cardapio.tipo}</h3>
-            <h3>
-              {format(parseISO(cardapio.data), 'eeee - dd/MM/yyyy', {
-                locale: ptBR,
-              })}
-            </h3>
-
-            <ContainerRating>
-              <h3>Média das Avaliações</h3>
-              <p>Avaliações: {media.votos}</p>
-              <RatingUI
-                size="large"
-                name="media"
-                precision={0.5}
-                value={mediaValue}
-                disabled
-              />
-            </ContainerRating>
-
             <ContainerInfo>
-              <div>
-                <p>Cardápio dia: </p>
-                <span>{format(parseISO(cardapio.data), 'dd/MM/yyyy')}</span>
-              </div>
-
-              <div>
-                <p>Tipo de Refeição: </p>
-                <span>{cardapio.tipo}</span>
-              </div>
+              <h3>
+                {cardapio.tipo}
+                {' - '}
+                {format(parseISO(cardapio.data), 'eeee, dd/MM/yyyy', {
+                  locale: ptBR,
+                })}
+              </h3>
 
               <div>
                 <p>Entrada: </p>
@@ -135,22 +117,38 @@ export default function Detalhes({ match, history }) {
                 <span>{cardapio.sobremesa.descricao}</span>
               </div>
             </ContainerInfo>
+            <ContainerRating>
+              <h3>Média das Avaliações</h3>
+              <div>
+                <p>
+                  Avaliações: <span>{media.votos}</span>
+                </p>
+                <RatingUI
+                  size="large"
+                  name="media"
+                  precision={0.5}
+                  value={mediaValue}
+                  disabled
+                />
+                <p>{labels[Math.round(mediaValue)]}</p>
+              </div>
+            </ContainerRating>
           </>
         )}
       </ContainerCardapio>
 
       <ContainerComentario>
-        <h4>Comentários</h4>
+        <ContainerTitleComentario>
+          <h4>
+            Comentários: (<span>{comentarios.length})</span>
+          </h4>
+        </ContainerTitleComentario>
+
         <List component="ul">
           {loadingCommentario ? (
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-              }}
-            >
+            <ContainerLoading>
               <CircularProgress color="primary" />
-            </div>
+            </ContainerLoading>
           ) : comentarios.length > 0 ? (
             comentarios.map((comentario, index) => (
               <ListItem key={index} component="li">
@@ -162,9 +160,9 @@ export default function Detalhes({ match, history }) {
               </ListItem>
             ))
           ) : (
-            <div style={{ textAlign: 'center', fontSize: '24px' }}>
+            <ContainerSemComentario>
               <p>Não contém comentários</p>
-            </div>
+            </ContainerSemComentario>
           )}
         </List>
       </ContainerComentario>

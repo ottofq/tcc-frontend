@@ -103,12 +103,12 @@ export default function AlunoGraficos() {
 
   return (
     <>
-      <Title>
-        Abaixo contém gráficos gerados a partir dos dados obtidos pelo
-        questionário preenchido pelos alunos.
-      </Title>
       {loading === false ? (
         <Container>
+          <Title>
+            Abaixo contém gráficos gerados a partir dos dados obtidos pelo
+            questionário preenchido pelos alunos.
+          </Title>
           <ContainerGrafico>
             <Alergia quantAluno={quantAluno} data={dataAlergia} />
           </ContainerGrafico>

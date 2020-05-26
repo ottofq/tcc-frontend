@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { TextField as Input, Button } from '@material-ui/core';
 import AlertToast from '../../components/AlertToast';
 
-import { Container, ContainerRegister } from './styled';
+import { Container, ContainerRegister } from './styles';
 import logo from '../../assets/logo.png';
 import api from '../../services/api';
 

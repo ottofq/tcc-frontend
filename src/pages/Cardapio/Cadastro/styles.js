@@ -22,7 +22,7 @@ export const Form = styled.form`
 
 export const Input = styledUI(TextField)({
   marginTop: '10px',
-  width: '400px',
+  width: '600px',
 });
 
 export const StyledButton = styledUI(Button)({

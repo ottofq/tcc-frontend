@@ -11,12 +11,12 @@ import {
   Form,
   RadioGroup,
   FormLabel,
-} from './styled';
+} from './styles';
 
 import api from '../../../services/api';
 
 export default function Cadastro({ match, history }) {
-  const { register, handleSubmit, setValue, control } = useForm();
+  const { handleSubmit, setValue, control } = useForm();
   const [cardapio, setCardapio] = useState('');
   const [statusAlert, setStatusAlert] = useState('');
 
@@ -36,6 +36,7 @@ export default function Cadastro({ match, history }) {
 
   useEffect(() => {
     if (cardapio) {
+      setValue('tipo', cardapio.tipo);
       setValue('entrada', cardapio.entrada.descricao);
       setValue('proteina', cardapio.proteina.descricao);
       setValue('opcao', cardapio.opcao.descricao);
@@ -83,9 +84,8 @@ export default function Cadastro({ match, history }) {
           msg: 'Cardápio editado com sucesso!',
         });
       }
-      setTimeout(() => {
-        history.push('/dashboard/cardapio');
-      }, 1900);
+
+      history.push('/dashboard/cardapio');
     } catch (error) {
       console.log(error);
       setStatusAlert({
@@ -99,18 +99,27 @@ export default function Cadastro({ match, history }) {
     <Container>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormLabel component="legend">Tipo de Refeição</FormLabel>
-        <RadioGroup aria-label="tipo" name="tipo">
-          <FormControlLabel
-            value="Almoço"
-            control={<Radio required color="primary" inputRef={register} />}
-            label="Almoço"
-          />
-          <FormControlLabel
-            value="Jantar"
-            control={<Radio required color="primary" inputRef={register} />}
-            label="Jantar"
-          />
-        </RadioGroup>
+
+        <Controller
+          as={
+            <RadioGroup aria-label="tipo" name="tipo">
+              <FormControlLabel
+                value="Almoço"
+                control={<Radio required color="primary" />}
+                label="Almoço"
+              />
+              <FormControlLabel
+                value="Jantar"
+                control={<Radio required color="primary" />}
+                label="Jantar"
+              />
+            </RadioGroup>
+          }
+          control={control}
+          name="tipo"
+          defaultValue=""
+          rules={{ required: true }}
+        />
 
         <Controller
           as={<Input label="Entrada" variant="outlined" />}

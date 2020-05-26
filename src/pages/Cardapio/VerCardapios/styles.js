@@ -15,21 +15,6 @@ export const Container = styled.div`
   padding: 10px;
 `;
 
-export const Card = styled.div`
-  background-color: #eee;
-  align-self: center;
-  border-radius: 4px;
-  box-shadow: -1px 0px 4px 0px rgba(50, 50, 50, 0.75);
-  padding: 15px;
-  margin-bottom: 10px;
-
-  &:hover {
-    background-color: rgba(50, 50, 50, 0.1);
-    box-shadow: -1px 0px 8px 0px rgba(50, 50, 50, 0.75);
-    transition: box-shadow 0.5s 0s ease;
-  }
-`;
-
 export const Title = styled.h1`
   font-size: 28px;
   color: #174578;

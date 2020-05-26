@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, ButtonUI } from './styled';
+import { Container, ButtonUI } from './styles';
 import { withRouter } from 'react-router-dom';
 
 function Header({ history }) {
