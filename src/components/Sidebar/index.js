@@ -25,7 +25,8 @@ export default function Sidebar() {
               <RestaurantMenu size={32}></RestaurantMenu>
               <h2>Cardápio</h2>
             </Title>
-
+          </li>
+          <li>
             <SidebarLink
               activeStyle={{ backgroundColor: '#2266b1' }}
               exact
@@ -104,6 +105,9 @@ export default function Sidebar() {
               <People size={32}></People>
               <h2>Aluno</h2>
             </Title>
+          </li>
+
+          <li>
             <SidebarLink
               activeStyle={{ backgroundColor: '#2266b1' }}
               exact
@@ -114,6 +118,9 @@ export default function Sidebar() {
                 <span>Ver dados dos alunos</span>
               </div>
             </SidebarLink>
+          </li>
+
+          <li>
             <SidebarLink
               activeStyle={{ backgroundColor: '#2266b1' }}
               exact

@@ -26,6 +26,11 @@ export const Container = styled.aside`
       align-self: stretch;
 
       a {
+        &:hover {
+          background-color: rgba(246, 250, 253, 0.25);
+          transition: background-color ease 0.75s;
+        }
+
         div {
           height: 40px;
           display: flex;

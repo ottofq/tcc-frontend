@@ -22,9 +22,8 @@ export default function Register({ history }) {
           msg: 'Cadastro Efetuado com Sucesso!',
           date: new Date(),
         });
-        setTimeout(() => {
-          history.push('/');
-        }, 1900);
+
+        history.push('/');
       }
     } catch (error) {
       setStatus({

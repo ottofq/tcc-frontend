@@ -93,7 +93,9 @@ export default function VerCardapios() {
                   <TableCell align="center">
                     {format(parseISO(cardapio.data), 'dd/MM/yyyy')}
                   </TableCell>
-                  <TableCell align="center">{cardapio.media_geral}</TableCell>
+                  <TableCell align="center">
+                    {Math.round(cardapio.media_geral)}
+                  </TableCell>
 
                   <TableCell align="center">
                     <ContainerAcoes>

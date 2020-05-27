@@ -5,16 +5,20 @@ import { List, ListItem, Divider, CircularProgress } from '@material-ui/core';
 
 import {
   Container,
-  ContainerLoading,
   ContainerCardapio,
-  ContainerInfo,
+  ContainerLoading,
+  ContainerItem,
+  ContainerImage,
+  ContainerCardapioDescription,
   RatingUI,
-  ContainerRating,
+  ContainerCardapioRating,
   ContainerComentario,
   ContainerTitleComentario,
   ContainerSemComentario,
   Comentario,
 } from './styles';
+import menu from '../../../assets/menu.svg';
+import rating from '../../../assets/rating.svg';
 import api from '../../../services/api';
 
 const labels = {
@@ -66,7 +70,7 @@ export default function Detalhes({ match, history }) {
     async function loadingComments() {
       if (cardapio) {
         const comments = await api.get(`/cardapio/${cardapio._id}/comentarios`);
-        setComentarios(comments.data.comentarios);
+        setComentarios(comments.data.avaliacoes);
         setLoadingComentario(false);
       }
     }
@@ -83,56 +87,72 @@ export default function Detalhes({ match, history }) {
           </ContainerLoading>
         ) : (
           <>
-            <ContainerInfo>
-              <h3>
-                {cardapio.tipo}
-                {' - '}
-                {format(parseISO(cardapio.data), 'eeee, dd/MM/yyyy', {
-                  locale: ptBR,
-                })}
-              </h3>
+            <ContainerItem>
+              <ContainerImage>
+                <img src={menu} alt="menu icon" />
+              </ContainerImage>
+              <ContainerCardapioDescription>
+                <h3>
+                  {cardapio.tipo}
+                  {' - '}
+                  {format(parseISO(cardapio.data), 'eeee, dd/MM/yyyy', {
+                    locale: ptBR,
+                  })}
+                </h3>
 
-              <div>
-                <p>Entrada: </p>
-                <span>{cardapio.entrada.descricao}</span>
-              </div>
+                <div>
+                  <p>Entrada: </p>
+                  <span>{cardapio.entrada.descricao}</span>
+                </div>
 
-              <div>
-                <p>Guarnição: </p>
-                <span>{cardapio.guarnicao.descricao}</span>
-              </div>
+                <div>
+                  <p>Prato Proteico: </p>
+                  <span>{cardapio.proteina.descricao}</span>
+                </div>
 
-              <div>
-                <p>Proteína: </p>
-                <span>{cardapio.proteina.descricao}</span>
-              </div>
+                <div>
+                  <p>Opção: </p>
+                  <span>{cardapio.opcao.descricao}</span>
+                </div>
 
-              <div>
-                <p>Opção: </p>
-                <span>{cardapio.opcao.descricao}</span>
-              </div>
+                <div>
+                  <p>Acompanhamento: </p>
+                  <span>{cardapio.acompanhamento.descricao}</span>
+                </div>
 
-              <div>
-                <p>Sobremesa: </p>
-                <span>{cardapio.sobremesa.descricao}</span>
-              </div>
-            </ContainerInfo>
-            <ContainerRating>
-              <h3>Média das Avaliações</h3>
-              <div>
-                <p>
-                  Avaliações: <span>{media.votos}</span>
-                </p>
-                <RatingUI
-                  size="large"
-                  name="media"
-                  precision={0.5}
-                  value={mediaValue}
-                  disabled
-                />
-                <p>{labels[Math.round(mediaValue)]}</p>
-              </div>
-            </ContainerRating>
+                <div>
+                  <p>Guarnição: </p>
+                  <span>{cardapio.guarnicao.descricao}</span>
+                </div>
+
+                <div>
+                  <p>Sobremesa: </p>
+                  <span>{cardapio.sobremesa.descricao}</span>
+                </div>
+              </ContainerCardapioDescription>
+            </ContainerItem>
+
+            <ContainerItem>
+              <ContainerImage>
+                <img src={rating} alt="star icon" />
+              </ContainerImage>
+              <ContainerCardapioRating>
+                <h3>Média das Avaliações</h3>
+                <div>
+                  <p>
+                    Avaliações: <span>{media.votos}</span>
+                  </p>
+                  <RatingUI
+                    size="large"
+                    name="media"
+                    precision={0.5}
+                    value={mediaValue}
+                    disabled
+                  />
+                  <p>{labels[Math.round(mediaValue)]}</p>
+                </div>
+              </ContainerCardapioRating>
+            </ContainerItem>
           </>
         )}
       </ContainerCardapio>
@@ -153,7 +173,7 @@ export default function Detalhes({ match, history }) {
             comentarios.map((comentario, index) => (
               <ListItem key={index} component="li">
                 <Comentario>
-                  <h5>{comentario.user_id}</h5>
+                  <h5>{comentario.nome}</h5>
                   <p>{comentario.comentario}</p>
                 </Comentario>
                 <Divider />

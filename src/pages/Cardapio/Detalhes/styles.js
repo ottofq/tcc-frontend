@@ -9,44 +9,64 @@ export const Container = styled.div`
   height: 100vh;
   justify-content: space-around;
   align-items: center;
+
   h1 {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: bold;
     color: #174578;
   }
 `;
 
-export const ContainerLoading = styled.div`
-  display: flex;
-  height: 200px;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-`;
-
 export const ContainerCardapio = styled.div`
   display: flex;
   width: 1200px;
-  border: 1px solid #ccc;
   padding: 10px;
-  border-radius: 4px;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
 `;
 
-export const ContainerInfo = styled.div`
-  border: 1px solid #bbb;
-  background-color: #f6fafd;
+export const ContainerLoading = styled.div`
+  display: flex;
+  height: 170px;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ContainerItem = styled.div`
+  display: flex;
   box-shadow: -1px 0px 4px 0px rgba(50, 50, 50, 0.75);
-  border-radius: 4px;
+  border-radius: 5px;
+  align-self: stretch;
+`;
+
+export const ContainerImage = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  width: 150px;
+  background-color: #174578;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding: 10px;
+
+  img {
+    height: 150px;
+    width: 150px;
+  }
+`;
+
+export const ContainerCardapioDescription = styled.div`
+  background-color: #f6fafd;
   display: flex;
   justify-content: space-around;
   flex-direction: column;
   flex-wrap: wrap;
   padding: 10px;
-  width: 40%;
-  height: 170px;
+  height: 200px;
+
   h3 {
     font-weight: bold;
     font-size: 24px;
@@ -55,11 +75,11 @@ export const ContainerInfo = styled.div`
   }
 
   div {
-    margin-top: 10px;
     display: flex;
     align-items: center;
 
     p {
+      margin-right: 4px;
       font-size: 18px;
     }
 
@@ -70,18 +90,14 @@ export const ContainerInfo = styled.div`
   }
 `;
 
-export const ContainerRating = styled.div`
+export const ContainerCardapioRating = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  border: 1px solid #bbb;
   background-color: #f6fafd;
-  border-radius: 4px;
-  box-shadow: -1px 0px 4px 0px rgba(50, 50, 50, 0.75);
   padding: 10px;
-  width: 40%;
-  height: 170px;
+  height: 200px;
 
   h3 {
     font-size: 24px;
