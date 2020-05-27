@@ -1,12 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { ArrowBack } from '@material-ui/icons';
 import { format, parseISO } from 'date-fns';
-import { Container, Form, TextFieldUI, TextArea, ButtonUI } from './styled';
+import { EditorState, ContentState } from 'draft-js';
+import htmlToDraft from 'html-to-draftjs';
+import { Editor } from 'react-draft-wysiwyg';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+
+import {
+  Container,
+  Form,
+  TextFieldUI,
+  ContainerEditor,
+  ButtonUI,
+} from './styles';
 import api from '../../../services/api';
 
 export default function DetalhesInfo({ match, history }) {
   const { control, setValue } = useForm();
+  const [editorState, setEditorState] = useState();
 
   useEffect(() => {
     async function loadInfo() {
@@ -15,7 +27,11 @@ export default function DetalhesInfo({ match, history }) {
         const result = await api.get(`/informacoes/${id}`);
         setValue('titulo', result.data.titulo);
         setValue('data', format(parseISO(result.data.data), 'yyyy-MM-dd'));
-        setValue('descricao', result.data.descricao);
+        const contentBlock = htmlToDraft(result.data.descricao);
+        const contentState = ContentState.createFromBlockArray(
+          contentBlock.contentBlocks
+        );
+        setEditorState(EditorState.createWithContent(contentState));
       } catch (error) {
         console.log(error);
       }
@@ -32,7 +48,14 @@ export default function DetalhesInfo({ match, history }) {
       <Form>
         <Controller
           as={
-            <TextFieldUI type="date" disabled label="Data" variant="outlined" />
+            <TextFieldUI
+              type="date"
+              InputProps={{
+                readOnly: true,
+              }}
+              label="Data"
+              variant="outlined"
+            />
           }
           name="data"
           defaultValue=""
@@ -40,23 +63,29 @@ export default function DetalhesInfo({ match, history }) {
         ></Controller>
 
         <Controller
-          as={<TextFieldUI disabled label="Titulo" variant="outlined" />}
+          as={
+            <TextFieldUI
+              InputProps={{
+                readOnly: true,
+              }}
+              label="Titulo"
+              variant="outlined"
+            />
+          }
           name="titulo"
           defaultValue=""
           control={control}
         ></Controller>
 
-        <Controller
-          as={
-            <TextArea
-              disabled={true}
-              spellCheck
-              placeholder="Digite um aviso"
-            />
-          }
-          name="descricao"
-          control={control}
-        ></Controller>
+        <ContainerEditor>
+          <Editor
+            editorState={editorState}
+            editorClassName="editor"
+            onEditorStateChange={setEditorState}
+            toolbarHidden
+            readOnly
+          />
+        </ContainerEditor>
 
         <ButtonUI
           startIcon={<ArrowBack fontSize="large" />}

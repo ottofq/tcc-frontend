@@ -1,22 +1,37 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Save } from '@material-ui/icons';
+import { EditorState, convertToRaw } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+import { Editor } from 'react-draft-wysiwyg';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
-import { Container, Form, TextFieldUI, TextArea, ButtonUI } from './styled';
+import {
+  Container,
+  Form,
+  TextFieldUI,
+  ButtonUI,
+  ContainerEditor,
+} from './styles';
 import AlertToast from '../../../components/AlertToast';
 import api from '../../../services/api';
 
 export default function InfoCadastro({ history }) {
   const { register, handleSubmit, reset } = useForm();
   const [statusAlert, setStatusAlert] = useState('');
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   async function onSubmit(data) {
     try {
-      const { titulo, descricao } = data;
+      const contentInfo = draftToHtml(
+        convertToRaw(editorState.getCurrentContent())
+      );
+
+      const { titulo } = data;
       const user = JSON.parse(localStorage.getItem('@app-ru/user'));
       const result = await api.post(
         '/informacoes/',
-        { titulo, descricao },
+        { titulo, descricao: contentInfo },
         {
           headers: {
             authorization: `Bearer ${user.token}`,
@@ -31,9 +46,7 @@ export default function InfoCadastro({ history }) {
         });
       }
       reset();
-      setTimeout(() => {
-        history.push('/dashboard/avisos/listagem');
-      }, 1500);
+      history.push('/dashboard/avisos/listagem');
     } catch (error) {
       console.log(error);
       setStatusAlert({
@@ -53,12 +66,30 @@ export default function InfoCadastro({ history }) {
           variant="outlined"
         />
 
-        <TextArea
-          name="descricao"
-          ref={register({ required: true })}
-          spellCheck
-          placeholder="Digite um aviso"
-        />
+        <ContainerEditor>
+          <Editor
+            initialEditorState={editorState}
+            editorClassName="editor"
+            toolbarClassName="toolbar"
+            onEditorStateChange={setEditorState}
+            toolbar={{
+              options: [
+                'inline',
+                'blockType',
+                'list',
+                'textAlign',
+                'colorPicker',
+                'link',
+                'emoji',
+                'remove',
+                'history',
+              ],
+              fontFamily: {
+                options: ['PT Sans'],
+              },
+            }}
+          />
+        </ContainerEditor>
 
         <ButtonUI
           startIcon={<Save fontSize="large" />}

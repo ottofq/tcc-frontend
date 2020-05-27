@@ -139,15 +139,15 @@ export default function VerCardapios() {
             message={statusAlert.msg}
           />
         ) : null}
+        <TablePagination
+          component="div"
+          rowsPerPageOptions={['']}
+          count={qtdInfo}
+          rowsPerPage={8}
+          page={page}
+          onChangePage={handleChangePage}
+        />
       </TableContainerUI>
-      <TablePagination
-        component="div"
-        rowsPerPageOptions={['']}
-        count={qtdInfo}
-        rowsPerPage={8}
-        page={page}
-        onChangePage={handleChangePage}
-      />
     </Container>
   );
 }

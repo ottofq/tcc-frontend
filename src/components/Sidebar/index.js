@@ -42,19 +42,6 @@ export default function Sidebar() {
             <SidebarLink
               activeStyle={{ backgroundColor: '#2266b1' }}
               exact
-              to="/dashboard/cardapio"
-            >
-              <div>
-                <ViewList size={32} />
-                <span>Ver Cardápios</span>
-              </div>
-            </SidebarLink>
-          </li>
-
-          <li>
-            <SidebarLink
-              activeStyle={{ backgroundColor: '#2266b1' }}
-              exact
               to="/dashboard/cardapio/cadastrar"
             >
               <div>
@@ -65,21 +52,24 @@ export default function Sidebar() {
           </li>
 
           <li>
+            <SidebarLink
+              activeStyle={{ backgroundColor: '#2266b1' }}
+              exact
+              to="/dashboard/cardapio"
+            >
+              <div>
+                <ViewList size={32} />
+                <span>Ver Cardápios</span>
+              </div>
+            </SidebarLink>
+          </li>
+
+          <li>
             <Divider />
             <Title>
               <Info size={32}></Info>
               <h2>Avisos</h2>
             </Title>
-            <SidebarLink
-              activeStyle={{ backgroundColor: '#2266b1' }}
-              exact
-              to="/dashboard/avisos/listagem"
-            >
-              <div>
-                <ViewList size={32} />
-                <span>Ver Avisos</span>
-              </div>
-            </SidebarLink>
           </li>
 
           <li>
@@ -91,6 +81,19 @@ export default function Sidebar() {
               <div>
                 <AddBox size={32} />
                 <span>Cadastar Aviso</span>
+              </div>
+            </SidebarLink>
+          </li>
+
+          <li>
+            <SidebarLink
+              activeStyle={{ backgroundColor: '#2266b1' }}
+              exact
+              to="/dashboard/avisos/listagem"
+            >
+              <div>
+                <ViewList size={32} />
+                <span>Ver Avisos</span>
               </div>
             </SidebarLink>
           </li>
