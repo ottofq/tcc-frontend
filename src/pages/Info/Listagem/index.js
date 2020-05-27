@@ -6,7 +6,6 @@ import {
   TablePagination,
   Paper,
 } from '@material-ui/core';
-import DialogExcluir from '../../../components/DialogExcluir';
 import { Link } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
 
@@ -18,6 +17,7 @@ import {
   ContainerAcoes,
   Container,
 } from './styles';
+import DialogExcluir from '../../../components/DialogExcluir';
 import AlertToast from '../../../components/AlertToast';
 import api from '../../../services/api';
 
@@ -85,7 +85,9 @@ export default function VerCardapios() {
               infos.map(info => (
                 <TableRow key={info._id}>
                   <TableCell component="th" scope="row">
-                    {info.titulo}
+                    {info.titulo.length < 80
+                      ? info.titulo
+                      : info.titulo.substring(0, 80) + '...'}
                   </TableCell>
                   <TableCell align="center">
                     {format(parseISO(info.data), 'dd/MM/yyyy')}

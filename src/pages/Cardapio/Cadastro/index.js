@@ -10,7 +10,7 @@ import {
   Form,
   RadioGroup,
   FormLabel,
-} from './styled';
+} from './styles';
 import api from '../../../services/api';
 import AlertToast from '../../../components/AlertToast';
 

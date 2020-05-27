@@ -10,7 +10,7 @@ export const Container = styled.header`
   justify-content: space-between;
   align-items: center;
 
-  h6 {
+  h1 {
     margin-left: 20px;
     font-size: 24px;
     font-weight: bold;

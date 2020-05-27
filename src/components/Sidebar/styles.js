@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 export const Container = styled.aside`
   display: flex;
   width: 240px;
-  height: 100vh;
   justify-content: flex-start;
   background-color: #174578;
   flex-direction: column;
@@ -27,6 +26,11 @@ export const Container = styled.aside`
       align-self: stretch;
 
       a {
+        &:hover {
+          background-color: rgba(246, 250, 253, 0.25);
+          transition: background-color ease 0.75s;
+        }
+
         div {
           height: 40px;
           display: flex;

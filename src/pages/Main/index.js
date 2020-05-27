@@ -16,7 +16,7 @@ import AlunoListagem from '../Aluno/Listagem';
 import AlunoDetalhes from '../Aluno/Detalhes/Main';
 import AlunoGraficos from '../Aluno/Graficos/Main';
 
-import { Container, Wrapper } from './styled';
+import { Container, Wrapper } from './styles';
 
 export default function Main() {
   return (

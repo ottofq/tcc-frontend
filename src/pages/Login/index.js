@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 
 import AlertToast from '../../components/AlertToast';
-import { Container, ContainerLogin } from './styled';
+import { Container, ContainerLogin } from './styles';
 import logo from '../../assets/logo.png';
 import api from '../../services/api';
 import { useEffect } from 'react';
