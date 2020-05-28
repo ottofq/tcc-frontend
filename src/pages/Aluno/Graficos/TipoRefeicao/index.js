@@ -26,7 +26,7 @@ export default function TipoRefeicao({ data }) {
       <h2>Tipo de Refeição consumida no RU</h2>
       <Pie
         data={tipo_refeicao}
-        margin={{ top: 20, right: 120, bottom: 20, left: 170 }}
+        margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
         colors={{ scheme: 'accent' }}
       />
     </>

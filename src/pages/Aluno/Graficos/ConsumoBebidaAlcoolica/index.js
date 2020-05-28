@@ -36,8 +36,8 @@ export default function ConsumoBebidaAlcoolica({ data }) {
       <h2>Consumo de Bebida Alcoólica</h2>
       <Pie
         data={consumo_bebida_alcoolica}
-        margin={{ top: 20, right: 120, bottom: 20, left: 170 }}
-        colors={{ scheme: 'reds' }}
+        margin={{ top: 20, right: 80, bottom: 20, left: 20 }}
+        colors={{ scheme: 'set3' }}
       />
     </>
   );

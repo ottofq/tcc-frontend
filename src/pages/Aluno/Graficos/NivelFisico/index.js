@@ -31,7 +31,7 @@ export default function NivelFisico({ data }) {
       <h2>Nível de Atividade Física</h2>
       <Pie
         data={nivel_fisico}
-        margin={{ top: 20, right: 120, bottom: 20, left: 170 }}
+        margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
         colors={{ scheme: 'pastel1' }}
       />
     </>

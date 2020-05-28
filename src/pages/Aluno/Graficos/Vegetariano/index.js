@@ -31,8 +31,8 @@ export default function Vegetariano({ data }) {
       <h2>Veganos ou Vegetarianos</h2>
       <Pie
         data={nivel_fisico}
-        margin={{ top: 20, right: 120, bottom: 20, left: 170 }}
-        colors={{ scheme: 'greens' }}
+        margin={{ top: 20, right: 120, bottom: 20, left: 0 }}
+        colors={{ scheme: 'nivo' }}
       />
     </>
   );

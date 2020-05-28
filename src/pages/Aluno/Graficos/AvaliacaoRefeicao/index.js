@@ -52,7 +52,7 @@ export default function AvaliacaoRefeicao({ data }) {
         indexBy="avaliacao"
         labelFormat={format}
         tooltipFormat={format}
-        margin={{ top: 20, right: 100, bottom: 70, left: 50 }}
+        margin={{ top: 20, right: 120, bottom: 70, left: 50 }}
         colors={{ scheme: 'nivo' }}
         legendBottom="Avaliações"
         legendLeft="%"

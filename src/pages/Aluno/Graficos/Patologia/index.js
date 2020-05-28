@@ -49,7 +49,7 @@ export default function Patologia({ data, quantAluno }) {
           'DC - Doença Cardiovascular',
         ]}
         indexBy="patologia"
-        margin={{ top: 20, right: 230, bottom: 50, left: 35 }}
+        margin={{ top: 20, right: 250, bottom: 50, left: 35 }}
         legendOffset={30}
         colors={{ scheme: 'paired' }}
         legendBottom="Patologias"
