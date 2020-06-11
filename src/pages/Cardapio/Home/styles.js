@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button } from '@material-ui/core';
 import { styled as styledUI } from '@material-ui/core/styles';
 import { Rating } from '@material-ui/lab';
 
@@ -140,7 +141,6 @@ export const ContainerComentario = styled.div`
     width: 100%;
     overflow: hidden;
     overflow-y: scroll;
-
     li {
       width: 50%;
     }
@@ -180,9 +180,30 @@ export const Comentario = styled.div`
     font-weight: bold;
     color: #174578;
     padding-bottom: 5px;
+    margin-right: 5px;
   }
 
   p {
     font-size: 14px;
   }
 `;
+
+export const RatingComentario = styledUI(Rating)({});
+
+export const ContainerButtonPagination = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+
+  strong {
+    font-weight: bold;
+  }
+`;
+
+export const StyledButton = styledUI(Button)({
+  marginTop: '10px',
+  fontSize: '14px',
+  alignSelf: 'center',
+});

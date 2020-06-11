@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import { List, ListItem, Divider, CircularProgress } from '@material-ui/core';
@@ -15,7 +15,10 @@ import {
   ContainerComentario,
   ContainerTitleComentario,
   ContainerSemComentario,
+  RatingComentario,
   Comentario,
+  StyledButton,
+  ContainerButtonPagination,
 } from './styles';
 import menu from '../../../assets/menu.svg';
 import rating from '../../../assets/rating.svg';
@@ -29,31 +32,27 @@ const labels = {
   5: 'Muito bom',
 };
 
-export default function Detalhes({ match, history }) {
-  const [cardapio, setCardapio] = useState();
+export default function Home() {
+  const [cardapio, setCardapio] = useState('');
   const [comentarios, setComentarios] = useState([]);
   const [media, setMedia] = useState('');
   const [mediaValue, setMediaValue] = useState(0);
   const [loadingCommentario, setLoadingComentario] = useState(true);
   const [loadingCardapio, setLoadingCardapio] = useState(true);
+  const [skip, setSkip] = useState(0);
+  const [limit, setLimit] = useState(10);
+  const [pagina, setPagina] = useState(1);
 
   useEffect(() => {
     async function loadingMenu() {
-      try {
-        const { id } = match.params;
-        const result = await api.get(`/cardapio/${id}`);
+      const result = await api.get('/cardapio/last');
 
-        setCardapio(result.data);
-        setLoadingCardapio(false);
-      } catch (error) {
-        console.log(error);
-        history.push('/404');
-        window.location.reload();
-      }
+      setCardapio(result.data);
+      setLoadingCardapio(false);
     }
 
     loadingMenu();
-  }, [match.params, history]);
+  }, []);
 
   useEffect(() => {
     async function loadingRate() {
@@ -69,17 +68,36 @@ export default function Detalhes({ match, history }) {
   useEffect(() => {
     async function loadingComments() {
       if (cardapio) {
-        const comments = await api.get(`/cardapio/${cardapio._id}/comentarios`);
+        const comments = await api.get(
+          `/cardapio/${cardapio._id}/comentarios?skip=${skip}&limit=${limit}`
+        );
         setComentarios(comments.data.avaliacoes);
         setLoadingComentario(false);
       }
     }
     loadingComments();
-  }, [cardapio]);
+  }, [cardapio, skip, limit]);
+
+  const nextComment = () => {
+    const page = pagina + 1;
+    setSkip(skip + limit);
+    setPagina(page);
+  };
+
+  const previousComment = () => {
+    const page = pagina - 1;
+    setSkip(skip - limit);
+    setPagina(page);
+  };
+
+  const memoizedValue = useMemo(() => Math.round(media.votos / limit), [
+    media,
+    limit,
+  ]);
 
   return (
     <Container>
-      <h1>Detalhes do cardápio</h1>
+      <h1>Detalhes do cardapio</h1>
       <ContainerCardapio>
         {loadingCardapio ? (
           <ContainerLoading>
@@ -145,9 +163,9 @@ export default function Detalhes({ match, history }) {
                   <RatingUI
                     size="large"
                     name="media"
-                    precision={0.5}
+                    precision={1}
                     value={mediaValue}
-                    disabled
+                    readOnly
                   />
                   <p>{labels[Math.round(mediaValue)]}</p>
                 </div>
@@ -160,7 +178,7 @@ export default function Detalhes({ match, history }) {
       <ContainerComentario>
         <ContainerTitleComentario>
           <h4>
-            Comentários: (<span>{comentarios.length})</span>
+            Avaliações: (<span>{media.votos})</span>
           </h4>
         </ContainerTitleComentario>
 
@@ -173,7 +191,16 @@ export default function Detalhes({ match, history }) {
             comentarios.map((comentario, index) => (
               <ListItem key={index} component="li">
                 <Comentario>
-                  <h5>{comentario.nome}</h5>
+                  <ContainerTitleComentario>
+                    <h5>{comentario.nome}</h5>
+                    <RatingComentario
+                      size="small"
+                      name="nota"
+                      precision={1}
+                      value={comentario.nota}
+                      readOnly
+                    />
+                  </ContainerTitleComentario>
                   <p>{comentario.comentario}</p>
                 </Comentario>
                 <Divider />
@@ -185,6 +212,28 @@ export default function Detalhes({ match, history }) {
             </ContainerSemComentario>
           )}
         </List>
+        <ContainerButtonPagination>
+          <StyledButton
+            onClick={previousComment}
+            variant="outlined"
+            color="primary"
+            disabled={skip === 0}
+          >
+            Anterior
+          </StyledButton>
+          <p>
+            {' '}
+            Página <strong>{pagina}</strong> de {memoizedValue}
+          </p>
+          <StyledButton
+            onClick={nextComment}
+            variant="outlined"
+            color="primary"
+            disabled={pagina === memoizedValue || media.votos === 0}
+          >
+            Próximo
+          </StyledButton>
+        </ContainerButtonPagination>
       </ContainerComentario>
     </Container>
   );
