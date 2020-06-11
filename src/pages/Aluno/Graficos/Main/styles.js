@@ -32,6 +32,7 @@ export const ContainerGrafico = styled.div`
   justify-content: center;
   align-items: center;
   border: 1px solid #bbb;
+  border-radius: 4px;
   background-color: #f6fafd;
   margin: 10px;
   padding: 10px;

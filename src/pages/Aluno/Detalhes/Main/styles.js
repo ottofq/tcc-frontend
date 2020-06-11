@@ -4,8 +4,8 @@ export const Container = styled.div`
   display: flex;
   flex: 1;
   flex-direction: column;
+  overflow-y: scroll;
   padding: 10px;
-  justify-content: space-around;
 `;
 
 export const ContainerLoading = styled.div`
@@ -17,6 +17,9 @@ export const ContainerLoading = styled.div`
 
 export const Title = styled.h2`
   font-size: 1.2em;
-  padding: 10px 0px;
+  font-weight: bold;
+  color: #174578;
+  padding-top: 10px;
   line-height: 20px;
+  text-align: center;
 `;
