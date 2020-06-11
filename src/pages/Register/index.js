@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-expressions */
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { TextField as Input, Button } from '@material-ui/core';
-import AlertToast from '../../components/AlertToast';
+import { useSnackbar } from 'notistack';
 
 import { Container, ContainerRegister } from './styles';
 import logo from '../../assets/logo.png';
@@ -10,71 +10,57 @@ import api from '../../services/api';
 
 export default function Register({ history }) {
   const { register, handleSubmit } = useForm();
-  const [status, setStatus] = useState('');
+  const { enqueueSnackbar } = useSnackbar();
 
   const onSubmit = async data => {
     try {
       const { email, password, nome } = data;
       const result = await api.post('/users', { nome, email, password });
       if (result.status === 200) {
-        setStatus({
-          type: 'success',
-          msg: 'Cadastro Efetuado com Sucesso!',
-          date: new Date(),
+        enqueueSnackbar('Cadastro efetuado com Sucesso!', {
+          variant: 'success',
         });
-
         history.push('/');
       }
     } catch (error) {
-      setStatus({
-        type: 'error',
-        msg: 'Erro ao realizar o cadastro!',
-        date: new Date(),
+      enqueueSnackbar('Erro ao registrar, email já cadastrado!', {
+        variant: 'error',
       });
     }
   };
 
   return (
-    <>
-      <Container>
-        <ContainerRegister>
-          <img src={logo} alt="Logo UFES" />
-          <h2>Cadastro</h2>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <Input
-              inputRef={register({ required: true })}
-              type="text"
-              name="nome"
-              label="Nome"
-              variant="outlined"
-            />
-            <Input
-              inputRef={register({ required: true })}
-              type="email"
-              name="email"
-              label="Email"
-              variant="outlined"
-            />
+    <Container>
+      <ContainerRegister>
+        <img src={logo} alt="Logo UFES" />
+        <h2>Cadastro</h2>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            inputRef={register({ required: true })}
+            type="text"
+            name="nome"
+            label="Nome"
+            variant="outlined"
+          />
+          <Input
+            inputRef={register({ required: true })}
+            type="email"
+            name="email"
+            label="Email"
+            variant="outlined"
+          />
 
-            <Input
-              inputRef={register({ required: true })}
-              name="password"
-              type="password"
-              label="Senha"
-              variant="outlined"
-            />
+          <Input
+            inputRef={register({ required: true })}
+            name="password"
+            type="password"
+            label="Senha"
+            variant="outlined"
+          />
 
-            <Button type="submit">Cadastrar</Button>
-          </form>
-          {status ? (
-            <AlertToast
-              key={status.date}
-              typeMessage={status.type}
-              message={status.msg}
-            />
-          ) : null}
-        </ContainerRegister>
-      </Container>
-    </>
+          <Button type="submit">Cadastrar</Button>
+        </form>
+      </ContainerRegister>
+    </Container>
   );
 }

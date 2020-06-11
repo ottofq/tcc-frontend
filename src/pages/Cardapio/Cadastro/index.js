@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Radio, FormControlLabel } from '@material-ui/core';
 import { Save } from '@material-ui/icons';
+import { useSnackbar } from 'notistack';
 
 import {
   Container,
@@ -12,11 +13,10 @@ import {
   FormLabel,
 } from './styles';
 import api from '../../../services/api';
-import AlertToast from '../../../components/AlertToast';
 
 export default function Cadastro({ history }) {
   const { register, handleSubmit, reset } = useForm();
-  const [statusAlert, setStatusAlert] = useState('');
+  const { enqueueSnackbar } = useSnackbar();
 
   const onSubmit = async data => {
     const {
@@ -50,21 +50,16 @@ export default function Cadastro({ history }) {
       );
 
       if (result.status === 200) {
-        setStatusAlert({
-          type: 'success',
-          msg: 'Novo Cardápio cadastrado!',
+        enqueueSnackbar('Novo cardápio cadastrado!', {
+          variant: 'success',
         });
+        history.push('/dashboard');
         reset();
       }
-      setTimeout(() => {
-        history.push('/dashboard');
-      }, 1900);
     } catch (error) {
       console.log(error);
-
-      setStatusAlert({
-        type: 'error',
-        msg: 'Erro ao cadastrar um novo cardápio!',
+      enqueueSnackbar('Erro ao cadastrar novo cardápio!', {
+        variant: 'error',
       });
     }
   };
@@ -143,14 +138,6 @@ export default function Cadastro({ history }) {
           Cadastrar
         </StyledButton>
       </Form>
-
-      {statusAlert ? (
-        <AlertToast
-          key={Date.now}
-          typeMessage={statusAlert.type}
-          message={statusAlert.msg}
-        />
-      ) : null}
     </Container>
   );
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Radio, FormControlLabel } from '@material-ui/core';
 import { Save } from '@material-ui/icons';
-import AlertToast from '../../../components/AlertToast';
+import { useSnackbar } from 'notistack';
 
 import {
   Container,
@@ -18,7 +18,7 @@ import api from '../../../services/api';
 export default function Cadastro({ match, history }) {
   const { handleSubmit, setValue, control } = useForm();
   const [cardapio, setCardapio] = useState('');
-  const [statusAlert, setStatusAlert] = useState('');
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     async function loadCardapio() {
@@ -79,18 +79,15 @@ export default function Cadastro({ match, history }) {
       );
 
       if (result.status === 200) {
-        setStatusAlert({
-          type: 'success',
-          msg: 'Cardápio editado com sucesso!',
+        enqueueSnackbar('Cardápio editado com Sucesso!', {
+          variant: 'success',
         });
       }
 
       history.push('/dashboard/cardapio');
     } catch (error) {
-      console.log(error);
-      setStatusAlert({
-        type: 'error',
-        msg: 'Erro ao editar um cardápio!',
+      enqueueSnackbar('Erro ao editar o cardápio!', {
+        variant: 'error',
       });
     }
   }
@@ -178,14 +175,6 @@ export default function Cadastro({ match, history }) {
           Salvar Edição
         </StyledButton>
       </Form>
-
-      {statusAlert ? (
-        <AlertToast
-          key={Date.now}
-          typeMessage={statusAlert.type}
-          message={statusAlert.msg}
-        />
-      ) : null}
     </Container>
   );
 }

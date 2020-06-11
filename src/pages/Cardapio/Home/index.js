@@ -40,7 +40,7 @@ export default function Home() {
   const [loadingCommentario, setLoadingComentario] = useState(true);
   const [loadingCardapio, setLoadingCardapio] = useState(true);
   const [skip, setSkip] = useState(0);
-  const [limit, setLimit] = useState(10);
+  const [limit] = useState(10);
   const [pagina, setPagina] = useState(1);
 
   useEffect(() => {
