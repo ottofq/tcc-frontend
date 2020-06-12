@@ -15,6 +15,7 @@ import InfoDetalhes from '../Info/Detalhes';
 import AlunoListagem from '../Aluno/Listagem';
 import AlunoDetalhes from '../Aluno/Detalhes/Main';
 import AlunoGraficos from '../Aluno/Graficos/Main';
+import Profile from '../User/Profile';
 
 import { Container, Wrapper } from './styles';
 
@@ -105,6 +106,12 @@ export default function Main() {
               exact
               path="/dashboard/aluno/graficos"
               component={AlunoGraficos}
+            />
+            <Route
+              key="user-profile"
+              exact
+              path="/dashboard/profile"
+              component={Profile}
             />
           </Switch>
         </Wrapper>
