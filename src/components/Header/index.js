@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Avatar } from '@material-ui/core';
 import { withRouter, Link } from 'react-router-dom';
-import { StylesProvider } from '@material-ui/core/styles';
 
 import * as S from './styles';
 import avatar from '../../assets/avatar.png';
@@ -20,7 +19,7 @@ function Header({ history }) {
   }
 
   return (
-    <StylesProvider injectFirst>
+    <S.Header>
       <S.Container>
         <h1>Cardápio RU CCA-UFES</h1>
         <S.ContainerMenu>
@@ -48,7 +47,7 @@ function Header({ history }) {
           </S.ContainerItems>
         </S.ContainerMenu>
       </S.Container>
-    </StylesProvider>
+    </S.Header>
   );
 }
 

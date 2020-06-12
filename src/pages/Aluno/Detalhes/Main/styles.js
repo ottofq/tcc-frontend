@@ -19,7 +19,9 @@ export const Title = styled.h2`
   font-size: 1.2em;
   font-weight: bold;
   color: #174578;
-  padding-top: 10px;
+  margin-top: 10px;
+  margin-bottom: 5px;
   line-height: 20px;
-  text-align: center;
+  border-left: 4px solid #174578;
+  padding-left: 5px;
 `;
