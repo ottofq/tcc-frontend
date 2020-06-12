@@ -30,7 +30,7 @@ export default function Profile({ history }) {
 
     try {
       if (new_password === repeat_new_password) {
-        const result = await api.put(
+        await api.put(
           `/users/${user.user._id}`,
           {
             nome,

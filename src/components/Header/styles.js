@@ -1,17 +1,22 @@
 import styled from 'styled-components';
 
-export const Container = styled.header`
-  height: 70px;
-  width: 100%;
+export const Header = styled.header`
   display: flex;
+  height: 50px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
   background-color: #2266b1;
+  box-shadow: -1px 0px 4px 0px rgba(50, 50, 50, 0.75);
+`;
+
+export const Container = styled.div`
+  width: 1200px;
+  display: flex;
   justify-content: space-between;
   align-items: center;
 
   h1 {
-    border-left: 4px solid #fff;
-    padding-left: 4px;
-    margin-left: 20px;
     font-size: 24px;
     font-weight: bold;
     color: #fff;
@@ -23,7 +28,6 @@ export const ContainerMenu = styled.ul`
   flex-direction: column;
   position: relative;
   background-color: #2266b1;
-  margin-right: 90px;
   align-items: center;
 
   :hover li {

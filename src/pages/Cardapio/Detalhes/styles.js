@@ -12,9 +12,13 @@ export const Container = styled.div`
   align-items: center;
 
   h1 {
-    font-size: 28px;
+    border-left: 4px solid #174578;
+    padding-left: 4px;
+    font-size: 24px;
     font-weight: bold;
     color: #174578;
+    width: 1200px;
+    margin-top: 5px;
   }
 `;
 
