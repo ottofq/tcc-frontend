@@ -21,14 +21,15 @@ export default function Pie({ data, margin, colors }) {
       margin={margin}
       sliceLabel={format}
       tooltipFormat={formatTooltip}
-      innerRadius={0}
       startAngle={-180}
+      innerRadius={0.5}
       endAngle={360}
       padAngle={0.7}
       cornerRadius={3}
       colors={colors}
       sortByValue={true}
       borderWidth={1}
+      enableRadialLabels={false}
       radialLabelsSkipAngle={0}
       radialLabelsTextXOffset={6}
       radialLabelsTextColor="#333333"
@@ -37,7 +38,17 @@ export default function Pie({ data, margin, colors }) {
       radialLabelsLinkHorizontalLength={24}
       radialLabelsLinkStrokeWidth={1}
       slicesLabelsSkipAngle={10}
-      slicesLabelsTextColor="#333333"
+      legends={[
+        {
+          anchor: 'top-right',
+          direction: 'column',
+          translateY: 56,
+          itemWidth: 100,
+          itemHeight: 18,
+          itemsSpacing: 20,
+          symbolShape: 'square',
+        },
+      ]}
     />
   );
 }

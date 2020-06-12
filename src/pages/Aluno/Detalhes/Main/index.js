@@ -37,21 +37,23 @@ export default function AlunoDetalhes({ match, history }) {
   }, [match.params]);
 
   return (
-    <Container>
+    <>
       {loading === false ? (
-        <>
+        <Container>
           <Title>Dados do Gerais</Title>
           <DadosGerais aluno={aluno} />
+
           <Title>Patologias e Alergias</Title>
           <AlergiasPatologias aluno={aluno} />
+
           <Title>Avaliação do RU</Title>
           <AvaliacaoRU aluno={aluno} />
-        </>
+        </Container>
       ) : (
         <ContainerLoading>
           <CircularProgress color="primary" />
         </ContainerLoading>
       )}
-    </Container>
+    </>
   );
 }

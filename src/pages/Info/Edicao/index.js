@@ -6,6 +6,7 @@ import htmlToDraft from 'html-to-draftjs';
 import draftToHtml from 'draftjs-to-html';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { useSnackbar } from 'notistack';
 
 import {
   Container,
@@ -15,13 +16,12 @@ import {
   ContainerEditor,
 } from './styles';
 import api from '../../../services/api';
-import AlertToast from '../../../components/AlertToast';
 
 export default function InfoEdicao({ match, history }) {
   const { handleSubmit, setValue, control } = useForm();
-  const [statusAlert, setStatusAlert] = useState('');
   const [info, setInfo] = useState('');
   const [editorState, setEditorState] = useState();
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     async function loadInfo() {
@@ -66,17 +66,14 @@ export default function InfoEdicao({ match, history }) {
       );
 
       if (result.status === 200) {
-        setStatusAlert({
-          type: 'success',
-          msg: 'Aviso editado com sucesso!',
+        enqueueSnackbar('Aviso editado com Sucesso!', {
+          variant: 'success',
         });
       }
       history.push('/dashboard/avisos/listagem');
     } catch (error) {
-      console.log(error);
-      setStatusAlert({
-        type: 'error',
-        msg: 'Erro ao editar o aviso!',
+      enqueueSnackbar('Erro ao editar o aviso!', {
+        variant: 'error',
       });
     }
   }
@@ -125,13 +122,6 @@ export default function InfoEdicao({ match, history }) {
           Salvar Edição
         </ButtonUI>
       </Form>
-      {statusAlert ? (
-        <AlertToast
-          key={new Date()}
-          typeMessage={statusAlert.type}
-          message={statusAlert.msg}
-        />
-      ) : null}
     </Container>
   );
 }

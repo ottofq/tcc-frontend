@@ -5,6 +5,7 @@ import { EditorState, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { useSnackbar } from 'notistack';
 
 import {
   Container,
@@ -13,13 +14,13 @@ import {
   ButtonUI,
   ContainerEditor,
 } from './styles';
-import AlertToast from '../../../components/AlertToast';
+
 import api from '../../../services/api';
 
 export default function InfoCadastro({ history }) {
   const { register, handleSubmit, reset } = useForm();
-  const [statusAlert, setStatusAlert] = useState('');
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const { enqueueSnackbar } = useSnackbar();
 
   async function onSubmit(data) {
     try {
@@ -40,18 +41,16 @@ export default function InfoCadastro({ history }) {
       );
 
       if (result.status === 200) {
-        setStatusAlert({
-          type: 'success',
-          msg: 'Aviso cadastrado com sucesso!',
+        enqueueSnackbar('Aviso cadastrado com Sucesso!', {
+          variant: 'success',
         });
       }
       reset();
       history.push('/dashboard/avisos/listagem');
     } catch (error) {
       console.log(error);
-      setStatusAlert({
-        type: 'error',
-        msg: 'Erro ao cadastrar o aviso!',
+      enqueueSnackbar('Erro ao cadastrar o aviso!', {
+        variant: 'error',
       });
     }
   }
@@ -100,13 +99,6 @@ export default function InfoCadastro({ history }) {
           Cadastrar
         </ButtonUI>
       </Form>
-      {statusAlert ? (
-        <AlertToast
-          key={new Date()}
-          typeMessage={statusAlert.type}
-          message={statusAlert.msg}
-        />
-      ) : null}
     </Container>
   );
 }

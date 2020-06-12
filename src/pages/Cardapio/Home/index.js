@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import { List, ListItem, Divider, CircularProgress } from '@material-ui/core';
@@ -15,7 +15,10 @@ import {
   ContainerComentario,
   ContainerTitleComentario,
   ContainerSemComentario,
+  RatingComentario,
   Comentario,
+  StyledButton,
+  ContainerButtonPagination,
 } from './styles';
 import menu from '../../../assets/menu.svg';
 import rating from '../../../assets/rating.svg';
@@ -36,6 +39,9 @@ export default function Home() {
   const [mediaValue, setMediaValue] = useState(0);
   const [loadingCommentario, setLoadingComentario] = useState(true);
   const [loadingCardapio, setLoadingCardapio] = useState(true);
+  const [skip, setSkip] = useState(0);
+  const [limit] = useState(10);
+  const [pagina, setPagina] = useState(1);
 
   useEffect(() => {
     async function loadingMenu() {
@@ -62,13 +68,32 @@ export default function Home() {
   useEffect(() => {
     async function loadingComments() {
       if (cardapio) {
-        const comments = await api.get(`/cardapio/${cardapio._id}/comentarios`);
+        const comments = await api.get(
+          `/cardapio/${cardapio._id}/comentarios?skip=${skip}&limit=${limit}`
+        );
         setComentarios(comments.data.avaliacoes);
         setLoadingComentario(false);
       }
     }
     loadingComments();
-  }, [cardapio]);
+  }, [cardapio, skip, limit]);
+
+  const nextComment = () => {
+    const page = pagina + 1;
+    setSkip(skip + limit);
+    setPagina(page);
+  };
+
+  const previousComment = () => {
+    const page = pagina - 1;
+    setSkip(skip - limit);
+    setPagina(page);
+  };
+
+  const memoizedValue = useMemo(() => Math.round(media.votos / limit), [
+    media,
+    limit,
+  ]);
 
   return (
     <Container>
@@ -138,9 +163,9 @@ export default function Home() {
                   <RatingUI
                     size="large"
                     name="media"
-                    precision={0.5}
+                    precision={1}
                     value={mediaValue}
-                    disabled
+                    readOnly
                   />
                   <p>{labels[Math.round(mediaValue)]}</p>
                 </div>
@@ -153,7 +178,7 @@ export default function Home() {
       <ContainerComentario>
         <ContainerTitleComentario>
           <h4>
-            Comentários: (<span>{comentarios.length})</span>
+            Avaliações: (<span>{media.votos})</span>
           </h4>
         </ContainerTitleComentario>
 
@@ -166,7 +191,16 @@ export default function Home() {
             comentarios.map((comentario, index) => (
               <ListItem key={index} component="li">
                 <Comentario>
-                  <h5>{comentario.nome}</h5>
+                  <ContainerTitleComentario>
+                    <h5>{comentario.nome}</h5>
+                    <RatingComentario
+                      size="small"
+                      name="nota"
+                      precision={1}
+                      value={comentario.nota}
+                      readOnly
+                    />
+                  </ContainerTitleComentario>
                   <p>{comentario.comentario}</p>
                 </Comentario>
                 <Divider />
@@ -178,6 +212,28 @@ export default function Home() {
             </ContainerSemComentario>
           )}
         </List>
+        <ContainerButtonPagination>
+          <StyledButton
+            onClick={previousComment}
+            variant="outlined"
+            color="primary"
+            disabled={skip === 0}
+          >
+            Anterior
+          </StyledButton>
+          <p>
+            {' '}
+            Página <strong>{pagina}</strong> de {memoizedValue}
+          </p>
+          <StyledButton
+            onClick={nextComment}
+            variant="outlined"
+            color="primary"
+            disabled={pagina === memoizedValue || media.votos === 0}
+          >
+            Próximo
+          </StyledButton>
+        </ContainerButtonPagination>
       </ContainerComentario>
     </Container>
   );

@@ -22,7 +22,7 @@ export default function Tabagista({ data }) {
       <Pie
         data={tabagista}
         margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
-        colors={{ scheme: 'set3' }}
+        colors={{ scheme: 'set2' }}
       />
     </>
   );

@@ -31,7 +31,7 @@ export default function Frequencia({ data }) {
       <h2>Frequência de refeição no RU</h2>
       <Pie
         data={frequencia}
-        margin={{ top: 20, right: 120, bottom: 20, left: 170 }}
+        margin={{ top: 20, right: 100, bottom: 20, left: 10 }}
         colors={{ scheme: 'nivo' }}
       />
     </>

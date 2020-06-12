@@ -8,8 +8,8 @@ import {
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
+import { useSnackbar } from 'notistack';
 
-import AlertToast from '../../../components/AlertToast';
 import DialogExcluir from '../../../components/DialogExcluir';
 import {
   TableContainerUI,
@@ -23,9 +23,9 @@ import api from '../../../services/api';
 
 export default function VerCardapios() {
   const [cardapios, setCardapios] = useState([]);
-  const [statusAlert, setStatusAlert] = useState('');
   const [qtdCardapio, setQtdCardapio] = useState(0);
   const [page, setPage] = useState(0);
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     async function loadCardapios() {
@@ -55,16 +55,13 @@ export default function VerCardapios() {
       setCardapios(cardapios.filter(cardapio => cardapio._id !== id));
 
       if (result.status === 200) {
-        setStatusAlert({
-          type: 'success',
-          msg: 'Cardápio excluido com sucesso!',
+        enqueueSnackbar('Cardápio excluido com Sucesso!', {
+          variant: 'success',
         });
       }
     } catch (error) {
-      console.log(error);
-      setStatusAlert({
-        type: 'error',
-        msg: 'Erro ao excluir o cardápio!',
+      enqueueSnackbar('Erro ao excluir o cardápio!', {
+        variant: 'error',
       });
     }
   }
@@ -138,13 +135,6 @@ export default function VerCardapios() {
             )}
           </TableBodyUI>
         </Table>
-        {statusAlert ? (
-          <AlertToast
-            key={new Date()}
-            typeMessage={statusAlert.type}
-            message={statusAlert.msg}
-          />
-        ) : null}
         <TablePagination
           component="div"
           rowsPerPageOptions={['']}

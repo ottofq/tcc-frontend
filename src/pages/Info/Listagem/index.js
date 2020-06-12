@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
+import { useSnackbar } from 'notistack';
 
 import {
   TableContainerUI,
@@ -18,14 +19,14 @@ import {
   Container,
 } from './styles';
 import DialogExcluir from '../../../components/DialogExcluir';
-import AlertToast from '../../../components/AlertToast';
+
 import api from '../../../services/api';
 
 export default function VerCardapios() {
   const [infos, setInfos] = useState([]);
-  const [statusAlert, setStatusAlert] = useState('');
   const [page, setPage] = useState(0);
   const [qtdInfo, setQtdInfo] = useState(0);
+  const { enqueueSnackbar } = useSnackbar();
 
   async function handleSubmitModal(id) {
     try {
@@ -37,17 +38,15 @@ export default function VerCardapios() {
       });
 
       if (result.status === 200) {
-        setStatusAlert({
-          type: 'success',
-          msg: 'Aviso excluido com sucesso!',
+        enqueueSnackbar('Aviso excluido com Sucesso!', {
+          variant: 'success',
         });
       }
       setInfos(infos.filter(info => info._id !== id));
     } catch (error) {
       console.log(error);
-      setStatusAlert({
-        type: 'error',
-        msg: 'Erro ao excluir o aviso!',
+      enqueueSnackbar('Erro ao excluir o aviso!', {
+        variant: 'error',
       });
     }
   }
@@ -134,13 +133,6 @@ export default function VerCardapios() {
             )}
           </TableBodyUI>
         </Table>
-        {statusAlert ? (
-          <AlertToast
-            key={new Date()}
-            typeMessage={statusAlert.type}
-            message={statusAlert.msg}
-          />
-        ) : null}
         <TablePagination
           component="div"
           rowsPerPageOptions={['']}
