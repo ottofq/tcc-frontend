@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import Pie from '../Base/Pie';
 
-import Pie from '../../../../components/Charts/Pie';
-
-export default function AvaliacaoGeral({ data }) {
-  const avaliacao_geral = [
+export default function GeneralRating({ data }) {
+  const avaliacaoGeral = [
     {
       id: 'Muito bom',
       label: 'Muito bom',
@@ -35,10 +35,22 @@ export default function AvaliacaoGeral({ data }) {
     <>
       <h2>Avaliação geral da refeição servida no RU</h2>
       <Pie
-        data={avaliacao_geral}
+        data={avaliacaoGeral}
         margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
         colors={{ scheme: 'set3' }}
       />
     </>
   );
 }
+
+GeneralRating.propTypes = {
+  data: PropTypes.shape({
+    porcentagem: PropTypes.shape({
+      muito_bom: PropTypes.number,
+      bom: PropTypes.number,
+      regular: PropTypes.number,
+      ruim: PropTypes.number,
+      muito_ruim: PropTypes.number,
+    }),
+  }).isRequired,
+};
