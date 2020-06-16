@@ -1,10 +1,12 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { ResponsiveBar } from '@nivo/bar';
+import PropTypes from 'prop-types';
 
 export default function Bar({
   legendBottom,
-  tickRotation = 0,
-  legendOffset = 50,
+  tickRotation,
+  legendOffset,
   legendLeft,
   ...rest
 }) {
@@ -15,10 +17,10 @@ export default function Bar({
       axisBottom={{
         tickSize: 5,
         tickPadding: 5,
-        tickRotation: tickRotation,
+        tickRotation,
         legend: legendBottom,
         legendPosition: 'middle',
-        legendOffset: legendOffset,
+        legendOffset,
       }}
       axisLeft={{
         tickSize: 0,
@@ -54,9 +56,21 @@ export default function Bar({
           ],
         },
       ]}
-      animate={true}
+      animate
       motionStiffness={90}
       motionDamping={15}
     />
   );
 }
+
+Bar.defaultProps = {
+  tickRotation: 0,
+  legendOffset: 50,
+};
+
+Bar.propTypes = {
+  legendBottom: PropTypes.string.isRequired,
+  tickRotation: PropTypes.number,
+  legendOffset: PropTypes.number,
+  legendLeft: PropTypes.string.isRequired,
+};

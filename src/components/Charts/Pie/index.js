@@ -1,5 +1,6 @@
 import React from 'react';
 import { ResponsivePie } from '@nivo/pie';
+import PropTypes from 'prop-types';
 
 export default function Pie({ data, margin, colors }) {
   const format = item =>
@@ -27,7 +28,7 @@ export default function Pie({ data, margin, colors }) {
       padAngle={0.7}
       cornerRadius={3}
       colors={colors}
-      sortByValue={true}
+      sortByValue
       borderWidth={1}
       enableRadialLabels={false}
       radialLabelsSkipAngle={0}
@@ -52,3 +53,22 @@ export default function Pie({ data, margin, colors }) {
     />
   );
 }
+
+Pie.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+      value: PropTypes.number.isRequired,
+    })
+  ).isRequired,
+  margin: PropTypes.shape({
+    top: PropTypes.number.isRequired,
+    righ: PropTypes.number.isRequired,
+    bottom: PropTypes.number.isRequired,
+    left: PropTypes.number.isRequired,
+  }).isRequired,
+  colors: PropTypes.shape({
+    scheme: PropTypes.string.isRequired,
+  }).isRequired,
+};

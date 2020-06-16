@@ -8,8 +8,10 @@ import {
   DialogTitle,
   Slide,
 } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
+  // eslint-disable-next-line react/jsx-props-no-spreading
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
@@ -24,14 +26,16 @@ export default function DialogExcluir({
   const OpenModal = () => {
     setOpen(true);
   };
+
+  const CloseModal = () => {
+    setOpen(false);
+  };
+
   const handleSubmitModal = () => {
     SubmitModal();
     CloseModal();
   };
 
-  const CloseModal = () => {
-    setOpen(false);
-  };
   return (
     <div>
       <div>{cloneElement(children, { onClick: OpenModal })}</div>
@@ -40,8 +44,6 @@ export default function DialogExcluir({
         TransitionComponent={Transition}
         keepMounted
         onClose={CloseModal}
-        aria-labelledby="alert-dialog-slide-title"
-        aria-describedby="alert-dialog-slide-description"
       >
         <DialogTitle id="alert-dialog-slide-title">{TitleDialog}</DialogTitle>
         <DialogContent>
@@ -65,3 +67,10 @@ export default function DialogExcluir({
     </div>
   );
 }
+
+DialogExcluir.propTypes = {
+  SubmitModal: PropTypes.func.isRequired,
+  TitleDialog: PropTypes.string.isRequired,
+  TextDialog: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};
