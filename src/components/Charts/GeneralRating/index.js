@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Pie from '../Base/Pie';
 
 export default function GeneralRating({ data }) {
-  const avaliacaoGeral = [
+  const generalRatings = [
     {
       id: 'Muito bom',
       label: 'Muito bom',
@@ -35,7 +35,7 @@ export default function GeneralRating({ data }) {
     <>
       <h2>Avaliação geral da refeição servida no RU</h2>
       <Pie
-        data={avaliacaoGeral}
+        data={generalRatings}
         margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
         colors={{ scheme: 'set3' }}
       />
@@ -44,13 +44,5 @@ export default function GeneralRating({ data }) {
 }
 
 GeneralRating.propTypes = {
-  data: PropTypes.shape({
-    porcentagem: PropTypes.shape({
-      muito_bom: PropTypes.number,
-      bom: PropTypes.number,
-      regular: PropTypes.number,
-      ruim: PropTypes.number,
-      muito_ruim: PropTypes.number,
-    }),
-  }).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

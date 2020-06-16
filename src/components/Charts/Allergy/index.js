@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Bar from '../Base/Bar';
 
-export default function Allergy({ data, amountStudent }) {
-  const alergia = [
+export default function Allergy({ data, amountOfStudents }) {
+  const allergys = [
     {
       alergia: 'AG',
       'AG - Alergia a Glúten': data.totais.alergia_gluten,
@@ -25,7 +25,7 @@ export default function Allergy({ data, amountStudent }) {
     <>
       <h2>Alergias</h2>
       <Bar
-        data={alergia}
+        data={allergys}
         keys={[
           'OA - Outras Alergias',
           'PLV - Proteína Leite da Vaca',
@@ -38,20 +38,13 @@ export default function Allergy({ data, amountStudent }) {
         legendOffset={30}
         colors={{ scheme: 'nivo' }}
         legendLeft="Total de Alunos"
-        maxValue={amountStudent}
+        maxValue={amountOfStudents}
       />
     </>
   );
 }
 
 Allergy.propTypes = {
-  data: PropTypes.shape({
-    totais: PropTypes.shape({
-      alergia_gluten: PropTypes.number,
-      intolerancia_lactose: PropTypes.number,
-      proteina_leite_vaca: PropTypes.number,
-      outras_alergias: PropTypes.number,
-    }),
-  }).isRequired,
-  amountStudent: PropTypes.number.isRequired,
+  amountOfStudents: PropTypes.number.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

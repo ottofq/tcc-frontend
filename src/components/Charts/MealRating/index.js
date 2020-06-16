@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Bar from '../Base/Bar';
 
 export default function MealRating({ data }) {
-  const avaliacao = [
+  const mealRatings = [
     {
       avaliacao: 'Aroma',
       'Muito bom': data.porcentagem.aroma.muito_bom,
@@ -48,7 +48,7 @@ export default function MealRating({ data }) {
     <>
       <h2>Avaliação da refeição servida no RU</h2>
       <Bar
-        data={avaliacao}
+        data={mealRatings}
         keys={['Muito ruim', 'Ruim', 'Regular', 'Bom', 'Muito bom']}
         indexBy="avaliacao"
         labelFormat={format}
@@ -65,36 +65,5 @@ export default function MealRating({ data }) {
 }
 
 MealRating.propTypes = {
-  data: PropTypes.shape({
-    porcentagem: PropTypes.shape({
-      aroma: PropTypes.shape({
-        muito_bom: PropTypes.number,
-        bom: PropTypes.number,
-        regular: PropTypes.number,
-        ruim: PropTypes.number,
-        muito_ruim: PropTypes.number,
-      }),
-      coloracao_cardapio: PropTypes.shape({
-        muito_bom: PropTypes.number,
-        bom: PropTypes.number,
-        regular: PropTypes.number,
-        ruim: PropTypes.number,
-        muito_ruim: PropTypes.number,
-      }),
-      textura_preparacao: PropTypes.shape({
-        muito_bom: PropTypes.number,
-        bom: PropTypes.number,
-        regular: PropTypes.number,
-        ruim: PropTypes.number,
-        muito_ruim: PropTypes.number,
-      }),
-      sabor: PropTypes.shape({
-        muito_bom: PropTypes.number,
-        bom: PropTypes.number,
-        regular: PropTypes.number,
-        ruim: PropTypes.number,
-        muito_ruim: PropTypes.number,
-      }),
-    }),
-  }).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

@@ -39,12 +39,5 @@ export default function FrenquencyOfMeals({ data }) {
 }
 
 FrenquencyOfMeals.propTypes = {
-  data: PropTypes.shape({
-    porcentagem: PropTypes.shape({
-      todo_dia: PropTypes.number,
-      semana_3vezes: PropTypes.number,
-      semana_1vez: PropTypes.number,
-      raramente: PropTypes.number,
-    }),
-  }).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

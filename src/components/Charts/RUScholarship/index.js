@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Pie from '../Base/Pie';
 
 export default function RUScholarship({ data }) {
-  const scholarship = [
+  const RUScholarships = [
     {
       id: 'Bolsa Integral',
       label: 'Bolsa Integral',
@@ -25,7 +25,7 @@ export default function RUScholarship({ data }) {
     <>
       <h2>Bolsistas</h2>
       <Pie
-        data={scholarship}
+        data={RUScholarships}
         margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
         colors={{ scheme: 'pastel1' }}
       />
@@ -34,11 +34,5 @@ export default function RUScholarship({ data }) {
 }
 
 RUScholarship.propTypes = {
-  data: PropTypes.shape({
-    porcentagem: PropTypes.shape({
-      bolsa_integral: PropTypes.number,
-      bolsa_parcial: PropTypes.number,
-      nao_bolsista: PropTypes.number,
-    }),
-  }).isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
