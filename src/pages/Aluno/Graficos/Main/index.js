@@ -4,18 +4,18 @@ import { CircularProgress } from '@material-ui/core';
 import { Title, Container, ContainerGrafico, ContainerLoading } from './styles';
 import api from '../../../../services/api';
 
-import Alergia from '../Alergia';
-import Patologia from '../Patologia';
-import Bolsista from '../Bolsista';
-import Frequencia from '../Frequencia';
-import TipoRefeicao from '../TipoRefeicao';
-import NivelFisico from '../NivelFisico';
-import Vegetariano from '../Vegetariano';
-import ConsumoBebidaAlcoolica from '../ConsumoBebidaAlcoolica';
-import Tabagista from '../Tabagista';
-import AvaliacaoRefeicao from '../AvaliacaoRefeicao';
-import AvaliacaoGeral from '../AvaliacaoGeral';
-import MelhoriaRU from '../MelhoriaRU';
+import Allergy from '../../../../components/Charts/Allergy';
+import Pathology from '../../../../components/Charts/Pathology';
+import RUScholarship from '../../../../components/Charts/RUScholarship';
+import FrenquencyOfMeals from '../../../../components/Charts/FrenquencyOfMeals';
+import TypeOfMeal from '../../../../components/Charts/TypeOfMeal';
+import PhysicalLevel from '../../../../components/Charts/PhysicalLevel';
+import Vegan from '../../../../components/Charts/Vegan';
+import AlcoholicBeverageConsumption from '../../../../components/Charts/AlcoholicBeverageConsumption';
+import Smoker from '../../../../components/Charts/Smoker';
+import MealRating from '../../../../components/Charts/MealRating';
+import GerenalRating from '../../../../components/Charts/GeneralRating';
+import RUImprovement from '../../../../components/Charts/RUImprovement';
 
 export default function AlunoGraficos() {
   const [dataAlergia, setDataAlergia] = useState([]);
@@ -55,13 +55,12 @@ export default function AlunoGraficos() {
           'melhoriasru',
         ];
 
-        const promises = routes.map(
-          async route =>
-            await api.get(`/alunos/${route}`, {
-              headers: {
-                authorization: `Bearer ${user.token}`,
-              },
-            })
+        const promises = routes.map(async route =>
+          api.get(`/alunos/${route}`, {
+            headers: {
+              authorization: `Bearer ${user.token}`,
+            },
+          })
         );
 
         const [
@@ -109,51 +108,56 @@ export default function AlunoGraficos() {
             Abaixo contém gráficos gerados a partir dos dados obtidos pelo
             questionário preenchido pelos alunos.
           </Title>
+
           <ContainerGrafico>
-            <Alergia quantAluno={quantAluno} data={dataAlergia} />
+            <Allergy amountStudent={quantAluno} data={dataAlergia} />
           </ContainerGrafico>
 
           <ContainerGrafico>
-            <Patologia quantAluno={quantAluno} data={dataPatologia} />
+            <Pathology amountStudent={quantAluno} data={dataPatologia} />
           </ContainerGrafico>
 
           <ContainerGrafico>
-            <Bolsista data={dataBolsista} />
+            <RUScholarship data={dataBolsista} />
           </ContainerGrafico>
 
           <ContainerGrafico>
-            <Frequencia data={dataFrequencia} />
+            <FrenquencyOfMeals data={dataFrequencia} />
           </ContainerGrafico>
 
           <ContainerGrafico>
-            <TipoRefeicao data={dataTipoRefeicao} />
-          </ContainerGrafico>
-          <ContainerGrafico>
-            <NivelFisico data={dataNivelFisico} />
+            <TypeOfMeal data={dataTipoRefeicao} />
           </ContainerGrafico>
 
           <ContainerGrafico>
-            <Vegetariano data={dataVegetariano} />
+            <PhysicalLevel data={dataNivelFisico} />
           </ContainerGrafico>
 
           <ContainerGrafico>
-            <ConsumoBebidaAlcoolica data={dataConsumoBebidaAlcoolica} />
+            <Vegan data={dataVegetariano} />
           </ContainerGrafico>
 
           <ContainerGrafico>
-            <Tabagista data={dataTabagista} />
+            <AlcoholicBeverageConsumption data={dataConsumoBebidaAlcoolica} />
           </ContainerGrafico>
 
           <ContainerGrafico>
-            <AvaliacaoRefeicao data={dataAvaliacaoRefeicao} />
+            <Smoker data={dataTabagista} />
           </ContainerGrafico>
 
           <ContainerGrafico>
-            <AvaliacaoGeral data={dataAvaliacaoGeral} />
+            <MealRating data={dataAvaliacaoRefeicao} />
           </ContainerGrafico>
 
           <ContainerGrafico>
-            <MelhoriaRU data={dataMelhoriaRU} quantAluno={quantAluno} />
+            <GerenalRating data={dataAvaliacaoGeral} />
+          </ContainerGrafico>
+
+          <ContainerGrafico>
+            <RUImprovement
+              data={dataMelhoriaRU}
+              amountOfStudents={quantAluno}
+            />
           </ContainerGrafico>
         </Container>
       ) : (
