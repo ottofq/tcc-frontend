@@ -86,7 +86,7 @@ export default function InfoEdicao({ match, history }) {
           defaultValue=""
           control={control}
           rules={{ required: true }}
-        ></Controller>
+        />
 
         <ContainerEditor>
           <Editor

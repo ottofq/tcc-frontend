@@ -212,7 +212,7 @@ export default function AvaliacaoRU({ aluno }) {
         <FormControlLabel
           control={
             <Checkbox
-              readOnly={true}
+              readOnly
               defaultChecked={aluno.melhorias_RU.cardapio}
               color="primary"
               onClick={e => e.preventDefault()}
@@ -230,7 +230,7 @@ export default function AvaliacaoRU({ aluno }) {
           }
           label="Sabor da Preparação"
           name="melhoria_sabor_preparacao"
-          readOnly={true}
+          readOnly
         />
 
         <FormControlLabel
@@ -242,7 +242,7 @@ export default function AvaliacaoRU({ aluno }) {
           }
           label="Mais opção vegetariana"
           name="opcao_vegetariana"
-          readOnly={true}
+          readOnly
         />
         <FormControlLabel
           control={
@@ -253,7 +253,7 @@ export default function AvaliacaoRU({ aluno }) {
           }
           label="Estrutura física do RU"
           name="estrutura_fisica"
-          readOnly={true}
+          readOnly
         />
         <FormControlLabel
           control={
@@ -264,7 +264,7 @@ export default function AvaliacaoRU({ aluno }) {
           }
           label="Tempo de espera na fila"
           name="tempo_fila"
-          readOnly={true}
+          readOnly
         />
         <FormControlLabel
           control={
@@ -275,7 +275,7 @@ export default function AvaliacaoRU({ aluno }) {
           }
           label="Preço do ticket"
           name="tempo_fila"
-          readOnly={true}
+          readOnly
         />
 
         <Input

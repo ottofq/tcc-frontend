@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { styled as styledUI } from '@material-ui/core';
-import { TextField, Button } from '@material-ui/core';
+import { styled as styledUI, TextField, Button } from '@material-ui/core';
 
 export const Container = styled.div`
   display: flex;

@@ -3,6 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { Radio, FormControlLabel } from '@material-ui/core';
 import { Save } from '@material-ui/icons';
 import { useSnackbar } from 'notistack';
+import { useHistory, useParams } from 'react-router-dom';
 
 import {
   Container,
@@ -15,15 +16,17 @@ import {
 
 import api from '../../../services/api';
 
-export default function Cadastro({ match, history }) {
+export default function Cadastro() {
   const { handleSubmit, setValue, control } = useForm();
   const [cardapio, setCardapio] = useState('');
   const { enqueueSnackbar } = useSnackbar();
+  const history = useHistory();
+  const params = useParams();
 
   useEffect(() => {
     async function loadCardapio() {
       try {
-        const { id } = match.params;
+        const { id } = params;
         const result = await api.get(`/cardapio/${id}`);
         setCardapio(result.data);
       } catch (error) {
@@ -32,7 +35,7 @@ export default function Cadastro({ match, history }) {
     }
 
     loadCardapio();
-  }, [match.params]);
+  }, [params]);
 
   useEffect(() => {
     if (cardapio) {
@@ -57,7 +60,7 @@ export default function Cadastro({ match, history }) {
       sobremesa,
     } = data;
     try {
-      const { id } = match.params;
+      const { id } = params;
       const user = JSON.parse(localStorage.getItem('@app-ru/user'));
 
       const result = await api.put(

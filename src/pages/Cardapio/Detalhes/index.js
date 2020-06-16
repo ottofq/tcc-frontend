@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState, useMemo } from 'react';
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
@@ -187,9 +188,10 @@ export default function Home() {
             <ContainerLoading>
               <CircularProgress color="primary" />
             </ContainerLoading>
-          ) : comentarios.length > 0 ? (
-            comentarios.map((comentario, index) => (
-              <ListItem key={index} component="li">
+          ) : null}
+          {comentarios.length > 0 ? (
+            comentarios.map(comentario => (
+              <ListItem key={comentario.user_id} component="li">
                 <Comentario>
                   <ContainerTitleComentario>
                     <h5>{comentario.nome}</h5>

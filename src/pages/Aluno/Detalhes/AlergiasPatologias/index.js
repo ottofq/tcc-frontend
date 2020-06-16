@@ -11,7 +11,7 @@ export default function AlergiasPatologias({ aluno }) {
         <FormControlLabel
           control={
             <Checkbox
-              readOnly={true}
+              readOnly
               defaultChecked={aluno.alergias.nenhuma}
               color="primary"
               onClick={e => e.preventDefault()}
@@ -29,7 +29,7 @@ export default function AlergiasPatologias({ aluno }) {
           }
           label="Alergia ao glúten"
           name="alergia_gluten"
-          readOnly={true}
+          readOnly
         />
 
         <FormControlLabel
@@ -41,7 +41,7 @@ export default function AlergiasPatologias({ aluno }) {
           }
           label="Intolerância à lactose"
           name="intolerancia_lactose"
-          readOnly={true}
+          readOnly
         />
         <FormControlLabel
           control={
@@ -52,7 +52,7 @@ export default function AlergiasPatologias({ aluno }) {
           }
           label="Proteína do leite de vaca"
           name="proteina_leite_vaca"
-          readOnly={true}
+          readOnly
         />
 
         <Input
@@ -79,7 +79,7 @@ export default function AlergiasPatologias({ aluno }) {
         <FormControlLabel
           control={
             <Checkbox
-              readOnly={true}
+              readOnly
               defaultChecked={aluno.patologias.doenca_cardiovascular}
               color="primary"
               onClick={e => e.preventDefault()}
@@ -97,7 +97,7 @@ export default function AlergiasPatologias({ aluno }) {
           }
           label="Hipertensão Arterial"
           name="hipertensao_arterial"
-          readOnly={true}
+          readOnly
         />
 
         <FormControlLabel
@@ -109,7 +109,7 @@ export default function AlergiasPatologias({ aluno }) {
           }
           label="Obesidade"
           name="obesidade"
-          readOnly={true}
+          readOnly
         />
         <FormControlLabel
           control={
@@ -120,7 +120,7 @@ export default function AlergiasPatologias({ aluno }) {
           }
           label="Dislipidemias"
           name="dislipidemias"
-          readOnly={true}
+          readOnly
         />
         <FormControlLabel
           control={
@@ -131,7 +131,7 @@ export default function AlergiasPatologias({ aluno }) {
           }
           label="Doença Arterial Coronariana"
           name="doenca_arterial_coronariana"
-          readOnly={true}
+          readOnly
         />
         <FormControlLabel
           control={
@@ -142,7 +142,7 @@ export default function AlergiasPatologias({ aluno }) {
           }
           label="Diabetes"
           name="diabetes"
-          readOnly={true}
+          readOnly
         />
 
         <Input
@@ -161,7 +161,7 @@ export default function AlergiasPatologias({ aluno }) {
         <FormControlLabel
           control={
             <Checkbox
-              readOnly={true}
+              readOnly
               defaultChecked={
                 aluno.patologias_familia.fam_doenca_cardiovascular
               }
@@ -181,7 +181,7 @@ export default function AlergiasPatologias({ aluno }) {
           }
           label="Hipertensão Arterial"
           name="hipertensao_arterial"
-          readOnly={true}
+          readOnly
         />
 
         <FormControlLabel
@@ -193,7 +193,7 @@ export default function AlergiasPatologias({ aluno }) {
           }
           label="Obesidade"
           name="obesidade"
-          readOnly={true}
+          readOnly
         />
         <FormControlLabel
           control={
@@ -204,7 +204,7 @@ export default function AlergiasPatologias({ aluno }) {
           }
           label="Dislipidemias"
           name="dislipidemias"
-          readOnly={true}
+          readOnly
         />
         <FormControlLabel
           control={
@@ -217,7 +217,7 @@ export default function AlergiasPatologias({ aluno }) {
           }
           label="Doença Arterial Coronariana"
           name="doenca_arterial_coronariana"
-          readOnly={true}
+          readOnly
         />
         <FormControlLabel
           control={
@@ -228,7 +228,7 @@ export default function AlergiasPatologias({ aluno }) {
           }
           label="Diabetes"
           name="diabetes"
-          readOnly={true}
+          readOnly
         />
 
         <Input

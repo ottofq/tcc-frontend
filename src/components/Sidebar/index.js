@@ -22,7 +22,7 @@ export default function Sidebar() {
         <ul>
           <li>
             <Title>
-              <RestaurantMenu size={32}></RestaurantMenu>
+              <RestaurantMenu size={32} />
               <h2>Cardápio</h2>
             </Title>
           </li>
@@ -68,7 +68,7 @@ export default function Sidebar() {
           <li>
             <Divider />
             <Title>
-              <Info size={32}></Info>
+              <Info size={32} />
               <h2>Avisos</h2>
             </Title>
           </li>
@@ -102,7 +102,7 @@ export default function Sidebar() {
           <li>
             <Divider />
             <Title>
-              <People size={32}></People>
+              <People size={32} />
               <h2>Aluno</h2>
             </Title>
           </li>

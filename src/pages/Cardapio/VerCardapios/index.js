@@ -114,7 +114,7 @@ export default function VerCardapios() {
 
                       <DialogExcluir
                         TextButton="Excluir"
-                        TextDialog={`Deseja excluir o Cardápio selecionado?`}
+                        TextDialog="Deseja excluir o Cardápio selecionado?"
                         TitleDialog="Excluir Aviso"
                         SubmitModal={() => handleClick(`${cardapio._id}`)}
                       >

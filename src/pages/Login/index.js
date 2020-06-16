@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useSnackbar } from 'notistack';
@@ -12,7 +12,6 @@ import {
 import { Container, ContainerLogin } from './styles';
 import logo from '../../assets/logo.png';
 import api from '../../services/api';
-import { useEffect } from 'react';
 
 export default function Login({ history }) {
   const { register, handleSubmit } = useForm();

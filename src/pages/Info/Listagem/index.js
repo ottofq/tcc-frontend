@@ -86,7 +86,7 @@ export default function VerCardapios() {
                   <TableCell component="th" scope="row">
                     {info.titulo.length < 80
                       ? info.titulo
-                      : info.titulo.substring(0, 80) + '...'}
+                      : `${info.titulo.substring(0, 80)}...`}
                   </TableCell>
                   <TableCell align="center">
                     {format(parseISO(info.data), 'dd/MM/yyyy')}

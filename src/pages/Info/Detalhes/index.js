@@ -60,7 +60,7 @@ export default function DetalhesInfo({ match, history }) {
           name="data"
           defaultValue=""
           control={control}
-        ></Controller>
+        />
 
         <Controller
           as={
@@ -75,7 +75,7 @@ export default function DetalhesInfo({ match, history }) {
           name="titulo"
           defaultValue=""
           control={control}
-        ></Controller>
+        />
 
         <ContainerEditor>
           <Editor
