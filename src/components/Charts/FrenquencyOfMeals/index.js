@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import Pie from '../Base/Pie';
 
-import Pie from '../../../../components/Charts/Pie';
-
-export default function Frequencia({ data }) {
-  const frequencia = [
+export default function FrenquencyOfMeals({ data }) {
+  const frenquencyOfMeals = [
     {
       id: 'Todos os dias',
       label: 'Todos os dias',
@@ -30,10 +30,21 @@ export default function Frequencia({ data }) {
     <>
       <h2>Frequência de refeição no RU</h2>
       <Pie
-        data={frequencia}
+        data={frenquencyOfMeals}
         margin={{ top: 20, right: 100, bottom: 20, left: 10 }}
         colors={{ scheme: 'nivo' }}
       />
     </>
   );
 }
+
+FrenquencyOfMeals.propTypes = {
+  data: PropTypes.shape({
+    porcentagem: PropTypes.shape({
+      todo_dia: PropTypes.number,
+      semana_3vezes: PropTypes.number,
+      semana_1vez: PropTypes.number,
+      raramente: PropTypes.number,
+    }),
+  }).isRequired,
+};
