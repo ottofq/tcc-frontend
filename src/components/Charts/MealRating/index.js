@@ -1,7 +1,8 @@
 import React from 'react';
-import Bar from '../../../../components/Charts/Bar';
+import PropTypes from 'prop-types';
+import Bar from '../Base/Bar';
 
-export default function AvaliacaoRefeicao({ data }) {
+export default function MealRating({ data }) {
   const avaliacao = [
     {
       avaliacao: 'Aroma',
@@ -62,3 +63,38 @@ export default function AvaliacaoRefeicao({ data }) {
     </>
   );
 }
+
+MealRating.propTypes = {
+  data: PropTypes.shape({
+    porcentagem: PropTypes.shape({
+      aroma: PropTypes.shape({
+        muito_bom: PropTypes.number,
+        bom: PropTypes.number,
+        regular: PropTypes.number,
+        ruim: PropTypes.number,
+        muito_ruim: PropTypes.number,
+      }),
+      coloracao_cardapio: PropTypes.shape({
+        muito_bom: PropTypes.number,
+        bom: PropTypes.number,
+        regular: PropTypes.number,
+        ruim: PropTypes.number,
+        muito_ruim: PropTypes.number,
+      }),
+      textura_preparacao: PropTypes.shape({
+        muito_bom: PropTypes.number,
+        bom: PropTypes.number,
+        regular: PropTypes.number,
+        ruim: PropTypes.number,
+        muito_ruim: PropTypes.number,
+      }),
+      sabor: PropTypes.shape({
+        muito_bom: PropTypes.number,
+        bom: PropTypes.number,
+        regular: PropTypes.number,
+        ruim: PropTypes.number,
+        muito_ruim: PropTypes.number,
+      }),
+    }),
+  }).isRequired,
+};
