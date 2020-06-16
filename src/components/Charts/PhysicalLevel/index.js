@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import Pie from '../Base/Pie';
 
-import Pie from '../../../../components/Charts/Pie';
-
-export default function NivelFisico({ data }) {
-  const nivel_fisico = [
+export default function PhysicalLevel({ data }) {
+  const physicalLevels = [
     {
       id: 'Sedentário',
       label: 'Sedentário',
@@ -30,10 +30,14 @@ export default function NivelFisico({ data }) {
     <>
       <h2>Nível de Atividade Física</h2>
       <Pie
-        data={nivel_fisico}
+        data={physicalLevels}
         margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
         colors={{ scheme: 'pastel1' }}
       />
     </>
   );
 }
+
+PhysicalLevel.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
