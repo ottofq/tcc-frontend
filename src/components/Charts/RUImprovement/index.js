@@ -1,8 +1,9 @@
 import React from 'react';
-import Bar from '../../../../components/Charts/Bar';
+import PropTypes from 'prop-types';
+import Bar from '../Base/Bar';
 
-export default function MelhoriaRU({ data, quantAluno }) {
-  const melhoria_ru = [
+export default function RUImprovement({ data, amountOfStudents }) {
+  const RUImprovements = [
     {
       melhoria: 'CP',
       Cardápio: data.totais.cardapio,
@@ -37,7 +38,7 @@ export default function MelhoriaRU({ data, quantAluno }) {
     <>
       <h2>Melhorias no RU</h2>
       <Bar
-        data={melhoria_ru}
+        data={RUImprovements}
         keys={[
           'Outras melhorias',
           'Preço Ticket',
@@ -53,8 +54,13 @@ export default function MelhoriaRU({ data, quantAluno }) {
         legendBottom="Melhorias"
         legendLeft="Total de Alunos"
         legendOffset={30}
-        maxValue={quantAluno}
+        maxValue={amountOfStudents}
       />
     </>
   );
 }
+
+RUImprovement.propTypes = {
+  amountOfStudents: PropTypes.number.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
