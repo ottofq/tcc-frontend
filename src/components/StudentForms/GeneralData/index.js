@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   FormControlLabel,
   Radio,
@@ -8,11 +9,11 @@ import {
 
 import { ContainerDadosAluno, ContainerRadioButton, Input } from './styles';
 
-export default function DadosGerais({ aluno }) {
+export default function GeneralData({ student }) {
   return (
     <ContainerDadosAluno>
       <Input
-        defaultValue={aluno.nome}
+        defaultValue={student.nome}
         variant="outlined"
         name="nome"
         label="Nome"
@@ -22,7 +23,7 @@ export default function DadosGerais({ aluno }) {
       />
 
       <Input
-        defaultValue={aluno.matricula}
+        defaultValue={student.matricula}
         variant="outlined"
         name="matricula"
         label="Matricula"
@@ -31,7 +32,7 @@ export default function DadosGerais({ aluno }) {
         }}
       />
       <Input
-        defaultValue={aluno.data_nascimento}
+        defaultValue={student.data_nascimento}
         type="date"
         variant="outlined"
         name="data_nascimento"
@@ -42,7 +43,7 @@ export default function DadosGerais({ aluno }) {
       />
 
       <Input
-        defaultValue={aluno.curso}
+        defaultValue={student.curso}
         variant="outlined"
         name="curso"
         label="Curso"
@@ -52,7 +53,7 @@ export default function DadosGerais({ aluno }) {
       />
 
       <Input
-        defaultValue={aluno.ano_ingresso}
+        defaultValue={student.ano_ingresso}
         variant="outlined"
         name="ano_ingresso"
         label="Ano de Ingresso"
@@ -62,7 +63,7 @@ export default function DadosGerais({ aluno }) {
       />
 
       <Input
-        defaultValue={aluno.sexo}
+        defaultValue={student.sexo}
         variant="outlined"
         name="sexo"
         label="Sexo"
@@ -72,7 +73,7 @@ export default function DadosGerais({ aluno }) {
       />
 
       <Input
-        defaultValue={aluno.bolsista}
+        defaultValue={student.bolsista}
         variant="outlined"
         name="bolsista"
         label="Bolsista do RU"
@@ -82,7 +83,7 @@ export default function DadosGerais({ aluno }) {
       />
 
       <Input
-        defaultValue={aluno.frequencia_RU}
+        defaultValue={student.frequencia_RU}
         variant="outlined"
         name="frequencia_RU"
         label="Frenquência das refeições no RU"
@@ -92,7 +93,7 @@ export default function DadosGerais({ aluno }) {
       />
 
       <Input
-        defaultValue={aluno.tipo_refeicao_RU}
+        defaultValue={student.tipo_refeicao_RU}
         variant="outlined"
         name="tipo_refeicao_RU"
         label="Tipo de Refeição consumida no RU"
@@ -102,7 +103,7 @@ export default function DadosGerais({ aluno }) {
       />
 
       <Input
-        defaultValue={aluno.nivel_fisico}
+        defaultValue={student.nivel_fisico}
         variant="outlined"
         name="nivel_fisico"
         label="Nível de atividade física"
@@ -117,7 +118,7 @@ export default function DadosGerais({ aluno }) {
         <RadioGroup
           aria-label="peso ideal"
           name="peso_ideal"
-          value={aluno.peso_ideal ? 'sim' : 'nao'}
+          value={student.peso_ideal ? 'sim' : 'nao'}
         >
           <FormControlLabel
             control={<Radio color="primary" />}
@@ -138,7 +139,7 @@ export default function DadosGerais({ aluno }) {
         <RadioGroup
           aria-label="peso ideal"
           name="adiciona_sal"
-          value={aluno.adiciona_sal ? 'sim' : 'nao'}
+          value={student.adiciona_sal ? 'sim' : 'nao'}
         >
           <FormControlLabel
             control={<Radio color="primary" />}
@@ -160,7 +161,7 @@ export default function DadosGerais({ aluno }) {
         <RadioGroup
           aria-label="peso ideal"
           name="utiliza_oleo_composto"
-          value={aluno.utiliza_oleo_composto ? 'sim' : 'nao'}
+          value={student.utiliza_oleo_composto ? 'sim' : 'nao'}
         >
           <FormControlLabel
             control={<Radio color="primary" />}
@@ -182,7 +183,7 @@ export default function DadosGerais({ aluno }) {
         <RadioGroup
           aria-label="peso ideal"
           name="tabagista"
-          value={aluno.tabagista ? 'sim' : 'nao'}
+          value={student.tabagista ? 'sim' : 'nao'}
         >
           <FormControlLabel
             control={<Radio color="primary" />}
@@ -200,7 +201,7 @@ export default function DadosGerais({ aluno }) {
       </ContainerRadioButton>
       <Input
         name="consome_bebida_alcoolica"
-        defaultValue={aluno.consome_bebida_alcoolica}
+        defaultValue={student.consome_bebida_alcoolica}
         InputProps={{
           readOnly: true,
         }}
@@ -209,7 +210,7 @@ export default function DadosGerais({ aluno }) {
       />
       <Input
         name="vegano_vegetariano"
-        defaultValue={aluno.vegano_vegetariano}
+        defaultValue={student.vegano_vegetariano}
         InputProps={{
           readOnly: true,
         }}
@@ -219,3 +220,7 @@ export default function DadosGerais({ aluno }) {
     </ContainerDadosAluno>
   );
 }
+
+GeneralData.propTypes = {
+  student: PropTypes.objectOf(PropTypes.object).isRequired,
+};

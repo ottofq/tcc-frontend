@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { format, parseISO } from 'date-fns';
 import { CircularProgress } from '@material-ui/core';
+import { useParams } from 'react-router-dom';
 
 import { Container, ContainerLoading, Title } from './styles';
-import api from '../../../../services/api';
-import DadosGerais from '../DadosGerais';
-import AlergiasPatologias from '../AlergiasPatologias';
-import AvaliacaoRU from '../AvaliacaoRU';
+import api from '../../../services/api';
+import GerenalData from '../../../components/StudentForms/GeneralData';
+import Allergies from '../../../components/StudentForms/Allergies';
+import Pathologies from '../../../components/StudentForms/Pathologies';
+import RURatings from '../../../components/StudentForms/RURatings';
 
-export default function AlunoDetalhes({ match, history }) {
-  const [aluno, setAluno] = useState('');
+export default function AlunoDetalhes() {
+  const [aluno, setAluno] = useState({});
   const [loading, setLoading] = useState(true);
+  const params = useParams();
 
   useEffect(() => {
     async function loadAluno() {
       try {
-        const { id } = match.params;
+        const { id } = params;
         const user = JSON.parse(localStorage.getItem('@app-ru/user'));
         const result = await api.get(`/alunos/${id}`, {
           headers: {
@@ -34,20 +37,21 @@ export default function AlunoDetalhes({ match, history }) {
     }
 
     loadAluno();
-  }, [match.params]);
+  }, [params]);
 
   return (
     <>
       {loading === false ? (
         <Container>
           <Title>Dados do Gerais</Title>
-          <DadosGerais aluno={aluno} />
+          <GerenalData student={aluno} />
 
           <Title>Patologias e Alergias</Title>
-          <AlergiasPatologias aluno={aluno} />
+          <Allergies student={aluno} />
+          <Pathologies student={aluno} />
 
           <Title>Avaliação do RU</Title>
-          <AvaliacaoRU aluno={aluno} />
+          <RURatings student={aluno} />
         </Container>
       ) : (
         <ContainerLoading>

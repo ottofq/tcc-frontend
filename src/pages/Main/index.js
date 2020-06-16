@@ -13,7 +13,7 @@ import InfoListagem from '../Info/Listagem';
 import InfoEdicao from '../Info/Edicao';
 import InfoDetalhes from '../Info/Detalhes';
 import AlunoListagem from '../Aluno/Listagem';
-import AlunoDetalhes from '../Aluno/Detalhes/Main';
+import StudentDetails from '../Aluno/Details';
 import AlunoGraficos from '../Aluno/Graficos/Main';
 import Profile from '../User/Profile';
 
@@ -99,7 +99,7 @@ export default function Main() {
               key="aluno-detalhes"
               exact
               path="/dashboard/aluno/detalhes/:id"
-              component={AlunoDetalhes}
+              component={StudentDetails}
             />
             <Route
               key="aluno-graficos"

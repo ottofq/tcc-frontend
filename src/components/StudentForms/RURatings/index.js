@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   FormControlLabel,
   Radio,
@@ -13,12 +14,12 @@ import {
   Input,
 } from './styles';
 
-export default function AvaliacaoRU({ aluno }) {
+export default function RURatings({ student }) {
   return (
     <ContainerDadosAluno>
       <ContainerRadioButtonAvaliacao>
         <FormLabel component="legend">Aroma das preparações</FormLabel>
-        <RadioGroup name="aroma_refeicao" value={aluno.avaliacao_RU.aroma}>
+        <RadioGroup name="aroma_refeicao" value={student.avaliacao_RU.aroma}>
           <FormControlLabel
             control={<Radio color="primary" />}
             name="aroma_refeicao"
@@ -55,7 +56,7 @@ export default function AvaliacaoRU({ aluno }) {
         <FormLabel component="legend">Coloração do cardápio</FormLabel>
         <RadioGroup
           name="aroma_refeicao"
-          value={aluno.avaliacao_RU.coloracao_cardapio}
+          value={student.avaliacao_RU.coloracao_cardapio}
         >
           <FormControlLabel
             control={<Radio color="primary" />}
@@ -93,7 +94,7 @@ export default function AvaliacaoRU({ aluno }) {
         <FormLabel component="legend">Textura das preparações</FormLabel>
         <RadioGroup
           name="aroma_refeicao"
-          value={aluno.avaliacao_RU.textura_preparacao}
+          value={student.avaliacao_RU.textura_preparacao}
         >
           <FormControlLabel
             control={<Radio color="primary" />}
@@ -131,7 +132,7 @@ export default function AvaliacaoRU({ aluno }) {
         <FormLabel component="legend">Sabor das preparações</FormLabel>
         <RadioGroup
           name="aroma_refeicao"
-          value={aluno.avaliacao_RU.sabor_preparacao}
+          value={student.avaliacao_RU.sabor_preparacao}
         >
           <FormControlLabel
             control={<Radio color="primary" />}
@@ -171,7 +172,7 @@ export default function AvaliacaoRU({ aluno }) {
         </FormLabel>
         <RadioGroup
           name="aroma_refeicao"
-          value={aluno.avaliacao_RU.avaliacao_geral}
+          value={student.avaliacao_RU.avaliacao_geral}
         >
           <FormControlLabel
             control={<Radio color="primary" />}
@@ -213,7 +214,7 @@ export default function AvaliacaoRU({ aluno }) {
           control={
             <Checkbox
               readOnly
-              defaultChecked={aluno.melhorias_RU.cardapio}
+              defaultChecked={student.melhorias_RU.cardapio}
               color="primary"
               onClick={e => e.preventDefault()}
             />
@@ -224,7 +225,7 @@ export default function AvaliacaoRU({ aluno }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={aluno.melhorias_RU.melhoria_sabor_preparacao}
+              defaultChecked={student.melhorias_RU.melhoria_sabor_preparacao}
               color="primary"
             />
           }
@@ -236,7 +237,7 @@ export default function AvaliacaoRU({ aluno }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={aluno.melhorias_RU.opcao_vegetariana}
+              defaultChecked={student.melhorias_RU.opcao_vegetariana}
               color="primary"
             />
           }
@@ -247,7 +248,7 @@ export default function AvaliacaoRU({ aluno }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={aluno.melhorias_RU.estrutura_fisica}
+              defaultChecked={student.melhorias_RU.estrutura_fisica}
               color="primary"
             />
           }
@@ -258,7 +259,7 @@ export default function AvaliacaoRU({ aluno }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={aluno.melhorias_RU.tempo_fila}
+              defaultChecked={student.melhorias_RU.tempo_fila}
               color="primary"
             />
           }
@@ -269,7 +270,7 @@ export default function AvaliacaoRU({ aluno }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={aluno.melhorias_RU.preco_ticket}
+              defaultChecked={student.melhorias_RU.preco_ticket}
               color="primary"
             />
           }
@@ -280,7 +281,7 @@ export default function AvaliacaoRU({ aluno }) {
 
         <Input
           name="melhoria_outros"
-          defaultValue={aluno.melhorias_RU.melhoria_outros}
+          defaultValue={student.melhorias_RU.melhoria_outros}
           InputProps={{
             readOnly: true,
           }}
@@ -291,3 +292,7 @@ export default function AvaliacaoRU({ aluno }) {
     </ContainerDadosAluno>
   );
 }
+
+RURatings.propTypes = {
+  student: PropTypes.objectOf(PropTypes.object).isRequired,
+};

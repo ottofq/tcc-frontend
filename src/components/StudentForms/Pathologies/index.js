@@ -1,86 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FormControlLabel, FormLabel, Checkbox } from '@material-ui/core';
 
 import { ContainerDadosAluno, ContainerCheckbox, Input } from './styles';
 
-export default function AlergiasPatologias({ aluno }) {
+export default function Pathologies({ student }) {
   return (
     <ContainerDadosAluno>
-      <ContainerCheckbox>
-        <FormLabel component="legend">Alergias</FormLabel>
-        <FormControlLabel
-          control={
-            <Checkbox
-              readOnly
-              defaultChecked={aluno.alergias.nenhuma}
-              color="primary"
-              onClick={e => e.preventDefault()}
-            />
-          }
-          label="Nenhuma Alergia"
-          name="alergias_nenhuma"
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              defaultChecked={aluno.alergias.alergia_gluten}
-              color="primary"
-            />
-          }
-          label="Alergia ao glúten"
-          name="alergia_gluten"
-          readOnly
-        />
-
-        <FormControlLabel
-          control={
-            <Checkbox
-              defaultChecked={aluno.alergias.intolerancia_lactose}
-              color="primary"
-            />
-          }
-          label="Intolerância à lactose"
-          name="intolerancia_lactose"
-          readOnly
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              defaultChecked={aluno.alergias.proteina_leite_vaca}
-              color="primary"
-            />
-          }
-          label="Proteína do leite de vaca"
-          name="proteina_leite_vaca"
-          readOnly
-        />
-
-        <Input
-          name="outras_alergias"
-          defaultValue={aluno.alergias.outras_alergias}
-          InputProps={{
-            readOnly: true,
-          }}
-          label="Outras Alergias"
-          variant="outlined"
-        />
-        <Input
-          name="medicamento_continuo"
-          defaultValue={aluno.medicamento_continuo}
-          InputProps={{
-            readOnly: true,
-          }}
-          label="Medicamento Continuo"
-          variant="outlined"
-        />
-      </ContainerCheckbox>
       <ContainerCheckbox>
         <FormLabel component="legend">Patologias</FormLabel>
         <FormControlLabel
           control={
             <Checkbox
               readOnly
-              defaultChecked={aluno.patologias.doenca_cardiovascular}
+              defaultChecked={student.patologias.doenca_cardiovascular}
               color="primary"
               onClick={e => e.preventDefault()}
             />
@@ -91,7 +24,7 @@ export default function AlergiasPatologias({ aluno }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={aluno.patologias.hipertensao_arterial}
+              defaultChecked={student.patologias.hipertensao_arterial}
               color="primary"
             />
           }
@@ -103,7 +36,7 @@ export default function AlergiasPatologias({ aluno }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={aluno.patologias.obesidade}
+              defaultChecked={student.patologias.obesidade}
               color="primary"
             />
           }
@@ -114,7 +47,7 @@ export default function AlergiasPatologias({ aluno }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={aluno.patologias.dislipidemias}
+              defaultChecked={student.patologias.dislipidemias}
               color="primary"
             />
           }
@@ -125,7 +58,7 @@ export default function AlergiasPatologias({ aluno }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={aluno.patologias.doenca_arterial_coronariana}
+              defaultChecked={student.patologias.doenca_arterial_coronariana}
               color="primary"
             />
           }
@@ -136,7 +69,7 @@ export default function AlergiasPatologias({ aluno }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={aluno.patologias.diabetes}
+              defaultChecked={student.patologias.diabetes}
               color="primary"
             />
           }
@@ -147,7 +80,7 @@ export default function AlergiasPatologias({ aluno }) {
 
         <Input
           name="outras_alergias"
-          defaultValue={aluno.patologias.outras_patologias}
+          defaultValue={student.patologias.outras_patologias}
           InputProps={{
             readOnly: true,
           }}
@@ -163,7 +96,7 @@ export default function AlergiasPatologias({ aluno }) {
             <Checkbox
               readOnly
               defaultChecked={
-                aluno.patologias_familia.fam_doenca_cardiovascular
+                student.patologias_familia.fam_doenca_cardiovascular
               }
               color="primary"
               onClick={e => e.preventDefault()}
@@ -175,7 +108,7 @@ export default function AlergiasPatologias({ aluno }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={aluno.patologias_familia.fam_hipertensao}
+              defaultChecked={student.patologias_familia.fam_hipertensao}
               color="primary"
             />
           }
@@ -187,7 +120,7 @@ export default function AlergiasPatologias({ aluno }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={aluno.patologias_familia.fam_obesidade}
+              defaultChecked={student.patologias_familia.fam_obesidade}
               color="primary"
             />
           }
@@ -198,7 +131,7 @@ export default function AlergiasPatologias({ aluno }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={aluno.patologias_familia.fam_dislipidemias}
+              defaultChecked={student.patologias_familia.fam_dislipidemias}
               color="primary"
             />
           }
@@ -210,7 +143,7 @@ export default function AlergiasPatologias({ aluno }) {
           control={
             <Checkbox
               defaultChecked={
-                aluno.patologias_familia.fam_doenca_arterial_coronariana
+                student.patologias_familia.fam_doenca_arterial_coronariana
               }
               color="primary"
             />
@@ -222,7 +155,7 @@ export default function AlergiasPatologias({ aluno }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={aluno.patologias_familia.fam_diabetes}
+              defaultChecked={student.patologias_familia.fam_diabetes}
               color="primary"
             />
           }
@@ -233,7 +166,7 @@ export default function AlergiasPatologias({ aluno }) {
 
         <Input
           name="outras_alergias"
-          defaultValue={aluno.patologias_familia.patologias_familia_outras}
+          defaultValue={student.patologias_familia.patologias_familia_outras}
           InputProps={{
             readOnly: true,
           }}
@@ -244,3 +177,7 @@ export default function AlergiasPatologias({ aluno }) {
     </ContainerDadosAluno>
   );
 }
+
+Pathologies.propTypes = {
+  student: PropTypes.objectOf(PropTypes.object).isRequired,
+};
