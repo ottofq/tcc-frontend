@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import Pie from '../Base/Pie';
 
-import Pie from '../../../../components/Charts/Pie';
-
-export default function Bolsista({ data }) {
-  const bolsista = [
+export default function RUScholarship({ data }) {
+  const scholarship = [
     {
       id: 'Bolsa Integral',
       label: 'Bolsa Integral',
@@ -25,10 +25,20 @@ export default function Bolsista({ data }) {
     <>
       <h2>Bolsistas</h2>
       <Pie
-        data={bolsista}
+        data={scholarship}
         margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
         colors={{ scheme: 'pastel1' }}
       />
     </>
   );
 }
+
+RUScholarship.propTypes = {
+  data: PropTypes.shape({
+    porcentagem: PropTypes.shape({
+      bolsa_integral: PropTypes.number,
+      bolsa_parcial: PropTypes.number,
+      nao_bolsista: PropTypes.number,
+    }),
+  }).isRequired,
+};
