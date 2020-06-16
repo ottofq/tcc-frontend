@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import Pie from '../Base/Pie';
 
-import Pie from '../../../../components/Charts/Pie';
-
-export default function Vegetariano({ data }) {
-  const nivel_fisico = [
+export default function Vegan({ data }) {
+  const vegans = [
     {
       id: 'Ovolactovegetariano',
       label: 'Ovolactovegetariano',
@@ -30,10 +30,14 @@ export default function Vegetariano({ data }) {
     <>
       <h2>Veganos ou Vegetarianos</h2>
       <Pie
-        data={nivel_fisico}
+        data={vegans}
         margin={{ top: 20, right: 120, bottom: 20, left: 0 }}
         colors={{ scheme: 'nivo' }}
       />
     </>
   );
 }
+
+Vegan.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
