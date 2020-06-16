@@ -1,8 +1,9 @@
 import React from 'react';
-import Bar from '../../../../components/Charts/Bar';
+import PropTypes from 'prop-types';
+import Bar from '../Base/Bar';
 
-export default function Patologia({ data, quantAluno }) {
-  const patologia = [
+export default function Pathology({ data, amountOfStudents }) {
+  const pathologies = [
     {
       patologia: 'DC',
       'DC - Doença Cardiovascular': data.totais.doenca_cardiovascular,
@@ -38,7 +39,7 @@ export default function Patologia({ data, quantAluno }) {
     <>
       <h2>Patologias</h2>
       <Bar
-        data={patologia}
+        data={pathologies}
         keys={[
           'OP - Outras Patologias',
           'DB - Diabetes',
@@ -54,8 +55,13 @@ export default function Patologia({ data, quantAluno }) {
         colors={{ scheme: 'paired' }}
         legendBottom="Patologias"
         legendLeft="Total de Alunos"
-        maxValue={quantAluno}
+        maxValue={amountOfStudents}
       />
     </>
   );
 }
+
+Pathology.propTypes = {
+  amountOfStudents: PropTypes.number.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
