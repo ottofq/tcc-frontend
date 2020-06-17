@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormControlLabel, FormLabel, Checkbox } from '@material-ui/core';
 
-import { ContainerDadosAluno, ContainerCheckbox, Input } from './styles';
+import * as S from './styles';
 
 export default function Pathologies({ student }) {
   return (
-    <ContainerDadosAluno>
-      <ContainerCheckbox>
+    <>
+      <S.ContainerCheckbox>
         <FormLabel component="legend">Patologias</FormLabel>
         <FormControlLabel
           control={
@@ -78,7 +78,7 @@ export default function Pathologies({ student }) {
           readOnly
         />
 
-        <Input
+        <S.Input
           name="outras_alergias"
           defaultValue={student.patologias.outras_patologias}
           InputProps={{
@@ -87,9 +87,9 @@ export default function Pathologies({ student }) {
           label="Outras Patologias"
           variant="outlined"
         />
-      </ContainerCheckbox>
+      </S.ContainerCheckbox>
 
-      <ContainerCheckbox>
+      <S.ContainerCheckbox>
         <FormLabel component="legend">Patologias Familia</FormLabel>
         <FormControlLabel
           control={
@@ -164,7 +164,7 @@ export default function Pathologies({ student }) {
           readOnly
         />
 
-        <Input
+        <S.Input
           name="outras_alergias"
           defaultValue={student.patologias_familia.patologias_familia_outras}
           InputProps={{
@@ -173,8 +173,8 @@ export default function Pathologies({ student }) {
           label="Outras Patologias"
           variant="outlined"
         />
-      </ContainerCheckbox>
-    </ContainerDadosAluno>
+      </S.ContainerCheckbox>
+    </>
   );
 }
 

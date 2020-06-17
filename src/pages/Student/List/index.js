@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -21,7 +22,7 @@ import {
 
 import api from '../../../services/api';
 
-export default function AlunoListagem() {
+export default function List() {
   const [alunos, setAlunos] = useState([]);
   const [qtdAlunos, setQtdsAlunos] = useState(0);
   const [page, setPage] = useState(0);
@@ -44,9 +45,10 @@ export default function AlunoListagem() {
     loadAlunos();
   }, [page]);
 
-  const handleChangePage = (event, page) => {
-    setPage(page);
+  const handleChangePage = (event, nextPage) => {
+    setPage(nextPage);
   };
+
   return (
     <Container>
       <Card>

@@ -2,9 +2,22 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  flex: 1;
-  flex-direction: column;
   overflow-y: scroll;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ContainerDetails = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+`;
+
+export const ContainerAllergiesPathologies = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: space-around;
+  border: 1px solid #bbb;
   padding: 10px;
 `;
 

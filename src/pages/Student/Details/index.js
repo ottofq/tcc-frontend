@@ -3,14 +3,14 @@ import { format, parseISO } from 'date-fns';
 import { CircularProgress } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
 
-import { Container, ContainerLoading, Title } from './styles';
+import * as S from './styles';
 import api from '../../../services/api';
 import GerenalData from '../../../components/StudentForms/GeneralData';
 import Allergies from '../../../components/StudentForms/Allergies';
 import Pathologies from '../../../components/StudentForms/Pathologies';
 import RURatings from '../../../components/StudentForms/RURatings';
 
-export default function AlunoDetalhes() {
+export default function Details() {
   const [aluno, setAluno] = useState({});
   const [loading, setLoading] = useState(true);
   const params = useParams();
@@ -42,21 +42,25 @@ export default function AlunoDetalhes() {
   return (
     <>
       {loading === false ? (
-        <Container>
-          <Title>Dados do Gerais</Title>
-          <GerenalData student={aluno} />
+        <S.Container>
+          <S.ContainerDetails>
+            <S.Title>Dados do Gerais</S.Title>
+            <GerenalData student={aluno} />
 
-          <Title>Patologias e Alergias</Title>
-          <Allergies student={aluno} />
-          <Pathologies student={aluno} />
+            <S.Title>Patologias e Alergias</S.Title>
+            <S.ContainerAllergiesPathologies>
+              <Allergies student={aluno} />
+              <Pathologies student={aluno} />
+            </S.ContainerAllergiesPathologies>
 
-          <Title>Avaliação do RU</Title>
-          <RURatings student={aluno} />
-        </Container>
+            <S.Title>Avaliação do RU</S.Title>
+            <RURatings student={aluno} />
+          </S.ContainerDetails>
+        </S.Container>
       ) : (
-        <ContainerLoading>
+        <S.ContainerLoading>
           <CircularProgress color="primary" />
-        </ContainerLoading>
+        </S.ContainerLoading>
       )}
     </>
   );

@@ -6,7 +6,6 @@ export const ContainerDadosAluno = styled.div`
   flex-direction: column;
   height: 400px;
   flex-wrap: wrap;
-  border: 1px solid #bbb;
   justify-content: space-around;
   padding: 10px;
   border-radius: 4px;
@@ -15,6 +14,7 @@ export const ContainerDadosAluno = styled.div`
 export const ContainerCheckbox = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   flex-wrap: wrap;
   width: 270px;
   padding-bottom: 4px;

@@ -2,20 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { CircularProgress } from '@material-ui/core';
 
 import { Title, Container, ContainerGrafico, ContainerLoading } from './styles';
-import api from '../../../../services/api';
+import api from '../../../services/api';
 
-import Allergy from '../../../../components/Charts/Allergy';
-import Pathology from '../../../../components/Charts/Pathology';
-import RUScholarship from '../../../../components/Charts/RUScholarship';
-import FrenquencyOfMeals from '../../../../components/Charts/FrenquencyOfMeals';
-import TypeOfMeal from '../../../../components/Charts/TypeOfMeal';
-import PhysicalLevel from '../../../../components/Charts/PhysicalLevel';
-import Vegan from '../../../../components/Charts/Vegan';
-import AlcoholicBeverageConsumption from '../../../../components/Charts/AlcoholicBeverageConsumption';
-import Smoker from '../../../../components/Charts/Smoker';
-import MealRating from '../../../../components/Charts/MealRating';
-import GerenalRating from '../../../../components/Charts/GeneralRating';
-import RUImprovement from '../../../../components/Charts/RUImprovement';
+import Allergy from '../../../components/Charts/Allergy';
+import Pathology from '../../../components/Charts/Pathology';
+import RUScholarship from '../../../components/Charts/RUScholarship';
+import FrenquencyOfMeals from '../../../components/Charts/FrenquencyOfMeals';
+import TypeOfMeal from '../../../components/Charts/TypeOfMeal';
+import PhysicalLevel from '../../../components/Charts/PhysicalLevel';
+import Vegan from '../../../components/Charts/Vegan';
+import AlcoholicBeverageConsumption from '../../../components/Charts/AlcoholicBeverageConsumption';
+import Smoker from '../../../components/Charts/Smoker';
+import MealRating from '../../../components/Charts/MealRating';
+import GerenalRating from '../../../components/Charts/GeneralRating';
+import RUImprovement from '../../../components/Charts/RUImprovement';
 
 export default function AlunoGraficos() {
   const [dataAlergia, setDataAlergia] = useState([]);
