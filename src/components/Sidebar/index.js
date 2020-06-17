@@ -16,10 +16,11 @@ import { Container, SidebarLink, Title } from './styles';
 export default function Sidebar() {
   return (
     <Container>
-      <img src={logo} alt="Logo UFES" />
-      <Divider light />
       <nav>
         <ul>
+          <li>
+            <img src={logo} alt="UFES" />
+          </li>
           <li>
             <Title>
               <RestaurantMenu size={32} />
