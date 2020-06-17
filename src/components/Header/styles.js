@@ -3,23 +3,38 @@ import styled from 'styled-components';
 export const Header = styled.header`
   display: flex;
   height: 50px;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
+  width: calc(100vw - 240px);
   background-color: #2266b1;
   box-shadow: -1px 0px 4px 0px rgba(50, 50, 50, 0.75);
 `;
 
 export const Container = styled.div`
-  width: 1200px;
   display: flex;
+  width: 1200px;
   justify-content: space-between;
   align-items: center;
+  padding: 0px 10px;
 
   h1 {
     font-size: 24px;
     font-weight: bold;
     color: #fff;
+  }
+`;
+
+export const ContainerTitle = styled.div`
+  display: flex;
+  align-items: center;
+
+  justify-content: space-around;
+  padding: 5px;
+  width: 300px;
+
+  button {
+    background-color: transparent;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
   }
 `;
 
@@ -74,7 +89,7 @@ export const ItemMenu = styled.div`
   display: block;
 
   :hover {
-    background-color: #0f2d4d;
+    background-color: rgba(246, 250, 253, 0.25);
   }
 
   a {

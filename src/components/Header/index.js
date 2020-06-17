@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Avatar } from '@material-ui/core';
+// import { Menu } from '@material-ui/icons';
 import { withRouter, Link, useHistory } from 'react-router-dom';
 
 import * as S from './styles';
@@ -22,7 +23,12 @@ function Header() {
   return (
     <S.Header>
       <S.Container>
-        <h1>Cardápio RU CCA-UFES</h1>
+        <S.ContainerTitle>
+          {/* <button type="button">
+            <Menu size={32} />
+          </button> */}
+          <h1>Cardápio RU CCA-UFES</h1>
+        </S.ContainerTitle>
         <S.ContainerMenu>
           <S.ContainerUser>
             <Avatar src={avatar} alt="avatar" />
