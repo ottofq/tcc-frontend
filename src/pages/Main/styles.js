@@ -2,12 +2,15 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
-  height: 100vh;
 `;
 
 export const Wrapper = styled.div`
   display: flex;
-  flex: 1;
   flex-direction: column;
-  align-items: inherit;
+`;
+
+export const ContainerPages = styled.section`
+  display: flex;
+  height: calc(100vh - 50px);
+  width: calc(100vw - 240px);
 `;
