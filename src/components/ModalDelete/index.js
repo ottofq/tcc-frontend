@@ -15,7 +15,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function DialogExcluir({
+export default function ModalDelete({
   SubmitModal,
   TitleDialog,
   TextDialog,
@@ -68,7 +68,7 @@ export default function DialogExcluir({
   );
 }
 
-DialogExcluir.propTypes = {
+ModalDelete.propTypes = {
   SubmitModal: PropTypes.func.isRequired,
   TitleDialog: PropTypes.string.isRequired,
   TextDialog: PropTypes.string.isRequired,
