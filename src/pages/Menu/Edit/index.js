@@ -5,20 +5,13 @@ import { Save } from '@material-ui/icons';
 import { useSnackbar } from 'notistack';
 import { useHistory, useParams } from 'react-router-dom';
 
-import {
-  Container,
-  Input,
-  StyledButton,
-  Form,
-  RadioGroup,
-  FormLabel,
-} from './styles';
+import * as S from './styles';
 
 import api from '../../../services/api';
 
-export default function Cadastro() {
+export default function Edit() {
   const { handleSubmit, setValue, control } = useForm();
-  const [cardapio, setCardapio] = useState('');
+  const [menu, setMenu] = useState('');
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
   const params = useParams();
@@ -28,7 +21,7 @@ export default function Cadastro() {
       try {
         const { id } = params;
         const result = await api.get(`/cardapio/${id}`);
-        setCardapio(result.data);
+        setMenu(result.data);
       } catch (error) {
         console.log(error);
       }
@@ -38,16 +31,16 @@ export default function Cadastro() {
   }, [params]);
 
   useEffect(() => {
-    if (cardapio) {
-      setValue('tipo', cardapio.tipo);
-      setValue('entrada', cardapio.entrada.descricao);
-      setValue('proteina', cardapio.proteina.descricao);
-      setValue('opcao', cardapio.opcao.descricao);
-      setValue('acompanhamento', cardapio.acompanhamento.descricao);
-      setValue('guarnicao', cardapio.guarnicao.descricao);
-      setValue('sobremesa', cardapio.sobremesa.descricao);
+    if (menu) {
+      setValue('tipo', menu.tipo);
+      setValue('entrada', menu.entrada.descricao);
+      setValue('proteina', menu.proteina.descricao);
+      setValue('opcao', menu.opcao.descricao);
+      setValue('acompanhamento', menu.acompanhamento.descricao);
+      setValue('guarnicao', menu.guarnicao.descricao);
+      setValue('sobremesa', menu.sobremesa.descricao);
     }
-  }, [cardapio, setValue]);
+  }, [menu, setValue]);
 
   async function onSubmit(data) {
     const {
@@ -96,13 +89,13 @@ export default function Cadastro() {
   }
 
   return (
-    <Container>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <FormLabel component="legend">Tipo de Refeição</FormLabel>
+    <S.Container>
+      <S.Form onSubmit={handleSubmit(onSubmit)}>
+        <S.FormLabel component="legend">Tipo de Refeição</S.FormLabel>
 
         <Controller
           as={
-            <RadioGroup aria-label="tipo" name="tipo">
+            <S.RadioGroup aria-label="tipo" name="tipo">
               <FormControlLabel
                 value="Almoço"
                 control={<Radio required color="primary" />}
@@ -113,7 +106,7 @@ export default function Cadastro() {
                 control={<Radio required color="primary" />}
                 label="Jantar"
               />
-            </RadioGroup>
+            </S.RadioGroup>
           }
           control={control}
           name="tipo"
@@ -122,7 +115,7 @@ export default function Cadastro() {
         />
 
         <Controller
-          as={<Input label="Entrada" variant="outlined" />}
+          as={<S.Input label="Entrada" variant="outlined" />}
           control={control}
           name="entrada"
           defaultValue=""
@@ -130,7 +123,7 @@ export default function Cadastro() {
         />
 
         <Controller
-          as={<Input label="Proteina" variant="outlined" />}
+          as={<S.Input label="Proteina" variant="outlined" />}
           control={control}
           name="proteina"
           defaultValue=""
@@ -138,7 +131,7 @@ export default function Cadastro() {
         />
 
         <Controller
-          as={<Input label="Opção" variant="outlined" />}
+          as={<S.Input label="Opção" variant="outlined" />}
           control={control}
           name="opcao"
           defaultValue=""
@@ -146,7 +139,7 @@ export default function Cadastro() {
         />
 
         <Controller
-          as={<Input label="Acompanhamento" variant="outlined" />}
+          as={<S.Input label="Acompanhamento" variant="outlined" />}
           control={control}
           name="acompanhamento"
           defaultValue=""
@@ -154,7 +147,7 @@ export default function Cadastro() {
         />
 
         <Controller
-          as={<Input label="Guarnicão" variant="outlined" />}
+          as={<S.Input label="Guarnicão" variant="outlined" />}
           control={control}
           name="guarnicao"
           defaultValue=""
@@ -162,22 +155,22 @@ export default function Cadastro() {
         />
 
         <Controller
-          as={<Input label="Sobremesa" variant="outlined" />}
+          as={<S.Input label="Sobremesa" variant="outlined" />}
           control={control}
           name="sobremesa"
           defaultValue=""
           rules={{ required: true }}
         />
 
-        <StyledButton
+        <S.Button
           startIcon={<Save fontSize="large" />}
           variant="contained"
           color="primary"
           type="submit"
         >
           Salvar Edição
-        </StyledButton>
-      </Form>
-    </Container>
+        </S.Button>
+      </S.Form>
+    </S.Container>
   );
 }

@@ -3,20 +3,15 @@ import { useForm } from 'react-hook-form';
 import { Radio, FormControlLabel } from '@material-ui/core';
 import { Save } from '@material-ui/icons';
 import { useSnackbar } from 'notistack';
+import { useHistory } from 'react-router-dom';
 
-import {
-  Container,
-  Input,
-  StyledButton,
-  Form,
-  RadioGroup,
-  FormLabel,
-} from './styles';
+import * as S from './styles';
 import api from '../../../services/api';
 
-export default function Cadastro({ history }) {
+export default function Create() {
   const { register, handleSubmit, reset } = useForm();
   const { enqueueSnackbar } = useSnackbar();
+  const history = useHistory();
 
   const onSubmit = async data => {
     const {
@@ -57,7 +52,6 @@ export default function Cadastro({ history }) {
         reset();
       }
     } catch (error) {
-      console.log(error);
       enqueueSnackbar('Erro ao cadastrar novo cardápio!', {
         variant: 'error',
       });
@@ -65,10 +59,10 @@ export default function Cadastro({ history }) {
   };
 
   return (
-    <Container>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <FormLabel component="legend">Tipo de Refeição</FormLabel>
-        <RadioGroup aria-label="tipo" name="tipo">
+    <S.Container>
+      <S.Form onSubmit={handleSubmit(onSubmit)}>
+        <S.FormLabel component="legend">Tipo de Refeição</S.FormLabel>
+        <S.RadioGroup aria-label="tipo" name="tipo">
           <FormControlLabel
             value="Almoço"
             control={<Radio required color="primary" inputRef={register} />}
@@ -79,9 +73,9 @@ export default function Cadastro({ history }) {
             control={<Radio required color="primary" inputRef={register} />}
             label="Jantar"
           />
-        </RadioGroup>
+        </S.RadioGroup>
 
-        <Input
+        <S.Input
           name="entrada"
           inputRef={register({ required: true })}
           id="outlined-basic"
@@ -89,7 +83,7 @@ export default function Cadastro({ history }) {
           variant="outlined"
         />
 
-        <Input
+        <S.Input
           inputRef={register({ required: true })}
           name="proteina"
           id="outlined-basic"
@@ -97,7 +91,7 @@ export default function Cadastro({ history }) {
           variant="outlined"
         />
 
-        <Input
+        <S.Input
           inputRef={register({ required: true })}
           name="opcao"
           id="outlined-basic"
@@ -105,7 +99,7 @@ export default function Cadastro({ history }) {
           variant="outlined"
         />
 
-        <Input
+        <S.Input
           inputRef={register({ required: true })}
           name="acompanhamento"
           id="outlined-basic"
@@ -113,7 +107,7 @@ export default function Cadastro({ history }) {
           variant="outlined"
         />
 
-        <Input
+        <S.Input
           inputRef={register({ required: true })}
           name="guarnicao"
           id="outlined-basic"
@@ -121,7 +115,7 @@ export default function Cadastro({ history }) {
           variant="outlined"
         />
 
-        <Input
+        <S.Input
           inputRef={register({ required: true })}
           name="sobremesa"
           id="outlined-basic"
@@ -129,15 +123,15 @@ export default function Cadastro({ history }) {
           variant="outlined"
         />
 
-        <StyledButton
+        <S.Button
           startIcon={<Save fontSize="large" />}
           variant="contained"
           color="primary"
           type="submit"
         >
           Cadastrar
-        </StyledButton>
-      </Form>
-    </Container>
+        </S.Button>
+      </S.Form>
+    </S.Container>
   );
 }

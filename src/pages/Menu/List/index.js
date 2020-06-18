@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
 import {
   Table,
@@ -10,20 +11,13 @@ import { Link } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
 import { useSnackbar } from 'notistack';
 
-import DialogExcluir from '../../../components/DialogExcluir';
-import {
-  TableContainerUI,
-  TableHeadUI,
-  TableBodyUI,
-  ButtonUI,
-  ContainerAcoes,
-  Container,
-} from './styles';
+import ModalDelete from '../../../components/ModalDelete';
+import * as S from './styles';
 import api from '../../../services/api';
 
-export default function VerCardapios() {
-  const [cardapios, setCardapios] = useState([]);
-  const [qtdCardapio, setQtdCardapio] = useState(0);
+export default function List() {
+  const [menus, setMenus] = useState([]);
+  const [totalMenus, setTotalMenus] = useState(0);
   const [page, setPage] = useState(0);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -31,20 +25,22 @@ export default function VerCardapios() {
     async function loadCardapios() {
       try {
         const result = await api.get(`/cardapio?page=${page + 1}`);
-        setCardapios(result.data.result);
-        setQtdCardapio(result.data.total_cardapios);
+        setMenus(result.data.result);
+        setTotalMenus(result.data.total_cardapios);
       } catch (error) {
-        console.log(error);
+        enqueueSnackbar('Erro ao carregar os cardápios!', {
+          variant: 'error',
+        });
       }
     }
     loadCardapios();
-  }, [page]);
+  }, [page, enqueueSnackbar]);
 
-  const handleChangePage = (event, page) => {
-    setPage(page);
+  const handleChangePage = (event, nextPage) => {
+    setPage(nextPage);
   };
 
-  async function handleClick(id) {
+  async function handleButtonDelete(id) {
     try {
       const user = JSON.parse(localStorage.getItem('@app-ru/user'));
       const result = await api.delete(`/cardapio/${id}`, {
@@ -52,7 +48,7 @@ export default function VerCardapios() {
           authorization: `Bearer ${user.token}`,
         },
       });
-      setCardapios(cardapios.filter(cardapio => cardapio._id !== id));
+      setMenus(menus.filter(menu => menu._id !== id));
 
       if (result.status === 200) {
         enqueueSnackbar('Cardápio excluido com Sucesso!', {
@@ -67,10 +63,10 @@ export default function VerCardapios() {
   }
 
   return (
-    <Container>
-      <TableContainerUI component={Paper}>
+    <S.Container>
+      <S.TableContainer component={Paper}>
         <Table aria-label="tabela de cardapios">
-          <TableHeadUI>
+          <S.TableHead>
             <TableRow hover>
               <TableCell>Cardápios</TableCell>
               <TableCell align="center">Tipo de Refeição</TableCell>
@@ -78,51 +74,51 @@ export default function VerCardapios() {
               <TableCell align="center">Média</TableCell>
               <TableCell align="center">Ações</TableCell>
             </TableRow>
-          </TableHeadUI>
-          <TableBodyUI>
-            {cardapios.length > 0 ? (
-              cardapios.map(cardapio => (
-                <TableRow hover key={cardapio._id}>
+          </S.TableHead>
+          <S.TableBody>
+            {menus.length > 0 ? (
+              menus.map(menu => (
+                <TableRow hover key={menu._id}>
                   <TableCell component="th" scope="row">
-                    {cardapio.proteina.descricao}
+                    {menu.proteina.descricao}
                   </TableCell>
-                  <TableCell align="center">{cardapio.tipo}</TableCell>
+                  <TableCell align="center">{menu.tipo}</TableCell>
                   <TableCell align="center">
-                    {format(parseISO(cardapio.data), 'dd/MM/yyyy')}
+                    {format(parseISO(menu.data), 'dd/MM/yyyy')}
                   </TableCell>
                   <TableCell align="center">
-                    {Math.round(cardapio.media_geral)}
+                    {Math.round(menu.media_geral)}
                   </TableCell>
 
                   <TableCell align="center">
-                    <ContainerAcoes>
+                    <S.ContainerActions>
                       <Link
                         style={{ textDecoration: 'none' }}
-                        to={`/dashboard/cardapio/detalhes/${cardapio._id}`}
+                        to={`/dashboard/cardapio/detalhes/${menu._id}`}
                       >
-                        <ButtonUI variant="contained">Detalhes</ButtonUI>
+                        <S.Button variant="contained">Detalhes</S.Button>
                       </Link>
 
                       <Link
                         style={{ textDecoration: 'none' }}
-                        to={`/dashboard/cardapio/editar/${cardapio._id}`}
+                        to={`/dashboard/cardapio/editar/${menu._id}`}
                       >
-                        <ButtonUI variant="contained" color="primary">
+                        <S.Button variant="contained" color="primary">
                           Editar
-                        </ButtonUI>
+                        </S.Button>
                       </Link>
 
-                      <DialogExcluir
+                      <ModalDelete
                         TextButton="Excluir"
                         TextDialog="Deseja excluir o Cardápio selecionado?"
                         TitleDialog="Excluir Aviso"
-                        SubmitModal={() => handleClick(`${cardapio._id}`)}
+                        SubmitModal={() => handleButtonDelete(`${menu._id}`)}
                       >
-                        <ButtonUI variant="contained" color="secondary">
+                        <S.Button variant="contained" color="secondary">
                           Excluir
-                        </ButtonUI>
-                      </DialogExcluir>
-                    </ContainerAcoes>
+                        </S.Button>
+                      </ModalDelete>
+                    </S.ContainerActions>
                   </TableCell>
                 </TableRow>
               ))
@@ -133,17 +129,17 @@ export default function VerCardapios() {
                 </TableCell>
               </TableRow>
             )}
-          </TableBodyUI>
+          </S.TableBody>
         </Table>
         <TablePagination
           component="div"
           rowsPerPageOptions={['']}
-          count={qtdCardapio}
+          count={totalMenus}
           rowsPerPage={8}
           page={page}
           onChangePage={handleChangePage}
         />
-      </TableContainerUI>
-    </Container>
+      </S.TableContainer>
+    </S.Container>
   );
 }
