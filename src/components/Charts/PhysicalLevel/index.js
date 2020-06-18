@@ -39,5 +39,12 @@ export default function PhysicalLevel({ data }) {
 }
 
 PhysicalLevel.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.shape({
+    porcentagem: PropTypes.shape({
+      sedentario: PropTypes.number,
+      leve: PropTypes.number,
+      moderado: PropTypes.number,
+      ativo: PropTypes.number,
+    }),
+  }).isRequired,
 };

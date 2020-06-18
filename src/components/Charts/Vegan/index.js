@@ -39,5 +39,12 @@ export default function Vegan({ data }) {
 }
 
 Vegan.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.shape({
+    porcentagem: PropTypes.shape({
+      ovolactovegetariano: PropTypes.number,
+      vegetariano_restrito: PropTypes.number,
+      vegano: PropTypes.number,
+      nao_vegano: PropTypes.number,
+    }),
+  }).isRequired,
 };

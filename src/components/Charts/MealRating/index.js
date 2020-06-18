@@ -65,5 +65,36 @@ export default function MealRating({ data }) {
 }
 
 MealRating.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.shape({
+    porcentagem: PropTypes.shape({
+      aroma: PropTypes.shape({
+        muito_bom: PropTypes.number,
+        bom: PropTypes.number,
+        regular: PropTypes.number,
+        ruim: PropTypes.number,
+        muito_ruim: PropTypes.number,
+      }),
+      coloracao_cardapio: PropTypes.shape({
+        muito_bom: PropTypes.number,
+        bom: PropTypes.number,
+        regular: PropTypes.number,
+        ruim: PropTypes.number,
+        muito_ruim: PropTypes.number,
+      }),
+      textura_preparacao: PropTypes.shape({
+        muito_bom: PropTypes.number,
+        bom: PropTypes.number,
+        regular: PropTypes.number,
+        ruim: PropTypes.number,
+        muito_ruim: PropTypes.number,
+      }),
+      sabor: PropTypes.shape({
+        muito_bom: PropTypes.number,
+        bom: PropTypes.number,
+        regular: PropTypes.number,
+        ruim: PropTypes.number,
+        muito_ruim: PropTypes.number,
+      }),
+    }),
+  }).isRequired,
 };

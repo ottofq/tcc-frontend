@@ -34,5 +34,11 @@ export default function RUScholarship({ data }) {
 }
 
 RUScholarship.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.shape({
+    porcentagem: PropTypes.shape({
+      bolsa_integral: PropTypes.number,
+      bolsa_parcial: PropTypes.number,
+      nao_bolsista: PropTypes.number,
+    }),
+  }).isRequired,
 };
