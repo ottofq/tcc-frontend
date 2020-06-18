@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
 import {
   Table,
@@ -10,22 +11,15 @@ import { Link } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
 import { useSnackbar } from 'notistack';
 
-import {
-  TableContainerUI,
-  TableHeadUI,
-  TableBodyUI,
-  ButtonUI,
-  ContainerAcoes,
-  Container,
-} from './styles';
-import DialogExcluir from '../../../components/DialogExcluir';
+import * as S from './styles';
+import ModalDelete from '../../../components/ModalDelete';
 
 import api from '../../../services/api';
 
-export default function VerCardapios() {
-  const [infos, setInfos] = useState([]);
+export default function List() {
+  const [news, setNews] = useState([]);
   const [page, setPage] = useState(0);
-  const [qtdInfo, setQtdInfo] = useState(0);
+  const [totalNews, setTotalNews] = useState(0);
   const { enqueueSnackbar } = useSnackbar();
 
   async function handleSubmitModal(id) {
@@ -42,9 +36,8 @@ export default function VerCardapios() {
           variant: 'success',
         });
       }
-      setInfos(infos.filter(info => info._id !== id));
+      setNews(news.filter(newsItem => newsItem._id !== id));
     } catch (error) {
-      console.log(error);
       enqueueSnackbar('Erro ao excluir o aviso!', {
         variant: 'error',
       });
@@ -52,36 +45,38 @@ export default function VerCardapios() {
   }
 
   useEffect(() => {
-    async function loadInfos() {
+    async function loadNews() {
       try {
         const result = await api.get(`/informacoes?page=${page + 1}`);
-        setInfos(result.data.result);
-        setQtdInfo(result.data.total_infos);
+        setNews(result.data.result);
+        setTotalNews(result.data.total_infos);
       } catch (error) {
-        console.log(error);
+        enqueueSnackbar('Erro ao carregar os avisos!', {
+          variant: 'error',
+        });
       }
     }
-    loadInfos();
-  }, [page]);
+    loadNews();
+  }, [page, enqueueSnackbar]);
 
-  const handleChangePage = (event, page) => {
-    setPage(page);
+  const handleChangePage = (event, nextPage) => {
+    setPage(nextPage);
   };
 
   return (
-    <Container>
-      <TableContainerUI component={Paper}>
+    <S.Container>
+      <S.TableContainer component={Paper}>
         <Table aria-label="simple table">
-          <TableHeadUI>
+          <S.TableHead>
             <TableRow>
               <TableCell>Titulo</TableCell>
               <TableCell align="center">Data</TableCell>
               <TableCell align="center">Ações</TableCell>
             </TableRow>
-          </TableHeadUI>
-          <TableBodyUI>
-            {infos.length > 0 ? (
-              infos.map(info => (
+          </S.TableHead>
+          <S.TableBody>
+            {news.length > 0 ? (
+              news.map(info => (
                 <TableRow key={info._id}>
                   <TableCell component="th" scope="row">
                     {info.titulo.length < 80
@@ -93,34 +88,34 @@ export default function VerCardapios() {
                   </TableCell>
 
                   <TableCell align="center">
-                    <ContainerAcoes>
+                    <S.ContainerActions>
                       <Link
                         style={{ textDecoration: 'none' }}
                         to={`/dashboard/avisos/detalhes/${info._id}`}
                       >
-                        <ButtonUI variant="contained">Detalhes</ButtonUI>
+                        <S.Button variant="contained">Detalhes</S.Button>
                       </Link>
 
                       <Link
                         style={{ textDecoration: 'none' }}
                         to={`/dashboard/avisos/edicao/${info._id}`}
                       >
-                        <ButtonUI variant="contained" color="primary">
+                        <S.Button variant="contained" color="primary">
                           Editar
-                        </ButtonUI>
+                        </S.Button>
                       </Link>
 
-                      <DialogExcluir
+                      <ModalDelete
                         TextButton="Excluir"
                         TextDialog={`Deseja excluiro aviso: ${info.titulo}`}
                         TitleDialog="Excluir Aviso"
                         SubmitModal={() => handleSubmitModal(info._id)}
                       >
-                        <ButtonUI variant="contained" color="secondary">
+                        <S.Button variant="contained" color="secondary">
                           Excluir
-                        </ButtonUI>
-                      </DialogExcluir>
-                    </ContainerAcoes>
+                        </S.Button>
+                      </ModalDelete>
+                    </S.ContainerActions>
                   </TableCell>
                 </TableRow>
               ))
@@ -131,17 +126,17 @@ export default function VerCardapios() {
                 </TableCell>
               </TableRow>
             )}
-          </TableBodyUI>
+          </S.TableBody>
         </Table>
         <TablePagination
           component="div"
           rowsPerPageOptions={['']}
-          count={qtdInfo}
+          count={totalNews}
           rowsPerPage={8}
           page={page}
           onChangePage={handleChangePage}
         />
-      </TableContainerUI>
-    </Container>
+      </S.TableContainer>
+    </S.Container>
   );
 }

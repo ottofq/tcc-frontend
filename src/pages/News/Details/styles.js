@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { styled as styledUI, TextField, Button } from '@material-ui/core';
+import { TextField, Button as ButtonMaterial } from '@material-ui/core';
 
 export const Container = styled.div`
   display: flex;
@@ -28,9 +28,9 @@ export const Form = styled.form`
   justify-content: space-around;
 `;
 
-export const TextFieldUI = styledUI(TextField)({});
+export const Input = styled(TextField)``;
 
-export const ButtonUI = styledUI(Button)({
-  backgroundColor: '#174578',
-  fontSize: '18px',
-});
+export const Button = styled(ButtonMaterial)`
+  background-color: #174578;
+  font-size: 18px;
+`;

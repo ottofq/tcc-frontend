@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Save } from '@material-ui/icons';
@@ -7,45 +8,44 @@ import draftToHtml from 'draftjs-to-html';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { useSnackbar } from 'notistack';
+import { useHistory, useParams } from 'react-router-dom';
 
-import {
-  Container,
-  Form,
-  TextFieldUI,
-  ButtonUI,
-  ContainerEditor,
-} from './styles';
+import * as S from './styles';
 import api from '../../../services/api';
 
-export default function InfoEdicao({ match, history }) {
+export default function Edit() {
   const { handleSubmit, setValue, control } = useForm();
-  const [info, setInfo] = useState('');
+  const [news, setNews] = useState('');
   const [editorState, setEditorState] = useState();
   const { enqueueSnackbar } = useSnackbar();
+  const history = useHistory();
+  const params = useParams();
 
   useEffect(() => {
     async function loadInfo() {
       try {
-        const { id } = match.params;
+        const { id } = params;
         const result = await api.get(`/informacoes/${id}`);
-        setInfo(result.data);
+        setNews(result.data);
         const contentBlock = htmlToDraft(result.data.descricao);
         const contentState = ContentState.createFromBlockArray(
           contentBlock.contentBlocks
         );
         setEditorState(EditorState.createWithContent(contentState));
       } catch (error) {
-        console.log(error);
+        enqueueSnackbar('Erro ao carregar os avisos!', {
+          variant: 'error',
+        });
       }
     }
     loadInfo();
-  }, [match.params]);
+  }, [params, enqueueSnackbar]);
 
   useEffect(() => {
-    if (info) {
-      setValue('titulo', info.titulo);
+    if (news) {
+      setValue('titulo', news.titulo);
     }
-  }, [info, setValue]);
+  }, [news, setValue]);
 
   async function onSubmit(data) {
     try {
@@ -56,7 +56,7 @@ export default function InfoEdicao({ match, history }) {
       );
 
       const result = await api.put(
-        `/informacoes/${info._id}`,
+        `/informacoes/${news._id}`,
         { titulo, descricao: contentInfo },
         {
           headers: {
@@ -78,17 +78,17 @@ export default function InfoEdicao({ match, history }) {
     }
   }
   return (
-    <Container>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+    <S.Container>
+      <S.Form onSubmit={handleSubmit(onSubmit)}>
         <Controller
-          as={<TextFieldUI label="Titulo" variant="outlined" />}
+          as={<S.Input label="Titulo" variant="outlined" />}
           name="titulo"
           defaultValue=""
           control={control}
           rules={{ required: true }}
         />
 
-        <ContainerEditor>
+        <S.ContainerEditor>
           <Editor
             editorState={editorState}
             editorClassName="editor"
@@ -111,17 +111,17 @@ export default function InfoEdicao({ match, history }) {
               },
             }}
           />
-        </ContainerEditor>
+        </S.ContainerEditor>
 
-        <ButtonUI
+        <S.Button
           startIcon={<Save fontSize="large" />}
           variant="contained"
           color="primary"
           type="submit"
         >
           Salvar Edição
-        </ButtonUI>
-      </Form>
-    </Container>
+        </S.Button>
+      </S.Form>
+    </S.Container>
   );
 }

@@ -6,21 +6,17 @@ import draftToHtml from 'draftjs-to-html';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { useSnackbar } from 'notistack';
+import { useHistory } from 'react-router-dom';
 
-import {
-  Container,
-  Form,
-  TextFieldUI,
-  ButtonUI,
-  ContainerEditor,
-} from './styles';
+import * as S from './styles';
 
 import api from '../../../services/api';
 
-export default function InfoCadastro({ history }) {
+export default function Create() {
   const { register, handleSubmit, reset } = useForm();
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const { enqueueSnackbar } = useSnackbar();
+  const history = useHistory();
 
   async function onSubmit(data) {
     try {
@@ -48,7 +44,6 @@ export default function InfoCadastro({ history }) {
       reset();
       history.push('/dashboard/avisos/listagem');
     } catch (error) {
-      console.log(error);
       enqueueSnackbar('Erro ao cadastrar o aviso!', {
         variant: 'error',
       });
@@ -56,16 +51,16 @@ export default function InfoCadastro({ history }) {
   }
 
   return (
-    <Container>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <TextFieldUI
+    <S.Container>
+      <S.Form onSubmit={handleSubmit(onSubmit)}>
+        <S.Input
           name="titulo"
           inputRef={register({ required: true })}
           label="Titulo"
           variant="outlined"
         />
 
-        <ContainerEditor>
+        <S.ContainerEditor>
           <Editor
             initialEditorState={editorState}
             editorClassName="editor"
@@ -88,17 +83,17 @@ export default function InfoCadastro({ history }) {
               },
             }}
           />
-        </ContainerEditor>
+        </S.ContainerEditor>
 
-        <ButtonUI
+        <S.Button
           startIcon={<Save fontSize="large" />}
           variant="contained"
           color="primary"
           type="submit"
         >
           Cadastrar
-        </ButtonUI>
-      </Form>
-    </Container>
+        </S.Button>
+      </S.Form>
+    </S.Container>
   );
 }

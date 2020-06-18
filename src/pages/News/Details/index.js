@@ -6,24 +6,23 @@ import { EditorState, ContentState } from 'draft-js';
 import htmlToDraft from 'html-to-draftjs';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { useHistory, useParams } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
-import {
-  Container,
-  Form,
-  TextFieldUI,
-  ContainerEditor,
-  ButtonUI,
-} from './styles';
+import * as S from './styles';
 import api from '../../../services/api';
 
-export default function DetalhesInfo({ match, history }) {
+export default function Details() {
   const { control, setValue } = useForm();
   const [editorState, setEditorState] = useState();
+  const history = useHistory();
+  const params = useParams();
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     async function loadInfo() {
       try {
-        const { id } = match.params;
+        const { id } = params;
         const result = await api.get(`/informacoes/${id}`);
         setValue('titulo', result.data.titulo);
         setValue('data', format(parseISO(result.data.data), 'yyyy-MM-dd'));
@@ -33,22 +32,24 @@ export default function DetalhesInfo({ match, history }) {
         );
         setEditorState(EditorState.createWithContent(contentState));
       } catch (error) {
-        console.log(error);
+        enqueueSnackbar('Erro ao carregar os avisos!', {
+          variant: 'error',
+        });
       }
     }
     loadInfo();
-  }, [match.params, setValue]);
+  }, [params, setValue, enqueueSnackbar]);
 
   function handleClick() {
     history.goBack();
   }
 
   return (
-    <Container>
-      <Form>
+    <S.Container>
+      <S.Form>
         <Controller
           as={
-            <TextFieldUI
+            <S.Input
               type="date"
               InputProps={{
                 readOnly: true,
@@ -64,7 +65,7 @@ export default function DetalhesInfo({ match, history }) {
 
         <Controller
           as={
-            <TextFieldUI
+            <S.Input
               InputProps={{
                 readOnly: true,
               }}
@@ -77,7 +78,7 @@ export default function DetalhesInfo({ match, history }) {
           control={control}
         />
 
-        <ContainerEditor>
+        <S.ContainerEditor>
           <Editor
             editorState={editorState}
             editorClassName="editor"
@@ -85,17 +86,17 @@ export default function DetalhesInfo({ match, history }) {
             toolbarHidden
             readOnly
           />
-        </ContainerEditor>
+        </S.ContainerEditor>
 
-        <ButtonUI
+        <S.Button
           startIcon={<ArrowBack fontSize="large" />}
           onClick={handleClick}
           variant="contained"
           color="primary"
         >
           Voltar
-        </ButtonUI>
-      </Form>
-    </Container>
+        </S.Button>
+      </S.Form>
+    </S.Container>
   );
 }
