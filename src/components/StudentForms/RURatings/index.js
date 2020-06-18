@@ -7,17 +7,12 @@ import {
   FormLabel,
   Checkbox,
 } from '@material-ui/core';
-import {
-  ContainerDadosAluno,
-  ContainerRadioButtonAvaliacao,
-  ContainerCheckbox,
-  Input,
-} from './styles';
+import * as S from './styles';
 
 export default function RURatings({ student }) {
   return (
-    <ContainerDadosAluno>
-      <ContainerRadioButtonAvaliacao>
+    <S.ContainerStudentData>
+      <S.ContainerRadioButtonRating>
         <FormLabel component="legend">Aroma das preparações</FormLabel>
         <RadioGroup name="aroma_refeicao" value={student.avaliacao_RU.aroma}>
           <FormControlLabel
@@ -51,8 +46,8 @@ export default function RURatings({ student }) {
             label="Muito Bom"
           />
         </RadioGroup>
-      </ContainerRadioButtonAvaliacao>
-      <ContainerRadioButtonAvaliacao>
+      </S.ContainerRadioButtonRating>
+      <S.ContainerRadioButtonRating>
         <FormLabel component="legend">Coloração do cardápio</FormLabel>
         <RadioGroup
           name="aroma_refeicao"
@@ -89,8 +84,8 @@ export default function RURatings({ student }) {
             label="Muito Bom"
           />
         </RadioGroup>
-      </ContainerRadioButtonAvaliacao>
-      <ContainerRadioButtonAvaliacao>
+      </S.ContainerRadioButtonRating>
+      <S.ContainerRadioButtonRating>
         <FormLabel component="legend">Textura das preparações</FormLabel>
         <RadioGroup
           name="aroma_refeicao"
@@ -127,8 +122,8 @@ export default function RURatings({ student }) {
             label="Muito Bom"
           />
         </RadioGroup>
-      </ContainerRadioButtonAvaliacao>
-      <ContainerRadioButtonAvaliacao>
+      </S.ContainerRadioButtonRating>
+      <S.ContainerRadioButtonRating>
         <FormLabel component="legend">Sabor das preparações</FormLabel>
         <RadioGroup
           name="aroma_refeicao"
@@ -165,8 +160,8 @@ export default function RURatings({ student }) {
             label="Muito Bom"
           />
         </RadioGroup>
-      </ContainerRadioButtonAvaliacao>
-      <ContainerRadioButtonAvaliacao>
+      </S.ContainerRadioButtonRating>
+      <S.ContainerRadioButtonRating>
         <FormLabel component="legend">
           Avalição Geral do cardápio do RU
         </FormLabel>
@@ -205,8 +200,8 @@ export default function RURatings({ student }) {
             label="Muito Bom"
           />
         </RadioGroup>
-      </ContainerRadioButtonAvaliacao>
-      <ContainerCheckbox>
+      </S.ContainerRadioButtonRating>
+      <S.ContainerCheckbox>
         <FormLabel component="legend">
           O que você acha que deveria ser melhorado no RU?
         </FormLabel>
@@ -279,7 +274,7 @@ export default function RURatings({ student }) {
           readOnly
         />
 
-        <Input
+        <S.Input
           name="melhoria_outros"
           defaultValue={student.melhorias_RU.melhoria_outros}
           InputProps={{
@@ -288,8 +283,8 @@ export default function RURatings({ student }) {
           label="Outras melhorias"
           variant="outlined"
         />
-      </ContainerCheckbox>
-    </ContainerDadosAluno>
+      </S.ContainerCheckbox>
+    </S.ContainerStudentData>
   );
 }
 

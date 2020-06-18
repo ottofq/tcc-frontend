@@ -7,12 +7,12 @@ import {
   FormLabel,
 } from '@material-ui/core';
 
-import { ContainerDadosAluno, ContainerRadioButton, Input } from './styles';
+import * as S from './styles';
 
 export default function GeneralData({ student }) {
   return (
-    <ContainerDadosAluno>
-      <Input
+    <S.ContainerStudentData>
+      <S.Input
         defaultValue={student.nome}
         variant="outlined"
         name="nome"
@@ -22,7 +22,7 @@ export default function GeneralData({ student }) {
         }}
       />
 
-      <Input
+      <S.Input
         defaultValue={student.matricula}
         variant="outlined"
         name="matricula"
@@ -31,7 +31,7 @@ export default function GeneralData({ student }) {
           readOnly: true,
         }}
       />
-      <Input
+      <S.Input
         defaultValue={student.data_nascimento}
         type="date"
         variant="outlined"
@@ -42,7 +42,7 @@ export default function GeneralData({ student }) {
         }}
       />
 
-      <Input
+      <S.Input
         defaultValue={student.curso}
         variant="outlined"
         name="curso"
@@ -52,7 +52,7 @@ export default function GeneralData({ student }) {
         }}
       />
 
-      <Input
+      <S.Input
         defaultValue={student.ano_ingresso}
         variant="outlined"
         name="ano_ingresso"
@@ -62,7 +62,7 @@ export default function GeneralData({ student }) {
         }}
       />
 
-      <Input
+      <S.Input
         defaultValue={student.sexo}
         variant="outlined"
         name="sexo"
@@ -72,7 +72,7 @@ export default function GeneralData({ student }) {
         }}
       />
 
-      <Input
+      <S.Input
         defaultValue={student.bolsista}
         variant="outlined"
         name="bolsista"
@@ -82,7 +82,7 @@ export default function GeneralData({ student }) {
         }}
       />
 
-      <Input
+      <S.Input
         defaultValue={student.frequencia_RU}
         variant="outlined"
         name="frequencia_RU"
@@ -92,7 +92,7 @@ export default function GeneralData({ student }) {
         }}
       />
 
-      <Input
+      <S.Input
         defaultValue={student.tipo_refeicao_RU}
         variant="outlined"
         name="tipo_refeicao_RU"
@@ -102,7 +102,7 @@ export default function GeneralData({ student }) {
         }}
       />
 
-      <Input
+      <S.Input
         defaultValue={student.nivel_fisico}
         variant="outlined"
         name="nivel_fisico"
@@ -111,7 +111,7 @@ export default function GeneralData({ student }) {
           readOnly: true,
         }}
       />
-      <ContainerRadioButton>
+      <S.ContainerRadioButton>
         <FormLabel component="legend">
           Peso ideal para a sua idade e sexo
         </FormLabel>
@@ -133,8 +133,8 @@ export default function GeneralData({ student }) {
             label="Não"
           />
         </RadioGroup>
-      </ContainerRadioButton>
-      <ContainerRadioButton>
+      </S.ContainerRadioButton>
+      <S.ContainerRadioButton>
         <FormLabel component="legend">Utiliza saleiro à mesa</FormLabel>
         <RadioGroup
           aria-label="peso ideal"
@@ -154,9 +154,9 @@ export default function GeneralData({ student }) {
             label="Não"
           />
         </RadioGroup>
-      </ContainerRadioButton>
+      </S.ContainerRadioButton>
 
-      <ContainerRadioButton>
+      <S.ContainerRadioButton>
         <FormLabel component="legend">Utiliza o óleo composto</FormLabel>
         <RadioGroup
           aria-label="peso ideal"
@@ -176,9 +176,9 @@ export default function GeneralData({ student }) {
             label="Não"
           />
         </RadioGroup>
-      </ContainerRadioButton>
+      </S.ContainerRadioButton>
 
-      <ContainerRadioButton>
+      <S.ContainerRadioButton>
         <FormLabel component="legend">Tabagista</FormLabel>
         <RadioGroup
           aria-label="peso ideal"
@@ -198,8 +198,8 @@ export default function GeneralData({ student }) {
             label="Não"
           />
         </RadioGroup>
-      </ContainerRadioButton>
-      <Input
+      </S.ContainerRadioButton>
+      <S.Input
         name="consome_bebida_alcoolica"
         defaultValue={student.consome_bebida_alcoolica}
         InputProps={{
@@ -208,7 +208,7 @@ export default function GeneralData({ student }) {
         label="Consome Bebida Alcoólica"
         variant="outlined"
       />
-      <Input
+      <S.Input
         name="vegano_vegetariano"
         defaultValue={student.vegano_vegetariano}
         InputProps={{
@@ -217,7 +217,7 @@ export default function GeneralData({ student }) {
         label="Vegano ou Vegetariano"
         variant="outlined"
       />
-    </ContainerDadosAluno>
+    </S.ContainerStudentData>
   );
 }
 

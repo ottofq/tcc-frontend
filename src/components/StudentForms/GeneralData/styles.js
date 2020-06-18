@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { styled as styledUI, TextField } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 
-export const ContainerDadosAluno = styled.div`
+export const ContainerStudentData = styled.div`
   display: flex;
   flex-direction: column;
   height: 400px;
@@ -20,7 +20,7 @@ export const ContainerRadioButton = styled.div`
   }
 `;
 
-export const Input = styledUI(TextField)({
-  height: '70px',
-  width: '300px',
-});
+export const Input = styled(TextField)`
+  height: 70px;
+  width: 30%;
+`;
