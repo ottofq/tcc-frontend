@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Avatar } from '@material-ui/core';
-import { withRouter, Link } from 'react-router-dom';
+// import { Menu } from '@material-ui/icons';
+import { withRouter, Link, useHistory } from 'react-router-dom';
 
 import * as S from './styles';
 import avatar from '../../assets/avatar.png';
 
-function Header({ history }) {
+function Header() {
   const [user, setUser] = useState('');
+  const history = useHistory();
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('@app-ru/user'));
-    setUser(user.user);
+    const userLocalStorage = JSON.parse(localStorage.getItem('@app-ru/user'));
+    setUser(userLocalStorage.user);
   }, []);
 
   function handleLogout() {
@@ -21,7 +23,12 @@ function Header({ history }) {
   return (
     <S.Header>
       <S.Container>
-        <h1>Cardápio RU CCA-UFES</h1>
+        <S.ContainerTitle>
+          {/* <button type="button">
+            <Menu size={32} />
+          </button> */}
+          <h1>Cardápio RU CCA-UFES</h1>
+        </S.ContainerTitle>
         <S.ContainerMenu>
           <S.ContainerUser>
             <Avatar src={avatar} alt="avatar" />

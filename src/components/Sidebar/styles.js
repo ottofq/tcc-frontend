@@ -3,10 +3,11 @@ import { NavLink } from 'react-router-dom';
 
 export const Container = styled.aside`
   display: flex;
-  width: 240px;
-  justify-content: flex-start;
   background-color: #174578;
   flex-direction: column;
+  justify-content: flex-start;
+  width: 240px;
+  height: 100vh;
 
   img {
     margin: 10px;

@@ -3,119 +3,120 @@ import { Route, Switch, BrowserRouter } from 'react-router-dom';
 
 import Sidebar from '../../components/Sidebar';
 import Header from '../../components/Header';
-import Home from '../Cardapio/Home';
-import CardapioCadastro from '../Cardapio/Cadastro';
-import CardapioEdicao from '../Cardapio/Editar';
-import CardapioListagem from '../Cardapio/VerCardapios';
-import CardapioDetalhes from '../Cardapio/Detalhes';
-import InfoCadastro from '../Info/Cadastro';
-import InfoListagem from '../Info/Listagem';
-import InfoEdicao from '../Info/Edicao';
-import InfoDetalhes from '../Info/Detalhes';
-import AlunoListagem from '../Aluno/Listagem';
-import AlunoDetalhes from '../Aluno/Detalhes/Main';
-import AlunoGraficos from '../Aluno/Graficos/Main';
+import MenuHome from '../Menu/Home';
+import CreateMenu from '../Menu/Create';
+import MenuEdit from '../Menu/Edit';
+import MenuList from '../Menu/List';
+import MenuDetails from '../Menu/Details';
+import CreateNews from '../News/Create';
+import NewsList from '../News/List';
+import NewsEdit from '../News/Edit';
+import NewsDetails from '../News/Details';
+import StudentList from '../Student/List';
+import StudentDetails from '../Student/Details';
+import StudentCharts from '../Student/Charts';
 import Profile from '../User/Profile';
 
-import { Container, Wrapper } from './styles';
+import * as S from './styles';
 
 export default function Main() {
   return (
     <BrowserRouter>
-      <Container>
+      <S.Container>
         <Sidebar />
-        <Wrapper>
+        <S.Wrapper>
           <Header />
+          <S.ContainerPages>
+            <Switch>
+              <Route
+                key="cardapio-home"
+                exact
+                path="/dashboard"
+                component={MenuHome}
+              />
 
-          <Switch>
-            <Route
-              key="cardapio-home"
-              exact
-              path="/dashboard"
-              component={Home}
-            />
+              <Route
+                key="cardapio-home"
+                exact
+                path="/dashboard/cardapio/detalhes/:id"
+                component={MenuDetails}
+              />
 
-            <Route
-              key="cardapio-home"
-              exact
-              path="/dashboard/cardapio/detalhes/:id"
-              component={CardapioDetalhes}
-            />
+              <Route
+                key="cardapio-cadastro"
+                exact
+                path="/dashboard/cardapio/cadastrar"
+                component={CreateMenu}
+              />
+              <Route
+                key="cardapio-listagem"
+                exact
+                path="/dashboard/cardapio/"
+                component={MenuList}
+              />
 
-            <Route
-              key="cardapio-cadastro"
-              exact
-              path="/dashboard/cardapio/cadastrar"
-              component={CardapioCadastro}
-            />
-            <Route
-              key="cardapio-listagem"
-              exact
-              path="/dashboard/cardapio/"
-              component={CardapioListagem}
-            />
+              <Route
+                key="cardapio-edicao"
+                exact
+                path="/dashboard/cardapio/editar/:id"
+                component={MenuEdit}
+              />
 
-            <Route
-              key="cardapio-edicao"
-              exact
-              path="/dashboard/cardapio/editar/:id"
-              component={CardapioEdicao}
-            />
+              <Route
+                key="aviso-cadastro"
+                exact
+                path="/dashboard/avisos/cadastro"
+                component={CreateNews}
+              />
 
-            <Route
-              key="aviso-cadastro"
-              exact
-              path="/dashboard/avisos/cadastro"
-              component={InfoCadastro}
-            />
+              <Route
+                key="aviso-listagem"
+                exact
+                path="/dashboard/avisos/listagem"
+                component={NewsList}
+              />
 
-            <Route
-              key="aviso-listagem"
-              exact
-              path="/dashboard/avisos/listagem"
-              component={InfoListagem}
-            />
+              <Route
+                key="aviso-edicao"
+                exact
+                path="/dashboard/avisos/edicao/:id"
+                component={NewsEdit}
+              />
+              <Route
+                key="aviso-detalhes"
+                exact
+                path="/dashboard/avisos/detalhes/:id"
+                component={NewsDetails}
+              />
 
-            <Route
-              key="aviso-edicao"
-              exact
-              path="/dashboard/avisos/edicao/:id"
-              component={InfoEdicao}
-            />
-            <Route
-              key="aviso-detalhes"
-              exact
-              path="/dashboard/avisos/detalhes/:id"
-              component={InfoDetalhes}
-            />
-
-            <Route
-              key="aluno-listagem"
-              exact
-              path="/dashboard/aluno/listagem"
-              component={AlunoListagem}
-            />
-            <Route
-              key="aluno-detalhes"
-              exact
-              path="/dashboard/aluno/detalhes/:id"
-              component={AlunoDetalhes}
-            />
-            <Route
-              key="aluno-graficos"
-              exact
-              path="/dashboard/aluno/graficos"
-              component={AlunoGraficos}
-            />
-            <Route
-              key="user-profile"
-              exact
-              path="/dashboard/profile"
-              component={Profile}
-            />
-          </Switch>
-        </Wrapper>
-      </Container>
+              <Route
+                key="aluno-listagem"
+                exact
+                path="/dashboard/aluno/listagem"
+                component={StudentList}
+              />
+              <Route
+                key="aluno-detalhes"
+                exact
+                path="/dashboard/aluno/detalhes/:id"
+                component={StudentDetails}
+              />
+              <Route
+                key="aluno-graficos"
+                exact
+                path="/dashboard/aluno/graficos"
+                component={StudentCharts}
+              />
+              <Route
+                key="user-profile"
+                exact
+                path="/dashboard/profile"
+                component={Profile}
+              />
+            </Switch>
+          </S.ContainerPages>
+        </S.Wrapper>
+      </S.Container>
     </BrowserRouter>
   );
 }

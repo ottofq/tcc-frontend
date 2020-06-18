@@ -4,8 +4,8 @@ import PrivateRoute from './components/PrivateRoute';
 import Page404 from './components/404';
 
 import Main from './pages/Main';
-import Login from './pages/Login';
-import Register from './pages/Register';
+import Login from './pages/User/Login';
+import Register from './pages/User/Register';
 
 export default function Routes() {
   return (
