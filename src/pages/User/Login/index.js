@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useSnackbar } from 'notistack';
 
@@ -9,14 +9,15 @@ import {
   CircularProgress,
 } from '@material-ui/core';
 
-import { Container, ContainerLogin } from './styles';
-import logo from '../../assets/logo.png';
-import api from '../../services/api';
+import * as S from './styles';
+import logo from '../../../assets/logo.png';
+import api from '../../../services/api';
 
-export default function Login({ history }) {
+export default function Login() {
   const { register, handleSubmit } = useForm();
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
+  const history = useHistory();
 
   const onSubmit = async data => {
     try {
@@ -52,8 +53,8 @@ export default function Login({ history }) {
   }, [history]);
 
   return (
-    <Container>
-      <ContainerLogin>
+    <S.Container>
+      <S.ContainerLogin>
         <img src={logo} alt="Logo UFES" />
         <h2>Login</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -79,7 +80,7 @@ export default function Login({ history }) {
         </form>
 
         <Link to="/register">Cadastre-se</Link>
-      </ContainerLogin>
-    </Container>
+      </S.ContainerLogin>
+    </S.Container>
   );
 }

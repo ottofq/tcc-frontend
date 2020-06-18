@@ -3,14 +3,16 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { TextField as Input, Button } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
+import { useHistory } from 'react-router-dom';
 
-import { Container, ContainerRegister } from './styles';
-import logo from '../../assets/logo.png';
-import api from '../../services/api';
+import * as S from './styles';
+import logo from '../../../assets/logo.png';
+import api from '../../../services/api';
 
-export default function Register({ history }) {
+export default function Register() {
   const { register, handleSubmit } = useForm();
   const { enqueueSnackbar } = useSnackbar();
+  const history = useHistory();
 
   const onSubmit = async data => {
     try {
@@ -30,8 +32,8 @@ export default function Register({ history }) {
   };
 
   return (
-    <Container>
-      <ContainerRegister>
+    <S.Container>
+      <S.ContainerRegister>
         <img src={logo} alt="Logo UFES" />
         <h2>Cadastro</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -60,7 +62,7 @@ export default function Register({ history }) {
 
           <Button type="submit">Cadastrar</Button>
         </form>
-      </ContainerRegister>
-    </Container>
+      </S.ContainerRegister>
+    </S.Container>
   );
 }
