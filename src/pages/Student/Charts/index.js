@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { CircularProgress } from '@material-ui/core';
+import { useSnackbar } from 'notistack';
 
-import { Title, Container, ContainerGrafico, ContainerLoading } from './styles';
+import * as S from './styles';
 import api from '../../../services/api';
 
 import Allergy from '../../../components/Charts/Allergy';
@@ -17,23 +18,25 @@ import MealRating from '../../../components/Charts/MealRating';
 import GerenalRating from '../../../components/Charts/GeneralRating';
 import RUImprovement from '../../../components/Charts/RUImprovement';
 
-export default function AlunoGraficos() {
-  const [dataAlergia, setDataAlergia] = useState([]);
-  const [quantAluno, setQuantAluno] = useState(0);
-  const [dataPatologia, setDataPatologia] = useState([]);
-  const [dataBolsista, setDataBolsista] = useState([]);
-  const [dataFrequencia, setDataFrequencia] = useState([]);
-  const [dataTipoRefeicao, setDataTipoRefeicao] = useState([]);
-  const [dataNivelFisico, setDataNivelFisico] = useState([]);
-  const [dataVegetariano, setDataVegetariano] = useState([]);
-  const [dataTabagista, setDataTabagista] = useState([]);
-  const [dataConsumoBebidaAlcoolica, setDataConsumoBebidaAlcoolica] = useState(
-    []
-  );
-  const [dataAvaliacaoRefeicao, setDataAvaliacaoRefeicao] = useState([]);
-  const [dataAvaliacaoGeral, setDataAvaliacaoGeral] = useState([]);
-  const [dataMelhoriaRU, setDataMelhoriaRU] = useState([]);
+export default function Charts() {
+  const [allergyData, setAllergyData] = useState(null);
+  const [totalStudents, setTotalStudents] = useState(0);
+  const [pathologyData, setPathologyData] = useState(null);
+  const [RUScholarshipData, setRUScholarshipData] = useState(null);
+  const [frenquencyOfMealsData, setFrenquencyOfMealsData] = useState(null);
+  const [typeOfMealData, setTypeOfMealData] = useState(null);
+  const [physicalLevelData, setPhysicalLevelData] = useState(null);
+  const [veganData, setVeganData] = useState(null);
+  const [smokerData, setSmokerData] = useState(null);
+  const [
+    alcoholicBeverageConsumptionData,
+    setAlcoholicBeverageConsumptionData,
+  ] = useState(null);
+  const [mealRatingData, setMealRatingData] = useState(null);
+  const [gerenalRatingData, setDerenalRatingData] = useState(null);
+  const [RUImprovementData, setRUImprovementData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     async function loadData() {
@@ -78,92 +81,96 @@ export default function AlunoGraficos() {
           melhoriaRU,
         ] = await Promise.all(promises);
 
-        setQuantAluno(alergia.data.total_alunos);
-        setDataAlergia(alergia.data);
-        setDataPatologia(patologia.data);
-        setDataBolsista(bolsista.data);
-        setDataFrequencia(frequencia.data);
-        setDataTipoRefeicao(tipoRefeicao.data);
-        setDataNivelFisico(nivelAtividadeFisica.data);
-        setDataVegetariano(vegetariano.data);
-        setDataConsumoBebidaAlcoolica(consumoBebidaAlcoolica.data);
-        setDataTabagista(tabagista.data);
-        setDataAvaliacaoRefeicao(avaliacaoRefeicao.data);
-        setDataAvaliacaoGeral(avaliacaoGeral.data);
-        setDataMelhoriaRU(melhoriaRU.data);
+        setTotalStudents(alergia.data.total_alunos);
+        setAllergyData(alergia.data);
+        setPathologyData(patologia.data);
+        setRUScholarshipData(bolsista.data);
+        setFrenquencyOfMealsData(frequencia.data);
+        setTypeOfMealData(tipoRefeicao.data);
+        setPhysicalLevelData(nivelAtividadeFisica.data);
+        setVeganData(vegetariano.data);
+        setAlcoholicBeverageConsumptionData(consumoBebidaAlcoolica.data);
+        setSmokerData(tabagista.data);
+        setMealRatingData(avaliacaoRefeicao.data);
+        setDerenalRatingData(avaliacaoGeral.data);
+        setRUImprovementData(melhoriaRU.data);
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        enqueueSnackbar('Erro ao carregar gráficos!', {
+          variant: 'error',
+        });
       }
     }
 
     loadData();
-  }, []);
+  }, [enqueueSnackbar]);
 
   return (
     <>
       {loading === false ? (
-        <Container>
-          <Title>
+        <S.Container>
+          <S.Title>
             Abaixo contém gráficos gerados a partir dos dados obtidos pelo
             questionário preenchido pelos alunos.
-          </Title>
+          </S.Title>
 
-          <ContainerGrafico>
-            <Allergy amountStudent={quantAluno} data={dataAlergia} />
-          </ContainerGrafico>
+          <S.ContainerChart>
+            <Allergy totalStudents={totalStudents} data={allergyData} />
+          </S.ContainerChart>
 
-          <ContainerGrafico>
-            <Pathology amountStudent={quantAluno} data={dataPatologia} />
-          </ContainerGrafico>
+          <S.ContainerChart>
+            <Pathology totalStudents={totalStudents} data={pathologyData} />
+          </S.ContainerChart>
 
-          <ContainerGrafico>
-            <RUScholarship data={dataBolsista} />
-          </ContainerGrafico>
+          <S.ContainerChart>
+            <RUScholarship data={RUScholarshipData} />
+          </S.ContainerChart>
 
-          <ContainerGrafico>
-            <FrenquencyOfMeals data={dataFrequencia} />
-          </ContainerGrafico>
+          <S.ContainerChart>
+            <FrenquencyOfMeals data={frenquencyOfMealsData} />
+          </S.ContainerChart>
 
-          <ContainerGrafico>
-            <TypeOfMeal data={dataTipoRefeicao} />
-          </ContainerGrafico>
+          <S.ContainerChart>
+            <TypeOfMeal data={typeOfMealData} />
+          </S.ContainerChart>
 
-          <ContainerGrafico>
-            <PhysicalLevel data={dataNivelFisico} />
-          </ContainerGrafico>
+          <S.ContainerChart>
+            <PhysicalLevel data={physicalLevelData} />
+          </S.ContainerChart>
 
-          <ContainerGrafico>
-            <Vegan data={dataVegetariano} />
-          </ContainerGrafico>
+          <S.ContainerChart>
+            <Vegan data={veganData} />
+          </S.ContainerChart>
 
-          <ContainerGrafico>
-            <AlcoholicBeverageConsumption data={dataConsumoBebidaAlcoolica} />
-          </ContainerGrafico>
-
-          <ContainerGrafico>
-            <Smoker data={dataTabagista} />
-          </ContainerGrafico>
-
-          <ContainerGrafico>
-            <MealRating data={dataAvaliacaoRefeicao} />
-          </ContainerGrafico>
-
-          <ContainerGrafico>
-            <GerenalRating data={dataAvaliacaoGeral} />
-          </ContainerGrafico>
-
-          <ContainerGrafico>
-            <RUImprovement
-              data={dataMelhoriaRU}
-              amountOfStudents={quantAluno}
+          <S.ContainerChart>
+            <AlcoholicBeverageConsumption
+              data={alcoholicBeverageConsumptionData}
             />
-          </ContainerGrafico>
-        </Container>
+          </S.ContainerChart>
+
+          <S.ContainerChart>
+            <Smoker data={smokerData} />
+          </S.ContainerChart>
+
+          <S.ContainerChart>
+            <MealRating data={mealRatingData} />
+          </S.ContainerChart>
+
+          <S.ContainerChart>
+            <GerenalRating data={gerenalRatingData} />
+          </S.ContainerChart>
+
+          <S.ContainerChart>
+            <RUImprovement
+              data={RUImprovementData}
+              totalStudents={totalStudents}
+            />
+          </S.ContainerChart>
+        </S.Container>
       ) : (
-        <ContainerLoading>
+        <S.ContainerLoading>
           <CircularProgress color="primary" />
-        </ContainerLoading>
+        </S.ContainerLoading>
       )}
     </>
   );
