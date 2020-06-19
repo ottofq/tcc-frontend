@@ -78,5 +78,14 @@ export default function Allergies({ student }) {
 }
 
 Allergies.propTypes = {
-  student: PropTypes.objectOf(PropTypes.object).isRequired,
+  student: PropTypes.shape({
+    alergias: PropTypes.shape({
+      nenhuma: PropTypes.bool,
+      alergia_gluten: PropTypes.bool,
+      intolerancia_lactose: PropTypes.bool,
+      proteina_leite_vaca: PropTypes.bool,
+      outras_alergias: PropTypes.string,
+    }),
+    medicamento_continuo: PropTypes.string,
+  }).isRequired,
 };

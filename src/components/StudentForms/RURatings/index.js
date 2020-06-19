@@ -289,5 +289,23 @@ export default function RURatings({ student }) {
 }
 
 RURatings.propTypes = {
-  student: PropTypes.objectOf(PropTypes.object).isRequired,
+  student: PropTypes.shape({
+    avaliacao_RU: PropTypes.shape({
+      aroma: PropTypes.string,
+      coloracao_cardapio: PropTypes.string,
+      textura_preparacao: PropTypes.string,
+      sabor_preparacao: PropTypes.string,
+      avaliacao_geral: PropTypes.string,
+    }),
+    melhorias_RU: PropTypes.shape({
+      cardapio: PropTypes.bool,
+      melhoria_sabor_preparacao: PropTypes.bool,
+      cardaopcao_vegetarianapio: PropTypes.bool,
+      opcao_vegetariana: PropTypes.bool,
+      estrutura_fisica: PropTypes.bool,
+      tempo_fila: PropTypes.bool,
+      preco_ticket: PropTypes.bool,
+      melhoria_outros: PropTypes.string,
+    }),
+  }).isRequired,
 };

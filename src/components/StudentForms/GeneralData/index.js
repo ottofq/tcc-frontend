@@ -222,5 +222,22 @@ export default function GeneralData({ student }) {
 }
 
 GeneralData.propTypes = {
-  student: PropTypes.objectOf(PropTypes.object).isRequired,
+  student: PropTypes.shape({
+    nome: PropTypes.string,
+    matricula: PropTypes.number,
+    data_nascimento: PropTypes.string,
+    curso: PropTypes.string,
+    ano_ingresso: PropTypes.string,
+    sexo: PropTypes.string,
+    bolsista: PropTypes.string,
+    frequencia_RU: PropTypes.string,
+    tipo_refeicao_RU: PropTypes.string,
+    nivel_fisico: PropTypes.string,
+    peso_ideal: PropTypes.bool,
+    adiciona_sal: PropTypes.bool,
+    utiliza_oleo_composto: PropTypes.bool,
+    tabagista: PropTypes.bool,
+    consome_bebida_alcoolica: PropTypes.string,
+    vegano_vegetariano: PropTypes.string,
+  }).isRequired,
 };
