@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Bar from '../Base/Bar';
 
-export default function RUImprovement({ data, amountOfStudents }) {
+export default function RUImprovement({ data, totalStudents }) {
   const RUImprovements = [
     {
       melhoria: 'CP',
@@ -54,13 +54,23 @@ export default function RUImprovement({ data, amountOfStudents }) {
         legendBottom="Melhorias"
         legendLeft="Total de Alunos"
         legendOffset={30}
-        maxValue={amountOfStudents}
+        maxValue={totalStudents}
       />
     </>
   );
 }
 
 RUImprovement.propTypes = {
-  amountOfStudents: PropTypes.number.isRequired,
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  totalStudents: PropTypes.number.isRequired,
+  data: PropTypes.shape({
+    totais: PropTypes.shape({
+      cardapio: PropTypes.number,
+      sabor_preparacao: PropTypes.number,
+      opcao_vegetariana: PropTypes.number,
+      estrutura_fisica: PropTypes.number,
+      tempo_fila: PropTypes.number,
+      preco_ticket: PropTypes.number,
+      melhoria_outros: PropTypes.number,
+    }),
+  }).isRequired,
 };

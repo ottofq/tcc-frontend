@@ -29,5 +29,10 @@ export default function Smoker({ data }) {
 }
 
 Smoker.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.shape({
+    porcentagem: PropTypes.shape({
+      tabagista: PropTypes.number,
+      nao_tabagista: PropTypes.number,
+    }),
+  }).isRequired,
 };

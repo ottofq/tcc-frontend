@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Bar from '../Base/Bar';
 
-export default function Pathology({ data, amountOfStudents }) {
+export default function Pathology({ data, totalStudents }) {
   const pathologies = [
     {
       patologia: 'DC',
@@ -55,13 +55,23 @@ export default function Pathology({ data, amountOfStudents }) {
         colors={{ scheme: 'paired' }}
         legendBottom="Patologias"
         legendLeft="Total de Alunos"
-        maxValue={amountOfStudents}
+        maxValue={totalStudents}
       />
     </>
   );
 }
 
 Pathology.propTypes = {
-  amountOfStudents: PropTypes.number.isRequired,
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  totalStudents: PropTypes.number.isRequired,
+  data: PropTypes.shape({
+    totais: PropTypes.shape({
+      doenca_cardiovascular: PropTypes.number,
+      hipertensao_arterial: PropTypes.number,
+      obesidade: PropTypes.number,
+      dislipidemias: PropTypes.number,
+      doenca_arterial_coronariana: PropTypes.number,
+      diabetes: PropTypes.number,
+      outras_patologias: PropTypes.number,
+    }),
+  }).isRequired,
 };

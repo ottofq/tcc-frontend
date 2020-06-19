@@ -34,5 +34,11 @@ export default function TypeOfMeal({ data }) {
 }
 
 TypeOfMeal.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.shape({
+    porcentagem: PropTypes.shape({
+      almoco: PropTypes.number,
+      jantar: PropTypes.number,
+      almoco_jantar: PropTypes.number,
+    }),
+  }).isRequired,
 };

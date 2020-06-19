@@ -44,5 +44,13 @@ export default function GeneralRating({ data }) {
 }
 
 GeneralRating.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.shape({
+    porcentagem: PropTypes.shape({
+      muito_bom: PropTypes.number,
+      bom: PropTypes.number,
+      regular: PropTypes.number,
+      ruim: PropTypes.number,
+      muito_ruim: PropTypes.number,
+    }),
+  }).isRequired,
 };

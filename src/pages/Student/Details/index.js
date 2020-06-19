@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { format, parseISO } from 'date-fns';
 import { CircularProgress } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 import * as S from './styles';
 import api from '../../../services/api';
@@ -11,12 +12,13 @@ import Pathologies from '../../../components/StudentForms/Pathologies';
 import RURatings from '../../../components/StudentForms/RURatings';
 
 export default function Details() {
-  const [aluno, setAluno] = useState({});
+  const [student, setStudent] = useState({});
   const [loading, setLoading] = useState(true);
   const params = useParams();
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
-    async function loadAluno() {
+    async function loadStudent() {
       try {
         const { id } = params;
         const user = JSON.parse(localStorage.getItem('@app-ru/user'));
@@ -29,15 +31,17 @@ export default function Details() {
           parseISO(result.data.data_nascimento),
           'yyyy-MM-dd'
         );
-        setAluno(result.data);
+        setStudent(result.data);
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        enqueueSnackbar('Erro ao carregar dados do aluno!', {
+          variant: 'error',
+        });
       }
     }
 
-    loadAluno();
-  }, [params]);
+    loadStudent();
+  }, [params, enqueueSnackbar]);
 
   return (
     <>
@@ -45,16 +49,16 @@ export default function Details() {
         <S.Container>
           <S.ContainerDetails>
             <S.Title>Dados do Gerais</S.Title>
-            <GerenalData student={aluno} />
+            <GerenalData student={student} />
 
             <S.Title>Patologias e Alergias</S.Title>
             <S.ContainerAllergiesPathologies>
-              <Allergies student={aluno} />
-              <Pathologies student={aluno} />
+              <Allergies student={student} />
+              <Pathologies student={student} />
             </S.ContainerAllergiesPathologies>
 
             <S.Title>Avaliação do RU</S.Title>
-            <RURatings student={aluno} />
+            <RURatings student={student} />
           </S.ContainerDetails>
         </S.Container>
       ) : (

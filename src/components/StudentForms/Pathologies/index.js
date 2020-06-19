@@ -179,5 +179,24 @@ export default function Pathologies({ student }) {
 }
 
 Pathologies.propTypes = {
-  student: PropTypes.objectOf(PropTypes.object).isRequired,
+  student: PropTypes.shape({
+    patologias: PropTypes.shape({
+      doenca_cardiovascular: PropTypes.bool,
+      hipertensao_arterial: PropTypes.bool,
+      obesidade: PropTypes.bool,
+      dislipidemias: PropTypes.bool,
+      doenca_arterial_coronariana: PropTypes.bool,
+      diabetes: PropTypes.bool,
+      outras_patologias: PropTypes.string,
+    }),
+    patologias_familia: PropTypes.shape({
+      fam_doenca_cardiovascular: PropTypes.bool,
+      fam_hipertensao: PropTypes.bool,
+      fam_obesidade: PropTypes.bool,
+      fam_dislipidemias: PropTypes.bool,
+      fam_doenca_arterial_coronariana: PropTypes.bool,
+      fam_diabetes: PropTypes.bool,
+      patologias_familia_outras: PropTypes.string,
+    }),
+  }).isRequired,
 };

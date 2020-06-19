@@ -24,7 +24,7 @@ export const Container = styled.div`
   }
 `;
 
-export const ContainerGrafico = styled.div`
+export const ContainerChart = styled.div`
   width: 600px;
   height: 300px;
   display: flex;

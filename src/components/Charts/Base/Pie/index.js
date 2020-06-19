@@ -64,7 +64,7 @@ Pie.propTypes = {
   ).isRequired,
   margin: PropTypes.shape({
     top: PropTypes.number.isRequired,
-    righ: PropTypes.number.isRequired,
+    right: PropTypes.number.isRequired,
     bottom: PropTypes.number.isRequired,
     left: PropTypes.number.isRequired,
   }).isRequired,

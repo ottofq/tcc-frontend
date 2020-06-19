@@ -8,27 +8,20 @@ import {
   Paper,
   TablePagination,
 } from '@material-ui/core';
+import { useSnackbar } from 'notistack';
 
-import {
-  Container,
-  Title,
-  TableContainerUI,
-  TableHeadUI,
-  TableBodyUI,
-  ButtonUI,
-  ContainerAcoes,
-  Card,
-} from './styles';
+import * as S from './styles';
 
 import api from '../../../services/api';
 
 export default function List() {
-  const [alunos, setAlunos] = useState([]);
-  const [qtdAlunos, setQtdsAlunos] = useState(0);
+  const [students, setStudents] = useState([]);
+  const [totalStudents, setTotalStudents] = useState(0);
   const [page, setPage] = useState(0);
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
-    async function loadAlunos() {
+    async function loadStudents() {
       try {
         const user = JSON.parse(localStorage.getItem('@app-ru/user'));
         const result = await api.get(`/alunos?page=${page + 1}`, {
@@ -36,29 +29,31 @@ export default function List() {
             authorization: `Bearer ${user.token}`,
           },
         });
-        setAlunos(result.data.result);
-        setQtdsAlunos(result.data.total_alunos);
+        setStudents(result.data.result);
+        setTotalStudents(result.data.total_alunos);
       } catch (error) {
-        console.log(error);
+        enqueueSnackbar('Erro ao carregar listas de aluno!', {
+          variant: 'error',
+        });
       }
     }
-    loadAlunos();
-  }, [page]);
+    loadStudents();
+  }, [page, enqueueSnackbar]);
 
   const handleChangePage = (event, nextPage) => {
     setPage(nextPage);
   };
 
   return (
-    <Container>
-      <Card>
-        <Title>
-          Total de alunos cadastrados: <strong>{qtdAlunos}</strong>
-        </Title>
-      </Card>
-      <TableContainerUI component={Paper}>
+    <S.Container>
+      <S.Card>
+        <S.Title>
+          Total de alunos cadastrados: <strong>{totalStudents}</strong>
+        </S.Title>
+      </S.Card>
+      <S.TableContainer component={Paper}>
         <Table aria-label="simple table">
-          <TableHeadUI>
+          <S.TableHead>
             <TableRow>
               <TableCell>Nome do Aluno</TableCell>
               <TableCell align="center">Matrícula</TableCell>
@@ -66,27 +61,27 @@ export default function List() {
               <TableCell align="center">Curso</TableCell>
               <TableCell align="center">Ações</TableCell>
             </TableRow>
-          </TableHeadUI>
-          <TableBodyUI>
-            {alunos.length > 0 ? (
-              alunos.map(aluno => (
-                <TableRow hover key={aluno._id}>
+          </S.TableHead>
+          <S.TableBody>
+            {students.length > 0 ? (
+              students.map(student => (
+                <TableRow hover key={student._id}>
                   <TableCell component="th" scope="row">
-                    {aluno.nome}
+                    {student.nome}
                   </TableCell>
-                  <TableCell align="center">{aluno.matricula}</TableCell>
-                  <TableCell align="center">{aluno.ano_ingresso}</TableCell>
-                  <TableCell align="center">{aluno.curso}</TableCell>
+                  <TableCell align="center">{student.matricula}</TableCell>
+                  <TableCell align="center">{student.ano_ingresso}</TableCell>
+                  <TableCell align="center">{student.curso}</TableCell>
 
                   <TableCell align="center">
-                    <ContainerAcoes>
+                    <S.ActionsContainer>
                       <Link
                         style={{ textDecoration: 'none' }}
-                        to={`/dashboard/aluno/detalhes/${aluno._id}`}
+                        to={`/dashboard/aluno/detalhes/${student._id}`}
                       >
-                        <ButtonUI variant="contained">Detalhes</ButtonUI>
+                        <S.Button variant="contained">Detalhes</S.Button>
                       </Link>
-                    </ContainerAcoes>
+                    </S.ActionsContainer>
                   </TableCell>
                 </TableRow>
               ))
@@ -97,17 +92,17 @@ export default function List() {
                 </TableCell>
               </TableRow>
             )}
-          </TableBodyUI>
+          </S.TableBody>
         </Table>
         <TablePagination
           component="div"
           rowsPerPageOptions={['']}
-          count={qtdAlunos}
+          count={totalStudents}
           rowsPerPage={8}
           page={page}
           onChangePage={handleChangePage}
         />
-      </TableContainerUI>
-    </Container>
+      </S.TableContainer>
+    </S.Container>
   );
 }
