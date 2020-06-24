@@ -22,7 +22,7 @@ export default function List() {
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
-    async function loadCardapios() {
+    async function loadMenus() {
       try {
         const result = await api.get(`/cardapio?page=${page + 1}`);
         setMenus(result.data.result);
@@ -33,7 +33,7 @@ export default function List() {
         });
       }
     }
-    loadCardapios();
+    loadMenus();
   }, [page, enqueueSnackbar]);
 
   const handleChangePage = (event, nextPage) => {

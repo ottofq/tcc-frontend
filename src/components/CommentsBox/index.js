@@ -8,18 +8,18 @@ export default function CommentsBox({
   totalVotes,
   comments,
   actualPage,
-  maxpage,
+  maxPage,
   loading,
   previousComment,
   nextComment,
 }) {
   return (
-    <S.ContainerComentario>
-      <S.ContainerTitleComentario>
+    <S.ContainerComment>
+      <S.ContainerCommentTitle>
         <h4>
           Avaliações: (<span>{totalVotes})</span>
         </h4>
-      </S.ContainerTitleComentario>
+      </S.ContainerCommentTitle>
 
       <List component="ul">
         {loading ? (
@@ -30,26 +30,26 @@ export default function CommentsBox({
         {comments.length > 0 ? (
           comments.map(comment => (
             <ListItem key={comment.user_id} component="li">
-              <S.Comentario>
-                <S.ContainerTitleComentario>
+              <S.Comment>
+                <S.ContainerCommentTitle>
                   <h5>{comment.nome}</h5>
-                  <S.RatingComentario
+                  <S.RatingComment
                     size="small"
                     name="nota"
                     precision={1}
                     value={comment.nota}
                     readOnly
                   />
-                </S.ContainerTitleComentario>
+                </S.ContainerCommentTitle>
                 <p>{comment.comentario}</p>
-              </S.Comentario>
+              </S.Comment>
               <Divider />
             </ListItem>
           ))
         ) : (
-          <S.ContainerSemComentario>
+          <S.ContainerNoComment>
             <p>Não contém comentários</p>
-          </S.ContainerSemComentario>
+          </S.ContainerNoComment>
         )}
       </List>
       <S.ContainerButtonPagination>
@@ -62,18 +62,18 @@ export default function CommentsBox({
           Anterior
         </S.StyledButton>
         <p>
-          Página <strong>{actualPage}</strong> de {maxpage}
+          Página <strong>{actualPage}</strong> de {maxPage}
         </p>
         <S.StyledButton
           onClick={nextComment}
           variant="outlined"
           color="primary"
-          disabled={actualPage === maxpage || totalVotes === 0}
+          disabled={actualPage === maxPage || totalVotes === 0}
         >
           Próximo
         </S.StyledButton>
       </S.ContainerButtonPagination>
-    </S.ContainerComentario>
+    </S.ContainerComment>
   );
 }
 
@@ -81,7 +81,7 @@ CommentsBox.propTypes = {
   totalVotes: PropTypes.number.isRequired,
   comments: PropTypes.arrayOf(PropTypes.object).isRequired,
   actualPage: PropTypes.number.isRequired,
-  maxpage: PropTypes.number.isRequired,
+  maxPage: PropTypes.number.isRequired,
   loading: PropTypes.bool.isRequired,
   previousComment: PropTypes.func.isRequired,
   nextComment: PropTypes.func.isRequired,
