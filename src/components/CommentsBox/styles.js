@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Button } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 
-export const ContainerComentario = styled.div`
+export const ContainerComment = styled.div`
   display: flex;
   height: 400px;
   flex-direction: column;
@@ -23,7 +23,7 @@ export const ContainerComentario = styled.div`
   }
 `;
 
-export const ContainerTitleComentario = styled.div`
+export const ContainerCommentTitle = styled.div`
   display: flex;
 
   h4 {
@@ -36,7 +36,7 @@ export const ContainerTitleComentario = styled.div`
   }
 `;
 
-export const ContainerSemComentario = styled.div`
+export const ContainerNoComment = styled.div`
   text-align: center;
   font-size: 24px;
 `;
@@ -49,7 +49,7 @@ export const ContainerLoading = styled.div`
   align-items: center;
 `;
 
-export const Comentario = styled.div`
+export const Comment = styled.div`
   display: flex;
   flex-direction: column;
   border: 1px solid #ccc;
@@ -72,7 +72,7 @@ export const Comentario = styled.div`
   }
 `;
 
-export const RatingComentario = styled(Rating)``;
+export const RatingComment = styled(Rating)``;
 
 export const ContainerButtonPagination = styled.div`
   display: flex;
