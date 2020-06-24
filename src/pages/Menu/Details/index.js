@@ -3,6 +3,7 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import { CircularProgress } from '@material-ui/core';
+import { useParams } from 'react-router-dom';
 
 import CommentsBox from '../../../components/CommentsBox';
 
@@ -28,17 +29,19 @@ export default function Details() {
   const [skip, setSkip] = useState(0);
   const [limit] = useState(10);
   const [page, setPage] = useState(1);
+  const params = useParams();
 
   useEffect(() => {
     async function loadMenu() {
-      const result = await api.get('/cardapio/last');
+      const { id } = params;
+      const result = await api.get(`/cardapio/${id}`);
 
       setMenu(result.data);
       setLoadingMenuData(false);
     }
 
     loadMenu();
-  }, []);
+  }, [params]);
 
   useEffect(() => {
     async function loadMenuRating() {
@@ -163,7 +166,7 @@ export default function Details() {
         totalVotes={menuRating.votos || 0}
         comments={comments}
         actualPage={page}
-        maxpage={memoizedValue}
+        maxPage={memoizedValue}
         loading={loadingCommentData}
         previousComment={previousComment}
         nextComment={nextComment}

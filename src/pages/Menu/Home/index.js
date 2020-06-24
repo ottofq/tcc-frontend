@@ -163,7 +163,7 @@ export default function Home() {
         totalVotes={menuRating.votos || 0}
         comments={comments}
         actualPage={page}
-        maxpage={memoizedValue}
+        maxPage={memoizedValue}
         loading={loadingCommentData}
         previousComment={previousComment}
         nextComment={nextComment}
