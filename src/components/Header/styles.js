@@ -88,6 +88,16 @@ export const ItemMenu = styled.div`
   text-decoration: none;
   display: block;
 
+  button {
+    display: inline-block;
+    background-color: transparent;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+  }
+
   :hover {
     background-color: rgba(246, 250, 253, 0.25);
   }
