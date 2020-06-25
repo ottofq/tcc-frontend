@@ -41,8 +41,6 @@ export default function Charts() {
   useEffect(() => {
     async function loadData() {
       try {
-        const user = JSON.parse(localStorage.getItem('@app-ru/user'));
-
         const routes = [
           'alergias',
           'patologias',
@@ -58,13 +56,7 @@ export default function Charts() {
           'melhoriasru',
         ];
 
-        const promises = routes.map(async route =>
-          api.get(`/alunos/${route}`, {
-            headers: {
-              authorization: `Bearer ${user.token}`,
-            },
-          })
-        );
+        const promises = routes.map(async route => api.get(`/alunos/${route}`));
 
         const [
           alergia,

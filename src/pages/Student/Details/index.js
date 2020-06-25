@@ -21,12 +21,7 @@ export default function Details() {
     async function loadStudent() {
       try {
         const { id } = params;
-        const user = JSON.parse(localStorage.getItem('@app-ru/user'));
-        const result = await api.get(`/alunos/${id}`, {
-          headers: {
-            authorization: `Bearer ${user.token}`,
-          },
-        });
+        const result = await api.get(`/alunos/${id}`);
         result.data.data_nascimento = format(
           parseISO(result.data.data_nascimento),
           'yyyy-MM-dd'

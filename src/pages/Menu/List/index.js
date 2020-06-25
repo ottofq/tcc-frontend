@@ -42,12 +42,7 @@ export default function List() {
 
   async function handleButtonDelete(id) {
     try {
-      const user = JSON.parse(localStorage.getItem('@app-ru/user'));
-      const result = await api.delete(`/cardapio/${id}`, {
-        headers: {
-          authorization: `Bearer ${user.token}`,
-        },
-      });
+      const result = await api.delete(`/cardapio/${id}`);
       setMenus(menus.filter(menu => menu._id !== id));
 
       if (result.status === 200) {

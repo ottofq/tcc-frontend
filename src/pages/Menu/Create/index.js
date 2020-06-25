@@ -25,31 +25,22 @@ export default function Create() {
     } = data;
 
     try {
-      const user = JSON.parse(localStorage.getItem('@app-ru/user'));
-      const result = await api.post(
-        '/cardapio',
-        {
-          tipo,
-          entrada,
-          proteina,
-          opcao,
-          acompanhamento,
-          guarnicao,
-          sobremesa,
-        },
-        {
-          headers: {
-            authorization: `Bearer ${user.token}`,
-          },
-        }
-      );
+      const result = await api.post('/cardapio', {
+        tipo,
+        entrada,
+        proteina,
+        opcao,
+        acompanhamento,
+        guarnicao,
+        sobremesa,
+      });
 
       if (result.status === 200) {
         enqueueSnackbar('Novo cardápio cadastrado!', {
           variant: 'success',
         });
-        history.push('/dashboard');
         reset();
+        history.push('/dashboard');
       }
     } catch (error) {
       enqueueSnackbar('Erro ao cadastrar novo cardápio!', {

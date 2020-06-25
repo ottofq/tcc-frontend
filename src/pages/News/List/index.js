@@ -24,12 +24,7 @@ export default function List() {
 
   async function handleSubmitModal(id) {
     try {
-      const user = JSON.parse(localStorage.getItem('@app-ru/user'));
-      const result = await api.delete(`/informacoes/${id}`, {
-        headers: {
-          authorization: `Bearer ${user.token}`,
-        },
-      });
+      const result = await api.delete(`/informacoes/${id}`);
 
       if (result.status === 200) {
         enqueueSnackbar('Aviso excluido com Sucesso!', {

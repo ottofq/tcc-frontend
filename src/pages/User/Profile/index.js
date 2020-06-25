@@ -33,20 +33,12 @@ export default function Profile() {
 
     try {
       if (newPassword === repeatNewPassword) {
-        await api.put(
-          `/users/${user.user._id}`,
-          {
-            nome,
-            email,
-            oldPassword,
-            newPassword,
-          },
-          {
-            headers: {
-              authorization: `Bearer ${user.token}`,
-            },
-          }
-        );
+        await api.put(`/users/${user.user._id}`, {
+          nome,
+          email,
+          oldPassword,
+          newPassword,
+        });
 
         enqueueSnackbar('Dados Atualizado com sucesso!', {
           variant: 'success',

@@ -25,16 +25,10 @@ export default function Create() {
       );
 
       const { titulo } = data;
-      const user = JSON.parse(localStorage.getItem('@app-ru/user'));
-      const result = await api.post(
-        '/informacoes/',
-        { titulo, descricao: contentInfo },
-        {
-          headers: {
-            authorization: `Bearer ${user.token}`,
-          },
-        }
-      );
+      const result = await api.post('/informacoes/', {
+        titulo,
+        descricao: contentInfo,
+      });
 
       if (result.status === 200) {
         enqueueSnackbar('Aviso cadastrado com Sucesso!', {
