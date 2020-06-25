@@ -1,15 +1,18 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSnackbar } from 'notistack';
+import { useHistory } from 'react-router-dom';
 
 import * as S from './styles';
 import api from '../../../services/api';
 
-export default function Profile({ history }) {
+export default function Profile() {
   const { register, setValue, handleSubmit } = useForm();
   const [editar, setEditar] = useState(true);
   const [user, setUser] = useState('');
   const { enqueueSnackbar } = useSnackbar();
+  const history = useHistory();
 
   useEffect(() => {
     const localStorageUser = JSON.parse(localStorage.getItem('@app-ru/user'));
@@ -26,17 +29,17 @@ export default function Profile({ history }) {
   }
 
   async function onSubmit(data) {
-    const { nome, email, password, new_password, repeat_new_password } = data;
+    const { nome, email, oldPassword, newPassword, repeatNewPassword } = data;
 
     try {
-      if (new_password === repeat_new_password) {
+      if (newPassword === repeatNewPassword) {
         await api.put(
           `/users/${user.user._id}`,
           {
             nome,
             email,
-            password,
-            new_password,
+            oldPassword,
+            newPassword,
           },
           {
             headers: {
@@ -50,7 +53,7 @@ export default function Profile({ history }) {
         });
 
         localStorage.removeItem('@app-ru/user');
-        window.location.href = '/';
+        history.push('/');
       } else {
         enqueueSnackbar('Verifique a sua nova senha!', {
           variant: 'error',
@@ -90,28 +93,25 @@ export default function Profile({ history }) {
           disabled
         />
         <S.Input
-          name="password"
+          name="oldPassword"
           type="password"
           inputRef={register({ required: true })}
-          id="outlined-basic"
           label="Senha Atual"
           variant="outlined"
           disabled={editar}
         />
         <S.Input
-          name="new_password"
+          name="newPassword"
           type="password"
           inputRef={register({ required: true })}
-          id="outlined-basic"
           label="Nova Senha"
           variant="outlined"
           disabled={editar}
         />
         <S.Input
-          name="repeat_new_password"
+          name="repeatNewPassword"
           type="password"
           inputRef={register({ required: true })}
-          id="outlined-basic"
           label="Repita nova senha"
           variant="outlined"
           disabled={editar}
