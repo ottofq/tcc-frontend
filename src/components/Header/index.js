@@ -43,13 +43,9 @@ function Header() {
             </S.ItemMenu>
 
             <S.ItemMenu>
-              <a
-                style={{ textDecoration: 'none' }}
-                href="/"
-                onClick={handleLogout}
-              >
+              <button type="button" onClick={handleLogout}>
                 Sair
-              </a>
+              </button>
             </S.ItemMenu>
           </S.ContainerItems>
         </S.ContainerMenu>
