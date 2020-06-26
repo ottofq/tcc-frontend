@@ -23,12 +23,14 @@ export default function Edit() {
         const result = await api.get(`/cardapio/${id}`);
         setMenu(result.data);
       } catch (error) {
-        console.log(error);
+        enqueueSnackbar('Erro ao carregar o cardápio', {
+          variant: 'error',
+        });
       }
     }
 
     loadCardapio();
-  }, [params]);
+  }, [params, enqueueSnackbar]);
 
   useEffect(() => {
     if (menu) {
@@ -54,25 +56,16 @@ export default function Edit() {
     } = data;
     try {
       const { id } = params;
-      const user = JSON.parse(localStorage.getItem('@app-ru/user'));
 
-      const result = await api.put(
-        `/cardapio/${id}`,
-        {
-          tipo,
-          entrada,
-          proteina,
-          opcao,
-          acompanhamento,
-          guarnicao,
-          sobremesa,
-        },
-        {
-          headers: {
-            authorization: `Bearer ${user.token}`,
-          },
-        }
-      );
+      const result = await api.put(`/cardapio/${id}`, {
+        tipo,
+        entrada,
+        proteina,
+        opcao,
+        acompanhamento,
+        guarnicao,
+        sobremesa,
+      });
 
       if (result.status === 200) {
         enqueueSnackbar('Cardápio editado com Sucesso!', {

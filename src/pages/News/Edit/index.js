@@ -50,20 +50,14 @@ export default function Edit() {
   async function onSubmit(data) {
     try {
       const { titulo } = data;
-      const user = JSON.parse(localStorage.getItem('@app-ru/user'));
       const contentInfo = draftToHtml(
         convertToRaw(editorState.getCurrentContent())
       );
 
-      const result = await api.put(
-        `/informacoes/${news._id}`,
-        { titulo, descricao: contentInfo },
-        {
-          headers: {
-            authorization: `Bearer ${user.token}`,
-          },
-        }
-      );
+      const result = await api.put(`/informacoes/${news._id}`, {
+        titulo,
+        descricao: contentInfo,
+      });
 
       if (result.status === 200) {
         enqueueSnackbar('Aviso editado com Sucesso!', {

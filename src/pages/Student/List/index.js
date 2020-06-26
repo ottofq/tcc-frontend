@@ -23,12 +23,7 @@ export default function List() {
   useEffect(() => {
     async function loadStudents() {
       try {
-        const user = JSON.parse(localStorage.getItem('@app-ru/user'));
-        const result = await api.get(`/alunos?page=${page + 1}`, {
-          headers: {
-            authorization: `Bearer ${user.token}`,
-          },
-        });
+        const result = await api.get(`/alunos?page=${page + 1}`);
         setStudents(result.data.result);
         setTotalStudents(result.data.total_alunos);
       } catch (error) {
