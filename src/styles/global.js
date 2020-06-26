@@ -52,4 +52,10 @@ table {
 html{
   font-family: "PT Sans",Dejavu Serif,sans-serif
 }
+
+:root{
+  --primaryColor: #174578;
+  --secondaryColor:#2266b1;
+  --backgroudLight: #f6fafd;
+}
 `;
