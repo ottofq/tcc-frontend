@@ -1,18 +1,30 @@
 import styled from 'styled-components';
+import media from 'styled-media-query';
 import { NavLink } from 'react-router-dom';
 
 export const Container = styled.aside`
   display: flex;
-  background-color: #174578;
+  background-color: var(--primaryColor);
   flex-direction: column;
   justify-content: flex-start;
-  width: 240px;
+  width: var(--sidebarSize);
   height: 100vh;
 
+  ${media.lessThan('medium')`
+    display:${props => (props.isMenuOpen ? 'flex' : 'none')};
+    position:absolute;
+    align-items:center;
+    z-index:1;
+    width: 100%;
+    transition: 1s ease;
+    transform: ${props =>
+      props.isMenuOpen ? 'translateX(0)' : 'translateX(-100vw)'};
+  `}
+
   img {
-    margin: 10px;
-    width: 200px;
-    height: 100px;
+    margin: 0.625rem;
+    width: 12.5rem;
+    height: 6.25rem;
   }
 
   nav {
@@ -25,39 +37,35 @@ export const Container = styled.aside`
 
     li {
       align-self: stretch;
-
-      a {
-        &:hover {
-          background-color: rgba(246, 250, 253, 0.25);
-          transition: background-color ease 0.75s;
-        }
-
-        div {
-          height: 40px;
-          display: flex;
-          align-items: center;
-          margin-top: 5px;
-
-          svg {
-            padding-left: 20px;
-          }
-          span {
-            margin-left: 15px;
-            font-size: 18px;
-            color: #fff;
-          }
-        }
-      }
     }
   }
 `;
 
 export const SidebarLink = styled(NavLink)`
-  text-decoration: none;
-  color: #fff;
-  font-size: 20px;
-  box-sizing: border-box;
   display: block;
+  color: #fff;
+  text-decoration: none;
+
+  div {
+    display: flex;
+    align-items: center;
+    margin-top: 0.3125rem;
+    height: 2.5rem;
+    padding-left: 1.25rem;
+
+    h3 {
+      margin-left: 0.3125rem;
+      font-size: 1.125rem;
+    }
+  }
+
+  &.active {
+    background-color: var(--secondaryColor);
+  }
+  &:hover {
+    background-color: var(--secondaryColor);
+    transition: 0.5s;
+  }
 `;
 
 export const Title = styled.div`
@@ -65,12 +73,12 @@ export const Title = styled.div`
   color: #fff;
   align-items: center;
   justify-content: center;
-  height: 30px;
-  margin-top: 5px;
+  height: 1.875rem;
+  margin-top: 0.3125rem;
 
   h2 {
-    margin-left: 5px;
-    font-size: 24px;
+    margin-left: 0.3125rem;
+    font-size: 1.5rem;
     font-weight: bold;
   }
 `;
