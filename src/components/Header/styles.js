@@ -12,7 +12,7 @@ export const Header = styled(ContainerMateriaUI).attrs({
   maxWidth: 'xl',
 })`
   display: flex;
-  height: 3.125rem;
+  height: var(--headerSize);
   background-color: var(--secondaryColor);
   box-shadow: -1px 0px 4px 0px rgba(50, 50, 50, 0.75);
 `;
@@ -47,7 +47,7 @@ export const ContainerTitle = styled.div`
     cursor: pointer;
   }
 
-  ${media.lessThan('medium')`
+  ${media.lessThan('md')`
     button{
       display: inline-block;
     }
