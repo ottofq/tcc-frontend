@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Avatar, Button, MenuItem } from '@material-ui/core';
+import { Menu } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
 
 import * as S from './styles';
 import avatar from '../../assets/avatar.png';
 
-export default function Header() {
+export default function Header({ isMenuOpen, setIsMenuOpen }) {
   const [user, setUser] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
   const history = useHistory();
@@ -32,13 +34,17 @@ export default function Header() {
     history.push('/dashboard/profile');
   };
 
+  const openMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <S.Header>
       <S.Container>
         <S.ContainerTitle>
-          {/* <button type="button">
+          <button onClick={() => openMenu()} type="button">
             <Menu size={32} />
-          </button> */}
+          </button>
           <S.Title>Cardápio RU CCA-UFES</S.Title>
         </S.ContainerTitle>
         <S.ContainerMenu>
@@ -67,3 +73,8 @@ export default function Header() {
     </S.Header>
   );
 }
+
+Header.propTypes = {
+  isMenuOpen: PropTypes.bool.isRequired,
+  setIsMenuOpen: PropTypes.func.isRequired,
+};

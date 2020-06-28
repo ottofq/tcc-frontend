@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import media from 'styled-media-query';
+
 import {
   Container as ContainerMateriaUI,
   Typography,
@@ -38,11 +40,18 @@ export const ContainerTitle = styled.div`
   justify-content: space-around;
 
   button {
+    display: none;
     background-color: transparent;
     border: 0;
     color: #fff;
     cursor: pointer;
   }
+
+  ${media.lessThan('medium')`
+    button{
+      display: inline-block;
+    }
+  `}
 `;
 
 export const ContainerMenu = styled.ul`
