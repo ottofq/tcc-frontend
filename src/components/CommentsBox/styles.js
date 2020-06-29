@@ -8,14 +8,14 @@ export const ContainerComment = styled.div`
   height: 400px;
   flex-direction: column;
   border-radius: 4px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--borderColorLight);
 
   ul {
     display: flex;
 
     flex-wrap: wrap;
     width: 100%;
-    border: 1px solid #eee;
+    border: 1px solid var(--borderColorLight);
     overflow: hidden;
     overflow-y: scroll;
     li {
@@ -29,24 +29,30 @@ export const ContainerComment = styled.div`
 
 export const ContainerCommentTitle = styled.div`
   display: flex;
+  align-items: center;
 
-  h4 {
+  h3 {
     font-weight: bold;
     font-size: 20px;
-    color: #174578;
+    color: var(--primaryColor);
   }
-  span {
+  strong {
+    font-size: 1rem;
+    color: var(--primaryColor);
     font-weight: bold;
   }
 `;
 
 export const ContainerNoComment = styled.div`
+  display: ${props => (props.loading ? 'none' : 'flex')};
+  flex: 1;
   text-align: center;
   font-size: 24px;
 `;
 
 export const ContainerLoading = styled.div`
   display: flex;
+  flex: 1;
   height: 170px;
   width: 100%;
   justify-content: center;
@@ -56,20 +62,12 @@ export const ContainerLoading = styled.div`
 export const Comment = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid #ccc;
-  background-color: #f6fafd;
+  border: 1px solid var(--borderColorLight);
+  background-color: var(--backgroudLight);
   border-radius: 4px;
   justify-content: space-around;
   width: 100%;
   padding: 5px;
-
-  h5 {
-    font-size: 16px;
-    font-weight: bold;
-    color: #174578;
-    padding-bottom: 5px;
-    margin-right: 5px;
-  }
 
   p {
     font-size: 14px;
@@ -79,11 +77,11 @@ export const Comment = styled.div`
 export const RatingComment = styled(Rating)``;
 
 export const ContainerButtonPagination = styled.div`
-  display: flex;
+  display: ${props => (props.hasComments ? 'flex' : 'none')};
   flex: 1;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10px;
+  padding: 5px;
 
   strong {
     font-weight: bold;

@@ -16,9 +16,7 @@ export default function CommentsBox({
   return (
     <S.ContainerComment>
       <S.ContainerCommentTitle>
-        <h4>
-          Avaliações: (<span>{totalVotes})</span>
-        </h4>
+        <h3>Avaliações: ({totalVotes})</h3>
       </S.ContainerCommentTitle>
 
       <List component="ul">
@@ -32,7 +30,9 @@ export default function CommentsBox({
             <ListItem key={comment.user_id} component="li">
               <S.Comment>
                 <S.ContainerCommentTitle>
-                  <h5>{comment.nome}</h5>
+                  <p>
+                    <strong>{comment.nome}</strong>
+                  </p>
                   <S.RatingComment
                     size="small"
                     name="nota"
@@ -47,12 +47,12 @@ export default function CommentsBox({
             </ListItem>
           ))
         ) : (
-          <S.ContainerNoComment>
+          <S.ContainerNoComment loading={loading}>
             <p>Não contém comentários</p>
           </S.ContainerNoComment>
         )}
       </List>
-      <S.ContainerButtonPagination>
+      <S.ContainerButtonPagination hasComments={comments.length > 0}>
         <S.StyledButton
           onClick={previousComment}
           variant="outlined"
