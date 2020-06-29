@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Button } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
+import media from '../../styles/media';
 
 export const ContainerComment = styled.div`
   display: flex;
@@ -19,6 +20,9 @@ export const ContainerComment = styled.div`
     overflow-y: scroll;
     li {
       width: 50%;
+      ${media.lessThan('md')`
+      width: 100%;
+      `}
     }
   }
 `;
