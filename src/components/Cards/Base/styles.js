@@ -6,6 +6,10 @@ export const Container = styled.div`
   box-shadow: -1px 0px 4px 0px rgba(50, 50, 50, 0.75);
   border-radius: 5px;
   background-color: var(--backgroudLight);
+
+  ${media.lessThan('md')`
+    width:100%;
+  `}
 `;
 
 export const ImageContainer = styled.div`
@@ -17,22 +21,35 @@ export const ImageContainer = styled.div`
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
 
-  ${media.lessThan('md')`
-    width:6.25rem;
-  `}
-
   img {
     height: 9.375rem;
     width: 9.375rem;
+  }
 
-    ${media.lessThan('md')`
+  ${media.lessThan('md')`
+    width:6.25rem;
+    img{
       height: 5.625rem;
       width:5.625rem;
+    }
   `}
-  }
 `;
 
 export const Content = styled.div`
-  background-color: var(--backgroudLight);
+  display: flex;
   flex: 1;
+  background-color: var(--backgroudLight);
+`;
+
+export const ContainerLoading = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  height: ${props => (props.loading ? '200px' : '')};
+  width: ${props => (props.loading ? '200px' : '')};
+
+  ${media.lessThan('md')`
+  width: ${props => (props.loading ? '200px' : '100%')};
+  `}
 `;
