@@ -1,11 +1,10 @@
 import styled from 'styled-components';
-import media from 'styled-media-query';
-
 import {
   Container as ContainerMateriaUI,
   Typography,
   Menu as MenuMaterialUI,
 } from '@material-ui/core';
+import media from '../../styles/media';
 
 export const Header = styled(ContainerMateriaUI).attrs({
   component: 'header',
