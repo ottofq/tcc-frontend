@@ -95,6 +95,7 @@ export default function Routes() {
       <Route path="/register" exact component={Register} />
       {privateRoutes.map(route => (
         <PrivateRoute
+          key={route.key}
           path={route.path}
           exact={route.exat}
           component={route.component}
