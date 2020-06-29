@@ -4,6 +4,7 @@ import media from '../../../styles/media';
 
 export const ContainerMenuRating = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
@@ -12,7 +13,6 @@ export const ContainerMenuRating = styled.div`
 
   ${media.lessThan('md')`
     height: 150px;
-    width:100%;
     align-items: center;
   `}
 `;
@@ -22,17 +22,14 @@ export const Title = styled.h3`
   font-weight: bold;
   color: var(--primaryColor);
 
-  /* ${media.lessThan('md')`
+  ${media.lessThan('md')`
     font-size: 1.125rem;
-  `} */
+  `}
 `;
 
 export const ContainerMenuRatingDescription = styled.div`
   text-align: center;
 
-  ${media.lessThan('md')`
-    font-size: 1rem;
-  `}
   p {
     font-size: 18px;
   }
@@ -43,12 +40,14 @@ export const ContainerMenuRatingDescription = styled.div`
 
 export const Rating = styled(RatingMaterial)`
   svg {
-    width: 50px;
-    height: 50px;
-
-    ${media.lessThan('md')`
-    width: 35px;
-    height: 35px;
-  `}
+    width: 3.125rem;
+    height: 3.125rem;
   }
+
+  ${media.lessThan('md')`
+    svg{
+      width: 2.1875rem;
+      height: 2.1875rem;
+    }
+  `}
 `;
