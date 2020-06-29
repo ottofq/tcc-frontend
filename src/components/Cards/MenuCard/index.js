@@ -7,65 +7,76 @@ import Card from '../Base';
 import menuImage from '../../../assets/menu.svg';
 import * as S from './styles';
 
-export default function MenuCard({ menu }) {
+export default function MenuCard({ menu, loading }) {
   return (
-    <Card srcImage={menuImage} altImage="Menu">
+    <Card loading={loading} srcImage={menuImage} altImage="Menu">
       <S.ContainerMenuDescription>
-        <S.MenuTitle>
-          {menu.tipo}
-          {' - '}
-          {format(parseISO(menu.data), 'eeee, dd/MM/yyyy', {
-            locale: ptBR,
-          })}
-        </S.MenuTitle>
+        {menu === null ? (
+          <S.MenuTitle>Nenhum cardápio cadastrado</S.MenuTitle>
+        ) : (
+          <>
+            <S.MenuTitle>
+              {menu.tipo}
+              {' - '}
+              {format(parseISO(menu.data), 'eeee, dd/MM/yyyy', {
+                locale: ptBR,
+              })}
+            </S.MenuTitle>
 
-        <S.MenuItem>
-          <p>Entrada: </p>
-          <p>
-            <strong>{menu.entrada.descricao}</strong>
-          </p>
-        </S.MenuItem>
+            <S.MenuItem>
+              <p>Entrada: </p>
+              <p>
+                <strong>{menu.entrada.descricao}</strong>
+              </p>
+            </S.MenuItem>
 
-        <S.MenuItem>
-          <p>Prato Proteico: </p>
-          <p>
-            <strong>{menu.proteina.descricao}</strong>
-          </p>
-        </S.MenuItem>
+            <S.MenuItem>
+              <p>Prato Proteico: </p>
+              <p>
+                <strong>{menu.proteina.descricao}</strong>
+              </p>
+            </S.MenuItem>
 
-        <S.MenuItem>
-          <p>Opção: </p>
-          <p>
-            <strong>{menu.opcao.descricao}</strong>
-          </p>
-        </S.MenuItem>
+            <S.MenuItem>
+              <p>Opção: </p>
+              <p>
+                <strong>{menu.opcao.descricao}</strong>
+              </p>
+            </S.MenuItem>
 
-        <S.MenuItem>
-          <p>Acompanhamento: </p>
-          <p>
-            <strong>{menu.acompanhamento.descricao}</strong>
-          </p>
-        </S.MenuItem>
+            <S.MenuItem>
+              <p>Acompanhamento: </p>
+              <p>
+                <strong>{menu.acompanhamento.descricao}</strong>
+              </p>
+            </S.MenuItem>
 
-        <S.MenuItem>
-          <p>Guarnição: </p>
-          <p>
-            <strong>{menu.guarnicao.descricao}</strong>
-          </p>
-        </S.MenuItem>
+            <S.MenuItem>
+              <p>Guarnição: </p>
+              <p>
+                <strong>{menu.guarnicao.descricao}</strong>
+              </p>
+            </S.MenuItem>
 
-        <S.MenuItem>
-          <p>Sobremesa: </p>
-          <p>
-            <strong>{menu.sobremesa.descricao}</strong>
-          </p>
-        </S.MenuItem>
+            <S.MenuItem>
+              <p>Sobremesa: </p>
+              <p>
+                <strong>{menu.sobremesa.descricao}</strong>
+              </p>
+            </S.MenuItem>
+          </>
+        )}
       </S.ContainerMenuDescription>
     </Card>
   );
 }
 
+MenuCard.defaultProps = {
+  menu: null,
+};
+
 MenuCard.propTypes = {
+  loading: PropTypes.bool.isRequired,
   menu: PropTypes.shape({
     tipo: PropTypes.string,
     data: PropTypes.string,
@@ -87,5 +98,5 @@ MenuCard.propTypes = {
     sobremesa: PropTypes.shape({
       descricao: PropTypes.string,
     }),
-  }).isRequired,
+  }),
 };

@@ -9,7 +9,7 @@ export const ContainerMenuDescription = styled.ul`
   height: 12.5rem;
 
   ${media.lessThan('md')`
-    height: 150px;
+    height: 9.375rem;
   `}
 `;
 
@@ -31,15 +31,18 @@ export const MenuItem = styled.li`
   p {
     margin-right: 0.25rem;
     font-size: 1.125rem;
-    ${media.lessThan('md')`
-    font-size: 0.875rem;
-  `}
   }
   strong {
     font-weight: bold;
     font-size: 1.125rem;
-    ${media.lessThan('md')`
-    font-size: 0.875rem;
-  `}
   }
+
+  ${media.lessThan('md')`
+    p{
+      font-size: 0.875rem;
+    }
+    strong{
+      font-size: 0.875rem;
+    }
+  `}
 `;
