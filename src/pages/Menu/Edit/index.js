@@ -73,7 +73,7 @@ export default function Edit() {
         });
       }
 
-      history.push('/dashboard/cardapio');
+      history.push('/dashboard/cardapio/listagem');
     } catch (error) {
       enqueueSnackbar('Erro ao editar o cardápio!', {
         variant: 'error',
