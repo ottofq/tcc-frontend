@@ -1,7 +1,8 @@
 import { generateMedia } from 'styled-media-query';
 
 const media = generateMedia({
-  xs: '0px',
+  xxs: '0px',
+  xs: '360px',
   sm: '600px',
   md: '960px',
   lg: '1280px',
