@@ -36,7 +36,7 @@ export default function Create() {
         });
       }
       reset();
-      history.push('/dashboard/avisos/listagem');
+      history.push('/dashboard/noticias/listagem');
     } catch (error) {
       enqueueSnackbar('Erro ao cadastrar o aviso!', {
         variant: 'error',
@@ -62,15 +62,13 @@ export default function Create() {
             onEditorStateChange={setEditorState}
             toolbar={{
               options: [
-                'inline',
                 'blockType',
-                'list',
-                'textAlign',
-                'colorPicker',
-                'link',
                 'emoji',
-                'remove',
                 'history',
+                'list',
+                'inline',
+                'textAlign',
+                'link',
               ],
               fontFamily: {
                 options: ['PT Sans'],

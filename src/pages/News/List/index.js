@@ -86,14 +86,14 @@ export default function List() {
                     <S.ContainerActions>
                       <Link
                         style={{ textDecoration: 'none' }}
-                        to={`/dashboard/avisos/detalhes/${info._id}`}
+                        to={`/dashboard/noticias/detalhes/${info._id}`}
                       >
                         <S.Button variant="contained">Detalhes</S.Button>
                       </Link>
 
                       <Link
                         style={{ textDecoration: 'none' }}
-                        to={`/dashboard/avisos/edicao/${info._id}`}
+                        to={`/dashboard/noticias/editar/${info._id}`}
                       >
                         <S.Button variant="contained" color="primary">
                           Editar

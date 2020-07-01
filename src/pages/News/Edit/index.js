@@ -64,7 +64,7 @@ export default function Edit() {
           variant: 'success',
         });
       }
-      history.push('/dashboard/avisos/listagem');
+      history.push('/dashboard/noticias/listagem');
     } catch (error) {
       enqueueSnackbar('Erro ao editar o aviso!', {
         variant: 'error',
@@ -90,15 +90,13 @@ export default function Edit() {
             onEditorStateChange={setEditorState}
             toolbar={{
               options: [
-                'inline',
                 'blockType',
-                'list',
-                'textAlign',
-                'colorPicker',
-                'link',
                 'emoji',
-                'remove',
                 'history',
+                'list',
+                'inline',
+                'textAlign',
+                'link',
               ],
               fontFamily: {
                 options: ['PT Sans'],
