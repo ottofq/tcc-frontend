@@ -1,6 +1,5 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState, useMemo } from 'react';
-import { CircularProgress } from '@material-ui/core';
 
 import CommentsBox from '../../../components/CommentsBox';
 import MenuCard from '../../../components/Cards/MenuCard';
@@ -21,10 +20,13 @@ export default function Home() {
 
   useEffect(() => {
     async function loadMenu() {
-      const result = await api.get('/cardapio/last');
-
-      setMenu(result.data);
-      setLoadingMenuData(false);
+      try {
+        const result = await api.get('/cardapio/last');
+        setMenu(result.data);
+        setLoadingMenuData(false);
+      } catch (error) {
+        setLoadingMenuData(false);
+      }
     }
 
     loadMenu();
@@ -74,16 +76,8 @@ export default function Home() {
     <S.Container>
       <h1>Cardápio mais recente</h1>
       <S.ContainerMenu>
-        {loadingMenuData ? (
-          <S.ContainerLoading>
-            <CircularProgress color="primary" />
-          </S.ContainerLoading>
-        ) : (
-          <>
-            <MenuCard menu={menu} />
-            <MenuRatingCard menuRating={menuRating} />
-          </>
-        )}
+        <MenuCard loading={loadingMenuData} menu={menu} />
+        <MenuRatingCard loading={loadingMenuData} menuRating={menuRating} />
       </S.ContainerMenu>
       <CommentsBox
         totalVotes={menuRating.votos || 0}

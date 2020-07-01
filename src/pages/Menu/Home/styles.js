@@ -13,12 +13,11 @@ export const Container = styled(ContainerMateriaUI).attrs({
   padding: 10px;
 
   h1 {
-    border-left: 4px solid #174578;
+    border-left: 4px solid var(--primaryColor);
     padding-left: 4px;
     font-size: 24px;
     font-weight: bold;
-    color: #174578;
-    margin-top: 5px;
+    color: var(--primaryColor);
   }
 
   ${media.lessThan('md')`
@@ -31,6 +30,7 @@ export const Container = styled(ContainerMateriaUI).attrs({
 export const ContainerMenu = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
 
