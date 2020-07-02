@@ -1,6 +1,11 @@
 import styled from 'styled-components';
+import { Container as ContainerMateriaUI } from '@material-ui/core';
+import media from '../../../styles/media';
 
-export const Container = styled.div`
+export const Container = styled(ContainerMateriaUI).attrs({
+  component: 'div',
+  maxWidth: 'xl',
+})`
   display: flex;
   flex: 1;
   overflow-y: scroll;
@@ -19,6 +24,19 @@ export const ContainerAllergiesPathologies = styled.div`
   border: 1px solid #bbb;
   padding: 10px;
   border-radius: 4px;
+
+  ${media.lessThan('sm')`
+    width:100%;
+    padding:0px;
+    border:0;
+    flex-direction:column;
+    flex-wrap:nowrap;
+  `}
+
+  ${media.between('sm', 'md')`
+    width:100%;
+    padding:0px;
+  `}
 `;
 
 export const ContainerLoading = styled.div`
