@@ -7,7 +7,7 @@ export const Container = styled.div`
   border-radius: 5px;
   background-color: var(--backgroudLight);
 
-  ${media.lessThan('md')`
+  ${media.lessThan('sm')`
     width:100%;
   `}
 `;

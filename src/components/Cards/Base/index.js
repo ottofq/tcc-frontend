@@ -12,7 +12,7 @@ export default function Card({ children, srcImage, altImage, loading }) {
       </S.ImageContainer>
       <S.Content>
         {loading ? (
-          <S.ContainerLoading loading={loading}>
+          <S.ContainerLoading loading={loading ? 1 : 0}>
             <CircularProgress />
           </S.ContainerLoading>
         ) : (
