@@ -6,10 +6,7 @@ import {
 } from '@material-ui/core';
 import media from '../../styles/media';
 
-export const Header = styled(ContainerMateriaUI).attrs({
-  component: 'header',
-  maxWidth: 'xl',
-})`
+export const Header = styled.div`
   display: flex;
   height: var(--headerSize);
   background-color: var(--secondaryColor);
@@ -17,8 +14,8 @@ export const Header = styled(ContainerMateriaUI).attrs({
 `;
 
 export const Container = styled(ContainerMateriaUI).attrs({
-  component: 'header',
-  maxWidth: 'lg',
+  component: 'div',
+  maxWidth: 'xl',
   disableGutters: true,
 })`
   display: flex;
