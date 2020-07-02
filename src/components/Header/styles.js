@@ -16,7 +16,6 @@ export const Header = styled.div`
 export const Container = styled(ContainerMateriaUI).attrs({
   component: 'div',
   maxWidth: 'xl',
-  disableGutters: true,
 })`
   display: flex;
   justify-content: space-between;
