@@ -25,7 +25,7 @@ export default function CommentsBox({
             <CircularProgress color="primary" />
           </S.ContainerLoading>
         ) : null}
-        {comments.length > 0 ? (
+        {comments.length > 0 && loading === false ? (
           comments.map(comment => (
             <ListItem key={comment.user_id} component="li">
               <S.Comment>
