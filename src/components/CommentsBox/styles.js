@@ -12,7 +12,6 @@ export const ContainerComment = styled.div`
 
   ul {
     display: flex;
-
     flex-wrap: wrap;
     width: 100%;
     border: 1px solid var(--borderColorLight);
@@ -20,11 +19,24 @@ export const ContainerComment = styled.div`
     overflow-y: scroll;
     li {
       width: 50%;
-      ${media.lessThan('md')`
-      width: 100%;
-      `}
     }
   }
+
+  ${media.lessThan('md')`
+     ul {
+        li {
+          width: 100%;
+        }
+     }
+  `}
+
+  ${media.greaterThan('xl')`
+    height: 600px;
+
+    ul{
+      height:500px;
+    }
+  `}
 `;
 
 export const ContainerCommentTitle = styled.div`
@@ -68,6 +80,7 @@ export const Comment = styled.div`
   justify-content: space-around;
   width: 100%;
   padding: 5px;
+  height: auto;
 
   p {
     font-size: 14px;

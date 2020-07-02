@@ -47,7 +47,7 @@ export default function CommentsBox({
             </ListItem>
           ))
         ) : (
-          <S.ContainerNoComment loading={loading}>
+          <S.ContainerNoComment loading={loading ? 1 : 0}>
             <p>Não contém comentários</p>
           </S.ContainerNoComment>
         )}
