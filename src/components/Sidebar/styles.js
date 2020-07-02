@@ -14,7 +14,7 @@ export const Container = styled.aside`
     display:${props => (props.isMenuOpen ? 'flex' : 'none')};
     position:absolute;
     align-items:center;
-    z-index:1;
+    z-index:2;
     width: 100%;
     transition: 1s ease;
     transform: ${props =>
