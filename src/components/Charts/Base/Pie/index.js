@@ -1,8 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ResponsivePie } from '@nivo/pie';
 import PropTypes from 'prop-types';
+import useWindowDimensions from '../../../../hooks/useWindowDimensions';
 
 export default function Pie({ data, margin, colors }) {
+  const [handleMargin, setHandleMargin] = useState(margin);
+  const [legend, setLegend] = useState([
+    {
+      anchor: 'top-right',
+      direction: 'column',
+      translateY: 56,
+      itemWidth: 100,
+      itemHeight: 18,
+      itemsSpacing: 20,
+      symbolShape: 'square',
+    },
+  ]);
+  const windowDimensions = useWindowDimensions();
+
+  useEffect(() => {
+    if (windowDimensions.width <= 720) {
+      setHandleMargin({ top: 20, right: 0, bottom: 20, left: 0 });
+      setLegend([]);
+    }
+  }, [windowDimensions]);
+
   const format = item =>
     `${new Intl.NumberFormat('pt-BR', {
       style: 'decimal',
@@ -19,7 +41,7 @@ export default function Pie({ data, margin, colors }) {
     <ResponsivePie
       data={data}
       pixelRatio={1}
-      margin={margin}
+      margin={handleMargin}
       sliceLabel={format}
       tooltipFormat={formatTooltip}
       startAngle={-180}
@@ -39,20 +61,14 @@ export default function Pie({ data, margin, colors }) {
       radialLabelsLinkHorizontalLength={24}
       radialLabelsLinkStrokeWidth={1}
       slicesLabelsSkipAngle={10}
-      legends={[
-        {
-          anchor: 'top-right',
-          direction: 'column',
-          translateY: 56,
-          itemWidth: 100,
-          itemHeight: 18,
-          itemsSpacing: 20,
-          symbolShape: 'square',
-        },
-      ]}
+      legends={legend}
     />
   );
 }
+
+Pie.defaultProps = {
+  margin: { top: 20, right: 0, bottom: 20, left: 0 },
+};
 
 Pie.propTypes = {
   data: PropTypes.arrayOf(
@@ -67,7 +83,7 @@ Pie.propTypes = {
     right: PropTypes.number.isRequired,
     bottom: PropTypes.number.isRequired,
     left: PropTypes.number.isRequired,
-  }).isRequired,
+  }),
   colors: PropTypes.shape({
     scheme: PropTypes.string.isRequired,
   }).isRequired,
