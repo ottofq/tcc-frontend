@@ -10,17 +10,16 @@ export const Container = styled(ContainerMateriaUI).attrs({
   flex: 1;
   flex-direction: column;
   justify-content: space-around;
-  padding: 10px;
 
   h1 {
     border-left: 4px solid var(--primaryColor);
     padding-left: 4px;
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: bold;
     color: var(--primaryColor);
   }
 
-  ${media.lessThan('md')`
+  ${media.lessThan('sm')`
     overflow-y:scroll;
     flex-wrap:wrap;
     flex-direction: row;
