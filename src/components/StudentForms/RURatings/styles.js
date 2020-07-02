@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { TextField } from '@material-ui/core';
+import media from '../../../styles/media';
 
 export const ContainerStudentData = styled.div`
   display: flex;
@@ -10,6 +11,13 @@ export const ContainerStudentData = styled.div`
   justify-content: space-around;
   padding: 10px;
   border-radius: 4px;
+
+  ${media.lessThan('sm')`
+    width:100%;
+    padding: 0px;
+    border:0;
+    flex-direction: column;
+  `}
 `;
 
 export const ContainerRadioButtonRating = styled.div`

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { TextField } from '@material-ui/core';
+import media from '../../../styles/media';
 
 export const ContainerStudentData = styled.div`
   display: flex;
@@ -10,6 +11,14 @@ export const ContainerStudentData = styled.div`
   justify-content: space-around;
   padding: 10px;
   border-radius: 4px;
+
+  ${media.lessThan('sm')`
+    width:100%;
+    border: 0;
+    padding: 0px;
+    flex-wrap: nowrap;
+    height: auto;
+  `}
 `;
 
 export const ContainerRadioButton = styled.div`
@@ -18,9 +27,17 @@ export const ContainerRadioButton = styled.div`
   div {
     flex-direction: row;
   }
+
+  ${media.lessThan('sm')`
+    width:100%;
+  `}
 `;
 
 export const Input = styled(TextField)`
   height: 70px;
   width: 30%;
+
+  ${media.lessThan('sm')`
+    width:100%;
+  `}
 `;
