@@ -12,17 +12,16 @@ export const Container = styled(ContainerMateriaUI).attrs({
   justify-content: space-around;
 
   h1 {
-    border-left: 4px solid var(--primaryColor);
-    padding-left: 4px;
-    font-size: 1.5rem;
+    border-left: 7px solid var(--primaryColor);
+    padding-left: 10px;
+    font-size: 1.75rem;
     font-weight: bold;
     color: var(--primaryColor);
   }
 
   ${media.lessThan('sm')`
     overflow-y:scroll;
-    flex-wrap:wrap;
-    flex-direction: row;
+    height:1000px;
   `}
 `;
 

@@ -10,20 +10,18 @@ export const Container = styled(ContainerMateriaUI).attrs({
   flex: 1;
   flex-direction: column;
   justify-content: space-around;
-  padding: 10px;
 
   h1 {
-    border-left: 4px solid var(--primaryColor);
-    padding-left: 4px;
-    font-size: 24px;
+    border-left: 7px solid var(--primaryColor);
+    padding-left: 10px;
+    font-size: 1.75rem;
     font-weight: bold;
     color: var(--primaryColor);
   }
 
-  ${media.lessThan('md')`
+  ${media.lessThan('sm')`
     overflow-y:scroll;
-    flex-wrap:wrap;
-    flex-direction: row;
+    height:1000px;
   `}
 `;
 
