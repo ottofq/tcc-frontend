@@ -16,17 +16,13 @@ export const Container = styled(ContainerMaterialUI).attrs({
 
 export const ContainerEditor = styled.div`
   width: 100%;
-  height: 500px;
+  height: calc(100vh - 300px);
 
   & .editor {
-    height: 500px;
+    height: calc(100vh - 300px);
     border: 1px solid var(--borderColorLight);
     padding: 5px;
     border-radius: 2px;
-  }
-  & .toolbar {
-    background-color: var(--backgroudLight);
-    border: 1px solid var(--borderColorLight);
   }
 
   ${media.lessThan('sm')`
@@ -35,7 +31,6 @@ export const ContainerEditor = styled.div`
 
   & .editor {
     height: calc(100vh - 300px);
-
   }
   `}
 

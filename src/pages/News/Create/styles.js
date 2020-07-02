@@ -16,10 +16,10 @@ export const Container = styled(ContainerMaterialUI).attrs({
 
 export const ContainerEditor = styled.div`
   width: 100%;
-  height: 600px;
+  height: calc(100vh - 250px);
 
   & .editor {
-    height: 500px;
+    height: calc(100vh - 350px);
     border: 1px solid var(--borderColorLight);
     padding: 5px;
     border-radius: 2px;
@@ -33,18 +33,18 @@ export const ContainerEditor = styled.div`
     width: 100%;
     height: calc(100vh - 200px);
 
-  & .editor {
-    height: calc(100vh - 400px);
-  }
+    & .editor {
+      height: calc(100vh - 400px);
+    }
   `}
 
   ${media.between('md', 'lg')`
     width: 100%;
     height: calc(100vh - 200px);
 
-  & .editor {
-    height: calc(100vh - 300px);
-  }
+    & .editor {
+      height: calc(100vh - 300px);
+    }
   `}
 `;
 
@@ -62,5 +62,5 @@ export const Input = styled(TextField)``;
 
 export const Button = styled(ButtonMaterial)`
   background-color: var(--primaryColor);
-  font-size: 18px;
+  font-size: 1.125rem;
 `;
