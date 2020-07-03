@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Save } from '@material-ui/icons';
+import { CircularProgress } from '@material-ui/core';
 import { EditorState, ContentState, convertToRaw } from 'draft-js';
 import htmlToDraft from 'html-to-draftjs';
 import draftToHtml from 'draftjs-to-html';
@@ -15,15 +16,18 @@ import api from '../../../services/api';
 
 export default function Edit() {
   const { handleSubmit, setValue, control } = useForm();
-  const [news, setNews] = useState('');
+  const [loadingData, setLoadingData] = useState(false);
+  const [loadingSendData, setLoadingSendData] = useState(false);
+  const [news, setNews] = useState(null);
   const [editorState, setEditorState] = useState();
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
   const params = useParams();
 
   useEffect(() => {
-    async function loadInfo() {
+    async function loadNews() {
       try {
+        setLoadingData(true);
         const { id } = params;
         const result = await api.get(`/informacoes/${id}`);
         setNews(result.data);
@@ -32,23 +36,26 @@ export default function Edit() {
           contentBlock.contentBlocks
         );
         setEditorState(EditorState.createWithContent(contentState));
+        setLoadingData(false);
       } catch (error) {
+        setLoadingData(false);
         enqueueSnackbar('Erro ao carregar os avisos!', {
           variant: 'error',
         });
       }
     }
-    loadInfo();
+    loadNews();
   }, [params, enqueueSnackbar]);
 
   useEffect(() => {
-    if (news) {
+    if (news && loadingData === false) {
       setValue('titulo', news.titulo);
     }
-  }, [news, setValue]);
+  }, [news, setValue, loadingData]);
 
   async function onSubmit(data) {
     try {
+      setLoadingSendData(true);
       const { titulo } = data;
       const contentInfo = draftToHtml(
         convertToRaw(editorState.getCurrentContent())
@@ -63,9 +70,11 @@ export default function Edit() {
         enqueueSnackbar('Aviso editado com Sucesso!', {
           variant: 'success',
         });
+        setLoadingSendData(false);
       }
       history.push('/dashboard/noticias/listagem');
     } catch (error) {
+      setLoadingSendData(false);
       enqueueSnackbar('Erro ao editar o aviso!', {
         variant: 'error',
       });
@@ -73,47 +82,58 @@ export default function Edit() {
   }
   return (
     <S.Container>
-      <S.Form onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-          as={<S.Input label="Titulo" variant="outlined" />}
-          name="titulo"
-          defaultValue=""
-          control={control}
-          rules={{ required: true }}
-        />
-
-        <S.ContainerEditor>
-          <Editor
-            editorState={editorState}
-            editorClassName="editor"
-            toolbarClassName="toolbar"
-            onEditorStateChange={setEditorState}
-            toolbar={{
-              options: [
-                'blockType',
-                'emoji',
-                'history',
-                'list',
-                'inline',
-                'textAlign',
-                'link',
-              ],
-              fontFamily: {
-                options: ['PT Sans'],
-              },
-            }}
+      {loadingData ? (
+        <S.ContainerLoading>
+          <CircularProgress color="primary" />
+        </S.ContainerLoading>
+      ) : (
+        <S.Form onSubmit={handleSubmit(onSubmit)}>
+          <Controller
+            as={<S.Input label="Titulo" variant="outlined" />}
+            name="titulo"
+            defaultValue=""
+            control={control}
+            rules={{ required: true }}
           />
-        </S.ContainerEditor>
 
-        <S.Button
-          startIcon={<Save fontSize="large" />}
-          variant="contained"
-          color="primary"
-          type="submit"
-        >
-          Salvar Edição
-        </S.Button>
-      </S.Form>
+          <S.ContainerEditor>
+            <Editor
+              editorState={editorState}
+              editorClassName="editor"
+              toolbarClassName="toolbar"
+              onEditorStateChange={setEditorState}
+              toolbar={{
+                options: [
+                  'blockType',
+                  'emoji',
+                  'history',
+                  'list',
+                  'inline',
+                  'textAlign',
+                  'link',
+                ],
+                fontFamily: {
+                  options: ['PT Sans'],
+                },
+              }}
+            />
+          </S.ContainerEditor>
+
+          <S.Button
+            disabled={loadingSendData}
+            startIcon={loadingSendData ? '' : <Save fontSize="large" />}
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
+            {loadingSendData ? (
+              <CircularProgress color="primary" />
+            ) : (
+              'Salvar Edição'
+            )}
+          </S.Button>
+        </S.Form>
+      )}
     </S.Container>
   );
 }

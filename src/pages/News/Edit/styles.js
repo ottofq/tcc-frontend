@@ -14,6 +14,13 @@ export const Container = styled(ContainerMaterialUI).attrs({
   flex: 1;
 `;
 
+export const ContainerLoading = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const ContainerEditor = styled.div`
   width: 100%;
   height: calc(100vh - 250px);

@@ -17,6 +17,13 @@ export const Container = styled(ContainerMaterialUI).attrs({
   padding: 10px;
 `;
 
+export const ContainerLoading = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const TableContainer = styled(TableContainerMaterial)``;
 
 export const TableHead = styled(TableHeaderMaterial)`
