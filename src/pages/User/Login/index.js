@@ -70,7 +70,12 @@ export default function Login() {
             variant="outlined"
           />
 
-          <S.Button variant="contained" color="primary" type="submit">
+          <S.Button
+            disabled={loading}
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
             {loading ? <CircularProgress color="inherit" /> : 'Login'}
           </S.Button>
         </S.Form>
