@@ -45,6 +45,7 @@ export default function Home() {
   useEffect(() => {
     async function loadingComments() {
       if (menu) {
+        setLoadingCommentData(true);
         const result = await api.get(
           `/cardapio/${menu._id}/comentarios?skip=${skip}&limit=${limit}`
         );
