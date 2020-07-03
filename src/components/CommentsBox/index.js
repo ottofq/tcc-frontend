@@ -18,13 +18,12 @@ export default function CommentsBox({
       <S.ContainerCommentTitle>
         <h3>Avaliações: ({totalVotes})</h3>
       </S.ContainerCommentTitle>
-
+      {loading ? (
+        <S.ContainerLoading>
+          <CircularProgress color="primary" />
+        </S.ContainerLoading>
+      ) : null}
       <List component="ul">
-        {loading ? (
-          <S.ContainerLoading>
-            <CircularProgress color="primary" />
-          </S.ContainerLoading>
-        ) : null}
         {comments.length > 0 && loading === false ? (
           comments.map(comment => (
             <ListItem key={comment.user_id} component="li">

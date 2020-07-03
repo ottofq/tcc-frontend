@@ -64,8 +64,7 @@ export const ContainerNoComment = styled.div`
 
 export const ContainerLoading = styled.div`
   display: flex;
-  flex: 1;
-  height: 170px;
+  height: 100%;
   width: 100%;
   justify-content: center;
   align-items: center;
