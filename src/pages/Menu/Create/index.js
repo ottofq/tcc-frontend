@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Radio, FormControlLabel } from '@material-ui/core';
+import { Radio, FormControlLabel, CircularProgress } from '@material-ui/core';
 import { Save } from '@material-ui/icons';
 import { useSnackbar } from 'notistack';
 import { useHistory } from 'react-router-dom';
@@ -9,11 +9,13 @@ import * as S from './styles';
 import api from '../../../services/api';
 
 export default function Create() {
+  const [loading, setLoading] = useState(false);
   const { register, handleSubmit, reset } = useForm();
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
 
   const onSubmit = async data => {
+    setLoading(true);
     const {
       tipo,
       entrada,
@@ -39,10 +41,12 @@ export default function Create() {
         enqueueSnackbar('Novo cardápio cadastrado!', {
           variant: 'success',
         });
+        setLoading(false);
         reset();
         history.push('/dashboard');
       }
     } catch (error) {
+      setLoading(false);
       enqueueSnackbar('Erro ao cadastrar novo cardápio!', {
         variant: 'error',
       });
@@ -115,12 +119,13 @@ export default function Create() {
         />
 
         <S.Button
-          startIcon={<Save fontSize="large" />}
+          disabled={loading}
+          startIcon={loading ? '' : <Save fontSize="large" />}
           variant="contained"
           color="primary"
           type="submit"
         >
-          Cadastrar
+          {loading ? <CircularProgress color="inherit" /> : 'Cadastrar'}
         </S.Button>
       </S.Form>
     </S.Container>

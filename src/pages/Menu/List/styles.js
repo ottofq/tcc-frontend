@@ -18,6 +18,13 @@ export const Container = styled(ContainerMateriaUI).attrs({
   padding: 10px;
 `;
 
+export const ContainerLoading = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const Title = styled.h1`
   font-size: 1.75rem;
   color: var(--primaryColor);
