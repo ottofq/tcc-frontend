@@ -63,7 +63,12 @@ export default function Register() {
             variant="outlined"
           />
 
-          <S.Button variant="contained" color="primary" type="submit">
+          <S.Button
+            disabled={loading}
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
             {loading ? <CircularProgress color="inherit" /> : 'Cadastrar'}
           </S.Button>
         </S.Form>
