@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Save } from '@material-ui/icons';
+import { CircularProgress } from '@material-ui/core';
 import { EditorState, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import { Editor } from 'react-draft-wysiwyg';
@@ -14,12 +15,14 @@ import api from '../../../services/api';
 
 export default function Create() {
   const { register, handleSubmit, reset } = useForm();
+  const [loading, setLoading] = useState(false);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
 
   async function onSubmit(data) {
     try {
+      setLoading(true);
       const contentInfo = draftToHtml(
         convertToRaw(editorState.getCurrentContent())
       );
@@ -31,13 +34,15 @@ export default function Create() {
       });
 
       if (result.status === 200) {
+        setLoading(false);
         enqueueSnackbar('Aviso cadastrado com Sucesso!', {
           variant: 'success',
         });
       }
       reset();
-      history.push('/dashboard/avisos/listagem');
+      history.push('/dashboard/noticias/listagem');
     } catch (error) {
+      setLoading(false);
       enqueueSnackbar('Erro ao cadastrar o aviso!', {
         variant: 'error',
       });
@@ -62,15 +67,13 @@ export default function Create() {
             onEditorStateChange={setEditorState}
             toolbar={{
               options: [
-                'inline',
                 'blockType',
-                'list',
-                'textAlign',
-                'colorPicker',
-                'link',
                 'emoji',
-                'remove',
                 'history',
+                'list',
+                'inline',
+                'textAlign',
+                'link',
               ],
               fontFamily: {
                 options: ['PT Sans'],
@@ -80,12 +83,13 @@ export default function Create() {
         </S.ContainerEditor>
 
         <S.Button
-          startIcon={<Save fontSize="large" />}
+          disabled={loading}
+          startIcon={loading ? '' : <Save fontSize="large" />}
           variant="contained"
           color="primary"
           type="submit"
         >
-          Cadastrar
+          {loading ? <CircularProgress color="inherit" /> : 'Cadastrar'}
         </S.Button>
       </S.Form>
     </S.Container>

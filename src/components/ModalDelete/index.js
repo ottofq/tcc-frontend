@@ -1,5 +1,6 @@
-import React, { useState, cloneElement } from 'react';
+import React from 'react';
 import {
+  CircularProgress,
   Button,
   Dialog,
   DialogActions,
@@ -19,50 +20,46 @@ export default function ModalDelete({
   SubmitModal,
   TitleDialog,
   TextDialog,
-  children,
+  loading,
+  openModal,
+  setOpenModal,
 }) {
-  const [open, setOpen] = useState(false);
-
-  const OpenModal = () => {
-    setOpen(true);
-  };
-
-  const CloseModal = () => {
-    setOpen(false);
-  };
-
-  const handleSubmitModal = () => {
-    SubmitModal();
-    CloseModal();
-  };
-
   return (
     <div>
-      <div>{cloneElement(children, { onClick: OpenModal })}</div>
       <Dialog
-        open={open}
+        open={openModal}
         TransitionComponent={Transition}
         keepMounted
-        onClose={CloseModal}
+        onClose={() => setOpenModal(!openModal)}
       >
-        <DialogTitle id="alert-dialog-slide-title">{TitleDialog}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            {TextDialog}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={CloseModal} variant="contained" color="default">
-            Não
-          </Button>
-          <Button
-            onClick={handleSubmitModal}
-            variant="contained"
-            color="secondary"
-          >
-            Sim
-          </Button>
-        </DialogActions>
+        {loading ? (
+          <DialogContent>
+            <CircularProgress color="primary" />
+          </DialogContent>
+        ) : (
+          <>
+            <DialogTitle>{TitleDialog}</DialogTitle>
+            <DialogContent>
+              <DialogContentText>{TextDialog}</DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={() => setOpenModal(!openModal)}
+                variant="contained"
+                color="default"
+              >
+                Não
+              </Button>
+              <Button
+                onClick={SubmitModal}
+                variant="contained"
+                color="secondary"
+              >
+                Sim
+              </Button>
+            </DialogActions>
+          </>
+        )}
       </Dialog>
     </div>
   );
@@ -72,5 +69,7 @@ ModalDelete.propTypes = {
   SubmitModal: PropTypes.func.isRequired,
   TitleDialog: PropTypes.string.isRequired,
   TextDialog: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
+  loading: PropTypes.bool.isRequired,
+  openModal: PropTypes.bool.isRequired,
+  setOpenModal: PropTypes.func.isRequired,
 };

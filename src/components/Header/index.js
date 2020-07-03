@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Avatar } from '@material-ui/core';
-// import { Menu } from '@material-ui/icons';
-import { withRouter, Link, useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Avatar, Button, MenuItem } from '@material-ui/core';
+import { Menu } from '@material-ui/icons';
+import { useHistory } from 'react-router-dom';
 
 import * as S from './styles';
 import avatar from '../../assets/avatar.png';
 
-function Header() {
+export default function Header({ isMenuOpen, setIsMenuOpen }) {
   const [user, setUser] = useState('');
+  const [anchorEl, setAnchorEl] = useState(null);
   const history = useHistory();
 
   useEffect(() => {
@@ -15,43 +17,64 @@ function Header() {
     setUser(userLocalStorage.user);
   }, []);
 
-  function handleLogout() {
+  const handleLogout = () => {
     localStorage.removeItem('@app-ru/user');
     history.push('/');
-  }
+  };
+
+  const handleClick = event => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleNavigation = () => {
+    history.push('/dashboard/profile');
+  };
+
+  const openMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <S.Header>
       <S.Container>
         <S.ContainerTitle>
-          {/* <button type="button">
+          <button onClick={() => openMenu()} type="button">
             <Menu size={32} />
-          </button> */}
-          <h1>Cardápio RU CCA-UFES</h1>
+          </button>
+          <S.Title>Cardápio RU CCA-UFES</S.Title>
         </S.ContainerTitle>
         <S.ContainerMenu>
-          <S.ContainerUser>
-            <Avatar src={avatar} alt="avatar" />
-            <p>{user.nome}</p>
-          </S.ContainerUser>
-
-          <S.ContainerItems>
-            <S.ItemMenu>
-              <Link style={{ textDecoration: 'none' }} to="/dashboard/profile">
-                Ver dados
-              </Link>
-            </S.ItemMenu>
-
-            <S.ItemMenu>
-              <button type="button" onClick={handleLogout}>
-                Sair
-              </button>
-            </S.ItemMenu>
-          </S.ContainerItems>
+          <Button
+            variant="text"
+            aria-controls="simple-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
+          >
+            <S.ContainerUser>
+              <Avatar src={avatar} alt="avatar" />
+              <p>{user.nome}</p>
+            </S.ContainerUser>
+          </Button>
+          <S.Menu
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={handleNavigation}>Ver perfil</MenuItem>
+            <MenuItem onClick={handleLogout}>Sair</MenuItem>
+          </S.Menu>
         </S.ContainerMenu>
       </S.Container>
     </S.Header>
   );
 }
 
-export default withRouter(Header);
+Header.propTypes = {
+  isMenuOpen: PropTypes.bool.isRequired,
+  setIsMenuOpen: PropTypes.func.isRequired,
+};

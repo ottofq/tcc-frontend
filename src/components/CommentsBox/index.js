@@ -16,23 +16,22 @@ export default function CommentsBox({
   return (
     <S.ContainerComment>
       <S.ContainerCommentTitle>
-        <h4>
-          Avaliações: (<span>{totalVotes})</span>
-        </h4>
+        <h3>Avaliações: ({totalVotes})</h3>
       </S.ContainerCommentTitle>
-
+      {loading ? (
+        <S.ContainerLoading>
+          <CircularProgress color="primary" />
+        </S.ContainerLoading>
+      ) : null}
       <List component="ul">
-        {loading ? (
-          <S.ContainerLoading>
-            <CircularProgress color="primary" />
-          </S.ContainerLoading>
-        ) : null}
-        {comments.length > 0 ? (
+        {comments.length > 0 && loading === false ? (
           comments.map(comment => (
             <ListItem key={comment.user_id} component="li">
               <S.Comment>
                 <S.ContainerCommentTitle>
-                  <h5>{comment.nome}</h5>
+                  <p>
+                    <strong>{comment.nome}</strong>
+                  </p>
                   <S.RatingComment
                     size="small"
                     name="nota"
@@ -47,12 +46,12 @@ export default function CommentsBox({
             </ListItem>
           ))
         ) : (
-          <S.ContainerNoComment>
+          <S.ContainerNoComment loading={loading ? 1 : 0}>
             <p>Não contém comentários</p>
           </S.ContainerNoComment>
         )}
       </List>
-      <S.ContainerButtonPagination>
+      <S.ContainerButtonPagination hasComments={comments.length > 0}>
         <S.StyledButton
           onClick={previousComment}
           variant="outlined"

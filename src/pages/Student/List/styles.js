@@ -1,4 +1,5 @@
 import {
+  Container as ContainerMateriaUI,
   TableContainer as TableContainerMaterial,
   TableHead as TableHeaderMaterial,
   Button as ButtonMaterial,
@@ -6,11 +7,21 @@ import {
 } from '@material-ui/core';
 import styled from 'styled-components';
 
-export const Container = styled.div`
+export const Container = styled(ContainerMateriaUI).attrs({
+  component: 'div',
+  maxWidth: 'xl',
+})`
   display: flex;
   flex: 1;
   flex-direction: column;
   padding: 10px;
+`;
+
+export const ContainerLoading = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Card = styled.div`

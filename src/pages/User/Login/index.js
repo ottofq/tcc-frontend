@@ -3,11 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { useSnackbar } from 'notistack';
 
-import {
-  TextField as Input,
-  Button,
-  CircularProgress,
-} from '@material-ui/core';
+import { CircularProgress } from '@material-ui/core';
 
 import * as S from './styles';
 import logo from '../../../assets/logo.png';
@@ -56,9 +52,9 @@ export default function Login() {
     <S.Container>
       <S.ContainerLogin>
         <img src={logo} alt="Logo UFES" />
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Input
+        <h1>Login</h1>
+        <S.Form onSubmit={handleSubmit(onSubmit)}>
+          <S.Input
             inputRef={register({ required: true })}
             type="email"
             name="email"
@@ -66,7 +62,7 @@ export default function Login() {
             variant="outlined"
           />
 
-          <Input
+          <S.Input
             inputRef={register({ required: true })}
             type="password"
             name="password"
@@ -74,10 +70,15 @@ export default function Login() {
             variant="outlined"
           />
 
-          <Button type="submit">
+          <S.Button
+            disabled={loading}
+            variant="contained"
+            color="primary"
+            type="submit"
+          >
             {loading ? <CircularProgress color="inherit" /> : 'Login'}
-          </Button>
-        </form>
+          </S.Button>
+        </S.Form>
 
         <Link to="/register">Cadastre-se</Link>
       </S.ContainerLogin>

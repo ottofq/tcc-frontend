@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
 import {
+  CircularProgress,
   Table,
   TableCell,
   TableRow,
@@ -17,6 +18,10 @@ import api from '../../../services/api';
 
 export default function List() {
   const [menus, setMenus] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [loadingDelete, setLoadingDelete] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [idDeleteMenu, setIdDeleteMenu] = useState(0);
   const [totalMenus, setTotalMenus] = useState(0);
   const [page, setPage] = useState(0);
   const { enqueueSnackbar } = useSnackbar();
@@ -24,10 +29,13 @@ export default function List() {
   useEffect(() => {
     async function loadMenus() {
       try {
+        setLoading(true);
         const result = await api.get(`/cardapio?page=${page + 1}`);
         setMenus(result.data.result);
         setTotalMenus(result.data.total_cardapios);
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         enqueueSnackbar('Erro ao carregar os cardápios!', {
           variant: 'error',
         });
@@ -40,17 +48,27 @@ export default function List() {
     setPage(nextPage);
   };
 
-  async function handleButtonDelete(id) {
+  const handleButtonDelete = id => {
+    setOpenModal(true);
+    setIdDeleteMenu(id);
+  };
+
+  async function DeleteMenu() {
     try {
-      const result = await api.delete(`/cardapio/${id}`);
-      setMenus(menus.filter(menu => menu._id !== id));
+      setLoadingDelete(true);
+      const result = await api.delete(`/cardapio/${idDeleteMenu}`);
+      setMenus(menus.filter(menu => menu._id !== idDeleteMenu));
 
       if (result.status === 200) {
         enqueueSnackbar('Cardápio excluido com Sucesso!', {
           variant: 'success',
         });
+        setLoadingDelete(false);
+        setOpenModal(false);
       }
     } catch (error) {
+      setLoadingDelete(false);
+      setOpenModal(false);
       enqueueSnackbar('Erro ao excluir o cardápio!', {
         variant: 'error',
       });
@@ -59,82 +77,94 @@ export default function List() {
 
   return (
     <S.Container>
-      <S.TableContainer component={Paper}>
-        <Table aria-label="tabela de cardapios">
-          <S.TableHead>
-            <TableRow hover>
-              <TableCell>Cardápios</TableCell>
-              <TableCell align="center">Tipo de Refeição</TableCell>
-              <TableCell align="center">Data</TableCell>
-              <TableCell align="center">Média</TableCell>
-              <TableCell align="center">Ações</TableCell>
-            </TableRow>
-          </S.TableHead>
-          <S.TableBody>
-            {menus.length > 0 ? (
-              menus.map(menu => (
-                <TableRow hover key={menu._id}>
-                  <TableCell component="th" scope="row">
-                    {menu.proteina.descricao}
-                  </TableCell>
-                  <TableCell align="center">{menu.tipo}</TableCell>
-                  <TableCell align="center">
-                    {format(parseISO(menu.data), 'dd/MM/yyyy')}
-                  </TableCell>
-                  <TableCell align="center">
-                    {Math.round(menu.media_geral)}
-                  </TableCell>
+      {loading ? (
+        <S.ContainerLoading>
+          <CircularProgress color="primary" />
+        </S.ContainerLoading>
+      ) : (
+        <S.TableContainer component={Paper}>
+          <Table aria-label="tabela de cardapios">
+            <S.TableHead>
+              <TableRow hover>
+                <TableCell>Cardápios</TableCell>
+                <TableCell align="center">Tipo de Refeição</TableCell>
+                <TableCell align="center">Data</TableCell>
+                <TableCell align="center">Média</TableCell>
+                <TableCell align="center">Ações</TableCell>
+              </TableRow>
+            </S.TableHead>
+            <S.TableBody>
+              {menus.length > 0 ? (
+                menus.map(menu => (
+                  <TableRow hover key={menu._id}>
+                    <TableCell component="th" scope="row">
+                      {menu.proteina.descricao}
+                    </TableCell>
+                    <TableCell align="center">{menu.tipo}</TableCell>
+                    <TableCell align="center">
+                      {format(parseISO(menu.data), 'dd/MM/yyyy')}
+                    </TableCell>
+                    <TableCell align="center">
+                      {Math.round(menu.media_geral)}
+                    </TableCell>
 
-                  <TableCell align="center">
-                    <S.ContainerActions>
-                      <Link
-                        style={{ textDecoration: 'none' }}
-                        to={`/dashboard/cardapio/detalhes/${menu._id}`}
-                      >
-                        <S.Button variant="contained">Detalhes</S.Button>
-                      </Link>
+                    <TableCell align="center">
+                      <S.ContainerActions>
+                        <Link
+                          style={{ textDecoration: 'none' }}
+                          to={`/dashboard/cardapio/detalhes/${menu._id}`}
+                        >
+                          <S.Button variant="contained">Detalhes</S.Button>
+                        </Link>
 
-                      <Link
-                        style={{ textDecoration: 'none' }}
-                        to={`/dashboard/cardapio/editar/${menu._id}`}
-                      >
-                        <S.Button variant="contained" color="primary">
-                          Editar
-                        </S.Button>
-                      </Link>
+                        <Link
+                          style={{ textDecoration: 'none' }}
+                          to={`/dashboard/cardapio/editar/${menu._id}`}
+                        >
+                          <S.Button variant="contained" color="primary">
+                            Editar
+                          </S.Button>
+                        </Link>
 
-                      <ModalDelete
-                        TextButton="Excluir"
-                        TextDialog="Deseja excluir o Cardápio selecionado?"
-                        TitleDialog="Excluir Aviso"
-                        SubmitModal={() => handleButtonDelete(`${menu._id}`)}
-                      >
-                        <S.Button variant="contained" color="secondary">
+                        <S.Button
+                          onClick={() => handleButtonDelete(menu._id)}
+                          variant="contained"
+                          color="secondary"
+                        >
                           Excluir
                         </S.Button>
-                      </ModalDelete>
-                    </S.ContainerActions>
+                      </S.ContainerActions>
+                    </TableCell>
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell>
+                    <h1>Vazio</h1>
                   </TableCell>
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell>
-                  <h1>Vazio</h1>
-                </TableCell>
-              </TableRow>
-            )}
-          </S.TableBody>
-        </Table>
-        <TablePagination
-          component="div"
-          rowsPerPageOptions={['']}
-          count={totalMenus}
-          rowsPerPage={8}
-          page={page}
-          onChangePage={handleChangePage}
-        />
-      </S.TableContainer>
+              )}
+            </S.TableBody>
+          </Table>
+          <TablePagination
+            component="div"
+            rowsPerPageOptions={['']}
+            count={totalMenus}
+            rowsPerPage={8}
+            page={page}
+            onChangePage={handleChangePage}
+          />
+        </S.TableContainer>
+      )}
+      <ModalDelete
+        TextButton="Excluir"
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        loading={loadingDelete}
+        TextDialog="Deseja excluir o Cardápio selecionado?"
+        TitleDialog="Excluir Aviso"
+        SubmitModal={() => DeleteMenu()}
+      />
     </S.Container>
   );
 }

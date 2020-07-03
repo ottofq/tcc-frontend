@@ -1,9 +1,11 @@
 import styled from 'styled-components';
+import { TextField, Button as MaterialUIButton } from '@material-ui/core';
+import media from '../../../styles/media';
 
 export const Container = styled.div`
   display: flex;
   height: 100vh;
-  background-color: #174578;
+  background-color: var(--primaryColor);
   align-items: center;
   justify-content: center;
 `;
@@ -11,7 +13,7 @@ export const Container = styled.div`
 export const ContainerLogin = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   height: 500px;
   width: 400px;
@@ -24,37 +26,38 @@ export const ContainerLogin = styled.div`
     margin: 10px;
   }
 
-  h2 {
-    font-size: 24px;
+  h1 {
+    font-size: 1.5rem;
     font-weight: bold;
-    margin: 10px;
-  }
-
-  form {
-    display: flex;
-    height: 200px;
-    flex-direction: column;
-    justify-content: space-between;
-
-    input {
-      width: 300px;
-    }
-
-    button {
-      font-size: 18px;
-      background-color: #174578;
-      color: #fff;
-
-      &:hover {
-        background-color: #0f2c4d;
-      }
-    }
   }
 
   a {
-    margin: 10px 0;
-    font-size: 18px;
+    font-size: 1.125rem;
     text-decoration: none;
-    color: #174578;
+    color: var(--primaryColor);
   }
+
+  ${media.lessThan('md')`
+    width: 320px;
+  `}
+`;
+
+export const Form = styled.form`
+  display: flex;
+  height: 200px;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 350px;
+
+  ${media.lessThan('md')`
+    width: 300px;
+  `}
+`;
+
+export const Input = styled(TextField)`
+  width: 100%;
+`;
+
+export const Button = styled(MaterialUIButton)`
+  font-size: 1.125rem;
 `;

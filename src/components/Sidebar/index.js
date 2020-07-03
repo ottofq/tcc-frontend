@@ -1,140 +1,103 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Divider } from '@material-ui/core';
-import {
-  Home,
-  ViewList,
-  AddBox,
-  RestaurantMenu,
-  Info,
-  People,
-  PieChart,
-} from '@material-ui/icons';
+import { RestaurantMenu, Announcement, People } from '@material-ui/icons';
+
 import logo from '../../assets/logo_sem_texto.png';
 
 import { Container, SidebarLink, Title } from './styles';
+import { menuLinks, newsLinks, studentLinks } from './links';
 
-export default function Sidebar() {
+export default function Sidebar({ isMenuOpen, setIsMenuOpen }) {
+  const showMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
   return (
-    <Container>
+    <Container isMenuOpen={isMenuOpen}>
+      <img src={logo} alt="UFES" />
       <nav>
         <ul>
           <li>
-            <img src={logo} alt="UFES" />
-          </li>
-          <li>
             <Title>
-              <RestaurantMenu size={32} />
+              <RestaurantMenu />
               <h2>Cardápio</h2>
             </Title>
           </li>
-          <li>
-            <SidebarLink
-              activeStyle={{ backgroundColor: '#2266b1' }}
-              exact
-              to="/dashboard"
-            >
-              <div>
-                <Home size={32} />
-                <span>Home</span>
-              </div>
-            </SidebarLink>
-          </li>
-
-          <li>
-            <SidebarLink
-              activeStyle={{ backgroundColor: '#2266b1' }}
-              exact
-              to="/dashboard/cardapio/cadastrar"
-            >
-              <div>
-                <AddBox size={32} />
-                <span>Cadastar Cardápio</span>
-              </div>
-            </SidebarLink>
-          </li>
-
-          <li>
-            <SidebarLink
-              activeStyle={{ backgroundColor: '#2266b1' }}
-              exact
-              to="/dashboard/cardapio"
-            >
-              <div>
-                <ViewList size={32} />
-                <span>Ver Cardápios</span>
-              </div>
-            </SidebarLink>
-          </li>
-
+          {menuLinks.map(link => (
+            <li key={link.label}>
+              <SidebarLink
+                onClick={showMenu}
+                exact
+                activeClassName="active"
+                to={link.url}
+              >
+                <div>
+                  {link.icon}
+                  <h3>{link.label}</h3>
+                </div>
+              </SidebarLink>
+            </li>
+          ))}
           <li>
             <Divider />
+          </li>
+          <li>
             <Title>
-              <Info size={32} />
-              <h2>Avisos</h2>
+              <Announcement />
+              <h2>Noticias</h2>
+            </Title>
+          </li>
+          {newsLinks.map(link => (
+            <li key={link.label}>
+              <SidebarLink
+                exact
+                onClick={showMenu}
+                activeClassName="active"
+                to={link.url}
+              >
+                <div>
+                  {link.icon}
+                  <h3>{link.label}</h3>
+                </div>
+              </SidebarLink>
+            </li>
+          ))}
+          <li>
+            <Divider />
+          </li>
+          <li>
+            {' '}
+            <Title>
+              <People />
+              <h2>Alunos</h2>
             </Title>
           </li>
 
-          <li>
-            <SidebarLink
-              activeStyle={{ backgroundColor: '#2266b1' }}
-              exact
-              to="/dashboard/avisos/cadastro"
-            >
-              <div>
-                <AddBox size={32} />
-                <span>Cadastar Aviso</span>
-              </div>
-            </SidebarLink>
-          </li>
-
-          <li>
-            <SidebarLink
-              activeStyle={{ backgroundColor: '#2266b1' }}
-              exact
-              to="/dashboard/avisos/listagem"
-            >
-              <div>
-                <ViewList size={32} />
-                <span>Ver Avisos</span>
-              </div>
-            </SidebarLink>
-          </li>
-
+          {studentLinks.map(link => (
+            <li key={link.label}>
+              <SidebarLink
+                exact
+                onClick={showMenu}
+                activeClassName="active"
+                to={link.url}
+              >
+                <div>
+                  {link.icon}
+                  <h3>{link.label}</h3>
+                </div>
+              </SidebarLink>
+            </li>
+          ))}
           <li>
             <Divider />
-            <Title>
-              <People size={32} />
-              <h2>Aluno</h2>
-            </Title>
-          </li>
-
-          <li>
-            <SidebarLink
-              activeStyle={{ backgroundColor: '#2266b1' }}
-              exact
-              to="/dashboard/aluno/listagem"
-            >
-              <div>
-                <ViewList size={32} />
-                <span>Ver dados dos alunos</span>
-              </div>
-            </SidebarLink>
-          </li>
-
-          <li>
-            <SidebarLink
-              activeStyle={{ backgroundColor: '#2266b1' }}
-              exact
-              to="/dashboard/aluno/graficos"
-            >
-              <div>
-                <PieChart size={32} />
-                <span>Gráficos</span>
-              </div>
-            </SidebarLink>
           </li>
         </ul>
       </nav>
     </Container>
   );
 }
+
+Sidebar.propTypes = {
+  isMenuOpen: PropTypes.bool.isRequired,
+  setIsMenuOpen: PropTypes.func.isRequired,
+};
