@@ -4,6 +4,7 @@ import {
   TableHead as TableHeaderMaterial,
   Button as ButtonMaterial,
   TableBody as TableBodyMaterial,
+  TableRow as TableRowMaterial,
 } from '@material-ui/core';
 import styled from 'styled-components';
 
@@ -20,6 +21,7 @@ export const Container = styled(ContainerMaterialUI).attrs({
 export const ContainerLoading = styled.div`
   display: flex;
   flex: 1;
+  padding: 10px;
   justify-content: center;
   align-items: center;
 `;
@@ -40,6 +42,10 @@ export const TableBody = styled(TableBodyMaterial)`
   tr th {
     font-size: 1rem;
   }
+`;
+
+export const TableRow = styled(TableRowMaterial)`
+  display: ${props => (props.loading ? 'none' : 'table-row')};
 `;
 
 export const Button = styled(ButtonMaterial)`

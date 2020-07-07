@@ -77,75 +77,76 @@ export default function List() {
 
   return (
     <S.Container>
-      {loading ? (
-        <S.ContainerLoading>
-          <CircularProgress color="primary" />
-        </S.ContainerLoading>
-      ) : (
-        <S.TableContainer component={Paper}>
-          <Table aria-label="tabela de cardapios">
-            <S.TableHead>
-              <TableRow hover>
-                <TableCell>Cardápios</TableCell>
-                <TableCell align="center">Tipo de Refeição</TableCell>
-                <TableCell align="center">Data</TableCell>
-                <TableCell align="center">Média</TableCell>
-                <TableCell align="center">Ações</TableCell>
-              </TableRow>
-            </S.TableHead>
-            <S.TableBody>
-              {menus.length > 0 ? (
-                menus.map(menu => (
-                  <TableRow hover key={menu._id}>
-                    <TableCell component="th" scope="row">
-                      {menu.proteina.descricao}
-                    </TableCell>
-                    <TableCell align="center">{menu.tipo}</TableCell>
-                    <TableCell align="center">
-                      {format(parseISO(menu.data), 'dd/MM/yyyy')}
-                    </TableCell>
-                    <TableCell align="center">
-                      {Math.round(menu.media_geral)}
-                    </TableCell>
+      <S.TableContainer component={Paper}>
+        <Table aria-label="tabela de cardapios">
+          <S.TableHead>
+            <TableRow hover>
+              <TableCell>Cardápios</TableCell>
+              <TableCell align="center">Tipo de Refeição</TableCell>
+              <TableCell align="center">Data</TableCell>
+              <TableCell align="center">Média</TableCell>
+              <TableCell align="center">Ações</TableCell>
+            </TableRow>
+          </S.TableHead>
+          <S.TableBody>
+            {menus.length > 0 ? (
+              menus.map(menu => (
+                <TableRow hover key={menu._id}>
+                  <TableCell component="th" scope="row">
+                    {menu.proteina.descricao}
+                  </TableCell>
+                  <TableCell align="center">{menu.tipo}</TableCell>
+                  <TableCell align="center">
+                    {format(parseISO(menu.data), 'dd/MM/yyyy')}
+                  </TableCell>
+                  <TableCell align="center">
+                    {Math.round(menu.media_geral)}
+                  </TableCell>
 
-                    <TableCell align="center">
-                      <S.ContainerActions>
-                        <Link
-                          style={{ textDecoration: 'none' }}
-                          to={`/dashboard/cardapio/detalhes/${menu._id}`}
-                        >
-                          <S.Button variant="contained">Detalhes</S.Button>
-                        </Link>
+                  <TableCell align="center">
+                    <S.ContainerActions>
+                      <Link
+                        style={{ textDecoration: 'none' }}
+                        to={`/dashboard/cardapio/detalhes/${menu._id}`}
+                      >
+                        <S.Button variant="contained">Detalhes</S.Button>
+                      </Link>
 
-                        <Link
-                          style={{ textDecoration: 'none' }}
-                          to={`/dashboard/cardapio/editar/${menu._id}`}
-                        >
-                          <S.Button variant="contained" color="primary">
-                            Editar
-                          </S.Button>
-                        </Link>
-
-                        <S.Button
-                          onClick={() => handleButtonDelete(menu._id)}
-                          variant="contained"
-                          color="secondary"
-                        >
-                          Excluir
+                      <Link
+                        style={{ textDecoration: 'none' }}
+                        to={`/dashboard/cardapio/editar/${menu._id}`}
+                      >
+                        <S.Button variant="contained" color="primary">
+                          Editar
                         </S.Button>
-                      </S.ContainerActions>
-                    </TableCell>
-                  </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell>
-                    <h1>Vazio</h1>
+                      </Link>
+
+                      <S.Button
+                        onClick={() => handleButtonDelete(menu._id)}
+                        variant="contained"
+                        color="secondary"
+                      >
+                        Excluir
+                      </S.Button>
+                    </S.ContainerActions>
                   </TableCell>
                 </TableRow>
-              )}
-            </S.TableBody>
-          </Table>
+              ))
+            ) : (
+              <S.TableRow loading={loading ? 1 : 0}>
+                <TableCell>
+                  <h1>Vazio</h1>
+                </TableCell>
+              </S.TableRow>
+            )}
+          </S.TableBody>
+        </Table>
+
+        {loading ? (
+          <S.ContainerLoading>
+            <CircularProgress color="primary" />
+          </S.ContainerLoading>
+        ) : (
           <TablePagination
             component="div"
             rowsPerPageOptions={['']}
@@ -154,8 +155,9 @@ export default function List() {
             page={page}
             onChangePage={handleChangePage}
           />
-        </S.TableContainer>
-      )}
+        )}
+      </S.TableContainer>
+
       <ModalDelete
         TextButton="Excluir"
         openModal={openModal}
