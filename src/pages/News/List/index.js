@@ -77,71 +77,72 @@ export default function List() {
 
   return (
     <S.Container>
-      {loading ? (
-        <S.ContainerLoading>
-          <CircularProgress color="primary" />
-        </S.ContainerLoading>
-      ) : (
-        <S.TableContainer component={Paper}>
-          <Table aria-label="simple table">
-            <S.TableHead>
-              <TableRow>
-                <TableCell>Titulo</TableCell>
-                <TableCell align="center">Data</TableCell>
-                <TableCell align="center">Ações</TableCell>
-              </TableRow>
-            </S.TableHead>
-            <S.TableBody>
-              {news.length > 0 ? (
-                news.map(info => (
-                  <TableRow key={info._id}>
-                    <TableCell component="th" scope="row">
-                      {info.titulo.length < 80
-                        ? info.titulo
-                        : `${info.titulo.substring(0, 80)}...`}
-                    </TableCell>
-                    <TableCell align="center">
-                      {format(parseISO(info.data), 'dd/MM/yyyy')}
-                    </TableCell>
+      <S.TableContainer component={Paper}>
+        <Table aria-label="simple table">
+          <S.TableHead>
+            <TableRow>
+              <TableCell>Titulo</TableCell>
+              <TableCell align="center">Data</TableCell>
+              <TableCell align="center">Ações</TableCell>
+            </TableRow>
+          </S.TableHead>
+          <S.TableBody>
+            {news.length > 0 ? (
+              news.map(info => (
+                <TableRow key={info._id}>
+                  <TableCell component="th" scope="row">
+                    {info.titulo.length < 80
+                      ? info.titulo
+                      : `${info.titulo.substring(0, 80)}...`}
+                  </TableCell>
+                  <TableCell align="center">
+                    {format(parseISO(info.data), 'dd/MM/yyyy')}
+                  </TableCell>
 
-                    <TableCell align="center">
-                      <S.ContainerActions>
-                        <Link
-                          style={{ textDecoration: 'none' }}
-                          to={`/dashboard/noticias/detalhes/${info._id}`}
-                        >
-                          <S.Button variant="contained">Detalhes</S.Button>
-                        </Link>
+                  <TableCell align="center">
+                    <S.ContainerActions>
+                      <Link
+                        style={{ textDecoration: 'none' }}
+                        to={`/dashboard/noticias/detalhes/${info._id}`}
+                      >
+                        <S.Button variant="contained">Detalhes</S.Button>
+                      </Link>
 
-                        <Link
-                          style={{ textDecoration: 'none' }}
-                          to={`/dashboard/noticias/editar/${info._id}`}
-                        >
-                          <S.Button variant="contained" color="primary">
-                            Editar
-                          </S.Button>
-                        </Link>
-
-                        <S.Button
-                          onClick={() => handleButtonDelete(info._id)}
-                          variant="contained"
-                          color="secondary"
-                        >
-                          Excluir
+                      <Link
+                        style={{ textDecoration: 'none' }}
+                        to={`/dashboard/noticias/editar/${info._id}`}
+                      >
+                        <S.Button variant="contained" color="primary">
+                          Editar
                         </S.Button>
-                      </S.ContainerActions>
-                    </TableCell>
-                  </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell>
-                    <div>Vazio</div>
+                      </Link>
+
+                      <S.Button
+                        onClick={() => handleButtonDelete(info._id)}
+                        variant="contained"
+                        color="secondary"
+                      >
+                        Excluir
+                      </S.Button>
+                    </S.ContainerActions>
                   </TableCell>
                 </TableRow>
-              )}
-            </S.TableBody>
-          </Table>
+              ))
+            ) : (
+              <S.TableRow loading={loading ? 1 : 0}>
+                <TableCell>
+                  <div>Vazio</div>
+                </TableCell>
+              </S.TableRow>
+            )}
+          </S.TableBody>
+        </Table>
+
+        {loading ? (
+          <S.ContainerLoading>
+            <CircularProgress color="primary" />
+          </S.ContainerLoading>
+        ) : (
           <TablePagination
             component="div"
             rowsPerPageOptions={['']}
@@ -150,8 +151,8 @@ export default function List() {
             page={page}
             onChangePage={handleChangePage}
           />
-        </S.TableContainer>
-      )}
+        )}
+      </S.TableContainer>
       <ModalDelete
         TextButton="Excluir"
         openModal={openModal}
