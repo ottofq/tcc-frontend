@@ -7,10 +7,11 @@ import {
 } from '@material-ui/core/styles';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import GlobalStyle from './styles/global';
 import Routes from './routes';
-import store from './redux';
+import { store, persistor } from './redux';
 
 function App() {
   const theme = createMuiTheme({
@@ -27,23 +28,25 @@ function App() {
 
   return (
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <StylesProvider injectFirst>
-          <SnackbarProvider
-            autoHideDuration={2000}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            maxSnack={3}
-          >
-            <BrowserRouter>
-              <GlobalStyle />
-              <Routes />
-            </BrowserRouter>
-          </SnackbarProvider>
-        </StylesProvider>
-      </ThemeProvider>
+      <PersistGate persistor={persistor}>
+        <ThemeProvider theme={theme}>
+          <StylesProvider injectFirst>
+            <SnackbarProvider
+              autoHideDuration={2000}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              maxSnack={3}
+            >
+              <BrowserRouter>
+                <GlobalStyle />
+                <Routes />
+              </BrowserRouter>
+            </SnackbarProvider>
+          </StylesProvider>
+        </ThemeProvider>
+      </PersistGate>
     </Provider>
   );
 }
