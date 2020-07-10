@@ -17,3 +17,16 @@ export const loginFailure = () => {
     type: 'auth:LOGIN_FAILURE',
   };
 };
+
+export const registerRequest = (nome, email, password, history) => {
+  return {
+    type: 'auth:REGISTER_REQUEST',
+    payload: { nome, email, password, history },
+  };
+};
+
+export const registerSuccess = () => {
+  return {
+    type: 'auth:REGISTER_SUCCESS',
+  };
+};

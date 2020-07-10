@@ -23,6 +23,17 @@ const auth = (state = initialState, action) => {
         ...state,
         loading: false,
       };
+
+    case 'auth:REGISTER_REQUEST':
+      return {
+        ...state,
+        loading: true,
+      };
+    case 'auth:REGISTER_SUCCESS':
+      return {
+        ...state,
+        loading: false,
+      };
     default:
       return state;
   }
