@@ -18,6 +18,12 @@ export const loginFailure = () => {
   };
 };
 
+export const logout = () => {
+  return {
+    type: 'auth:LOGOUT',
+  };
+};
+
 export const registerRequest = (nome, email, password, history) => {
   return {
     type: 'auth:REGISTER_REQUEST',
