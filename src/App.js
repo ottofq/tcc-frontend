@@ -9,6 +9,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
+import SnackBar from 'components/Snackbar';
 import GlobalStyle from './styles/global';
 import Routes from './routes';
 import { store, persistor } from './redux';
@@ -31,6 +32,7 @@ function App() {
       <PersistGate persistor={persistor}>
         <ThemeProvider theme={theme}>
           <StylesProvider injectFirst>
+            <SnackBar />
             <SnackbarProvider
               autoHideDuration={2000}
               anchorOrigin={{
