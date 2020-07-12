@@ -6,21 +6,21 @@ const initialState = {
 
 const snackbar = (state = initialState, action) => {
   switch (action.type) {
-    case 'SNACKBAR_SUCCESS':
+    case 'snackbar:SNACKBAR_SUCCESS':
       return {
         ...state,
         isOpen: true,
         type: 'success',
         message: action.payload.message,
       };
-    case 'SNACKBAR_FAILURE':
+    case 'snackbar:SNACKBAR_FAILURE':
       return {
         ...state,
         isOpen: true,
         type: 'error',
         message: action.payload.message,
       };
-    case 'SNACKBAR_CLEAR':
+    case 'snackbar:SNACKBAR_CLEAR':
       return {
         ...state,
         isOpen: false,
