@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Container as ContainerMateriaUI } from '@material-ui/core';
-import media from '../../../styles/media';
+import media from '../../styles/media';
 
 export const Container = styled(ContainerMateriaUI).attrs({
   component: 'div',
