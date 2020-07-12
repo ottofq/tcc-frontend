@@ -1,40 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Radio, FormControlLabel, CircularProgress } from '@material-ui/core';
 import { Save } from '@material-ui/icons';
-import { useSnackbar } from 'notistack';
-import { useHistory, useParams } from 'react-router-dom';
 
+import { useHistory, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { fetchMenu, editMenu } from 'redux/modules/menu/actions';
 import * as S from './styles';
 
-import api from '../../../services/api';
-
 export default function Edit() {
-  const [loadingData, setLoadingData] = useState(false);
-  const [loadingSendData, setLoadingSendData] = useState(false);
   const { handleSubmit, setValue, control } = useForm();
-  const [menu, setMenu] = useState(null);
-  const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
   const params = useParams();
+  const dispatch = useDispatch();
+  const { data: menu, loadingData, loadingEdit } = useSelector(
+    state => state.menu
+  );
 
   useEffect(() => {
-    async function loadMenu() {
-      try {
-        setLoadingData(true);
-        const { id } = params;
-        const result = await api.get(`/cardapio/${id}`);
-        setMenu(result.data);
-        setLoadingData(false);
-      } catch (error) {
-        setLoadingData(false);
-        enqueueSnackbar('Erro ao carregar o cardápio', {
-          variant: 'error',
-        });
-      }
-    }
-    loadMenu();
-  }, [params, enqueueSnackbar]);
+    const { id } = params;
+    dispatch(fetchMenu(id));
+  }, [params, dispatch]);
 
   useEffect(() => {
     if (menu && loadingData === false) {
@@ -58,11 +45,11 @@ export default function Edit() {
       guarnicao,
       sobremesa,
     } = data;
-    try {
-      setLoadingSendData(true);
-      const { id } = params;
 
-      const result = await api.put(`/cardapio/${id}`, {
+    const { id } = params;
+    dispatch(
+      editMenu(
+        id,
         tipo,
         entrada,
         proteina,
@@ -70,22 +57,9 @@ export default function Edit() {
         acompanhamento,
         guarnicao,
         sobremesa,
-      });
-
-      if (result.status === 200) {
-        enqueueSnackbar('Cardápio editado com Sucesso!', {
-          variant: 'success',
-        });
-      }
-
-      history.push('/dashboard/cardapio/listagem');
-      setLoadingSendData(false);
-    } catch (error) {
-      setLoadingSendData(false);
-      enqueueSnackbar('Erro ao editar o cardápio!', {
-        variant: 'error',
-      });
-    }
+        history
+      )
+    );
   }
 
   return (
@@ -165,13 +139,13 @@ export default function Edit() {
           />
 
           <S.Button
-            disabled={loadingSendData}
-            startIcon={loadingSendData ? '' : <Save fontSize="large" />}
+            disabled={loadingEdit}
+            startIcon={loadingEdit ? '' : <Save fontSize="large" />}
             variant="contained"
             color="primary"
             type="submit"
           >
-            {loadingSendData ? (
+            {loadingEdit ? (
               <CircularProgress color="primary" />
             ) : (
               'Salvar Edição'
