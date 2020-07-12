@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   CircularProgress,
   Button,
@@ -11,26 +12,24 @@ import {
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 
+import { closeModal } from 'redux/modules/modal/actions';
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   // eslint-disable-next-line react/jsx-props-no-spreading
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function ModalDelete({
-  SubmitModal,
-  TitleDialog,
-  TextDialog,
-  loading,
-  openModal,
-  setOpenModal,
-}) {
+const ModalDelete = ({ submitModal, titleDialog, textDialog, loading }) => {
+  const dispatch = useDispatch();
+  const { isOpen } = useSelector(state => state.modal);
+
   return (
     <div>
       <Dialog
-        open={openModal}
+        open={isOpen}
         TransitionComponent={Transition}
         keepMounted
-        onClose={() => setOpenModal(!openModal)}
+        onClose={() => dispatch(closeModal())}
       >
         {loading ? (
           <DialogContent>
@@ -38,20 +37,20 @@ export default function ModalDelete({
           </DialogContent>
         ) : (
           <>
-            <DialogTitle>{TitleDialog}</DialogTitle>
+            <DialogTitle>{titleDialog}</DialogTitle>
             <DialogContent>
-              <DialogContentText>{TextDialog}</DialogContentText>
+              <DialogContentText>{textDialog}</DialogContentText>
             </DialogContent>
             <DialogActions>
               <Button
-                onClick={() => setOpenModal(!openModal)}
+                onClick={() => dispatch(closeModal())}
                 variant="contained"
                 color="default"
               >
                 Não
               </Button>
               <Button
-                onClick={SubmitModal}
+                onClick={submitModal}
                 variant="contained"
                 color="secondary"
               >
@@ -63,13 +62,13 @@ export default function ModalDelete({
       </Dialog>
     </div>
   );
-}
+};
 
 ModalDelete.propTypes = {
-  SubmitModal: PropTypes.func.isRequired,
-  TitleDialog: PropTypes.string.isRequired,
-  TextDialog: PropTypes.string.isRequired,
+  submitModal: PropTypes.func.isRequired,
+  titleDialog: PropTypes.string.isRequired,
+  textDialog: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
-  openModal: PropTypes.bool.isRequired,
-  setOpenModal: PropTypes.func.isRequired,
 };
+
+export default ModalDelete;
