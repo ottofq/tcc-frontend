@@ -2,7 +2,7 @@ import { takeLatest, put, call, all } from 'redux-saga/effects';
 
 import api from 'services/api';
 import { loginSuccess, loginFailure, registerSuccess } from './actions';
-import { success, failure } from '../snackbar/actions';
+import { snackBarSuccess, snackBarFailure } from '../snackbar/actions';
 
 export function* login({ payload }) {
   try {
@@ -12,12 +12,14 @@ export function* login({ payload }) {
     const { user, token } = result.data;
 
     yield put(loginSuccess(user, token));
-    yield put(success('Login efetuado com sucesso!'));
+    yield put(snackBarSuccess('Login efetuado com sucesso!'));
 
     history.push('/dashboard');
   } catch (error) {
     yield put(loginFailure());
-    yield put(failure('Erro ao efetuar o login, verifique seus dados!'));
+    yield put(
+      snackBarFailure('Erro ao efetuar o login, verifique seus dados!')
+    );
   }
 }
 
@@ -27,12 +29,14 @@ export function* register({ payload }) {
 
     yield call(api.post, '/users', { nome, email, password });
     yield put(registerSuccess());
-    yield put(success('Cadastro efetuado com sucesso!'));
+    yield put(snackBarSuccess('Cadastro efetuado com sucesso!'));
 
     history.push('/');
   } catch (error) {
     yield put(loginFailure());
-    yield put(failure('Erro ao efetuar o cadastro, verifique seus dados!'));
+    yield put(
+      snackBarFailure('Erro ao efetuar o cadastro, verifique seus dados!')
+    );
   }
 }
 

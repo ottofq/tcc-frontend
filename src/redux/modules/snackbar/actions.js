@@ -1,11 +1,11 @@
-export const success = message => {
+export const snackBarSuccess = message => {
   return {
     type: 'SNACKBAR_SUCCESS',
     payload: { message },
   };
 };
 
-export const failure = message => {
+export const snackBarFailure = message => {
   return {
     type: 'SNACKBAR_FAILURE',
     payload: { message },
