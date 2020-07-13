@@ -1,46 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import { format, parseISO } from 'date-fns';
+import React, { useEffect } from 'react';
 import { CircularProgress } from '@material-ui/core';
 import { useParams } from 'react-router-dom';
-import { useSnackbar } from 'notistack';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { fetchStudent } from 'redux/modules/student/actions';
 import * as S from './styles';
-import api from '../../../services/api';
 import GerenalData from '../../../components/StudentForms/GeneralData';
 import Allergies from '../../../components/StudentForms/Allergies';
 import Pathologies from '../../../components/StudentForms/Pathologies';
 import RURatings from '../../../components/StudentForms/RURatings';
 
-export default function Details() {
-  const [student, setStudent] = useState({});
-  const [loading, setLoading] = useState(true);
+const Details = () => {
   const params = useParams();
-  const { enqueueSnackbar } = useSnackbar();
+  const dispatch = useDispatch();
+  const { data: student, loadingData } = useSelector(state => state.student);
 
   useEffect(() => {
-    async function loadStudent() {
-      try {
-        const { id } = params;
-        const result = await api.get(`/alunos/${id}`);
-        result.data.data_nascimento = format(
-          parseISO(result.data.data_nascimento),
-          'yyyy-MM-dd'
-        );
-        setStudent(result.data);
-        setLoading(false);
-      } catch (error) {
-        enqueueSnackbar('Erro ao carregar dados do aluno!', {
-          variant: 'error',
-        });
-      }
-    }
-
-    loadStudent();
-  }, [params, enqueueSnackbar]);
+    const { id } = params;
+    dispatch(fetchStudent(id));
+  }, [params, dispatch]);
 
   return (
     <>
-      {loading === false ? (
+      {loadingData === false && student ? (
         <S.Container>
           <S.ContainerDetails>
             <S.Title>Dados do Gerais</S.Title>
@@ -63,4 +45,6 @@ export default function Details() {
       )}
     </>
   );
-}
+};
+
+export default Details;
