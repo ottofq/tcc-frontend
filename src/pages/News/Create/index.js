@@ -6,47 +6,26 @@ import { EditorState, convertToRaw } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { useSnackbar } from 'notistack';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { createNews } from 'redux/modules/news/actions';
 import * as S from './styles';
 
-import api from '../../../services/api';
-
-export default function Create() {
-  const { register, handleSubmit, reset } = useForm();
-  const [loading, setLoading] = useState(false);
+const Create = () => {
+  const { register, handleSubmit } = useForm();
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
-  const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
+  const dispatch = useDispatch();
+  const loadingData = useSelector(state => state.news.loadingData);
 
-  async function onSubmit(data) {
-    try {
-      setLoading(true);
-      const contentInfo = draftToHtml(
-        convertToRaw(editorState.getCurrentContent())
-      );
+  function onSubmit(data) {
+    const { titulo } = data;
+    const descricao = draftToHtml(
+      convertToRaw(editorState.getCurrentContent())
+    );
 
-      const { titulo } = data;
-      const result = await api.post('/informacoes/', {
-        titulo,
-        descricao: contentInfo,
-      });
-
-      if (result.status === 200) {
-        setLoading(false);
-        enqueueSnackbar('Aviso cadastrado com Sucesso!', {
-          variant: 'success',
-        });
-      }
-      reset();
-      history.push('/dashboard/noticias/listagem');
-    } catch (error) {
-      setLoading(false);
-      enqueueSnackbar('Erro ao cadastrar o aviso!', {
-        variant: 'error',
-      });
-    }
+    dispatch(createNews(titulo, descricao, history));
   }
 
   return (
@@ -83,15 +62,17 @@ export default function Create() {
         </S.ContainerEditor>
 
         <S.Button
-          disabled={loading}
-          startIcon={loading ? '' : <Save fontSize="large" />}
+          disabled={loadingData}
+          startIcon={loadingData ? '' : <Save fontSize="large" />}
           variant="contained"
           color="primary"
           type="submit"
         >
-          {loading ? <CircularProgress color="inherit" /> : 'Cadastrar'}
+          {loadingData ? <CircularProgress color="inherit" /> : 'Cadastrar'}
         </S.Button>
       </S.Form>
     </S.Container>
   );
-}
+};
+
+export default Create;
