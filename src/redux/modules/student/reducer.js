@@ -30,7 +30,7 @@ const student = (state = intialState, action) => {
         ...state,
         loadingData: false,
       };
-    case 'nstudent:FETCH_STUDENT':
+    case 'student:FETCH_STUDENT':
       return {
         ...state,
         loadingData: true,
