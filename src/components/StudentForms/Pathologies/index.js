@@ -4,7 +4,7 @@ import { FormControlLabel, FormLabel, Checkbox } from '@material-ui/core';
 
 import * as S from './styles';
 
-export default function Pathologies({ student }) {
+const Pathologies = ({ student }) => {
   return (
     <>
       <S.ContainerCheckbox>
@@ -13,9 +13,8 @@ export default function Pathologies({ student }) {
           control={
             <Checkbox
               readOnly
-              defaultChecked={student.patologias.doenca_cardiovascular}
+              checked={student.patologias.doenca_cardiovascular}
               color="primary"
-              onClick={e => e.preventDefault()}
             />
           }
           label="Doença Cardiovascular"
@@ -24,7 +23,7 @@ export default function Pathologies({ student }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={student.patologias.hipertensao_arterial}
+              checked={student.patologias.hipertensao_arterial}
               color="primary"
             />
           }
@@ -35,10 +34,7 @@ export default function Pathologies({ student }) {
 
         <FormControlLabel
           control={
-            <Checkbox
-              defaultChecked={student.patologias.obesidade}
-              color="primary"
-            />
+            <Checkbox checked={student.patologias.obesidade} color="primary" />
           }
           label="Obesidade"
           name="obesidade"
@@ -47,7 +43,7 @@ export default function Pathologies({ student }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={student.patologias.dislipidemias}
+              checked={student.patologias.dislipidemias}
               color="primary"
             />
           }
@@ -58,7 +54,7 @@ export default function Pathologies({ student }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={student.patologias.doenca_arterial_coronariana}
+              checked={student.patologias.doenca_arterial_coronariana}
               color="primary"
             />
           }
@@ -68,10 +64,7 @@ export default function Pathologies({ student }) {
         />
         <FormControlLabel
           control={
-            <Checkbox
-              defaultChecked={student.patologias.diabetes}
-              color="primary"
-            />
+            <Checkbox checked={student.patologias.diabetes} color="primary" />
           }
           label="Diabetes"
           name="diabetes"
@@ -80,7 +73,7 @@ export default function Pathologies({ student }) {
 
         <S.Input
           name="outras_alergias"
-          defaultValue={student.patologias.outras_patologias}
+          value={student.patologias.outras_patologias || ''}
           InputProps={{
             readOnly: true,
           }}
@@ -95,9 +88,7 @@ export default function Pathologies({ student }) {
           control={
             <Checkbox
               readOnly
-              defaultChecked={
-                student.patologias_familia.fam_doenca_cardiovascular
-              }
+              checked={student.patologias_familia.fam_doenca_cardiovascular}
               color="primary"
               onClick={e => e.preventDefault()}
             />
@@ -108,7 +99,7 @@ export default function Pathologies({ student }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={student.patologias_familia.fam_hipertensao}
+              checked={student.patologias_familia.fam_hipertensao}
               color="primary"
             />
           }
@@ -120,7 +111,7 @@ export default function Pathologies({ student }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={student.patologias_familia.fam_obesidade}
+              checked={student.patologias_familia.fam_obesidade}
               color="primary"
             />
           }
@@ -131,7 +122,7 @@ export default function Pathologies({ student }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={student.patologias_familia.fam_dislipidemias}
+              checked={student.patologias_familia.fam_dislipidemias}
               color="primary"
             />
           }
@@ -142,7 +133,7 @@ export default function Pathologies({ student }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={
+              checked={
                 student.patologias_familia.fam_doenca_arterial_coronariana
               }
               color="primary"
@@ -155,7 +146,7 @@ export default function Pathologies({ student }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={student.patologias_familia.fam_diabetes}
+              checked={student.patologias_familia.fam_diabetes}
               color="primary"
             />
           }
@@ -165,8 +156,8 @@ export default function Pathologies({ student }) {
         />
 
         <S.Input
-          name="outras_alergias"
-          defaultValue={student.patologias_familia.patologias_familia_outras}
+          name="outras_patologias"
+          value={student.patologias_familia.patologias_familia_outras || ''}
           InputProps={{
             readOnly: true,
           }}
@@ -176,7 +167,7 @@ export default function Pathologies({ student }) {
       </S.ContainerCheckbox>
     </>
   );
-}
+};
 
 Pathologies.propTypes = {
   student: PropTypes.shape({
@@ -200,3 +191,5 @@ Pathologies.propTypes = {
     }),
   }).isRequired,
 };
+
+export default Pathologies;
