@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { CircularProgress } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
@@ -10,9 +10,15 @@ import logo from '../../../assets/logo.png';
 
 export default function Register() {
   const { register, handleSubmit } = useForm();
-  const dispatch = useDispatch();
-  const loading = useSelector(state => state.auth.loading);
   const history = useHistory();
+  const dispatch = useDispatch();
+  const { loading, isLogged } = useSelector(state => state.auth);
+
+  useEffect(() => {
+    if (isLogged) {
+      history.push('/dashboard');
+    }
+  }, [isLogged, history]);
 
   const onSubmit = async data => {
     const { email, password, nome } = data;

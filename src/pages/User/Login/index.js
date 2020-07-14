@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { CircularProgress } from '@material-ui/core';
@@ -12,7 +12,13 @@ const Login = () => {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const history = useHistory();
-  const loading = useSelector(state => state.auth.loading);
+  const { loading, isLogged } = useSelector(state => state.auth);
+
+  useEffect(() => {
+    if (isLogged) {
+      history.push('/dashboard');
+    }
+  }, [isLogged, history]);
 
   const onSubmit = data => {
     const { email, password } = data;
