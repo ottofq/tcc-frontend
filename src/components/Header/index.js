@@ -1,25 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Avatar, Button, MenuItem } from '@material-ui/core';
 import { Menu } from '@material-ui/icons';
 import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 
+import { logout } from 'redux/modules/auth/actions';
 import * as S from './styles';
 import avatar from '../../assets/avatar.png';
 
 export default function Header({ isMenuOpen, setIsMenuOpen }) {
-  const [user, setUser] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
   const history = useHistory();
-
-  useEffect(() => {
-    const userLocalStorage = JSON.parse(localStorage.getItem('@app-ru/user'));
-    setUser(userLocalStorage.user);
-  }, []);
+  const user = useSelector(state => state.user);
+  const dispath = useDispatch();
 
   const handleLogout = () => {
-    localStorage.removeItem('@app-ru/user');
-    history.push('/');
+    dispath(logout());
   };
 
   const handleClick = event => {

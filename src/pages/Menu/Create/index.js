@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Radio, FormControlLabel, CircularProgress } from '@material-ui/core';
 import { Save } from '@material-ui/icons';
-import { useSnackbar } from 'notistack';
-import { useHistory } from 'react-router-dom';
 
+import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { createMenu } from 'redux/modules/menu/actions';
 import * as S from './styles';
-import api from '../../../services/api';
 
 export default function Create() {
-  const [loading, setLoading] = useState(false);
-  const { register, handleSubmit, reset } = useForm();
-  const { enqueueSnackbar } = useSnackbar();
+  const { register, handleSubmit } = useForm();
+  const dispatch = useDispatch();
+  const { loadingData: loading } = useSelector(state => state.menu);
   const history = useHistory();
 
   const onSubmit = async data => {
-    setLoading(true);
     const {
       tipo,
       entrada,
@@ -26,8 +26,8 @@ export default function Create() {
       sobremesa,
     } = data;
 
-    try {
-      const result = await api.post('/cardapio', {
+    dispatch(
+      createMenu(
         tipo,
         entrada,
         proteina,
@@ -35,22 +35,9 @@ export default function Create() {
         acompanhamento,
         guarnicao,
         sobremesa,
-      });
-
-      if (result.status === 200) {
-        enqueueSnackbar('Novo cardápio cadastrado!', {
-          variant: 'success',
-        });
-        setLoading(false);
-        reset();
-        history.push('/dashboard');
-      }
-    } catch (error) {
-      setLoading(false);
-      enqueueSnackbar('Erro ao cadastrar novo cardápio!', {
-        variant: 'error',
-      });
-    }
+        history
+      )
+    );
   };
 
   return (

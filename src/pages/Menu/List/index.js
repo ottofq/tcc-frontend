@@ -10,70 +10,38 @@ import {
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
-import { useSnackbar } from 'notistack';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { fetchMenus, deleteMenu } from 'redux/modules/menu/actions';
+import { openModal } from 'redux/modules/modal/actions';
 import ModalDelete from '../../../components/ModalDelete';
 import * as S from './styles';
-import api from '../../../services/api';
 
 export default function List() {
-  const [menus, setMenus] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [loadingDelete, setLoadingDelete] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
   const [idDeleteMenu, setIdDeleteMenu] = useState(0);
-  const [totalMenus, setTotalMenus] = useState(0);
-  const [page, setPage] = useState(0);
-  const { enqueueSnackbar } = useSnackbar();
+  const [actualPage, setActualPage] = useState(0);
+
+  const dispatch = useDispatch();
+  const { list: menus, loadingData, loadingDelete, total } = useSelector(
+    state => state.menu
+  );
 
   useEffect(() => {
-    async function loadMenus() {
-      try {
-        setLoading(true);
-        const result = await api.get(`/cardapio?page=${page + 1}`);
-        setMenus(result.data.result);
-        setTotalMenus(result.data.total_cardapios);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-        enqueueSnackbar('Erro ao carregar os cardápios!', {
-          variant: 'error',
-        });
-      }
-    }
-    loadMenus();
-  }, [page, enqueueSnackbar]);
+    dispatch(fetchMenus(actualPage + 1));
+  }, [actualPage, dispatch]);
 
   const handleChangePage = (event, nextPage) => {
-    setPage(nextPage);
+    setActualPage(nextPage);
+  };
+
+  const DeleteMenu = () => {
+    dispatch(deleteMenu(idDeleteMenu));
   };
 
   const handleButtonDelete = id => {
-    setOpenModal(true);
+    dispatch(openModal());
     setIdDeleteMenu(id);
   };
-
-  async function DeleteMenu() {
-    try {
-      setLoadingDelete(true);
-      const result = await api.delete(`/cardapio/${idDeleteMenu}`);
-      setMenus(menus.filter(menu => menu._id !== idDeleteMenu));
-
-      if (result.status === 200) {
-        enqueueSnackbar('Cardápio excluido com Sucesso!', {
-          variant: 'success',
-        });
-        setLoadingDelete(false);
-        setOpenModal(false);
-      }
-    } catch (error) {
-      setLoadingDelete(false);
-      setOpenModal(false);
-      enqueueSnackbar('Erro ao excluir o cardápio!', {
-        variant: 'error',
-      });
-    }
-  }
 
   return (
     <S.Container>
@@ -133,7 +101,7 @@ export default function List() {
                 </TableRow>
               ))
             ) : (
-              <S.TableRow loading={loading ? 1 : 0}>
+              <S.TableRow loading={loadingData ? 1 : 0}>
                 <TableCell>
                   <h1>Vazio</h1>
                 </TableCell>
@@ -142,7 +110,7 @@ export default function List() {
           </S.TableBody>
         </Table>
 
-        {loading ? (
+        {loadingData ? (
           <S.ContainerLoading>
             <CircularProgress color="primary" />
           </S.ContainerLoading>
@@ -150,9 +118,9 @@ export default function List() {
           <TablePagination
             component="div"
             rowsPerPageOptions={['']}
-            count={totalMenus}
+            count={total}
             rowsPerPage={8}
-            page={page}
+            page={actualPage}
             onChangePage={handleChangePage}
           />
         )}
@@ -160,12 +128,10 @@ export default function List() {
 
       <ModalDelete
         TextButton="Excluir"
-        openModal={openModal}
-        setOpenModal={setOpenModal}
         loading={loadingDelete}
-        TextDialog="Deseja excluir o Cardápio selecionado?"
-        TitleDialog="Excluir Aviso"
-        SubmitModal={() => DeleteMenu()}
+        textDialog="Deseja excluir o Cardápio selecionado?"
+        titleDialog="Excluir Aviso"
+        submitModal={() => DeleteMenu()}
       />
     </S.Container>
   );

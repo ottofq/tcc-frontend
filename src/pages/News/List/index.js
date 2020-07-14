@@ -10,64 +10,31 @@ import {
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
-import { useSnackbar } from 'notistack';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { fetchNews, deleteNews } from 'redux/modules/news/actions';
+import { openModal } from 'redux/modules/modal/actions';
 import * as S from './styles';
 import ModalDelete from '../../../components/ModalDelete';
 
-import api from '../../../services/api';
-
-export default function List() {
-  const [news, setNews] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [loadingDelete, setLoadingDelete] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
+const List = () => {
   const [idDeleteMenu, setIdDeleteMenu] = useState(0);
   const [page, setPage] = useState(0);
-  const [totalNews, setTotalNews] = useState(0);
-  const { enqueueSnackbar } = useSnackbar();
+  const dispatch = useDispatch();
+  const { list: news, loadingData, loadingDelete, total } = useSelector(
+    state => state.news
+  );
 
   useEffect(() => {
-    async function loadNews() {
-      try {
-        setLoading(true);
-        const result = await api.get(`/informacoes?page=${page + 1}`);
-        setNews(result.data.result);
-        setTotalNews(result.data.total_infos);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-        enqueueSnackbar('Erro ao carregar os avisos!', {
-          variant: 'error',
-        });
-      }
-    }
-    loadNews();
-  }, [page, enqueueSnackbar]);
+    dispatch(fetchNews(page + 1));
+  }, [page, dispatch]);
 
   async function DeleteNews() {
-    try {
-      setLoadingDelete(true);
-      const result = await api.delete(`/informacoes/${idDeleteMenu}`);
-
-      if (result.status === 200) {
-        enqueueSnackbar('Aviso excluido com Sucesso!', {
-          variant: 'success',
-        });
-      }
-      setNews(news.filter(newsItem => newsItem._id !== idDeleteMenu));
-      setLoadingDelete(false);
-      setOpenModal(false);
-    } catch (error) {
-      setLoadingDelete(false);
-      enqueueSnackbar('Erro ao excluir o aviso!', {
-        variant: 'error',
-      });
-    }
+    dispatch(deleteNews(idDeleteMenu));
   }
 
   const handleButtonDelete = id => {
-    setOpenModal(true);
+    dispatch(openModal());
     setIdDeleteMenu(id);
   };
 
@@ -129,7 +96,7 @@ export default function List() {
                 </TableRow>
               ))
             ) : (
-              <S.TableRow loading={loading ? 1 : 0}>
+              <S.TableRow loading={loadingData ? 1 : 0}>
                 <TableCell>
                   <div>Vazio</div>
                 </TableCell>
@@ -138,7 +105,7 @@ export default function List() {
           </S.TableBody>
         </Table>
 
-        {loading ? (
+        {loadingData ? (
           <S.ContainerLoading>
             <CircularProgress color="primary" />
           </S.ContainerLoading>
@@ -146,7 +113,7 @@ export default function List() {
           <TablePagination
             component="div"
             rowsPerPageOptions={['']}
-            count={totalNews}
+            count={total}
             rowsPerPage={8}
             page={page}
             onChangePage={handleChangePage}
@@ -154,14 +121,14 @@ export default function List() {
         )}
       </S.TableContainer>
       <ModalDelete
-        TextButton="Excluir"
-        openModal={openModal}
-        setOpenModal={setOpenModal}
+        textButton="Excluir"
         loading={loadingDelete}
-        TextDialog="Deseja excluir o Cardápio selecionado?"
-        TitleDialog="Excluir Aviso"
-        SubmitModal={() => DeleteNews()}
+        textDialog="Deseja excluir o Cardápio selecionado?"
+        titleDialog="Excluir Aviso"
+        submitModal={() => DeleteNews()}
       />
     </S.Container>
   );
-}
+};
+
+export default List;

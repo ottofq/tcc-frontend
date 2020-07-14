@@ -1,37 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { CircularProgress } from '@material-ui/core';
-import { useSnackbar } from 'notistack';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { registerRequest } from 'redux/modules/auth/actions';
 import * as S from './styles';
 import logo from '../../../assets/logo.png';
-import api from '../../../services/api';
 
 export default function Register() {
   const { register, handleSubmit } = useForm();
-  const { enqueueSnackbar } = useSnackbar();
-  const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const dispatch = useDispatch();
+  const { loading, isLogged } = useSelector(state => state.auth);
+
+  useEffect(() => {
+    if (isLogged) {
+      history.push('/dashboard');
+    }
+  }, [isLogged, history]);
 
   const onSubmit = async data => {
-    try {
-      setLoading(true);
-      const { email, password, nome } = data;
-      const result = await api.post('/users', { nome, email, password });
-      if (result.status === 200) {
-        enqueueSnackbar('Cadastro efetuado com Sucesso!', {
-          variant: 'success',
-        });
-        setLoading(false);
-        history.push('/');
-      }
-    } catch (error) {
-      setLoading(false);
-      enqueueSnackbar('Erro ao registrar, email já cadastrado!', {
-        variant: 'error',
-      });
-    }
+    const { email, password, nome } = data;
+    dispatch(registerRequest(nome, email, password, history));
   };
 
   return (

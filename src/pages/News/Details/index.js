@@ -8,40 +8,26 @@ import htmlToDraft from 'html-to-draftjs';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { useHistory, useParams } from 'react-router-dom';
-import { useSnackbar } from 'notistack';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { fetchOneNews } from 'redux/modules/news/actions';
 import * as S from './styles';
-import api from '../../../services/api';
 
-export default function Details() {
+const Details = () => {
   const { control, setValue } = useForm();
   const [editorState, setEditorState] = useState();
-  const [news, setNews] = useState(null);
-  const [loading, setLoading] = useState(false);
   const history = useHistory();
   const params = useParams();
-  const { enqueueSnackbar } = useSnackbar();
+  const dispatch = useDispatch();
+  const { loadingData, data: news } = useSelector(state => state.news);
 
   useEffect(() => {
-    async function loadNews() {
-      try {
-        setLoading(true);
-        const { id } = params;
-        const result = await api.get(`/informacoes/${id}`);
-        setNews(result.data);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-        enqueueSnackbar('Erro ao carregar os avisos!', {
-          variant: 'error',
-        });
-      }
-    }
-    loadNews();
-  }, [params, enqueueSnackbar]);
+    const { id } = params;
+    dispatch(fetchOneNews(id));
+  }, [params, dispatch]);
 
   useEffect(() => {
-    if (news && !loading) {
+    if (loadingData === false && news.data) {
       const contentBlock = htmlToDraft(news.descricao);
       const contentState = ContentState.createFromBlockArray(
         contentBlock.contentBlocks
@@ -50,7 +36,7 @@ export default function Details() {
       setValue('titulo', news.titulo);
       setValue('data', format(parseISO(news.data), 'yyyy-MM-dd'));
     }
-  }, [news, setValue, loading]);
+  }, [news, setValue, loadingData]);
 
   function handleClick() {
     history.goBack();
@@ -58,7 +44,7 @@ export default function Details() {
 
   return (
     <S.Container>
-      {loading ? (
+      {loadingData ? (
         <S.ContainerLoading>
           <CircularProgress color="primary" />
         </S.ContainerLoading>
@@ -117,4 +103,6 @@ export default function Details() {
       )}
     </S.Container>
   );
-}
+};
+
+export default Details;

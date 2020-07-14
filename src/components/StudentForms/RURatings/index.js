@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import * as S from './styles';
 
-export default function RURatings({ student }) {
+const RURatings = ({ student }) => {
   return (
     <S.ContainerStudentData>
       <S.ContainerRadioButtonRating>
@@ -209,7 +209,7 @@ export default function RURatings({ student }) {
           control={
             <Checkbox
               readOnly
-              defaultChecked={student.melhorias_RU.cardapio}
+              checked={student.melhorias_RU.cardapio}
               color="primary"
               onClick={e => e.preventDefault()}
             />
@@ -220,7 +220,7 @@ export default function RURatings({ student }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={student.melhorias_RU.melhoria_sabor_preparacao}
+              checked={student.melhorias_RU.melhoria_sabor_preparacao}
               color="primary"
             />
           }
@@ -232,7 +232,7 @@ export default function RURatings({ student }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={student.melhorias_RU.opcao_vegetariana}
+              checked={student.melhorias_RU.opcao_vegetariana}
               color="primary"
             />
           }
@@ -243,7 +243,7 @@ export default function RURatings({ student }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={student.melhorias_RU.estrutura_fisica}
+              checked={student.melhorias_RU.estrutura_fisica}
               color="primary"
             />
           }
@@ -254,7 +254,7 @@ export default function RURatings({ student }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={student.melhorias_RU.tempo_fila}
+              checked={student.melhorias_RU.tempo_fila}
               color="primary"
             />
           }
@@ -265,7 +265,7 @@ export default function RURatings({ student }) {
         <FormControlLabel
           control={
             <Checkbox
-              defaultChecked={student.melhorias_RU.preco_ticket}
+              checked={student.melhorias_RU.preco_ticket}
               color="primary"
             />
           }
@@ -276,7 +276,7 @@ export default function RURatings({ student }) {
 
         <S.Input
           name="melhoria_outros"
-          defaultValue={student.melhorias_RU.melhoria_outros}
+          value={student.melhorias_RU.melhoria_outros || ''}
           InputProps={{
             readOnly: true,
           }}
@@ -286,7 +286,7 @@ export default function RURatings({ student }) {
       </S.ContainerCheckbox>
     </S.ContainerStudentData>
   );
-}
+};
 
 RURatings.propTypes = {
   student: PropTypes.shape({
@@ -309,3 +309,5 @@ RURatings.propTypes = {
     }),
   }).isRequired,
 };
+
+export default RURatings;

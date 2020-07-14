@@ -1,27 +1,23 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useEffect, useState } from 'react';
+import { CircularProgress } from '@material-ui/core';
 import { useForm } from 'react-hook-form';
-import { useSnackbar } from 'notistack';
-import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { editNameAndPass } from 'redux/modules/user/actions';
 import * as S from './styles';
-import api from '../../../services/api';
 
 export default function Profile() {
-  const { register, setValue, handleSubmit } = useForm();
+  const { register, setValue, handleSubmit, setError, errors } = useForm();
   const [editar, setEditar] = useState(true);
-  const [user, setUser] = useState('');
-  const { enqueueSnackbar } = useSnackbar();
-  const history = useHistory();
+  const [errorMessage, setErrorMessage] = useState('');
+  const dispatch = useDispatch();
+  const user = useSelector(state => state.user);
+  const loading = useSelector(state => state.user.loading);
 
   useEffect(() => {
-    const localStorageUser = JSON.parse(localStorage.getItem('@app-ru/user'));
-    setUser(localStorageUser);
-  }, []);
-
-  useEffect(() => {
-    setValue('nome', user?.user?.nome);
-    setValue('email', user?.user?.email);
+    setValue('nome', user.nome);
+    setValue('email', user.email);
   }, [setValue, user]);
 
   function handleEditar() {
@@ -29,32 +25,16 @@ export default function Profile() {
   }
 
   async function onSubmit(data) {
-    const { nome, email, oldPassword, newPassword, repeatNewPassword } = data;
+    const { nome, oldPassword, newPassword, repeatNewPassword } = data;
 
-    try {
-      if (newPassword === repeatNewPassword) {
-        await api.put(`/users/${user.user._id}`, {
-          nome,
-          email,
-          oldPassword,
-          newPassword,
-        });
-
-        enqueueSnackbar('Dados Atualizado com sucesso!', {
-          variant: 'success',
-        });
-
-        localStorage.removeItem('@app-ru/user');
-        history.push('/');
-      } else {
-        enqueueSnackbar('Verifique a sua nova senha!', {
-          variant: 'error',
-        });
-      }
-    } catch (error) {
-      enqueueSnackbar('Senha atual incorreta!', {
-        variant: 'error',
+    if (newPassword === repeatNewPassword) {
+      dispatch(editNameAndPass(user.id, nome, oldPassword, newPassword));
+    } else {
+      setError('newPassword', {
+        type: 'manual',
+        message: 'As senha não confere, digite novamente a nova senha!',
       });
+      setErrorMessage('As senha não confere, digite novamente a nova senha!');
     }
   }
 
@@ -68,19 +48,18 @@ export default function Profile() {
         <S.Input
           name="nome"
           inputRef={register({ required: true })}
-          id="outlined-basic"
           label="Nome"
           variant="outlined"
           InputProps={{
             readOnly: editar,
           }}
+          disabled={editar || loading}
         />
         <S.Input
           name="email"
           type="email"
           inputRef={register({ required: true })}
-          id="outlined-basic"
-          label="Nome"
+          label="Email"
           variant="outlined"
           disabled
         />
@@ -90,29 +69,37 @@ export default function Profile() {
           inputRef={register({ required: true })}
           label="Senha Atual"
           variant="outlined"
-          disabled={editar}
+          disabled={editar || loading}
         />
+
         <S.Input
+          error={errors.newPassword}
           name="newPassword"
           type="password"
           inputRef={register({ required: true })}
           label="Nova Senha"
           variant="outlined"
-          disabled={editar}
+          disabled={editar || loading}
         />
+
         <S.Input
+          error={errors.newPassword}
+          helperText={errorMessage}
           name="repeatNewPassword"
           type="password"
           inputRef={register({ required: true })}
           label="Repita nova senha"
           variant="outlined"
-          disabled={editar}
+          disabled={editar || loading}
         />
+
         <S.Button
+          disabled={loading}
           onClick={editar ? handleEditar : handleSubmit(onSubmit)}
           color="primary"
           variant="contained"
         >
+          {loading ? <CircularProgress color="inherit" /> : null}
           {editar ? 'Editar Dados' : 'Salvar'}
         </S.Button>
       </S.ContainerInputs>

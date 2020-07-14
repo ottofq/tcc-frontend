@@ -9,36 +9,22 @@ import {
   Paper,
   TablePagination,
 } from '@material-ui/core';
-import { useSnackbar } from 'notistack';
 
+import { useDispatch, useSelector } from 'react-redux';
+
+import { fetchStudents } from 'redux/modules/student/actions';
 import * as S from './styles';
 
-import api from '../../../services/api';
-
-export default function List() {
-  const [students, setStudents] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [totalStudents, setTotalStudents] = useState(0);
+const List = () => {
   const [page, setPage] = useState(0);
-  const { enqueueSnackbar } = useSnackbar();
+  const dispatch = useDispatch();
+  const { list: students, loadingData, total } = useSelector(
+    state => state.student
+  );
 
   useEffect(() => {
-    async function loadStudents() {
-      try {
-        setLoading(true);
-        const result = await api.get(`/alunos?page=${page + 1}`);
-        setStudents(result.data.result);
-        setTotalStudents(result.data.total_alunos);
-        setLoading(false);
-      } catch (error) {
-        setLoading(false);
-        enqueueSnackbar('Erro ao carregar listas de aluno!', {
-          variant: 'error',
-        });
-      }
-    }
-    loadStudents();
-  }, [page, enqueueSnackbar]);
+    dispatch(fetchStudents(page + 1));
+  }, [page, dispatch]);
 
   const handleChangePage = (event, nextPage) => {
     setPage(nextPage);
@@ -48,7 +34,7 @@ export default function List() {
     <S.Container>
       <S.Card>
         <S.Title>
-          Total de alunos cadastrados: <strong>{totalStudents}</strong>
+          Total de alunos cadastrados: <strong>{total}</strong>
         </S.Title>
       </S.Card>
       <S.TableContainer component={Paper}>
@@ -86,7 +72,7 @@ export default function List() {
                 </TableRow>
               ))
             ) : (
-              <S.TableRow loading={loading ? 1 : 0}>
+              <S.TableRow loading={loadingData ? 1 : 0}>
                 <TableCell>
                   <h1>Vazio</h1>
                 </TableCell>
@@ -95,7 +81,7 @@ export default function List() {
           </S.TableBody>
         </Table>
 
-        {loading ? (
+        {loadingData ? (
           <S.ContainerLoading>
             <CircularProgress color="primary" />
           </S.ContainerLoading>
@@ -103,7 +89,7 @@ export default function List() {
           <TablePagination
             component="div"
             rowsPerPageOptions={['']}
-            count={totalStudents}
+            count={total}
             rowsPerPage={8}
             page={page}
             onChangePage={handleChangePage}
@@ -112,4 +98,6 @@ export default function List() {
       </S.TableContainer>
     </S.Container>
   );
-}
+};
+
+export default List;

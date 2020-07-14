@@ -7,102 +7,46 @@ import Layout from './pages/Layout';
 import Login from './pages/User/Login';
 import Register from './pages/User/Register';
 
-export default function Routes() {
-  const privateRoutes = [
+const Routes = () => {
+  const routes = [
     {
-      path: '/dashboard',
-      component: Layout,
-      key: 'main-menu-home',
+      path: '/',
+      component: Login,
+      key: 'login',
       exact: true,
     },
     {
-      path: '/dashboard/cardapio/cadastrar',
-      component: Layout,
-      key: 'main-menu-create',
+      path: '/register',
+      component: Register,
+      key: 'register',
       exact: true,
     },
     {
-      path: '/dashboard/cardapio/listagem',
-      component: Layout,
-      key: 'main-menu-list',
+      path: '/dashboard*',
+      component: PrivateRoute(Layout),
+      key: 'main',
       exact: true,
     },
     {
-      path: '/dashboard/cardapio/editar/:id',
-      component: Layout,
-      key: 'main-menu-edit',
-      exact: true,
-    },
-    {
-      path: '/dashboard/cardapio/detalhes/:id',
-      component: Layout,
-      key: 'main-menu-details',
-      exact: true,
-    },
-    {
-      path: '/dashboard/noticias/cadastro',
-      component: Layout,
-      key: 'main-news-create',
-      exact: true,
-    },
-    {
-      path: '/dashboard/noticias/listagem',
-      component: Layout,
-      key: 'main-news-list',
-      exact: true,
-    },
-    {
-      path: '/dashboard/noticias/:id',
-      component: Layout,
-      key: 'main-news-details',
-      exact: true,
-    },
-    {
-      path: '/dashboard/noticias/editar/:id',
-      component: Layout,
-      key: 'main-news-edit',
-      exact: true,
-    },
-    {
-      path: '/dashboard/aluno/listagem',
-      component: Layout,
-      key: 'main-student-list',
-      exact: true,
-    },
-    {
-      path: '/dashboard/aluno/detalhes/:id',
-      component: Layout,
-      key: 'main-student-details',
-      exact: true,
-    },
-    {
-      path: '/dashboard/aluno/graficos',
-      component: Layout,
-      key: 'main-student-charts',
-      exact: true,
-    },
-    {
-      path: '/dashboard/profile',
-      component: Layout,
-      key: 'main-user-profile',
-      exact: true,
+      path: '*',
+      component: Page404,
+      exact: false,
+      key: '404',
     },
   ];
 
   return (
     <Switch>
-      <Route path="/" exact component={Login} />
-      <Route path="/register" exact component={Register} />
-      {privateRoutes.map(route => (
-        <PrivateRoute
+      {routes.map(route => (
+        <Route
           key={route.key}
           path={route.path}
-          exact={route.exat}
+          exact={route.exact}
           component={route.component}
         />
       ))}
-
-      <Route path="*" component={Page404} />
     </Switch>
   );
-}
+};
+
+export default Routes;

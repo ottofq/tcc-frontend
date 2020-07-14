@@ -6,14 +6,15 @@ import {
   RadioGroup,
   FormLabel,
 } from '@material-ui/core';
+import { format, parseISO } from 'date-fns';
 
 import * as S from './styles';
 
-export default function GeneralData({ student }) {
+const GeneralData = ({ student }) => {
   return (
     <S.ContainerStudentData>
       <S.Input
-        defaultValue={student.nome}
+        value={student.nome}
         variant="outlined"
         name="nome"
         label="Nome"
@@ -23,7 +24,7 @@ export default function GeneralData({ student }) {
       />
 
       <S.Input
-        defaultValue={student.matricula}
+        value={student.matricula}
         variant="outlined"
         name="matricula"
         label="Matricula"
@@ -32,7 +33,7 @@ export default function GeneralData({ student }) {
         }}
       />
       <S.Input
-        defaultValue={student.data_nascimento}
+        value={format(parseISO(student.data_nascimento), 'yyyy-MM-dd')}
         type="date"
         variant="outlined"
         name="data_nascimento"
@@ -43,7 +44,7 @@ export default function GeneralData({ student }) {
       />
 
       <S.Input
-        defaultValue={student.curso}
+        value={student.curso}
         variant="outlined"
         name="curso"
         label="Curso"
@@ -53,7 +54,7 @@ export default function GeneralData({ student }) {
       />
 
       <S.Input
-        defaultValue={student.ano_ingresso}
+        value={student.ano_ingresso}
         variant="outlined"
         name="ano_ingresso"
         label="Ano de Ingresso"
@@ -63,7 +64,7 @@ export default function GeneralData({ student }) {
       />
 
       <S.Input
-        defaultValue={student.sexo}
+        value={student.sexo}
         variant="outlined"
         name="sexo"
         label="Sexo"
@@ -73,7 +74,7 @@ export default function GeneralData({ student }) {
       />
 
       <S.Input
-        defaultValue={student.bolsista}
+        value={student.bolsista}
         variant="outlined"
         name="bolsista"
         label="Bolsista do RU"
@@ -83,7 +84,7 @@ export default function GeneralData({ student }) {
       />
 
       <S.Input
-        defaultValue={student.frequencia_RU}
+        value={student.frequencia_RU}
         variant="outlined"
         name="frequencia_RU"
         label="Frenquência das refeições no RU"
@@ -93,7 +94,7 @@ export default function GeneralData({ student }) {
       />
 
       <S.Input
-        defaultValue={student.tipo_refeicao_RU}
+        value={student.tipo_refeicao_RU}
         variant="outlined"
         name="tipo_refeicao_RU"
         label="Tipo de Refeição consumida no RU"
@@ -103,7 +104,7 @@ export default function GeneralData({ student }) {
       />
 
       <S.Input
-        defaultValue={student.nivel_fisico}
+        value={student.nivel_fisico}
         variant="outlined"
         name="nivel_fisico"
         label="Nível de atividade física"
@@ -219,7 +220,7 @@ export default function GeneralData({ student }) {
       />
     </S.ContainerStudentData>
   );
-}
+};
 
 GeneralData.propTypes = {
   student: PropTypes.shape({
@@ -241,3 +242,5 @@ GeneralData.propTypes = {
     vegano_vegetariano: PropTypes.string,
   }).isRequired,
 };
+
+export default GeneralData;
