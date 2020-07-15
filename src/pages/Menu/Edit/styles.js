@@ -26,7 +26,7 @@ export const Form = styled.form`
   width: 100%;
 
   ${media.lessThan('sm')`
-  height: 100%;
+    height: 37.5rem;
   `}
 `;
 
