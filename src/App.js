@@ -1,5 +1,4 @@
 import React from 'react';
-import { SnackbarProvider } from 'notistack';
 import {
   StylesProvider,
   createMuiTheme,
@@ -33,19 +32,10 @@ function App() {
         <ThemeProvider theme={theme}>
           <StylesProvider injectFirst>
             <SnackBar />
-            <SnackbarProvider
-              autoHideDuration={2000}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              maxSnack={3}
-            >
-              <BrowserRouter>
-                <GlobalStyle />
-                <Routes />
-              </BrowserRouter>
-            </SnackbarProvider>
+            <BrowserRouter>
+              <GlobalStyle />
+              <Routes />
+            </BrowserRouter>
           </StylesProvider>
         </ThemeProvider>
       </PersistGate>
