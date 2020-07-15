@@ -14,19 +14,18 @@ export const Container = styled(ContainerMaterial).attrs({
 })`
   display: flex;
   flex: 1;
-  align-items: center;
-  justify-content: center;
 `;
 
 export const Form = styled.form`
   display: flex;
-  height: 37.5rem;
+  height: 100%;
   justify-content: space-around;
   flex-direction: column;
   width: 100%;
 
   ${media.lessThan('sm')`
-    height: 37.5rem;
+    max-height: 100%;
+    min-height: 37.5rem;
   `}
 `;
 

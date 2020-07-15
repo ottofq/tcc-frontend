@@ -14,12 +14,29 @@ export const Container = styled(ContainerMaterialUI).attrs({
   flex: 1;
 `;
 
+export const Form = styled(ContainerMaterialUI).attrs({
+  component: 'form',
+  maxWidth: 'md',
+})`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 10px 0px;
+  justify-content: space-around;
+
+  ${media.lessThan('md')`
+    padding:10px 0px;
+    justify-content: flex-start;
+  `}
+`;
+
 export const ContainerEditor = styled.div`
   width: 100%;
-  height: calc(100vh - 250px);
+  height: 560px;
+  padding: 10px 0;
 
   & .editor {
-    height: calc(100vh - 350px);
+    height: 460px;
     border: 1px solid var(--borderColorLight);
     padding: 5px;
     border-radius: 2px;
@@ -38,16 +55,25 @@ export const ContainerEditor = styled.div`
     }
   }
 
-  @media (min-height: 700px) and (max-height: 1000px) {
+  @media (min-height: 700px) and (max-height: 800px) {
     width: 100%;
     height: 550px;
 
     & .editor {
-      height: 370px;
+      height: 350px;
     }
   }
 
-  ${media.between('md', 'lg')`
+  @media (min-height: 800px) and (max-height: 1000px) {
+    width: 100%;
+    height: 660px;
+
+    & .editor {
+      height: 460px;
+    }
+  }
+
+  ${media.greaterThan('lg')`
     width: 100%;
     height: calc(100vh - 200px);
 
@@ -55,16 +81,6 @@ export const ContainerEditor = styled.div`
       height: calc(100vh - 300px);
     }
   `}
-`;
-
-export const Form = styled(ContainerMaterialUI).attrs({
-  component: 'form',
-  maxWidth: 'md',
-})`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: space-around;
 `;
 
 export const Input = styled(TextField)``;
