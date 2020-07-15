@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 import media from '../../styles/media';
 
-export const Header = styled.div`
+export const Header = styled.header`
   display: flex;
   height: var(--headerSize);
   background-color: var(--secondaryColor);
