@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 import {
   Container as ContainerMateriaUI,
-  Typography,
   Menu as MenuMaterialUI,
 } from '@material-ui/core';
 import media from '../../styles/media';
 
-export const Header = styled.div`
+export const Header = styled.header`
   display: flex;
   height: var(--headerSize);
   background-color: var(--secondaryColor);
@@ -22,11 +21,14 @@ export const Container = styled(ContainerMateriaUI).attrs({
   align-items: center;
 `;
 
-export const Title = styled(Typography).attrs({
-  component: 'h1',
-})`
+export const Title = styled.h1`
   color: #fff;
   font-weight: bold;
+  font-size: 1.5rem;
+
+  ${media.lessThan('md')`
+    font-size: 1rem;
+  `}
 `;
 
 export const ContainerTitle = styled.div`

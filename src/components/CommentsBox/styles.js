@@ -86,7 +86,9 @@ export const Comment = styled.div`
   }
 `;
 
-export const RatingComment = styled(Rating)``;
+export const RatingComment = styled(Rating)`
+  padding-left: 5px;
+`;
 
 export const ContainerButtonPagination = styled.div`
   display: ${props => (props.hasComments ? 'flex' : 'none')};

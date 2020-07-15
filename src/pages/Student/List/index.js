@@ -32,11 +32,6 @@ const List = () => {
 
   return (
     <S.Container>
-      <S.Card>
-        <S.Title>
-          Total de alunos cadastrados: <strong>{total}</strong>
-        </S.Title>
-      </S.Card>
       <S.TableContainer component={Paper}>
         <Table aria-label="simple table">
           <S.TableHead>

@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import Card from '../Base';
 import ratingImage from '../../../assets/rating.svg';
 import * as S from './styles';
 
-export default function MenuRatingCard({ menuRating, loading }) {
+const MenuRatingCard = ({ menuRating, loading }) => {
   const labels = {
     1: 'Muito ruim',
     2: 'Ruim',
@@ -34,7 +34,7 @@ export default function MenuRatingCard({ menuRating, loading }) {
       </S.ContainerMenuRating>
     </Card>
   );
-}
+};
 
 MenuRatingCard.propTypes = {
   loading: PropTypes.bool.isRequired,
@@ -43,3 +43,5 @@ MenuRatingCard.propTypes = {
     media: PropTypes.number,
   }).isRequired,
 };
+
+export default memo(MenuRatingCard);
