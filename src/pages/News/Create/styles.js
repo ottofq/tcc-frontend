@@ -29,14 +29,23 @@ export const ContainerEditor = styled.div`
     border: 1px solid var(--borderColorLight);
   }
 
-  ${media.lessThan('sm')`
+  @media (max-height: 700px) {
     width: 100%;
-    height: calc(100vh - 200px);
+    height: 450px;
 
     & .editor {
-      height: calc(100vh - 400px);
+      height: 250px;
     }
-  `}
+  }
+
+  @media (min-height: 700px) and (max-height: 1000px) {
+    width: 100%;
+    height: 550px;
+
+    & .editor {
+      height: 370px;
+    }
+  }
 
   ${media.between('md', 'lg')`
     width: 100%;
