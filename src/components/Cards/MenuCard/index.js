@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
@@ -7,7 +7,7 @@ import Card from '../Base';
 import menuImage from '../../../assets/menu.svg';
 import * as S from './styles';
 
-export default function MenuCard({ menu, loading }) {
+const MenuCard = ({ menu, loading }) => {
   return (
     <Card loading={loading} srcImage={menuImage} altImage="Menu">
       <S.ContainerMenuDescription>
@@ -69,7 +69,7 @@ export default function MenuCard({ menu, loading }) {
       </S.ContainerMenuDescription>
     </Card>
   );
-}
+};
 
 MenuCard.defaultProps = {
   menu: null,
@@ -100,3 +100,5 @@ MenuCard.propTypes = {
     }),
   }),
 };
+
+export default memo(MenuCard);
