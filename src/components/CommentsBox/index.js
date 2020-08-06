@@ -16,7 +16,7 @@ export default function CommentsBox({
   return (
     <S.ContainerComment>
       <S.ContainerCommentTitle>
-        <h3>Avaliações: ({totalVotes})</h3>
+        <h3>Comentários: ({totalVotes})</h3>
       </S.ContainerCommentTitle>
       {loading ? (
         <S.ContainerLoading>
@@ -32,13 +32,6 @@ export default function CommentsBox({
                   <p>
                     <strong>{comment.nome}</strong>
                   </p>
-                  <S.RatingComment
-                    size="small"
-                    name="nota"
-                    precision={1}
-                    value={comment.nota}
-                    readOnly
-                  />
                 </S.ContainerCommentTitle>
                 <p>{comment.comentario}</p>
               </S.Comment>
