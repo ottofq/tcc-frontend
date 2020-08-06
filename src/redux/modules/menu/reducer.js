@@ -7,7 +7,17 @@ const intialState = {
   list: [],
   total: 0,
   page: 1,
-  average: { votos: 0, media: 0 },
+  average: {
+    votes: 0,
+    ratings: {
+      entrada: 0,
+      prato_proteico: 0,
+      opcao: 0,
+      acompanhamento: 0,
+      guarnicao: 0,
+      sobremesa: 0,
+    },
+  },
   loadingData: false,
   loadingEdit: false,
   loadingDelete: false,
@@ -56,11 +66,12 @@ const menu = (state = intialState, action) => {
         loadingAverage: true,
       };
     case 'menu:FETCH_MENU_AVERAGE_SUCCESS':
-      return {
-        ...state,
-        average: action.payload.average,
-        loadingAverage: false,
-      };
+      return produce(state, draftState => {
+        console.log(action.payload);
+        draftState.average.votes = action.payload.average.totalAvaliacoes;
+        draftState.average.ratings = action.payload.average.avaliacao;
+        draftState.loadingAverage = false;
+      });
     case 'menu:FETCH_MENU_AVERAGE_FAILURE':
       return {
         ...state,
