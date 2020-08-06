@@ -27,21 +27,26 @@ export const Title = styled.h3`
   `}
 `;
 
-export const ContainerMenuRatingDescription = styled.div`
-  text-align: center;
+export const Item = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  align-self: flex-start;
 
   p {
-    font-size: 18px;
+    font-size: 1rem;
+    margin-right: 3px;
   }
-  span {
+  strong {
     font-weight: bold;
+    margin-left: 2px;
   }
 `;
 
 export const Rating = styled(RatingMaterial)`
   svg {
-    width: 3.125rem;
-    height: 3.125rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 
   ${media.lessThan('md')`
