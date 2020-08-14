@@ -1,5 +1,5 @@
-# Front-end de uma aplicação para o restaurante universitário do CCA-UFES
-### :construction: TCC em desenvolvimento.
+# Front-end de uma aplicação para o restaurante universitário (RU) do CCA-UFES
+### :construction: TCC em desenvolvimento 
 ####  Disponível em (https://app-ru-cca-ufes.netlify.app)
 
 ## 📑 Plataformas
@@ -11,6 +11,12 @@ O TCC está sendo desenvolvido como um Full Stack App, ou seja, Front-end, Back-
  
  ## Preview do dashboard
  ![screenshot](https://raw.githubusercontent.com/ottofq/tcc-frontend/master/readme/screenshot.png)
+ 
+ ## 📋 Funcionalidades
+ - Gerenciar os cardápios do RU
+ - Gerenciar os avisos que o setor divulga sobre o funcionamento do RU
+ - Consultar os dados colhidos dos alunos (questionário)
+ - Verificar os gráficos gerados através das respostas dos alunos no questionário
  
  ### 🛠 Feito com
   - [ReactJS](https://github.com/facebook/react)
