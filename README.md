@@ -10,7 +10,7 @@ O TCC está sendo desenvolvido como um Full Stack App, ou seja, Front-end, Back-
  - Mobile (https://github.com/ottofq/tcc-mobile)
  
  ## Preview do dashboard
- ![screenshot](https://lh6.googleusercontent.com/0QKl__4VJdyYwpuQUjLEiM437GfXO_T0By4l4igLR39dNJWYRKgPmrDUk-GqEy8rO5w4OEFFK9Y4ig=w785-h748)
+ ![screenshot](https://raw.githubusercontent.com/ottofq/tcc-frontend/master/readme/screenshot.png)
  
  ### 🛠 Feito com
   - [ReactJS](https://github.com/facebook/react)
