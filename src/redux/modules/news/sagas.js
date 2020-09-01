@@ -20,7 +20,7 @@ import { closeModal } from '../modal/actions';
 function* loadOneNews({ payload }) {
   try {
     const { id } = payload;
-    const result = yield call(api.get, `/informacoes/${id}`);
+    const result = yield call(api.get, `/noticias/${id}`);
     yield put(fetchOneNewsSuccess(result.data));
   } catch (error) {
     yield put(fetchOneNewsFailure());
@@ -31,9 +31,9 @@ function* loadOneNews({ payload }) {
 function* loadNews({ payload }) {
   try {
     const { page } = payload;
-    const result = yield call(api.get, `/informacoes?page=${page}`);
+    const result = yield call(api.get, `/noticias?page=${page}`);
 
-    yield put(fetchNewsSuccess(result.data.result, result.data.total_infos));
+    yield put(fetchNewsSuccess(result.data.news, result.data.total_news));
   } catch (error) {
     yield put(fetchNewsFailure());
     yield put(snackBarFailure('Erro ao carregar as notícias!'));
@@ -44,7 +44,7 @@ function* createNews({ payload }) {
   try {
     const { titulo, descricao, history } = payload;
 
-    yield call(api.post, '/informacoes/', {
+    yield call(api.post, '/noticias/', {
       titulo,
       descricao,
     });
@@ -62,8 +62,7 @@ function* editNews({ payload }) {
   try {
     const { id, titulo, descricao, history } = payload;
 
-    yield call(api.put, `/informacoes/${id}`, {
-      id,
+    yield call(api.put, `/noticias/${id}`, {
       titulo,
       descricao,
     });
@@ -79,7 +78,7 @@ function* editNews({ payload }) {
 function* deleteNews({ payload }) {
   try {
     const { id } = payload;
-    yield call(api.delete, `/informacoes/${id}`);
+    yield call(api.delete, `/noticias/${id}`);
     yield put(deleteNewsSuccess(id));
     yield put(closeModal());
     yield put(snackBarSuccess('Notícia excluida!'));
