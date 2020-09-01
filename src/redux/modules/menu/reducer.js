@@ -67,8 +67,7 @@ const menu = (state = intialState, action) => {
       };
     case 'menu:FETCH_MENU_AVERAGE_SUCCESS':
       return produce(state, draftState => {
-        console.log(action.payload);
-        draftState.average.votes = action.payload.average.totalAvaliacoes;
+        draftState.average.votes = action.payload.average.total_avaliacoes;
         draftState.average.ratings = action.payload.average.avaliacao;
         draftState.loadingAverage = false;
       });

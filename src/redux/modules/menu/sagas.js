@@ -36,9 +36,7 @@ function* loadMenus({ payload }) {
     const { page } = payload;
     const result = yield call(api.get, `/cardapio?page=${page}`);
 
-    yield put(
-      fetchMenusSuccess(result.data.result, result.data.total_cardapios)
-    );
+    yield put(fetchMenusSuccess(result.data.menus, result.data.total_menus));
   } catch (error) {
     yield put(fetchMenusFailure());
     yield put(snackBarFailure('Erro ao carregar os cardápios!'));
@@ -60,7 +58,7 @@ function* createMenu({ payload }) {
     const {
       tipo,
       entrada,
-      proteina,
+      prato_proteico,
       opcao,
       acompanhamento,
       guarnicao,
@@ -71,7 +69,7 @@ function* createMenu({ payload }) {
     yield call(api.post, '/cardapio', {
       tipo,
       entrada,
-      proteina,
+      prato_proteico,
       opcao,
       acompanhamento,
       guarnicao,
@@ -93,7 +91,7 @@ function* editMenu({ payload }) {
       id,
       tipo,
       entrada,
-      proteina,
+      prato_proteico,
       opcao,
       acompanhamento,
       guarnicao,
@@ -104,7 +102,7 @@ function* editMenu({ payload }) {
     yield call(api.put, `/cardapio/${id}`, {
       tipo,
       entrada,
-      proteina,
+      prato_proteico,
       opcao,
       acompanhamento,
       guarnicao,
