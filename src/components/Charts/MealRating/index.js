@@ -6,35 +6,35 @@ export default function MealRating({ data }) {
   const mealRatings = [
     {
       avaliacao: 'Aroma',
-      'Muito bom': data.porcentagem.aroma.muito_bom,
-      Bom: data.porcentagem.aroma.bom,
-      Regular: data.porcentagem.aroma.regular,
-      Ruim: data.porcentagem.aroma.ruim,
-      'Muito ruim': data.porcentagem.aroma.muito_ruim,
+      'Muito bom': data.totais.aroma.muito_bom,
+      Bom: data.totais.aroma.bom,
+      Regular: data.totais.aroma.regular,
+      Ruim: data.totais.aroma.ruim,
+      'Muito ruim': data.totais.aroma.muito_ruim,
     },
     {
       avaliacao: 'Coloração do cardápio',
-      'Muito bom': data.porcentagem.coloracao_cardapio.muito_bom,
-      Bom: data.porcentagem.coloracao_cardapio.bom,
-      Regular: data.porcentagem.coloracao_cardapio.regular,
-      Ruim: data.porcentagem.coloracao_cardapio.ruim,
-      'Muito ruim': data.porcentagem.coloracao_cardapio.muito_ruim,
+      'Muito bom': data.totais.coloracao_cardapio.muito_bom,
+      Bom: data.totais.coloracao_cardapio.bom,
+      Regular: data.totais.coloracao_cardapio.regular,
+      Ruim: data.totais.coloracao_cardapio.ruim,
+      'Muito ruim': data.totais.coloracao_cardapio.muito_ruim,
     },
     {
       avaliacao: 'Textura da preparação',
-      'Muito bom': data.porcentagem.textura_preparacao.muito_bom,
-      Bom: data.porcentagem.textura_preparacao.bom,
-      Regular: data.porcentagem.textura_preparacao.regular,
-      Ruim: data.porcentagem.textura_preparacao.ruim,
-      'Muito ruim': data.porcentagem.textura_preparacao.muito_ruim,
+      'Muito bom': data.totais.textura_preparacao.muito_bom,
+      Bom: data.totais.textura_preparacao.bom,
+      Regular: data.totais.textura_preparacao.regular,
+      Ruim: data.totais.textura_preparacao.ruim,
+      'Muito ruim': data.totais.textura_preparacao.muito_ruim,
     },
     {
       avaliacao: 'Sabor',
-      'Muito bom': data.porcentagem.sabor.muito_bom,
-      Bom: data.porcentagem.sabor.bom,
-      Regular: data.porcentagem.sabor.regular,
-      Ruim: data.porcentagem.sabor.ruim,
-      'Muito ruim': data.porcentagem.sabor.muito_ruim,
+      'Muito bom': data.totais.sabor.muito_bom,
+      Bom: data.totais.sabor.bom,
+      Regular: data.totais.sabor.regular,
+      Ruim: data.totais.sabor.ruim,
+      'Muito ruim': data.totais.sabor.muito_ruim,
     },
   ];
 
@@ -66,7 +66,7 @@ export default function MealRating({ data }) {
 
 MealRating.propTypes = {
   data: PropTypes.shape({
-    porcentagem: PropTypes.shape({
+    totais: PropTypes.shape({
       aroma: PropTypes.shape({
         muito_bom: PropTypes.number,
         bom: PropTypes.number,

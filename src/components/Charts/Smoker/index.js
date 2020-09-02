@@ -7,12 +7,12 @@ export default function Smoker({ data }) {
     {
       id: 'Tabagista',
       label: 'Tabagista',
-      value: data.porcentagem.tabagista,
+      value: data.totais.tabagista,
     },
     {
       id: 'Não Tabagista',
       label: 'Não Tabagista',
-      value: data.porcentagem.nao_tabagista,
+      value: data.totais.nao_tabagista,
     },
   ];
 
@@ -30,7 +30,7 @@ export default function Smoker({ data }) {
 
 Smoker.propTypes = {
   data: PropTypes.shape({
-    porcentagem: PropTypes.shape({
+    totais: PropTypes.shape({
       tabagista: PropTypes.number,
       nao_tabagista: PropTypes.number,
     }),

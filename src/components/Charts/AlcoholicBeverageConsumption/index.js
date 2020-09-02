@@ -7,27 +7,27 @@ export default function AlcoholicBeverageConsumption({ data }) {
     {
       id: 'Diariamente',
       label: 'Diariamente',
-      value: data.porcentagem.diariamente,
+      value: data.totais.diariamente,
     },
     {
       id: 'de 3-6 vezes na semana',
       label: 'de 3-6 vezes na semana',
-      value: data.porcentagem.semana_3vezes,
+      value: data.totais.semana_3vezes,
     },
     {
       id: 'de 1-2 vezes na semana',
       label: 'de 1-2 vezes na semana',
-      value: data.porcentagem.semana_1vez,
+      value: data.totais.semana_1vez,
     },
     {
       id: 'Raramente',
       label: 'Raramente',
-      value: data.porcentagem.raramente,
+      value: data.totais.raramente,
     },
     {
       id: 'Não Consome',
       label: 'Não Consome',
-      value: data.porcentagem.nao_consome,
+      value: data.totais.nao_consome,
     },
   ];
 
@@ -44,7 +44,7 @@ export default function AlcoholicBeverageConsumption({ data }) {
 }
 AlcoholicBeverageConsumption.propTypes = {
   data: PropTypes.shape({
-    porcentagem: PropTypes.shape({
+    totais: PropTypes.shape({
       diariamente: PropTypes.number,
       semana_3vezes: PropTypes.number,
       semana_1vez: PropTypes.number,

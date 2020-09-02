@@ -7,22 +7,22 @@ export default function FrenquencyOfMeals({ data }) {
     {
       id: 'Todos os dias',
       label: 'Todos os dias',
-      value: data.porcentagem.todo_dia,
+      value: data.totais.todo_dia,
     },
     {
       id: 'Pelo menos 3 vezes na semana',
       label: 'Pelo menos 3 vezes na semana',
-      value: data.porcentagem.semana_3vezes,
+      value: data.totais.semana_3vezes,
     },
     {
       id: 'Pelo menos 1 vez na semana',
       label: 'Pelo menos 1 vez na semana',
-      value: data.porcentagem.semana_1vez,
+      value: data.totais.semana_1vez,
     },
     {
       id: 'Raramente',
       label: 'Raramente',
-      value: data.porcentagem.raramente,
+      value: data.totais.raramente,
     },
   ];
 
@@ -40,7 +40,7 @@ export default function FrenquencyOfMeals({ data }) {
 
 FrenquencyOfMeals.propTypes = {
   data: PropTypes.shape({
-    porcentagem: PropTypes.shape({
+    totais: PropTypes.shape({
       todo_dia: PropTypes.number,
       semana_3vezes: PropTypes.number,
       semana_1vez: PropTypes.number,
