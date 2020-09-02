@@ -7,17 +7,17 @@ export default function TypeOfMeal({ data }) {
     {
       id: 'Almoço',
       label: 'Almoço',
-      value: data.porcentagem.almoco,
+      value: data.totais.almoco,
     },
     {
       id: 'Jantar',
       label: 'Jantar',
-      value: data.porcentagem.jantar,
+      value: data.totais.jantar,
     },
     {
       id: 'Almoço e Jantar',
       label: 'Almoço e Jantar',
-      value: data.porcentagem.almoco_jantar,
+      value: data.totais.almoco_jantar,
     },
   ];
 
@@ -35,7 +35,7 @@ export default function TypeOfMeal({ data }) {
 
 TypeOfMeal.propTypes = {
   data: PropTypes.shape({
-    porcentagem: PropTypes.shape({
+    totais: PropTypes.shape({
       almoco: PropTypes.number,
       jantar: PropTypes.number,
       almoco_jantar: PropTypes.number,

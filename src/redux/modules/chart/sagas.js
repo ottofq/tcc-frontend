@@ -35,7 +35,7 @@ function* loadCharts() {
       avaliacaoRefeicao,
       avaliacaoGeral,
       melhoriaRU,
-    ] = yield all(routes.map(route => call(api.get, `/alunos/${route}`)));
+    ] = yield all(routes.map(route => call(api.get, `/estatisticas/${route}`)));
 
     yield put(
       fetchChartsSuccess(

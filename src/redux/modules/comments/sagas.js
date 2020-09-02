@@ -16,7 +16,7 @@ function* loadMenuComments({ payload }) {
     yield put(
       fetchMenuCommentsSuccess(
         result.data.avaliacoes,
-        result.data.totalAvaliacoes
+        result.data.total_comentarios
       )
     );
   } catch (error) {

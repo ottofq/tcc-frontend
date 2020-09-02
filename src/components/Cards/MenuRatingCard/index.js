@@ -17,20 +17,79 @@ const MenuRatingCard = ({ menuRating, loading }) => {
   return (
     <Card loading={loading} srcImage={ratingImage} altImage="Rating">
       <S.ContainerMenuRating>
-        <S.Title>Média das Avaliações</S.Title>
-        <S.ContainerMenuRatingDescription>
-          <p>
-            Avaliações: <span>{menuRating.votos}</span>
-          </p>
+        <S.Title>
+          Total de Avaliações:<strong>{menuRating.votes}</strong>
+        </S.Title>
+        <S.Item>
+          <p>Entrada:</p>
           <S.Rating
-            size="large"
+            size="small"
             name="media"
             precision={1}
-            value={menuRating.media || 0}
+            value={menuRating.ratings.entrada}
             readOnly
           />
-          <p>{labels[Math.round(menuRating.media)]}</p>
-        </S.ContainerMenuRatingDescription>
+          <strong>{labels[Math.round(menuRating.ratings.entrada)]}</strong>
+        </S.Item>
+        <S.Item>
+          <p>Prato Proteico:</p>
+          <S.Rating
+            size="small"
+            name="media"
+            precision={1}
+            value={menuRating.ratings.prato_proteico}
+            readOnly
+          />
+          <strong>
+            {labels[Math.round(menuRating.ratings.prato_proteico)]}
+          </strong>
+        </S.Item>
+        <S.Item>
+          <p>Opção:</p>
+          <S.Rating
+            size="small"
+            name="media"
+            precision={1}
+            value={menuRating.ratings.opcao}
+            readOnly
+          />
+          <strong>{labels[Math.round(menuRating.ratings.opcao)]}</strong>
+        </S.Item>
+        <S.Item>
+          <p>Acompanhamento:</p>
+          <S.Rating
+            size="small"
+            name="media"
+            precision={1}
+            value={menuRating.ratings.acompanhamento}
+            readOnly
+          />
+          <strong>
+            {labels[Math.round(menuRating.ratings.acompanhamento)]}
+          </strong>
+        </S.Item>
+        <S.Item>
+          <p>Guarnição:</p>
+          <S.Rating
+            size="small"
+            name="media"
+            precision={1}
+            value={menuRating.ratings.guarnicao}
+            readOnly
+          />
+          <strong>{labels[Math.round(menuRating.ratings.guarnicao)]}</strong>
+        </S.Item>
+        <S.Item>
+          <p>Sobremesa:</p>
+          <S.Rating
+            size="small"
+            name="media"
+            precision={1}
+            value={menuRating.ratings.sobremesa}
+            readOnly
+          />
+          <strong>{labels[Math.round(menuRating.ratings.sobremesa)]}</strong>
+        </S.Item>
       </S.ContainerMenuRating>
     </Card>
   );
@@ -39,8 +98,15 @@ const MenuRatingCard = ({ menuRating, loading }) => {
 MenuRatingCard.propTypes = {
   loading: PropTypes.bool.isRequired,
   menuRating: PropTypes.shape({
-    votos: PropTypes.number,
-    media: PropTypes.number,
+    votes: PropTypes.number,
+    ratings: PropTypes.shape({
+      entrada: PropTypes.number,
+      prato_proteico: PropTypes.number,
+      opcao: PropTypes.number,
+      acompanhamento: PropTypes.number,
+      guarnicao: PropTypes.number,
+      sobremesa: PropTypes.number,
+    }),
   }).isRequired,
 };
 

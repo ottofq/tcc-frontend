@@ -7,22 +7,22 @@ export default function Vegan({ data }) {
     {
       id: 'Ovolactovegetariano',
       label: 'Ovolactovegetariano',
-      value: data.porcentagem.ovolactovegetariano,
+      value: data.totais.ovolactovegetariano,
     },
     {
       id: 'Vegetariano restrito – alimentação',
       label: 'Vegetariano restrito – alimentação',
-      value: data.porcentagem.vegetariano_restrito,
+      value: data.totais.vegetariano_restrito,
     },
     {
       id: 'Vegano',
       label: 'Vegano',
-      value: data.porcentagem.vegano,
+      value: data.totais.vegano,
     },
     {
       id: 'Não vegano/vegetariano',
       label: 'Não vegano/vegetariano',
-      value: data.porcentagem.nao_vegano,
+      value: data.totais.nao_vegano,
     },
   ];
 
@@ -40,7 +40,7 @@ export default function Vegan({ data }) {
 
 Vegan.propTypes = {
   data: PropTypes.shape({
-    porcentagem: PropTypes.shape({
+    totais: PropTypes.shape({
       ovolactovegetariano: PropTypes.number,
       vegetariano_restrito: PropTypes.number,
       vegano: PropTypes.number,

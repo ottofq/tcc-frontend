@@ -7,22 +7,22 @@ export default function PhysicalLevel({ data }) {
     {
       id: 'Sedentário',
       label: 'Sedentário',
-      value: data.porcentagem.sedentario,
+      value: data.totais.sedentario,
     },
     {
       id: 'Leve',
       label: 'Leve',
-      value: data.porcentagem.leve,
+      value: data.totais.leve,
     },
     {
       id: 'Moderado',
       label: 'Moderado',
-      value: data.porcentagem.moderado,
+      value: data.totais.moderado,
     },
     {
       id: 'Ativo',
       label: 'Ativo',
-      value: data.porcentagem.ativo,
+      value: data.totais.ativo,
     },
   ];
 
@@ -40,7 +40,7 @@ export default function PhysicalLevel({ data }) {
 
 PhysicalLevel.propTypes = {
   data: PropTypes.shape({
-    porcentagem: PropTypes.shape({
+    totais: PropTypes.shape({
       sedentario: PropTypes.number,
       leve: PropTypes.number,
       moderado: PropTypes.number,

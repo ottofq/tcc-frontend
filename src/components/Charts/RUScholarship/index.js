@@ -7,17 +7,17 @@ export default function RUScholarship({ data }) {
     {
       id: 'Bolsa Integral',
       label: 'Bolsa Integral',
-      value: data.porcentagem.bolsa_integral,
+      value: data.totais.bolsa_integral,
     },
     {
       id: 'Bolsa Parcial',
       label: 'Bolsa Parcial',
-      value: data.porcentagem.bolsa_parcial,
+      value: data.totais.bolsa_parcial,
     },
     {
       id: 'Não Bolsista',
       label: 'Não Bolsista',
-      value: data.porcentagem.nao_bolsista,
+      value: data.totais.nao_bolsista,
     },
   ];
 
@@ -35,7 +35,7 @@ export default function RUScholarship({ data }) {
 
 RUScholarship.propTypes = {
   data: PropTypes.shape({
-    porcentagem: PropTypes.shape({
+    totais: PropTypes.shape({
       bolsa_integral: PropTypes.number,
       bolsa_parcial: PropTypes.number,
       nao_bolsista: PropTypes.number,

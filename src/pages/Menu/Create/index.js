@@ -19,7 +19,7 @@ export default function Create() {
     const {
       tipo,
       entrada,
-      proteina,
+      prato_proteico,
       opcao,
       acompanhamento,
       guarnicao,
@@ -30,7 +30,7 @@ export default function Create() {
       createMenu(
         tipo,
         entrada,
-        proteina,
+        prato_proteico,
         opcao,
         acompanhamento,
         guarnicao,
@@ -67,9 +67,9 @@ export default function Create() {
 
         <S.Input
           inputRef={register({ required: true })}
-          name="proteina"
+          name="prato_proteico"
           id="outlined-basic"
-          label="Proteina"
+          label="Prato Proteico"
           variant="outlined"
         />
 

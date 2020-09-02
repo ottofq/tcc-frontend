@@ -27,7 +27,7 @@ function* loadStudents({ payload }) {
     const result = yield call(api.get, `/alunos?page=${page}`);
 
     yield put(
-      fetchStudentsSuccess(result.data.result, result.data.total_alunos)
+      fetchStudentsSuccess(result.data.students, result.data.total_students)
     );
   } catch (error) {
     yield put(fetchStudentsFailure());

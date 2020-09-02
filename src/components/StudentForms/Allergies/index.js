@@ -8,14 +8,7 @@ const Allergies = ({ student }) => {
   return (
     <S.ContainerStudentData>
       <FormLabel component="legend">Alergias</FormLabel>
-      <FormControlLabel
-        control={
-          <Checkbox checked={student.alergias.nenhuma} color="primary" />
-        }
-        label="Nenhuma Alergia"
-        name="alergias_nenhuma"
-        readOnly
-      />
+
       <FormControlLabel
         control={
           <Checkbox checked={student.alergias.alergia_gluten} color="primary" />
@@ -73,7 +66,6 @@ const Allergies = ({ student }) => {
 Allergies.propTypes = {
   student: PropTypes.shape({
     alergias: PropTypes.shape({
-      nenhuma: PropTypes.bool,
       alergia_gluten: PropTypes.bool,
       intolerancia_lactose: PropTypes.bool,
       proteina_leite_vaca: PropTypes.bool,

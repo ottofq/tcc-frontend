@@ -26,12 +26,12 @@ export default function Edit() {
   useEffect(() => {
     if (menu && loadingData === false) {
       setValue('tipo', menu.tipo);
-      setValue('entrada', menu.entrada.descricao);
-      setValue('proteina', menu.proteina.descricao);
-      setValue('opcao', menu.opcao.descricao);
-      setValue('acompanhamento', menu.acompanhamento.descricao);
-      setValue('guarnicao', menu.guarnicao.descricao);
-      setValue('sobremesa', menu.sobremesa.descricao);
+      setValue('entrada', menu.entrada);
+      setValue('prato_proteico', menu.prato_proteico);
+      setValue('opcao', menu.opcao);
+      setValue('acompanhamento', menu.acompanhamento);
+      setValue('guarnicao', menu.guarnicao);
+      setValue('sobremesa', menu.sobremesa);
     }
   }, [menu, setValue, loadingData]);
 
@@ -39,7 +39,7 @@ export default function Edit() {
     const {
       tipo,
       entrada,
-      proteina,
+      prato_proteico,
       opcao,
       acompanhamento,
       guarnicao,
@@ -52,7 +52,7 @@ export default function Edit() {
         id,
         tipo,
         entrada,
-        proteina,
+        prato_proteico,
         opcao,
         acompanhamento,
         guarnicao,
@@ -99,9 +99,9 @@ export default function Edit() {
           />
 
           <Controller
-            as={<S.Input label="Proteina" variant="outlined" />}
+            as={<S.Input label="Prato proteico" variant="outlined" />}
             control={control}
-            name="proteina"
+            name="prato_proteico"
             defaultValue=""
             rules={{ required: true }}
           />

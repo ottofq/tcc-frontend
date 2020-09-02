@@ -26,42 +26,42 @@ const MenuCard = ({ menu, loading }) => {
             <S.MenuItem>
               <p>Entrada: </p>
               <p>
-                <strong>{menu.entrada.descricao}</strong>
+                <strong>{menu.entrada}</strong>
               </p>
             </S.MenuItem>
 
             <S.MenuItem>
               <p>Prato Proteico: </p>
               <p>
-                <strong>{menu.proteina.descricao}</strong>
+                <strong>{menu.prato_proteico}</strong>
               </p>
             </S.MenuItem>
 
             <S.MenuItem>
               <p>Opção: </p>
               <p>
-                <strong>{menu.opcao.descricao}</strong>
+                <strong>{menu.opcao}</strong>
               </p>
             </S.MenuItem>
 
             <S.MenuItem>
               <p>Acompanhamento: </p>
               <p>
-                <strong>{menu.acompanhamento.descricao}</strong>
+                <strong>{menu.acompanhamento}</strong>
               </p>
             </S.MenuItem>
 
             <S.MenuItem>
               <p>Guarnição: </p>
               <p>
-                <strong>{menu.guarnicao.descricao}</strong>
+                <strong>{menu.guarnicao}</strong>
               </p>
             </S.MenuItem>
 
             <S.MenuItem>
               <p>Sobremesa: </p>
               <p>
-                <strong>{menu.sobremesa.descricao}</strong>
+                <strong>{menu.sobremesa}</strong>
               </p>
             </S.MenuItem>
           </>
@@ -80,24 +80,12 @@ MenuCard.propTypes = {
   menu: PropTypes.shape({
     tipo: PropTypes.string,
     data: PropTypes.string,
-    entrada: PropTypes.shape({
-      descricao: PropTypes.string,
-    }),
-    proteina: PropTypes.shape({
-      descricao: PropTypes.string,
-    }),
-    opcao: PropTypes.shape({
-      descricao: PropTypes.string,
-    }),
-    acompanhamento: PropTypes.shape({
-      descricao: PropTypes.string,
-    }),
-    guarnicao: PropTypes.shape({
-      descricao: PropTypes.string,
-    }),
-    sobremesa: PropTypes.shape({
-      descricao: PropTypes.string,
-    }),
+    entrada: PropTypes.string,
+    prato_proteico: PropTypes.string,
+    opcao: PropTypes.string,
+    acompanhamento: PropTypes.string,
+    guarnicao: PropTypes.string,
+    sobremesa: PropTypes.string,
   }),
 };
 

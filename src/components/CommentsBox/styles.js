@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { Button } from '@material-ui/core';
-import { Rating } from '@material-ui/lab';
+import { Button as ButtonMaterialUI } from '@material-ui/core';
 import media from '../../styles/media';
 
 export const ContainerComment = styled.div`
@@ -86,23 +85,19 @@ export const Comment = styled.div`
   }
 `;
 
-export const RatingComment = styled(Rating)`
-  padding-left: 5px;
-`;
-
 export const ContainerButtonPagination = styled.div`
   display: ${props => (props.hasComments ? 'flex' : 'none')};
-  flex: 1;
   justify-content: space-between;
   align-items: center;
   padding: 5px;
+  margin: auto 0 0 0;
 
   strong {
     font-weight: bold;
   }
 `;
 
-export const StyledButton = styled(Button)`
+export const Button = styled(ButtonMaterialUI)`
   margin-top: 10px;
   font-size: 14px;
   align-self: center;

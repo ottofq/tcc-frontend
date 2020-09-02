@@ -7,27 +7,27 @@ export default function GeneralRating({ data }) {
     {
       id: 'Muito bom',
       label: 'Muito bom',
-      value: data.porcentagem.muito_bom,
+      value: data.totais.muito_bom,
     },
     {
       id: 'Bom',
       label: 'Bom',
-      value: data.porcentagem.bom,
+      value: data.totais.bom,
     },
     {
       id: 'Regular',
       label: 'Regular',
-      value: data.porcentagem.regular,
+      value: data.totais.regular,
     },
     {
       id: 'Ruim',
       label: 'Ruim',
-      value: data.porcentagem.ruim,
+      value: data.totais.ruim,
     },
     {
       id: 'Muito ruim',
       label: 'Muito ruim',
-      value: data.porcentagem.muito_ruim,
+      value: data.totais.muito_ruim,
     },
   ];
 
@@ -45,7 +45,7 @@ export default function GeneralRating({ data }) {
 
 GeneralRating.propTypes = {
   data: PropTypes.shape({
-    porcentagem: PropTypes.shape({
+    totais: PropTypes.shape({
       muito_bom: PropTypes.number,
       bom: PropTypes.number,
       regular: PropTypes.number,

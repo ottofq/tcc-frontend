@@ -52,7 +52,6 @@ export default function List() {
               <TableCell>Cardápios</TableCell>
               <TableCell align="center">Tipo de Refeição</TableCell>
               <TableCell align="center">Data</TableCell>
-              <TableCell align="center">Média</TableCell>
               <TableCell align="center">Ações</TableCell>
             </TableRow>
           </S.TableHead>
@@ -61,14 +60,11 @@ export default function List() {
               menus.map(menu => (
                 <TableRow hover key={menu._id}>
                   <TableCell component="th" scope="row">
-                    {menu.proteina.descricao}
+                    {menu.entrada},{menu.prato_proteico},...
                   </TableCell>
                   <TableCell align="center">{menu.tipo}</TableCell>
                   <TableCell align="center">
                     {format(parseISO(menu.data), 'dd/MM/yyyy')}
-                  </TableCell>
-                  <TableCell align="center">
-                    {Math.round(menu.media_geral)}
                   </TableCell>
 
                   <TableCell align="center">
