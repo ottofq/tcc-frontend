@@ -45,25 +45,25 @@ export default function CommentsBox({
         )}
       </List>
       <S.ContainerButtonPagination hasComments={comments.length > 0}>
-        <S.StyledButton
+        <S.Button
           onClick={previousComment}
           variant="outlined"
           color="primary"
           disabled={actualPage === 1}
         >
           Anterior
-        </S.StyledButton>
+        </S.Button>
         <p>
           Página <strong>{actualPage}</strong> de {maxPage}
         </p>
-        <S.StyledButton
+        <S.Button
           onClick={nextComment}
           variant="outlined"
           color="primary"
           disabled={actualPage === maxPage || totalVotes === 0}
         >
           Próximo
-        </S.StyledButton>
+        </S.Button>
       </S.ContainerButtonPagination>
     </S.ContainerComment>
   );
