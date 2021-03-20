@@ -50,9 +50,9 @@ export const Rating = styled(RatingMaterial)`
   }
 
   ${media.lessThan('md')`
-    svg{
-      width: 2.1875rem;
-      height: 2.1875rem;
+    span {
+      width: 1.5rem;
+      height: 1.5rem;
     }
   `}
 `;
