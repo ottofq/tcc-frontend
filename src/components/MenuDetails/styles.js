@@ -6,10 +6,9 @@ export const Container = styled(ContainerMateriaUI).attrs({
   component: 'div',
   maxWidth: 'xl',
 })`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 1rem;
 
   h1 {
     border-left: 7px solid var(--primaryColor);
@@ -20,17 +19,18 @@ export const Container = styled(ContainerMateriaUI).attrs({
   }
 
   ${media.lessThan('sm')`
-    overflow-y:scroll;
-    height:1000px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   `}
 `;
 
 export const ContainerMenu = styled.div`
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
+  flex: 1;
+  gap: 2rem;
   align-items: center;
-  justify-content: space-around;
 
   ${media.lessThan('md')`
     flex-direction:column;
