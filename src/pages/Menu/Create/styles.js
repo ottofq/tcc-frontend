@@ -14,12 +14,13 @@ export const Container = styled(ContainerMaterial).attrs({
 })`
   display: flex;
   flex: 1;
+  padding: 1rem;
 `;
 
 export const Form = styled.form`
   display: flex;
   height: 100%;
-  justify-content: space-around;
+  gap: 2rem;
   flex-direction: column;
   width: 100%;
 

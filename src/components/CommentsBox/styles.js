@@ -4,38 +4,18 @@ import media from '../../styles/media';
 
 export const ContainerComment = styled.div`
   display: flex;
-  height: 400px;
+  height: 800px;
   flex-direction: column;
   border-radius: 4px;
   border: 1px solid var(--borderColorLight);
 
   ul {
     display: flex;
-    flex-wrap: wrap;
-    width: 100%;
+    flex-direction: column;
     border: 1px solid var(--borderColorLight);
     overflow: hidden;
     overflow-y: scroll;
-    li {
-      width: 50%;
-    }
   }
-
-  ${media.lessThan('md')`
-     ul {
-        li {
-          width: 100%;
-        }
-     }
-  `}
-
-  ${media.greaterThan('xl')`
-    height: 600px;
-
-    ul{
-      height:500px;
-    }
-  `}
 `;
 
 export const ContainerCommentTitle = styled.div`
@@ -77,7 +57,7 @@ export const Comment = styled.div`
   border-radius: 4px;
   justify-content: space-around;
   width: 100%;
-  padding: 5px;
+  padding: 0.5rem;
   height: auto;
 
   p {

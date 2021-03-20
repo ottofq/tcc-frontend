@@ -54,10 +54,12 @@ const MenuDetails = ({ title, fetchMenu }) => {
 
   return (
     <S.Container>
-      <h1>{title}</h1>
       <S.ContainerMenu>
+        <h1>{title}</h1>
         <MenuCard loading={loadingData} menu={menu} />
-        <MenuRatingCard loading={loadingAverage} menuRating={average} />
+        {!!menu && (
+          <MenuRatingCard loading={loadingAverage} menuRating={average} />
+        )}
       </S.ContainerMenu>
       <CommentsBox
         totalVotes={totalComments}
