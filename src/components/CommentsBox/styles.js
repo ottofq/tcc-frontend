@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Button as ButtonMaterialUI } from '@material-ui/core';
-import media from '../../styles/media';
 
 export const ContainerComment = styled.div`
   display: flex;
