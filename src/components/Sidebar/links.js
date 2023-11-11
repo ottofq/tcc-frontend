@@ -29,11 +29,11 @@ export const newsLinks = [
 ];
 
 export const studentLinks = [
-  {
-    label: 'Listagem de alunos',
-    url: '/dashboard/aluno/listagem',
-    icon: <ViewList />,
-  },
+  // {
+  //   label: 'Listagem de alunos',
+  //   url: '/dashboard/aluno/listagem',
+  //   icon: <ViewList />,
+  // },
   {
     label: 'Gráficos',
     url: '/dashboard/aluno/graficos',

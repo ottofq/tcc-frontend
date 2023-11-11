@@ -78,12 +78,12 @@ export default function Layout() {
       key: 'news-edit',
       exact: true,
     },
-    {
-      path: '/dashboard/aluno/listagem',
-      component: StudentList,
-      key: 'student-list',
-      exact: true,
-    },
+    // {
+    //   path: '/dashboard/aluno/listagem',
+    //   component: StudentList,
+    //   key: 'student-list',
+    //   exact: true,
+    // },
     {
       path: '/dashboard/aluno/detalhes/:id',
       component: StudentDetails,
