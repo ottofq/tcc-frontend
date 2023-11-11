@@ -12,7 +12,7 @@ import CreateNews from '../News/Create';
 import NewsList from '../News/List';
 import NewsEdit from '../News/Edit';
 import NewsDetails from '../News/Details';
-import StudentList from '../Student/List';
+// import StudentList from '../Student/List';
 import StudentDetails from '../Student/Details';
 import StudentCharts from '../Student/Charts';
 import Profile from '../User/Profile';
