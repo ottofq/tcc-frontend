@@ -1,6 +1,3 @@
-import { combineReducers } from 'redux';
-
-import auth from './auth/reducer';
 import user from './user/reducer';
 import snackbar from './snackbar/reducer';
 import menu from './menu/reducer';
@@ -10,8 +7,7 @@ import chart from './chart/reducer';
 import comments from './comments/reducer';
 import modal from './modal/reducer';
 
-export default combineReducers({
-  auth,
+export default {
   user,
   snackbar,
   menu,
@@ -20,4 +16,4 @@ export default combineReducers({
   chart,
   comments,
   modal,
-});
+};
