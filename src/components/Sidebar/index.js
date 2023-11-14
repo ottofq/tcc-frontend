@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Divider } from '@material-ui/core';
-import { RestaurantMenu, Announcement, People } from '@material-ui/icons';
 
 import logo from '../../assets/logo_sem_texto.png';
 
@@ -19,7 +18,6 @@ export default function Sidebar({ isMenuOpen, setIsMenuOpen }) {
         <ul>
           <li>
             <Title>
-              <RestaurantMenu />
               <h2>Cardápio</h2>
             </Title>
           </li>
@@ -43,7 +41,6 @@ export default function Sidebar({ isMenuOpen, setIsMenuOpen }) {
           </li>
           <li>
             <Title>
-              <Announcement />
               <h2>Noticias</h2>
             </Title>
           </li>
@@ -66,9 +63,7 @@ export default function Sidebar({ isMenuOpen, setIsMenuOpen }) {
             <Divider />
           </li>
           <li>
-            {' '}
             <Title>
-              <People />
               <h2>Alunos</h2>
             </Title>
           </li>

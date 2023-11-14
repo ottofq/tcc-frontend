@@ -71,8 +71,7 @@ export const SidebarLink = styled(NavLink)`
 export const Title = styled.div`
   display: flex;
   color: #fff;
-  align-items: center;
-  justify-content: center;
+  padding-left: 0.5rem;
   height: 1.875rem;
   margin-top: 0.3125rem;
 
